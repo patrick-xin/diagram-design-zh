@@ -1,8 +1,8 @@
 # diagram-design-zh：agent 零指令产出中文图表的技能
 
-**标准中文图表，白底、正式场合直接可用。**
+**经过设计的中文图表，开箱即用。**
 
-> 本项目 fork 自 [Cathryn Lavery](https://github.com/cathrynlavery) 的 [diagram-design](https://github.com/cathrynlavery/diagram-design)（MIT）。设计系统的骨架来自原项目；中文排版层的重写，以及「本项目独创」的全部能力，由本仓库完成。
+> 本项目 fork 自 [Cathryn Lavery](https://github.com/cathrynlavery) 的 [diagram-design](https://github.com/cathrynlavery/diagram-design)（MIT）。设计系统的骨架——类型体系、布局与几何计算——来自原项目；中文排版层的重写，以及「本项目独创」的全部能力，由本仓库完成。
 
 ## 项目简介
 
@@ -20,7 +20,7 @@
 
 原版是一套英文设计系统，直接拿来画中文有三个硬伤，本仓库为此重写了整个排版层：
 
-1. **字体**：原版用 Geist / Instrument Serif，没有中文字形，且依赖 Google Fonts 外链——国内拉不到。本仓库换成思源三字体栈（宋体标题 / 黑体节点 / Sarasa 等宽技术标签），成稿自动内嵌字体子集，断网打开像素级一致。
+1. **字体**：原版用 Geist / Instrument Serif，没有中文字形。本仓库换成思源三字体栈（宋体标题 / 黑体节点 / Sarasa 等宽技术标签），成稿自动内嵌字体子集，断网打开像素级一致。
 2. **字号**：原版按拉丁微缩字号设计（9px / 7px 标签），中文笔画密集，这个尺寸不可读。本仓库立了含汉字 ≥10px 的硬线，字号坡道按国内正文惯例校准（节点名 14px、中文小字 12px），并有自检脚本逐字强制。
 3. **排版**：中英混排空格、全角标点、角标字距这些中文语域规则，原版没有概念。本仓库把它们全部写成硬规则，违反即不交付。
 
