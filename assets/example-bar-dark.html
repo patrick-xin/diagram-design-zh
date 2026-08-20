@@ -7,10 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -64,68 +64,68 @@
     <p class="eyebrow">用户增长 · 柱状图</p>
     <h1>2026 H1 各渠道新增用户</h1>
 
-    <svg viewBox="0 0 1000 528" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-bar-title example-bar-desc">
-      <title id="example-bar-title">2026 H1 各渠道新增用户</title>
-      <desc id="example-bar-desc">柱状图：六个获客渠道按新增用户数比较，内容营销以 5.2 万居首，是本季度的增长焦点；应用商店 2.4 万、搜索引擎 3.6 万、合作渠道 1.6 万、邮件召回 0.8 万、线下活动 2.0 万。</desc>
+    <svg viewBox="0 0 1000 528" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-bar-dark-title example-bar-dark-desc">
+      <title id="example-bar-dark-title">2026 H1 各渠道新增用户</title>
+      <desc id="example-bar-dark-desc">柱状图：六个获客渠道按新增用户数比较，内容营销以 5.2 万居首，是本季度的增长焦点；应用商店 2.4 万、搜索引擎 3.6 万、合作渠道 1.6 万、邮件召回 0.8 万、线下活动 2.0 万。</desc>
 
       <!-- y 轴网格线（4–6 条等距，极淡） -->
-      <line x1="80" y1="60"  x2="960" y2="60"  stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="80" y1="120" x2="960" y2="120" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="80" y1="180" x2="960" y2="180" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="80" y1="240" x2="960" y2="240" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="80" y1="300" x2="960" y2="300" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="80" y1="360" x2="960" y2="360" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+      <line x1="80" y1="60"  x2="960" y2="60"  stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="80" y1="120" x2="960" y2="120" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="80" y1="180" x2="960" y2="180" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="80" y1="240" x2="960" y2="240" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="80" y1="300" x2="960" y2="300" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="80" y1="360" x2="960" y2="360" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
 
       <!-- 坐标轴 -->
-      <line x1="80" y1="40" x2="80" y2="420" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <line x1="80" y1="420" x2="960" y2="420" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+      <line x1="80" y1="40" x2="80" y2="420" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <line x1="80" y1="420" x2="960" y2="420" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
 
       <!-- y 轴刻度（0–6 万） -->
       <!-- y-axis rotated label -->
-      <text transform="rotate(-90 34 244)" x="34" y="244" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" letter-spacing="0.1em" text-anchor="middle">新增用户（万人）</text>
+      <text transform="rotate(-90 34 244)" x="34" y="244" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" letter-spacing="0.1em" text-anchor="middle">新增用户（万人）</text>
 
-      <text x="72" y="424" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">0</text>
-      <text x="72" y="364" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">1</text>
-      <text x="72" y="304" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">2</text>
-      <text x="72" y="244" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">3</text>
-      <text x="72" y="184" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">4</text>
-      <text x="72" y="124" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">5</text>
-      <text x="72" y="64"  fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">6</text>
-      <text x="76" y="44" fill="#565e7e" font-size="12" text-anchor="end" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">万人</text>
+      <text x="72" y="424" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">0</text>
+      <text x="72" y="364" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">1</text>
+      <text x="72" y="304" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">2</text>
+      <text x="72" y="244" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">3</text>
+      <text x="72" y="184" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">4</text>
+      <text x="72" y="124" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">5</text>
+      <text x="72" y="64"  fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">6</text>
+      <text x="76" y="44" fill="#a2a9ce" font-size="12" text-anchor="end" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">万人</text>
 
       <!-- 柱体：非焦点 = muted 淡染；焦点 = accent -->
-      <rect x="88"  y="276" width="72" height="144" fill="rgba(86,94,126,0.15)" stroke="#565e7e" stroke-width="1"/>
-      <rect x="232" y="108" width="72" height="312" fill="rgba(26,77,217,0.12)" stroke="#1a4dd9" stroke-width="1"/>
-      <rect x="376" y="204" width="72" height="216" fill="rgba(86,94,126,0.15)" stroke="#565e7e" stroke-width="1"/>
-      <rect x="520" y="324" width="72" height="96"  fill="rgba(86,94,126,0.15)" stroke="#565e7e" stroke-width="1"/>
-      <rect x="664" y="372" width="72" height="48"  fill="rgba(86,94,126,0.15)" stroke="#565e7e" stroke-width="1"/>
-      <rect x="808" y="300" width="72" height="120" fill="rgba(86,94,126,0.15)" stroke="#565e7e" stroke-width="1"/>
+      <rect x="88"  y="276" width="72" height="144" fill="rgba(162,169,206,0.15)" stroke="#a2a9ce" stroke-width="1"/>
+      <rect x="232" y="108" width="72" height="312" fill="rgba(125,152,255,0.12)" stroke="#7d98ff" stroke-width="1"/>
+      <rect x="376" y="204" width="72" height="216" fill="rgba(162,169,206,0.15)" stroke="#a2a9ce" stroke-width="1"/>
+      <rect x="520" y="324" width="72" height="96"  fill="rgba(162,169,206,0.15)" stroke="#a2a9ce" stroke-width="1"/>
+      <rect x="664" y="372" width="72" height="48"  fill="rgba(162,169,206,0.15)" stroke="#a2a9ce" stroke-width="1"/>
+      <rect x="808" y="300" width="72" height="120" fill="rgba(162,169,206,0.15)" stroke="#a2a9ce" stroke-width="1"/>
 
       <!-- 柱顶数值 -->
-      <text x="124" y="268" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">2.4</text>
-      <text x="268" y="100" fill="#1a4dd9" font-size="9" font-weight="600" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">5.2</text>
-      <text x="412" y="196" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">3.6</text>
-      <text x="556" y="316" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">1.6</text>
-      <text x="700" y="364" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">0.8</text>
-      <text x="844" y="292" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">2.0</text>
+      <text x="124" y="268" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">2.4</text>
+      <text x="268" y="100" fill="#7d98ff" font-size="9" font-weight="600" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">5.2</text>
+      <text x="412" y="196" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">3.6</text>
+      <text x="556" y="316" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">1.6</text>
+      <text x="700" y="364" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">0.8</text>
+      <text x="844" y="292" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">2.0</text>
 
       <!-- x 轴类目 -->
-      <text x="124" y="448" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">应用商店</text>
-      <text x="268" y="448" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">内容营销</text>
-      <text x="412" y="448" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">搜索引擎</text>
-      <text x="556" y="448" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">合作渠道</text>
-      <text x="700" y="448" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">邮件召回</text>
-      <text x="844" y="448" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">线下活动</text>
+      <text x="124" y="448" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">应用商店</text>
+      <text x="268" y="448" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">内容营销</text>
+      <text x="412" y="448" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">搜索引擎</text>
+      <text x="556" y="448" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">合作渠道</text>
+      <text x="700" y="448" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">邮件召回</text>
+      <text x="844" y="448" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">线下活动</text>
 
       <!-- 图例横条 -->
-      <line x1="24" y1="480" x2="960" y2="480" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <text x="24" y="498" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+      <line x1="24" y1="480" x2="960" y2="480" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <text x="24" y="498" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
 
-      <rect x="96" y="488" width="16" height="12" rx="2" fill="rgba(26,77,217,0.12)" stroke="#1a4dd9" stroke-width="1"/>
-      <text x="120" y="498" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点渠道（增长最快）</text>
+      <rect x="96" y="488" width="16" height="12" rx="2" fill="rgba(125,152,255,0.12)" stroke="#7d98ff" stroke-width="1"/>
+      <text x="120" y="498" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点渠道（增长最快）</text>
 
-      <rect x="284" y="488" width="16" height="12" rx="2" fill="rgba(86,94,126,0.15)" stroke="#565e7e" stroke-width="1"/>
-      <text x="308" y="498" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">常规渠道</text>
+      <rect x="284" y="488" width="16" height="12" rx="2" fill="rgba(162,169,206,0.15)" stroke="#a2a9ce" stroke-width="1"/>
+      <text x="308" y="498" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">常规渠道</text>
 
     </svg>
   </div>
