@@ -7,10 +7,16 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      /* full token set */
+      --color-paper:      #ffffff;
+      --color-paper-2:    #f3f2ff;
+      --color-ink:        #29314f;
+      --color-muted:      #565e7e;
+      --color-soft:       #8f94ab;
+      --color-rule:       rgba(41,49,79,0.10);
+      --color-accent:     #1a4dd9;
+      --color-accent-tint: rgba(26,77,217,0.08);
+      --color-link:       #1a4dd9;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -36,7 +42,6 @@
       font-weight: 500;
       letter-spacing: 0.3em;
       color: var(--color-muted);
-      margin-left: 4%;
       margin-bottom: 0.5rem;
     }
 
@@ -47,8 +52,48 @@
       letter-spacing: 0;
       line-height: 1.15;
       color: var(--color-ink);
-      margin-left: 4%;
       margin-bottom: 1.5rem;
+    }
+
+
+    .subtitle {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 1.55;
+      color: var(--color-muted);
+      max-width: 58ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .diagram-container {
+      background: rgba(41,49,79,0.03);
+      border-radius: 8px;
+      border: 1px solid var(--color-rule);
+      padding: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 1.5rem; }
+    @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
+    .card { background: var(--color-paper); border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
+    .card .eyebrow { margin-bottom: 0.5rem; }
+    .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.875rem; padding-bottom: 0.875rem; border-bottom: 1px solid rgba(41,49,79,0.10); }
+    .card-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+    .card-dot.accent { background: var(--color-accent); }
+    .card-dot.ink { background: var(--color-ink); }
+    .card-dot.muted { background: var(--color-muted); }
+    .card h3 { font-size: 0.875rem; font-weight: 600; letter-spacing: 0; }
+    .card p, .card ul { color: var(--color-muted); font-size: 0.8125rem; line-height: 1.55; }
+    .card ul { list-style: none; margin: 0; padding: 0; }
+    .card li { margin-bottom: 0.3rem; padding-left: 0.875rem; position: relative; }
+    .card li::before { content: '—'; position: absolute; left: 0; color: rgba(41,49,79,0.20); }
+
+    .footer {
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(41,49,79,0.10);
+      font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em;
+      color: var(--color-soft);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
     }
 
     svg { width: 100%; min-width: 900px; display: block; }
@@ -64,10 +109,13 @@
   <div class="frame">
     <p class="eyebrow">生产环境 · 架构图</p>
     <h1>AI 客服平台 · 生产架构</h1>
+    <p class="subtitle">请求经 API 网关进入对话 Agent（焦点），由 LLM 生成补全；会话写入 Postgres，缓存走 Redis 旁路。</p>
 
-    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-architecture-title example-architecture-desc">
-      <title id="example-architecture-title">AI 客服平台生产架构</title>
-      <desc id="example-architecture-desc">架构图：用户网站请求经 API 网关进入对话 Agent（焦点），Agent 调用外部 LLM API、写入 Postgres 并读写 Redis 缓存。</desc>
+    <div class="diagram-container">
+
+    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-architecture-full-title example-architecture-full-desc">
+      <title id="example-architecture-full-title">AI 客服平台生产架构</title>
+      <desc id="example-architecture-full-desc">架构图：用户网站请求经 API 网关进入对话 Agent（焦点），Agent 调用外部 LLM API、写入 Postgres 并读写 Redis 缓存。</desc>
         <defs>
           <!-- dots pattern: reserved for dev/editorial theme, unused by default -->
           <!--
@@ -194,6 +242,34 @@
         <line x1="808" y1="452" x2="836" y2="452" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
         <text x="844" y="457" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">缓存 / 异步</text>
       </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow">焦点服务</p>
+        <div class="card-header"><span class="card-dot accent"></span><h3>对话 Agent 是唯一焦点</h3></div>
+        <p>请求经 API 网关进入后，检索增强与工具调用都在这里完成；下游的 LLM、存储与缓存都由它统一编排。</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">外部依赖</p>
+        <div class="card-header"><span class="card-dot ink"></span><h3>LLM 生成 · Redis 旁路</h3></div>
+        <ul>
+          <li>LLM API 负责生成补全，走 HTTPS 出站调用</li>
+          <li>Redis 只做会话旁路缓存，虚线 = 异步 / 可选</li>
+          <li>缓存 5 分钟过期，不落盘、重启即清</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">数据落盘</p>
+        <div class="card-header"><span class="card-dot muted"></span><h3>会话记录写 Postgres</h3></div>
+        <p>完整会话写入 Postgres 持久化；缓存层不落盘，与持久层职责分离——读写路径在图中以「写入 / 缓存读写」标注。</p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <span>AI 客服平台 · 生产架构</span>
+      <span>2026-08</span>
+    </footer>
   </div>
 </body>
 </html>

@@ -9,12 +9,12 @@
     /* 深色档 token——见 style-guide.md 色板「深色档」列与反转规则。深色是 opt-in：
        用户点名深色 / 暗色 / 夜间，或投放目标是深色站点 / 幻灯时才用本模板。 */
     :root {
-      --color-paper:   #29314f;
+      --color-paper:   #0a0d1b;
       --color-paper-2: #13182e;   /* 深色下 backend 节点填充 */
-      --color-ink:     #faf8ff;
+      --color-ink:     #e0e4ff;
       --color-muted:   #a2a9ce;
-      --color-soft:    #787fa2;
-      --color-rule:    rgba(250,248,255,0.12);
+      --color-soft:    rgba(224,228,255,0.72);
+      --color-rule:    rgba(224,228,255,0.12);
       --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
@@ -65,7 +65,7 @@
     <!-- 产出时把 id 换成 {文件名 slug}-title / -desc（SKILL §7 无障碍契约）。
          下面整段 SVG 是演示内容——复制本模板后替换为你的图。
          深色换档要点：backend 填充 #ffffff → #13182e；ink 基 rgba 翻转为纸色基；
-         箭头标签遮罩 fill 跟 paper 换 #29314f。见 style-guide.md 反转规则。 -->
+         箭头标签遮罩 fill 跟 paper 换 #0a0d1b。见 style-guide.md 反转规则。 -->
     <svg viewBox="0 0 960 264" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="template-dark-title template-dark-desc">
       <title id="template-dark-title">深色模板示例图</title>
       <desc id="template-dark-desc">深色档模板演示：用户网站经 API 网关到对话 Agent（焦点），Agent 调用 LLM API 并写 Postgres；实际使用时替换为本图内容。</desc>
@@ -77,12 +77,12 @@
         <!-- 可选：点状纹理背景。取消注释并在纸面 rect 之后加 <rect fill="url(#dots)"/> 启用。 -->
         <!--
         <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
-          <circle cx="1" cy="1" r="0.9" fill="rgba(250,248,255,0.08)"/>
+          <circle cx="1" cy="1" r="0.9" fill="rgba(224,228,255,0.08)"/>
         </pattern>
         -->
       </defs>
 
-      <rect width="100%" height="100%" fill="#29314f"/>
+      <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 连接线（画在盒子下层） -->
       <line x1="168" y1="176" x2="232" y2="176" stroke="#7d98ff" stroke-width="1.2" marker-end="url(#arrow-link)"/>
@@ -92,48 +92,48 @@
       <path d="M 504,144 V 140 Q 504,132 512,132 H 736 Q 744,132 744,124 V 120"
             fill="none" stroke="#7d98ff" stroke-width="1.2" marker-end="url(#arrow-link)"/>
 
-      <!-- 箭头标签：遮罩 fill 跟 paper 换档 #29314f，6–10px 净空 -->
-      <rect x="176" y="156" width="48" height="12" rx="2" fill="#29314f"/>
+      <!-- 箭头标签：遮罩 fill 跟 paper 换档 #0a0d1b，6–10px 净空 -->
+      <rect x="176" y="156" width="48" height="12" rx="2" fill="#0a0d1b"/>
       <text x="200" y="165" fill="#7d98ff" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">HTTPS</text>
 
       <!-- Node: 用户网站（input；深色档 input 填充 = 纸色基 rgba） -->
-      <rect x="40" y="144" width="128" height="64" rx="6" fill="#29314f"/>
-      <rect x="40" y="144" width="128" height="64" rx="6" fill="rgba(162,169,206,0.10)" stroke="#787fa2" stroke-width="1"/>
-      <rect x="48" y="152" width="28" height="12" rx="2" fill="transparent" stroke="rgba(120,127,162,0.40)" stroke-width="0.8"/>
+      <rect x="40" y="144" width="128" height="64" rx="6" fill="#0a0d1b"/>
+      <rect x="40" y="144" width="128" height="64" rx="6" fill="rgba(162,169,206,0.08)" stroke="#787fa2" stroke-width="1"/>
+      <rect x="48" y="152" width="28" height="12" rx="2" fill="transparent" stroke="rgba(224,228,255,0.40)" stroke-width="0.8"/>
       <text x="62" y="161" fill="#787fa2" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">WEB</text>
-      <text x="104" y="180" fill="#faf8ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">用户网站</text>
+      <text x="104" y="180" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">用户网站</text>
       <text x="104" y="196" fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">chat widget</text>
 
       <!-- Node: API 网关（backend；深色档填充 = paper-2 #13182e） -->
-      <rect x="232" y="144" width="144" height="64" rx="6" fill="#29314f"/>
-      <rect x="232" y="144" width="144" height="64" rx="6" fill="#13182e" stroke="#faf8ff" stroke-width="1"/>
-      <rect x="240" y="152" width="28" height="12" rx="2" fill="transparent" stroke="rgba(250,248,255,0.40)" stroke-width="0.8"/>
-      <text x="254" y="161" fill="#faf8ff" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">API</text>
-      <text x="304" y="180" fill="#faf8ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">API 网关</text>
+      <rect x="232" y="144" width="144" height="64" rx="6" fill="#0a0d1b"/>
+      <rect x="232" y="144" width="144" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <rect x="240" y="152" width="28" height="12" rx="2" fill="transparent" stroke="rgba(224,228,255,0.40)" stroke-width="0.8"/>
+      <text x="254" y="161" fill="#e0e4ff" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">API</text>
+      <text x="304" y="180" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">API 网关</text>
       <text x="304" y="196" fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">jwt · rate limit</text>
 
       <!-- Node: 对话 Agent（focal 焦点；深色档 accent = #7d98ff） -->
-      <rect x="424" y="144" width="160" height="64" rx="6" fill="#29314f"/>
+      <rect x="424" y="144" width="160" height="64" rx="6" fill="#0a0d1b"/>
       <rect x="424" y="144" width="160" height="64" rx="6" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1"/>
       <rect x="432" y="152" width="36" height="12" rx="2" fill="transparent" stroke="rgba(125,152,255,0.50)" stroke-width="0.8"/>
       <text x="450" y="161" fill="#7d98ff" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
-      <text x="504" y="180" fill="#faf8ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">对话 Agent</text>
+      <text x="504" y="180" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">对话 Agent</text>
       <text x="504" y="196" fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">rag · tool calls</text>
 
       <!-- Node: LLM API（external；ink 基 rgba 翻转为纸色基） -->
-      <rect x="680" y="56" width="144" height="64" rx="6" fill="#29314f"/>
-      <rect x="680" y="56" width="144" height="64" rx="6" fill="rgba(250,248,255,0.03)" stroke="rgba(250,248,255,0.30)" stroke-width="1"/>
-      <rect x="688" y="64" width="28" height="12" rx="2" fill="transparent" stroke="rgba(250,248,255,0.20)" stroke-width="0.8"/>
+      <rect x="680" y="56" width="144" height="64" rx="6" fill="#0a0d1b"/>
+      <rect x="680" y="56" width="144" height="64" rx="6" fill="rgba(224,228,255,0.03)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <rect x="688" y="64" width="28" height="12" rx="2" fill="transparent" stroke="rgba(224,228,255,0.20)" stroke-width="0.8"/>
       <text x="702" y="73" fill="#787fa2" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">LLM</text>
-      <text x="752" y="92" fill="#faf8ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">LLM API</text>
+      <text x="752" y="92" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">LLM API</text>
       <text x="752" y="108" fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">claude-sonnet</text>
 
       <!-- Node: Postgres（store） -->
-      <rect x="680" y="144" width="144" height="64" rx="6" fill="#29314f"/>
-      <rect x="680" y="144" width="144" height="64" rx="6" fill="rgba(250,248,255,0.05)" stroke="#a2a9ce" stroke-width="1"/>
-      <rect x="688" y="152" width="24" height="12" rx="2" fill="transparent" stroke="rgba(162,169,206,0.50)" stroke-width="0.8"/>
+      <rect x="680" y="144" width="144" height="64" rx="6" fill="#0a0d1b"/>
+      <rect x="680" y="144" width="144" height="64" rx="6" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+      <rect x="688" y="152" width="24" height="12" rx="2" fill="transparent" stroke="rgba(224,228,255,0.50)" stroke-width="0.8"/>
       <text x="700" y="161" fill="#a2a9ce" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">DB</text>
-      <text x="752" y="180" fill="#faf8ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">Postgres</text>
+      <text x="752" y="180" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">Postgres</text>
       <text x="752" y="196" fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">conversations</text>
     </svg>
   </div>
