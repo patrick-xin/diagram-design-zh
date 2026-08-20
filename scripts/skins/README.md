@@ -27,9 +27,8 @@ sem-workspace `#c9a23a`）——换皮不换义，写了会被 gate 拒绝。
 | `default` | style-guide 现行值快照 | identity；配 `--dry-run` 当颜色出处普查器 |
 | `xinzhongshi` | `references/skin-xinzhongshi.md` | 近似——钤印/题签/朱批/黛蓝 link 是生成时语义，值替换做不了 |
 | `zhongguohong` | `references/skin-zhongguohong.md` | 忠实——节点语义沿用默认只换基色，link==accent 天然成立 |
-| `tonex` | `references/tonex-theme.md` §7（种子 #1a4dd9） | CLI 派生；换种子照 §7 重跑 `tonex generate --seed '<hex>' --format hex` 重填，不许手调 |
 
-皮肤文档（`references/skin-*.md`、`tonex-theme.md`）是权威；本目录 JSON 只是
+皮肤文档（`references/skin-*.md`）是权威；本目录 JSON 只是
 它们的机器可读转录，改值先改文档再同步这里。
 
 ## gate（定义在皮肤表层，不过门不让用）
@@ -46,15 +45,19 @@ sem-workspace `#c9a23a`）——换皮不换义，写了会被 gate 拒绝。
 python3 scripts/reskin.py --list                              # 列皮肤 + 过 gate
 python3 scripts/reskin.py --skin zhongguohong \
         assets/example-high-level.html \
-        -o assets/example-high-level-zhongguohong.html --tag  # 换肤出成品
+        -o assets/example-high-level-zhongguohong.html        # 换肤出成品
 python3 scripts/reskin.py --skin default --dry-run 文件.html   # 颜色出处普查
 ```
 
+- 产物默认打 `reskin:<名>` 来源注释（`--no-tag` 关闭）——self_check 的
+  颜色层靠它把这张皮肤表的值并进闭集，换肤产出照常过质量门。
 - `-o` 换了文件名词干时，脚本自动同步 title/desc 的 slug id，保住
   `self_check.py` 的 `{stem}-title/-desc` 契约；产出直接跑 self_check 验证。
 - 产出命名沿用现有惯例：`<原名>-<皮肤名>.html`。
-- 未知颜色（不在任何槽位、也不是语义五色）会以 `⚠ 未知` 报告——这同时是
-  值集闭集的脏值探测器。
+- 未知颜色（不在任何槽位、不是语义五色、也不是终端灰阶）会以 `⚠ 未知`
+  报告——这同时是值集闭集的脏值探测器；终端外壳灰阶七色原样保留、
+  单列「终端」段（终端不吃皮肤，但只许出现在终端外壳文件里——
+  self_check 在非终端文件里见到会红）。
 
 ## 边界（设计如此，不是 bug）
 

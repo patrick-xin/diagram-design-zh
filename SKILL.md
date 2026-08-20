@@ -157,6 +157,18 @@ metadata:
 
 触发：用户点名（中国红 / 政务红 / 红色主题 / 红头文件风）；或题材本身是党政机关、政务公开、国企汇报、党建场景。启用后按 [`references/skin-zhongguohong.md`](references/skin-zhongguohong.md) 执行。**普通企业的红色品牌走 onboarding 定制，不上本皮肤**。
 
+### 换肤（成品重涂）：reskin.py
+
+用户拿**已交付的成品**要另一版皮肤（"这张出个新中式版 / 政务红版""按我们的品牌色再出一版"）时**不重画**——值级换肤：
+
+    python3 <技能目录>/scripts/reskin.py --skin <名> 成品.html -o 成品-<皮肤名>.html
+
+- 皮肤 = `scripts/skins/<名>.json`（语义槽位 → 色值的表，十几行）；新皮肤就是写一张表，自带质量门（AA 对比度、焦点色唯一、防彩虹），`--list` 逐张过 gate。
+- 换皮不换义：语义色族五色与终端灰阶原样保留；透明度档位是结构不是颜色——梯子、坡道、深色 0.72 契约换肤后原样成立。
+- 产物自动打 reskin 来源注释，self_check 的颜色层据此认出处（换肤后照常跑质量门，必须全绿）。
+- 边界：结构性皮肤语义（新中式钤印 / 题签 / 朱批、黛蓝 link）值替换只能逼近色板——从零画皮肤图仍走 [`references/skin-xinzhongshi.md`](references/skin-xinzhongshi.md) 的生成时规则。
+- 与样式门分工：品牌定制走 onboarding 写 style-guide（此后本项目的图全部生效）；reskin 是对单张成品的重涂，两条路不混。
+
 ## 6. 节点类型 → 视觉处理
 
 七类节点（`focal` / `backend` / `store` / `external` / `input` / `optional` / `security`）的填充与描边取值，**唯一权威在 [`references/style-guide.md`](references/style-guide.md)「节点类型 → 视觉处理」节**——本文件不维护副本，两表不许再分叉。纪律不变：`focal` ≤2；`optional` 虚线 `4,3`；`security` 虚线 `4,4`；同图同类节点处理一致。

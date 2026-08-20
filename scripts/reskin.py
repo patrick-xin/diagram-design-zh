@@ -13,6 +13,8 @@ treemap 六档坡道、深色 0.72 文字契约在换肤后原样成立。
 不吃换肤（PINNED，皮肤表试图覆盖即报错）：
   语义色族五色 sem-security / sem-observability / sem-governance /
   sem-backup / sem-workspace——换皮不换义。
+  终端外壳灰阶七色（TERMINAL_NEUTRALS）——终端就是黑底灰字，不吃皮肤；
+  是否允许出现在某个文件里由 self_check 的上下文判定管（非终端文件用了会红）。
 
 皮肤表未覆盖的槽位保持默认值；皮肤缺深色档而文件含深色值时给警告
 （深色部分保持默认，不产出半套猜测值）。
@@ -27,7 +29,9 @@ gate（在皮肤表层做，不过门的皮肤不让用）：
 已知边界：reskin 是机械换值。皮肤若含结构性语义（新中式钤印/题签/朱批、
 黛蓝 link），值替换只能逼近色板，完整效果走生成时皮肤文档
 （references/skin-*.md）。写入 -o 且文件名词干变化时，自动同步改写
-title/desc 的 slug id，保持 self_check.py 的 slug 契约。
+title/desc 的 slug id，保持 self_check.py 的 slug 契约。产物默认打
+reskin 来源注释（--no-tag 关闭）——self_check 的颜色层靠它把目标皮肤表
+的值并进闭集。
 """
 
 from __future__ import annotations
@@ -50,7 +54,8 @@ SLOTS: dict[str, tuple[str, tuple[int, int, int]]] = {
     "muted":       ("#565e7e", (86, 94, 126)),
     "soft":        ("#8f94ab", (143, 148, 171)),
     "accent":      ("#1a4dd9", (26, 77, 217)),
-    # 深色档：paper-dark 是深色文字的纸色基（hex 形 #faf8ff 与 rgba 基 250,248,255 同源）
+    # 深色档：paper-dark 是深色文字的纸色基（hex 形 #faf8ff 与 rgba 基 250,248,255 同源）。
+    # 深色调色仍在调试（2026-08-20 用户指示：先不把 tonex 值写死进槽位，做几张稳定后再固化）。
     "paper-dark":  ("#faf8ff", (250, 248, 255)),
     "dark-bg":     ("#13182e", (19, 24, 46)),
     "muted-dark":  ("#a2a9ce", (162, 169, 206)),
@@ -78,6 +83,18 @@ PINNED: dict[str, tuple[str, tuple[int, int, int]]] = {
 }
 
 DARK_SLOTS = {"paper-dark", "dark-bg", "muted-dark", "soft-dark", "accent-dark"}
+
+# 终端外壳灰阶（assets/template-terminal.html 的题材专用色系，按 RGB 基收录，
+# hex 与 rgba 两种写法同时盖住）。换肤与普查均原样保留。
+TERMINAL_NEUTRALS: frozenset[tuple[int, int, int]] = frozenset({
+    (10, 10, 10),      # terminal-page   #0a0a0a
+    (20, 20, 20),      # terminal-paper  #141414
+    (27, 27, 27),      # terminal-bar    #1b1b1b
+    (43, 43, 43),      # terminal-border #2b2b2b
+    (92, 92, 92),      # terminal-soft   #5c5c5c
+    (154, 154, 154),   # terminal-muted  #9a9a9a
+    (245, 245, 245),   # terminal-ink    #f5f5f5
+})
 
 HEX_RE = re.compile(r"(?<!url\()#([0-9a-fA-F]{6})\b")
 RGBA_RE = re.compile(
@@ -223,16 +240,31 @@ def gate(skin: dict) -> tuple[list[str], list[str]]:
     return errors, warnings
 
 
-def translate(source: str, colors: dict) -> tuple[str, Counter, Counter]:
-    """值级替换。返回 (新文本, 替换统计, 原样保留统计)。"""
+def translate(
+    source: str,
+    colors: dict,
+    extra: dict | None = None,
+) -> tuple[str, Counter, Counter]:
+    """值级替换。返回 (新文本, 替换统计, 原样保留统计)。
+    extra：额外合法值 → 槽位映射（self_check 对换肤产物复用本识别器时
+    传入目标皮肤表的值，出处=那张表），仅用于识别、不参与替换。"""
     replaced: Counter = Counter()
     kept: Counter = Counter()
+    if extra:
+        hex_map = {**HEX_TO_SLOT, **{v[0]: f"皮肤/{slot}" for slot, v in extra.items()}}
+        base_map = {**BASE_TO_SLOT, **{v[1]: f"皮肤/{slot}" for slot, v in extra.items()}}
+    else:
+        hex_map, base_map = HEX_TO_SLOT, BASE_TO_SLOT
 
     def hex_sub(m: re.Match) -> str:
         canonical = "#" + m.group(1).lower()
-        slot = HEX_TO_SLOT.get(canonical)
+        slot = hex_map.get(canonical)
         if slot is None:
-            kept[f"未知:{m.group(0)}"] += 1
+            rgb = tuple(int(m.group(1)[i:i + 2], 16) for i in (0, 2, 4))
+            if rgb in TERMINAL_NEUTRALS:
+                kept[f"terminal:{canonical}"] += 1
+            else:
+                kept[f"未知:{m.group(0)}"] += 1
             return m.group(0)
         if slot in colors:
             replaced[slot] += 1
@@ -242,9 +274,12 @@ def translate(source: str, colors: dict) -> tuple[str, Counter, Counter]:
 
     def rgba_sub(m: re.Match) -> str:
         base = (int(m.group(1)), int(m.group(2)), int(m.group(3)))
-        slot = BASE_TO_SLOT.get(base)
+        slot = base_map.get(base)
         if slot is None:
-            kept[f"未知:rgb({base[0]},{base[1]},{base[2]})"] += 1
+            if base in TERMINAL_NEUTRALS:
+                kept[f"terminal:rgb({base[0]},{base[1]},{base[2]})"] += 1
+            else:
+                kept[f"未知:rgb({base[0]},{base[1]},{base[2]})"] += 1
             return m.group(0)
         if slot in colors:
             replaced[slot] += 1
@@ -277,9 +312,18 @@ def report_stats(path: Path, replaced: Counter, kept: Counter, dry: bool) -> Non
     line = f"{path.name}：{verb} {sum(replaced.values())} 处"
     if detail:
         line += f"（{detail}）"
-    pinned_detail = " · ".join(f"{k} {v}" for k, v in kept.most_common() if not k.startswith("未知:"))
+    pinned_detail = " · ".join(
+        f"{k} {v}" for k, v in kept.most_common()
+        if not k.startswith("未知:") and not k.startswith("terminal:")
+    )
     if pinned_detail:
         line += f"；原样 {pinned_detail}"
+    terminal_detail = " · ".join(
+        f"{k.removeprefix('terminal:')} {v}" for k, v in kept.most_common()
+        if k.startswith("terminal:")
+    )
+    if terminal_detail:
+        line += f"；终端 {terminal_detail}"
     if unknown:
         line += f"；⚠ 未知颜色 {sum(unknown.values())} 处 {sorted(unknown)}"
     print(line, file=sys.stderr)
@@ -293,7 +337,9 @@ def main() -> int:
     ap.add_argument("--skin", help="皮肤名（scripts/skins/<名>.json）或 JSON 路径")
     ap.add_argument("--dry-run", action="store_true", help="只统计不输出（配合 --skin default 做普查）")
     ap.add_argument("-o", "--output", type=Path, help="输出文件（缺省打印到 stdout）")
-    ap.add_argument("--tag", action="store_true", help="在 doctype 后插入皮肤来源注释")
+    ap.add_argument("--tag", action="store_true", default=True,
+                    help="在 doctype 后插入皮肤来源注释（默认开——self_check 靠它认换肤产物的出处）")
+    ap.add_argument("--no-tag", dest="tag", action="store_false", help="不插皮肤来源注释")
     ap.add_argument("--skins-dir", type=Path, default=SKINS_DIR)
     ap.add_argument("files", nargs="*", type=Path)
     args = ap.parse_args()

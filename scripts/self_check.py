@@ -5,7 +5,7 @@
 
     python3 <技能目录>/scripts/self_check.py my-diagram.html
 
-检查分五层：
+检查分六层：
   安全层   单文件契约：无任何远程引用（字体走 embed_fonts.py 内嵌子集
            或系统三栈）、无可执行属性、无 iframe/embed/object；脚本只允许
            一个——与 assets/template-motion.html 逐字节一致的动效控制器。
@@ -14,6 +14,9 @@
   动效层   结构化动效契约：单一 data-motion-root、模式合法、步数 0–8、
            条目 ≤12、步号连续且每步 ≤2 条、语义条目须有 aria-label、
            装饰条目须 aria-hidden、受控模式须控件齐全 + 播报区 + noscript。
+  颜色层   值级出处闭集（复用 reskin.py 的槽位识别，两套机器同一标准）：
+           hex 与 rgba 基色必须来自语义槽位表或语义色族，不许自造颜色；
+           终端灰阶只在终端外壳文件里合法。
   排版层   中文硬规则：lang=zh-CN、三字体栈齐全且含系统兜底、
            禁用纯西文字体（Geist/Inter/Roboto 等）、含汉字文本 ≥10px、
            中英混排空格（警告级）。
@@ -31,6 +34,11 @@ import sys
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
+
+# 颜色层与换肤机器同目录分发；直接跑脚本时脚本目录本就在 sys.path[0]，
+# 显式补一次是为了 self_check 被当作模块导入时也能找到 reskin。
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import reskin  # noqa: E402——同目录模块，槽位闭集与值级识别的唯一实现
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
 MOTION_TEMPLATE = SKILL_DIR / "assets" / "template-motion.html"
@@ -329,6 +337,41 @@ def check_motion(parser: DiagramParser, source: str, errors: list[str]) -> None:
             errors.append("动效文件需要 <noscript> 说明完整静态画面")
 
 
+def check_colors(source: str, errors: list[str]) -> None:
+    """颜色出处闭集：值级识别复用 reskin.translate——质量门与换肤机器
+    同一套槽位表，不存在两套标准。换肤产物按 doctype 后的 reskin 来源
+    注释把目标皮肤表的值并进闭集（出处=那张表）；标记指向的表不在
+    skins/ 里则直接拦——自带表请拷进 scripts/skins/（gate 顺带把关）。
+    终端灰阶只在终端外壳文件里合法（外壳特征：class="terminal" 或
+    CSS 变量注释 terminal-page）。"""
+    extra = None
+    marker = re.search(r"<!--\s*reskin:([\w.-]+)", source)
+    if marker:
+        skin_path = reskin.SKINS_DIR / f"{marker.group(1)}.json"
+        if not skin_path.is_file():
+            errors.append(
+                f"reskin 标记自报皮肤 {marker.group(1)!r} 不在 scripts/skins/ 里——"
+                "自带表先拷进去（--list 会顺带过 gate）再交付"
+            )
+        else:
+            extra = reskin.load_skin(skin_path)["colors"]
+    _text, _replaced, kept = reskin.translate(source, {}, extra=extra)
+    unknown = sorted(k for k in kept if k.startswith("未知:"))
+    if unknown:
+        errors.append(
+            f"颜色出处不明 {sum(kept[k] for k in unknown)} 处 {unknown}——"
+            "色值必须来自语义槽位表（scripts/skins/default.json，与 style-guide 对账）"
+            "或语义色族，不许自造颜色"
+        )
+    terminal = sorted(k.split(":", 1)[1] for k in kept if k.startswith("terminal:"))
+    is_terminal = 'class="terminal"' in source or "terminal-page" in source
+    if terminal and not is_terminal:
+        errors.append(
+            f"终端灰阶 {terminal} 用在非终端文件——终端色系只属于终端外壳"
+            "（references/primitive-terminal.md）"
+        )
+
+
 def verify(path: Path) -> tuple[list[str], list[str]]:
     source = path.read_text(encoding="utf-8")
     parser = parsed_document(source)
@@ -493,6 +536,9 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
     # 动效层（存在动效标记或脚本时才检查）
     check_scripts(parser, errors)
     check_motion(parser, source, errors)
+
+    # 颜色出处层（值级闭集，与 reskin 换肤机器同源）
+    check_colors(source, errors)
 
     return errors, warnings
 
