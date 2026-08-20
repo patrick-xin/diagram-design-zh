@@ -1,6 +1,6 @@
 ---
 name: diagram-design-zh
-description: 生成出版级中文图表：架构图、流程图、示意图、拓扑图等，输出 standalone HTML/SVG，内置中文字体栈与 CJK 排版规则（字号下限、字距、中英混排），零指令产出可直接放进文档、周报、公众号的图。支持把 Mermaid 源（.mmd/.mermaid/Markdown 代码块）重绘为中文编辑级图表；支持排队瓶颈、策略评估、安全铺路等语义模式与可选无障碍分步动效；内置 IT/云/K8s 单色图标库，支持终端外壳与深色档变体。当用户要求画架构图/流程图/示意图/拓扑图/图表/diagram 且期望好看，要求转换/重绘 Mermaid 图，或要求加动效/分步动画、配图标、终端风格、深色/暗色模式时使用。Chinese editorial diagram skill with built-in CJK typography for agent-authored standalone HTML/SVG.
+description: 生成标准中文图表：架构图、流程图、示意图、拓扑图等，输出 standalone HTML/SVG，内置中文字体栈与 CJK 排版规则（字号下限、字距、中英混排），零指令产出可直接放进文档、周报、公众号的图。支持把 Mermaid 源（.mmd/.mermaid/Markdown 代码块）重绘为中文标准图表；支持排队瓶颈、策略评估、安全铺路等语义模式与可选无障碍分步动效；内置 IT/云/K8s 单色图标库，支持终端外壳与深色档变体。当用户要求画架构图/流程图/示意图/拓扑图/图表/diagram 且期望好看，要求转换/重绘 Mermaid 图，或要求加动效/分步动画、配图标、终端风格、深色/暗色模式时使用。Chinese diagram skill with built-in CJK typography for agent-authored standalone HTML/SVG.
 license: MIT
 metadata:
   version: "0.1.0"
@@ -8,7 +8,7 @@ metadata:
 
 # 图表设计
 
-用自包含的单文件 HTML + 内联 SVG/CSS 产出编辑级图表。排版层为中文优先：字体栈、字号下限、字距、混排规则全部内置。
+用自包含的单文件 HTML + 内联 SVG/CSS 产出通用、正式场合直接可用的图表。排版层为中文优先：字体栈、字号下限、字距、混排规则全部内置。
 
 **核心承诺：用户不用说"换字体 / 调字号 / 改字距"，产出直接就是中文排版正确的图。**
 
@@ -20,7 +20,7 @@ metadata:
    > 这是你在本项目的第一张图，样式还是默认皮肤（纯白纸 + 靛蓝焦点）。要按你的品牌定制吗？(a) 从你的网站提取 (b) 从一张截图 / 海报 / PPT 提取 (c) 从本地文件夹的设计文件提取 (d) 直接给你色值 (e) 就用默认
 
    选 (a)–(d) 按 [`references/onboarding.md`](references/onboarding.md) 执行，diff 确认后写回 style-guide.md；选 (e) 直接开画。**不问的三种情况**：无主语的通用 / 教学 / 第三方案例（"画一张电商系统的架构图"）；用户已自报皮肤身份（如新中式、中国红——皮肤触发优先，不再叠问品牌色）；本项目已问过或已定制过。已定制（或档案激活）时不再问，但本项目第一张图要**一句话播报当前皮肤**（如「当前皮肤：acme 档案，主色 #c8102e」）——静默继承变成可感知，串色第一张图就能被发现。定制只做一次，后续所有图自动继承。
-3. 选定类型后，只载入对应的 `references/type-*.md`（§3 路由表 28 类之一）。
+3. 选定类型后，只载入对应的 `references/type-*.md`（§3 路由表所列类型之一）。
 4. 排版细节以 `references/style-guide.md` 为唯一权威。
 5. 动手前先看对应类型的 `assets/example-*.html`——锚点质量，产出至少要达到这个水平。
 6. 行为、状态、执行、风险承载含义时，先按 §3 的语义路由选模式再选类型；用户点名动效 / 动画 / 分步播放，或动效确实能讲清顺序、累积、评估时，再载入 [`references/animation.md`](references/animation.md)——**静态永远是默认**。
@@ -31,14 +31,14 @@ metadata:
 
 ## 1. 理念
 
-- 编辑级不是装饰级。最高级的动作是**删除**。
+- 克制优于装饰。最高级的动作是**删除**。
 - 密度 4/10：节点 ≤9，标签宁少勿多，每个元素都要挣自己的位置。
 - 全图最多 **1–2 个 accent 焦点**（焦点色）。焦点 = 读者第一眼该看的地方；全员焦点色 = 没有焦点。
 - 默认什么都不加：无阴影、无渐变、无图标、无 emoji、无 3D。
 
 ## 2. 何时用 / 何时不用
 
-28 类视觉形态全部内置（§3），当**读者从图学到的比从文字、表格、列表学到的多**时使用。
+路由表所列的视觉形态全部内置（§3），当**读者从图学到的比从文字、表格、列表学到的多**时使用。
 
 **不用画图的情况**：
 
@@ -132,52 +132,29 @@ metadata:
 
 ## 5. 色板（语义角色）与皮肤
 
-| 角色 | 用途 | 默认值 |
-|---|---|---|
-| `paper` | 页面背景、节点底 | `paper` |
-| `ink` | 主文本、主描边 | `ink` |
-| `muted` | 次文本、默认箭头 | `muted` |
-| `soft` | 子标签、边界标签 | `soft` |
-| `accent` | 焦点，全图 ≤2 处 | `accent` |
-| `accent-tint` | 焦点底色 | `accent @ 0.08` |
-| `link` | HTTP/API 调用 | `accent` |
+| 角色 | 用途 |
+|---|---|
+| `paper` / `paper-2` | 页面背景、容器底 |
+| `ink` | 主文本、主描边 |
+| `muted` / `soft` | 次文本、默认箭头、子标签 |
+| `accent` / `accent-tint` | 焦点（≤2 处）及其底色 |
+| `link` | HTTP/API 调用 |
 
-- 只引用语义角色名，不内联十六进制值到处写。全套 token（浅 / 深两列）唯一权威在 [`references/style-guide.md`](references/style-guide.md)。
+- 只引用语义角色名，不内联十六进制值到处写。本文件与各类型文档提到 `ink` / `accent` 等角色时，**现值一律查** [`references/style-guide.md`](references/style-guide.md)——浅 / 深两列 token 的唯一权威。
 - 反模式：彩虹色、两个 accent、给分区上底色。纸面纯白（`paper`）：backend 节点同纸色、靠 `ink @ 0.40` 描边成型（store `muted @ 0.60`）；分区只画发丝线不填充——遮罩才能统一纸色；深色档下 backend 填充才换 `paper-2`。
 - 深色档 **opt-in**：用户点名深色 / 暗色 / 夜间模式，或投放目标本身是深色站点 / 深色幻灯时启用——按 style-guide 深色列 + 反转规则换档，模板 [`assets/template-dark.html`](assets/template-dark.html)，锚点 [`assets/example-architecture-dark.html`](assets/example-architecture-dark.html)。默认仍是浅色；新中式与中国红皮肤暂只有浅色档。
 
 ### 可选皮肤：新中式
 
-**启用条件（任一满足即启用）**：
-
-1. 用户点名（新中式 / 中式 / 水墨 / 国风）。
-2. 题材本身属于传统文化、面向传统美学语境：非遗工序、茶道、汉服、古籍、博物馆、文旅项目。
-3. **用户自报带中式美学的品牌身份**（如"我们是做新中式茶饮的品牌"）——不论内容是否纯技术（API、数据库、部署拓扑同样算），图要跟品牌走。此时交付说明里带一句"已用新中式皮肤，需要中性版随时说"。
-
-**不启用**：请求里没有任何中式美学信号（普通电商、普通 SaaS、内部系统）。判定看**用户的自述**，不看图的内容类型。
-
-启用后按 [`references/skin-xinzhongshi.md`](references/skin-xinzhongshi.md) 执行（钤印 / 题签 / 朱批）。皮肤与图表类型正交：类型未内置时按通用纪律画，皮肤照常上。皮肤之间元素禁止混用。
+触发：用户点名（新中式 / 中式 / 水墨 / 国风）；或题材本身属于传统文化语境（非遗工序、茶道、博物馆、文旅）；或用户自报带中式美学的品牌身份（纯技术内容同样算，图跟品牌走）。判定看用户自述，不看图的内容类型。启用后按 [`references/skin-xinzhongshi.md`](references/skin-xinzhongshi.md) 执行（钤印 / 题签 / 朱批）。皮肤与图表类型正交：类型未内置时按通用纪律画，皮肤照常上；皮肤之间元素禁止混用。
 
 ### 可选皮肤：中国红（政务）
 
-**启用条件（任一满足即启用）**：
-
-1. 用户点名：中国红 / 政务红 / 红色主题 / 红头文件风。
-2. 题材本身是党政机关、政务公开、国企汇报、党建场景。
-
-单色相红（`link` 与 `accent` 同取皮肤朱红，靠 tint 底与线型区分语义），暂只有浅色档。启用后按 [`references/skin-zhongguohong.md`](references/skin-zhongguohong.md) 执行。**普通企业的红色品牌走 onboarding 定制，不上本皮肤**。
+触发：用户点名（中国红 / 政务红 / 红色主题 / 红头文件风）；或题材本身是党政机关、政务公开、国企汇报、党建场景。启用后按 [`references/skin-zhongguohong.md`](references/skin-zhongguohong.md) 执行。**普通企业的红色品牌走 onboarding 定制，不上本皮肤**。
 
 ## 6. 节点类型 → 视觉处理
 
-| 类型 | 填充 | 描边 |
-|---|---|---|
-| `focal`（≤2） | `accent-tint` | `accent` |
-| `backend` | `paper` | `ink` |
-| `store` | `ink @ 0.05` | `muted` |
-| `external` | `ink @ 0.03` | `ink @ 0.30` |
-| `input` | `muted @ 0.10` | `soft` |
-| `optional` | `ink @ 0.02` | `ink @ 0.20` 虚线 `4,3` |
-| `security` | `accent @ 0.05` | `accent @ 0.50` 虚线 `4,4` |
+七类节点（`focal` / `backend` / `store` / `external` / `input` / `optional` / `security`）的填充与描边取值，**唯一权威在 [`references/style-guide.md`](references/style-guide.md)「节点类型 → 视觉处理」节**——本文件不维护副本，两表不许再分叉。纪律不变：`focal` ≤2；`optional` 虚线 `4,3`；`security` 虚线 `4,4`；同图同类节点处理一致。
 
 ## 7. 中文排版纪律（全部硬规则）
 
