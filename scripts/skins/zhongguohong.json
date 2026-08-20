@@ -1,0 +1,13 @@
+{
+  "label": "中国红 · 政务",
+  "source": "references/skin-zhongguohong.md",
+  "note": "单色相红，link==accent（值替换天然成立）。节点语义沿用默认规则只换基色，因此本皮肤的 reskin 是忠实还原。暂无深色档——深色成品保持默认并告警。",
+  "colors": {
+    "paper": "#fff8f7",
+    "paper-2": "#f6edec",
+    "ink": "#522522",
+    "muted": "#87504c",
+    "soft": "#b18b88",
+    "accent": "#b11821"
+  }
+}

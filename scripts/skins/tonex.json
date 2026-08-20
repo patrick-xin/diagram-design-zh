@@ -1,0 +1,18 @@
+{
+  "label": "tonex · 种子 #1a4dd9（默认 accent 派生）",
+  "source": "references/tonex-theme.md §7 完整走例",
+  "note": "12 对 WCAG AA 已机器验证。soft 是 on-surface@0.72 派生位；§8 未拍板角色（描边/系列/节点梯）保持默认。换种子时照 §7 重跑 tonex generate --format hex 重填本表，不许手调。",
+  "colors": {
+    "paper": "#faf8ff",
+    "paper-2": "#f3f2ff",
+    "ink": "#2a314f",
+    "muted": "#565e7e",
+    "soft": "rgba(42,49,79,0.72)",
+    "accent": "#0040ca",
+    "paper-dark": "#e0e4ff",
+    "dark-bg": "#13182e",
+    "muted-dark": "#a2a9ce",
+    "soft-dark": "rgba(224,228,255,0.72)",
+    "accent-dark": "#7d98ff"
+  }
+}

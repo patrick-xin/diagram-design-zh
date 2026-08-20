@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>终端模板 · 图表设计（中文版）</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      /* 终端皮肤是固定九 token 皮肤（style-guide § 终端皮肤），不参与品牌化与浅/深反转。
+         三栈仍需齐全（self_check 硬校验）；本模板只有 mono 出场。 */
+      :root {
+        --color-page: #0a0a0a;       /* terminal-page */
+        --color-paper: #141414;      /* terminal-paper */
+        --color-bar: #1b1b1b;        /* terminal-bar */
+        --color-border: #2b2b2b;     /* terminal-border */
+        --color-ink: #f5f5f5;        /* terminal-ink */
+        --color-muted: #9a9a9a;      /* terminal-muted */
+        --color-soft: #5c5c5c;       /* terminal-soft */
+        --color-accent: #7d98ff;     /* terminal-accent——焦点蓝的深色档，黑底对比 6.8:1 */
+        --color-accent-tint: rgba(125, 152, 255, 0.12);
+        --font-sans:  'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+        --font-serif: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+        --font-mono:  'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
+      }
+
+      body {
+        font-family: var(--font-mono);
+        background: var(--color-page);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 2rem;
+      }
+
+      .terminal {
+        width: 100%;
+        max-width: 1200px;
+        background: var(--color-paper);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .titlebar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        background: var(--color-bar);
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--color-soft);
+      }
+      .dot.accent {
+        background: var(--color-accent);
+      } /* 三个点里恰好一个用 accent——1-accent 规则在此同样生效 */
+
+      .titlebar-name {
+        flex: 1;
+        text-align: center;
+        color: var(--color-muted);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        margin-right: 46px; /* 抵消三个圆点的宽度，让名字视觉居中 */
+      }
+
+      .frame {
+        padding: 2.25rem 2.5rem 2.5rem;
+      }
+
+      .prompt {
+        display: flex;
+        gap: 0.6em;
+        margin-bottom: 0.9rem;
+        color: var(--color-muted);
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+      .prompt .sign {
+        color: var(--color-accent);
+      }
+
+      h1 {
+        font-family: var(--font-mono);
+        font-size: clamp(1.5rem, 2.2vw + 0.8rem, 2.05rem);
+        font-weight: 700;
+        letter-spacing: 0;
+        line-height: 1.2;
+        color: var(--color-ink);
+        margin-bottom: 1.5rem;
+      }
+      h1::before {
+        content: "# ";
+        color: var(--color-soft);
+      }
+
+      svg {
+        width: 100%;
+        min-width: 900px;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="terminal">
+      <div class="titlebar">
+        <div class="dot accent"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="titlebar-name">loop.sh — zi-jin-xun-huan</div>
+      </div>
+      <main class="frame">
+        <p class="prompt">
+          <span class="sign">$</span> diagram-design render --type loop
+        </p>
+        <h1>自改进循环</h1>
+
+        <!-- 产出时把 id 换成 {文件名 slug}-title / -desc（SKILL §7 无障碍契约）。
+             下面整段 SVG 是演示内容——复制本模板后替换为你的图。
+             字号与默认坡道对齐：节点名 14px、中文子标签/箭头标签 12px、拉丁技术串 9px；
+             中文 ≥10px 下限不放宽；遮罩 fill 用 terminal-paper #141414。见 primitive-terminal.md。 -->
+        <svg viewBox="0 0 960 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="template-terminal-title template-terminal-desc">
+          <title id="template-terminal-title">终端模板示例图</title>
+          <desc id="template-terminal-desc">终端皮肤模板演示：生成方案、评估打分、反馈修正三步构成的自改进循环；实际使用时替换为本图内容。</desc>
+          <defs>
+            <marker
+              id="arrow"
+              markerWidth="8"
+              markerHeight="6"
+              refX="7"
+              refY="3"
+              orient="auto"
+            >
+              <polygon points="0 0, 8 3, 0 6" fill="#9a9a9a" />
+            </marker>
+            <marker
+              id="arrow-accent"
+              markerWidth="8"
+              markerHeight="6"
+              refX="7"
+              refY="3"
+              orient="auto"
+            >
+              <polygon points="0 0, 8 3, 0 6" fill="#7d98ff" />
+            </marker>
+
+            <!-- 可选：点状纹理背景。取消注释并在纸面 rect 之后加 <rect fill="url(#dots)"/> 启用。 -->
+            <!--
+          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(255,255,255,0.08)"/>
+          </pattern>
+          --></defs>
+
+          <rect width="100%" height="100%" fill="#141414" />
+
+          <!-- 连接线（画在盒子下层）。回路 = 主流程，实线；正交肘线 r=8 -->
+          <line x1="400" y1="152" x2="456" y2="152" stroke="#7d98ff" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+          <line x1="608" y1="152" x2="664" y2="152" stroke="#9a9a9a" stroke-width="1.2" marker-end="url(#arrow)"/>
+          <path d="M 740,184 V 228 Q 740,236 732,236 H 332 Q 324,236 324,228 V 184"
+                fill="none" stroke="#9a9a9a" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+          <!-- 中文箭头标签 12px；遮罩 fill 用 terminal-paper -->
+          <rect x="500" y="217" width="64" height="14" rx="2" fill="#141414"/>
+          <text x="532" y="227" fill="#9a9a9a" font-size="12" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.12em">反馈循环</text>
+
+          <!-- Node: 生成方案（focal——terminal-accent） -->
+          <rect x="248" y="120" width="152" height="64" rx="6" fill="#141414"/>
+          <rect x="248" y="120" width="152" height="64" rx="6" fill="rgba(125,152,255,0.12)" stroke="#7d98ff" stroke-width="1"/>
+          <rect x="256" y="128" width="32" height="12" rx="2" fill="transparent" stroke="rgba(125,152,255,0.50)" stroke-width="0.8"/>
+          <text x="272" y="137" fill="#7d98ff" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">GEN</text>
+          <text x="324" y="156" fill="#f5f5f5" font-size="14" font-weight="600" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">生成方案</text>
+          <text x="324" y="172" fill="#9a9a9a" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">gen · v1</text>
+
+          <!-- Node: 评估打分 -->
+          <rect x="456" y="120" width="152" height="64" rx="6" fill="#141414"/>
+          <rect x="456" y="120" width="152" height="64" rx="6" fill="none" stroke="#9a9a9a" stroke-width="1"/>
+          <rect x="464" y="128" width="40" height="12" rx="2" fill="transparent" stroke="rgba(154,154,154,0.50)" stroke-width="0.8"/>
+          <text x="484" y="137" fill="#9a9a9a" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">SCORE</text>
+          <text x="532" y="156" fill="#f5f5f5" font-size="14" font-weight="600" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">评估打分</text>
+          <text x="532" y="172" fill="#9a9a9a" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">score · 0-1</text>
+
+          <!-- Node: 反馈修正 -->
+          <rect x="664" y="120" width="152" height="64" rx="6" fill="#141414"/>
+          <rect x="664" y="120" width="152" height="64" rx="6" fill="none" stroke="#9a9a9a" stroke-width="1"/>
+          <rect x="672" y="128" width="44" height="12" rx="2" fill="transparent" stroke="rgba(154,154,154,0.50)" stroke-width="0.8"/>
+          <text x="694" y="137" fill="#9a9a9a" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">PATCH</text>
+          <text x="740" y="156" fill="#f5f5f5" font-size="14" font-weight="600" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">反馈修正</text>
+          <text x="740" y="172" fill="#9a9a9a" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">patch · +1</text>
+        </svg>
+      </main>
+    </div>
+  </body>
+</html>
