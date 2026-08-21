@@ -16,7 +16,7 @@ sources:                            # 左列，0..6 个节点
       connects_to: [{to: "对象存储", label: "JDBC"}] }
   - { name: "POS 导出",  type: "sftp",  subtitle: "每日 CSV 批次",
       connects_to: [{to: "对象存储", label: "CSV"}] }
-  - { name: "事件流",    type: "mail",  subtitle: "近实时事件",
+  - { name: "事件流",    type: "stream", subtitle: "近实时事件",
       connects_to: [{to: "对象存储", label: "EVENTS"}] }
 
 platform:
@@ -31,7 +31,7 @@ platform:
 consumers:                          # 右列，0..6 个节点
   - { name: "BI 工具",   type: "chart",   subtitle: "看板 · 报表",
       connects_from: [{from: "查询引擎", label: "JDBC"}] }
-  - { name: "笔记本",    type: "monitor", subtitle: "Python · 探索",
+  - { name: "笔记本",    type: "notebook", subtitle: "Python · 探索",
       connects_from: [{from: "查询引擎", label: "KERNEL"}] }
   - { name: "合作方 API", type: "api",    subtitle: "受控数据产品",
       connects_from: [{from: "查询引擎", label: "HTTPS"}] }
@@ -54,7 +54,7 @@ dark: false
 - `bar`——整分区宽的横条。默认高 44px（焦点条 56px）。必填 `name`；可选 `subtitle` / `role` / `color` / `focal`。
 - `row`——N 个节点沿分区宽均布。必填 `nodes` 列表；每个节点有 `name`，可选 `role` / `subtitle` / `color` / `focal`。
 
-**源 / 消费 `type` → 图标映射**（延伸自 primitive-icons.md，点名才上图标）：`db` 圆柱、`sftp` 折角文件夹、`mail` 信封、`mainframe` 通风机柜、`monitor` 显示器、`chart` 柱形、`globe` 地球、`api` 花括号、`key` 钥匙。也接受 primitive-icons.md 里的显式图标名。
+**源 / 消费 `type` → 图标映射**（延伸自 primitive-icons.md，点名才上图标）：`db` 圆柱、`sftp` 折角文件夹、`stream` 波形线、`mail` 信封、`mainframe` 通风机柜、`monitor` 显示器、`notebook` 笔记本、`chart` 柱形、`globe` 地球、`api` 花括号、`key` 钥匙。也接受 primitive-icons.md 里的显式图标名。底条图标见 §8。
 
 **逐组件 `color: "#hex"`** 可选，加在任何节点 / 横条 / 底条上，见 §4。
 
@@ -140,6 +140,16 @@ bar_w = zone_w - 2*zone_pad_x    # 664
 
 固定 `w=160 h=64`，步长 88。填充 `muted@0.05`、描边 `soft` 1px。
 
+### 2.5 图例条与页面标题
+
+图例占 viewBox 底部 84px 带（`footer_bottom .. viewBox_h`），单行、整体居中于带中线（基线 `y = footer_bottom + 47`）：
+
+- 标签「图例」：sans 10px · 500 · 字距 0.3em，fill muted，`x=40`——与源列左缘同一对齐轨。
+- 图例项：文字 10px，与标签同一基线；色块 16×10（`y = 基线−10`）；线样长 28（`y = 基线−4`）、带对应箭头 marker；色样填充 α 与图内实物一致。
+- 图例区与图表之间**不画**分隔线。
+
+页面层：eyebrow 格式「图内容语境 · 图类型」（如 数据平台 · 集成图），不带技能名；eyebrow / h1 `margin-left = 40 ÷ viewBox_w ≈ 3.33%`（内容最左标注元素对齐基线，三层一线）。
+
 ---
 
 ## 3. 连线规则（强制）
@@ -151,18 +161,16 @@ bar_w = zone_w - 2*zone_pad_x    # 664
 | `primary` | `accent` | 1.4 | — | `arrow-accent` | 任一端是 `focal: true` 组件的边。**外加**每条 Trino → 消费边（服务流规则）。 |
 | `secondary` | `muted` | 1.2 | — | `arrow` | 平台内部组件间、不触焦点的源 → 平台边的默认。 |
 | `federated` | `accent`（link） | 1.0 | `4,3` | `arrow-link` | 联邦查询（如源库 → Trino）。 |
-| `trigger` | `muted` | 1.0 | `4,3` | `arrow` | 每条从 `kind: bar` 组件发出的边（Airflow 下扎）。**无标签。** |
+| `trigger` | `muted` | 1.0 | `4,3` | `arrow-sm` | 每条从 `kind: bar` 组件发出的边（Airflow 下扎）。**无标签。** |
 | `auth` | `accent` | 1.2 | `5,4` | `arrow-accent` | 每条从底条上行到分区下缘的边。**绝不指向具体组件。** |
 
-**defs 块**（必需，恰好五支箭头）：
+**defs 块**（三支常备；用到 `federated` 样式时补 `arrow-link`——几何同 `arrow`、fill 同 accent；不预定义未用的箭头）：
 
 ```svg
 <defs>
   <marker id="arrow"        markerWidth="8" markerHeight="6" refX="7" refY="3"   orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#565e7e"/></marker>
   <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3"   orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a4dd9"/></marker>
-  <marker id="arrow-link"   markerWidth="8" markerHeight="6" refX="7" refY="3"   orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a4dd9"/></marker>
   <marker id="arrow-sm"     markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0, 6 2.5, 0 5" fill="#565e7e"/></marker>
-  <marker id="arrow-dim"    markerWidth="8" markerHeight="6" refX="7" refY="3"   orient="auto"><polygon points="0 0, 8 3, 0 6" fill="rgba(41,49,79,0.40)"/></marker>
 </defs>
 ```
 
@@ -272,12 +280,19 @@ footer_auth_x(k) = zone_cx + (k - (N-1)/2) * 32     # 每条 32px 步长
 10. 底条只经 `auth` 样式连到分区下缘。**没有**底条到具体组件的边。
 11. 自定义色组件 ≤ 2（焦点对之外）。组件 `color` 绝不改连线色。
 12. 所有连线先于任何节点 rect 输出（z 序）。
+13. 图例条按 §2.5 规格；可选图标按 §8 挂点。
 
 ---
 
-## 8. 源与消费——图标库
+## 8. 图标——词表与挂点
 
-每个图标在 `<defs>` 里定义为 `<g id="ico-…">`、currentColor 描边。常用：`ico-db`（圆柱）、`ico-sftp`（折角文件夹）、`ico-mail`（信封）、`ico-mainframe`（机柜）、`ico-monitor`、`ico-chart`、`ico-globe`、`ico-api`（花括号）、`ico-key`、`ico-monitoring`（折线）。要更多就翻 `assets/icons.html` 对应 `<symbol>`。图标是可选项——默认无图标、名字占满。
+每个图标在 `<defs>` 里定义为 `<g id="ico-…">`：`fill="none" stroke="currentColor" stroke-width="1.2"`，引用走 `<use href="#ico-…" transform="translate(…)" style="color:…">`。常用：`ico-db`（圆柱）、`ico-sftp`（折角文件夹）、`ico-stream`（波形线）、`ico-mail`（信封）、`ico-mainframe`（机柜）、`ico-monitor`（显示器）、`ico-notebook`（笔记本）、`ico-chart`（柱形）、`ico-globe`（地球）、`ico-api`（花括号）、`ico-key`（钥匙）、`ico-log`（折线，日志 / 监控）。要更多就翻 `assets/icons.html` 对应 `<symbol>`。图标是可选项——默认无图标、名字占满。
+
+**挂点（由本类型几何推导，不另行取位）**：
+
+- 侧列（源 / 消费）：图标中心 `(node_x + 24, node_cy)`——左内缘 24px、垂直居中；色 muted；文字仍居中不动。
+- 底条：图标中心 `(footer_bar_x + 32, 条中心线)`——落在文字左轨上；色 = 底条自己的语义色；名字 / 副标左缘从 72 右移到 96。
+- 平台分区（调度条、焦点节点）**不上图标**——DAG / STORE / SQL 角色芯片已承担身份。
 
 ---
 
@@ -323,4 +338,6 @@ footer_auth_x(k) = zone_cx + (k - (N-1)/2) * 32     # 每条 32px 步长
 
 ## 12. 示例
 
-- [`assets/example-dp-integration.html`](../assets/example-dp-integration.html) — 浅色标准版（1 条底 = 统一身份）
+- [`assets/example-dp-integration.html`](../assets/example-dp-integration.html) — 浅色标准版（两条底条：统一身份 + 集中日志）
+- [`assets/example-dp-integration-dark.html`](../assets/example-dp-integration-dark.html) — 深色版
+- [`assets/example-dp-integration-full.html`](../assets/example-dp-integration-full.html) — full 页面级
