@@ -7,10 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -64,154 +64,154 @@
     <p class="eyebrow">数据平台 · 安全矩阵</p>
     <h1>平台访问矩阵</h1>
 
-    <svg viewBox="0 0 920 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-dp-security-matrix-title example-dp-security-matrix-desc">
-      <title id="example-dp-security-matrix-title">平台访问矩阵</title>
-      <desc id="example-dp-security-matrix-desc">权限矩阵：四个 AD 组（数据管理员、数据工程师、数据科学家、数据消费者）对八个平台组件的访问权限；焦点格是数据消费者对 Trino 指标目录仅有 SELECT——唯一消费出口。</desc>
+    <svg viewBox="0 0 920 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-dp-security-matrix-dark-title example-dp-security-matrix-dark-desc">
+      <title id="example-dp-security-matrix-dark-title">平台访问矩阵（深色）</title>
+      <desc id="example-dp-security-matrix-dark-desc">权限矩阵：四个 AD 组（数据管理员、数据工程师、数据科学家、数据消费者）对八个平台组件的访问权限；焦点格是数据消费者对 Trino 指标目录仅有 SELECT——唯一消费出口。</desc>
 
-      <rect width="100%" height="100%" fill="#ffffff"/>
+      <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 表头：组件列表头 + 四条角色横幅 -->
-      <rect x="12" y="72" width="208" height="52" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.8"/>
-      <text x="116" y="94" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">组件</text>
-      <text x="116" y="112" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">vs. AD group</text>
+      <rect x="12" y="72" width="208" height="52" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.8"/>
+      <text x="116" y="94" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">组件</text>
+      <text x="116" y="112" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">vs. AD group</text>
 
-      <rect x="232" y="72" width="148" height="52" rx="6" fill="#29314f"/>
-      <text x="306" y="94" fill="#ffffff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据管理员</text>
-      <text x="306" y="112" fill="#ffffff" opacity="0.85" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">DL-DataAdmins</text>
+      <rect x="232" y="72" width="148" height="52" rx="6" fill="#e0e4ff"/>
+      <text x="306" y="94" fill="#0a0d1b" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据管理员</text>
+      <text x="306" y="112" fill="#0a0d1b" opacity="0.85" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">DL-DataAdmins</text>
 
-      <rect x="396" y="72" width="148" height="52" rx="6" fill="#29314f"/>
-      <text x="470" y="94" fill="#ffffff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据工程师</text>
-      <text x="470" y="112" fill="#ffffff" opacity="0.85" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">DL-DataEngineers</text>
+      <rect x="396" y="72" width="148" height="52" rx="6" fill="#e0e4ff"/>
+      <text x="470" y="94" fill="#0a0d1b" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据工程师</text>
+      <text x="470" y="112" fill="#0a0d1b" opacity="0.85" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">DL-DataEngineers</text>
 
-      <rect x="560" y="72" width="148" height="52" rx="6" fill="#29314f"/>
-      <text x="634" y="94" fill="#ffffff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据科学家</text>
-      <text x="634" y="112" fill="#ffffff" opacity="0.85" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">DL-DataScientists</text>
+      <rect x="560" y="72" width="148" height="52" rx="6" fill="#e0e4ff"/>
+      <text x="634" y="94" fill="#0a0d1b" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据科学家</text>
+      <text x="634" y="112" fill="#0a0d1b" opacity="0.85" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">DL-DataScientists</text>
 
-      <rect x="724" y="72" width="148" height="52" rx="6" fill="#29314f"/>
-      <text x="798" y="94" fill="#ffffff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据消费者</text>
-      <text x="798" y="112" fill="#ffffff" opacity="0.85" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">DL-DataConsumers</text>
+      <rect x="724" y="72" width="148" height="52" rx="6" fill="#e0e4ff"/>
+      <text x="798" y="94" fill="#0a0d1b" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据消费者</text>
+      <text x="798" y="112" fill="#0a0d1b" opacity="0.85" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">DL-DataConsumers</text>
 
       <!-- 行 0：Keycloak -->
-      <rect x="12" y="140" width="208" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.8"/>
-      <text x="24" y="163" fill="#29314f" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Keycloak</text>
-      <text x="208" y="163" fill="#565e7e" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">SSO</text>
-      <rect x="232" y="140" width="148" height="36" rx="4" fill="rgba(41,49,79,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="306" y="163" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">管理</text>
-      <rect x="396" y="140" width="148" height="36" rx="4" fill="rgba(86,94,126,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="470" y="163" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">登录</text>
-      <rect x="560" y="140" width="148" height="36" rx="4" fill="rgba(86,94,126,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="634" y="163" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">登录</text>
-      <rect x="724" y="140" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="798" y="163" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">登录</text>
+      <rect x="12" y="140" width="208" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.8"/>
+      <text x="24" y="163" fill="#e0e4ff" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Keycloak</text>
+      <text x="208" y="163" fill="#a2a9ce" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">SSO</text>
+      <rect x="232" y="140" width="148" height="36" rx="4" fill="rgba(224,228,255,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="306" y="163" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">管理</text>
+      <rect x="396" y="140" width="148" height="36" rx="4" fill="rgba(162,169,206,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="470" y="163" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">登录</text>
+      <rect x="560" y="140" width="148" height="36" rx="4" fill="rgba(162,169,206,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="634" y="163" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">登录</text>
+      <rect x="724" y="140" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="798" y="163" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">登录</text>
 
       <!-- 行 1：MinIO raw -->
-      <rect x="12" y="180" width="208" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.8"/>
-      <text x="24" y="203" fill="#29314f" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MinIO</text>
-      <text x="208" y="203" fill="#565e7e" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">raw 桶</text>
-      <rect x="232" y="180" width="148" height="36" rx="4" fill="rgba(41,49,79,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="306" y="203" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">完全</text>
-      <rect x="396" y="180" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="470" y="203" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
-      <rect x="560" y="180" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="634" y="203" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
-      <rect x="724" y="180" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="798" y="203" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
+      <rect x="12" y="180" width="208" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.8"/>
+      <text x="24" y="203" fill="#e0e4ff" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MinIO</text>
+      <text x="208" y="203" fill="#a2a9ce" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">raw 桶</text>
+      <rect x="232" y="180" width="148" height="36" rx="4" fill="rgba(224,228,255,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="306" y="203" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">完全</text>
+      <rect x="396" y="180" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="470" y="203" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
+      <rect x="560" y="180" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="634" y="203" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
+      <rect x="724" y="180" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="798" y="203" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
 
       <!-- 行 2：MinIO 脱敏 / staging / 指标 -->
-      <rect x="12" y="220" width="208" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.8"/>
-      <text x="24" y="243" fill="#29314f" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MinIO</text>
-      <text x="208" y="243" fill="#565e7e" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">脱敏 · staging · 指标</text>
-      <rect x="232" y="220" width="148" height="36" rx="4" fill="rgba(41,49,79,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="306" y="243" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">完全</text>
-      <rect x="396" y="220" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="470" y="243" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
-      <rect x="560" y="220" width="148" height="36" rx="4" fill="rgba(86,94,126,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="634" y="243" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">只读</text>
-      <rect x="724" y="220" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="798" y="243" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
+      <rect x="12" y="220" width="208" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.8"/>
+      <text x="24" y="243" fill="#e0e4ff" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MinIO</text>
+      <text x="208" y="243" fill="#a2a9ce" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">脱敏 · staging · 指标</text>
+      <rect x="232" y="220" width="148" height="36" rx="4" fill="rgba(224,228,255,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="306" y="243" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">完全</text>
+      <rect x="396" y="220" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="470" y="243" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
+      <rect x="560" y="220" width="148" height="36" rx="4" fill="rgba(162,169,206,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="634" y="243" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">只读</text>
+      <rect x="724" y="220" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="798" y="243" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
 
       <!-- 行 3：Trino raw -->
-      <rect x="12" y="260" width="208" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.8"/>
-      <text x="24" y="283" fill="#29314f" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino</text>
-      <text x="208" y="283" fill="#565e7e" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">raw 目录</text>
-      <rect x="232" y="260" width="148" height="36" rx="4" fill="rgba(41,49,79,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="306" y="283" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">完全</text>
-      <rect x="396" y="260" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="470" y="283" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
-      <rect x="560" y="260" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="634" y="283" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
-      <rect x="724" y="260" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="798" y="283" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
+      <rect x="12" y="260" width="208" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.8"/>
+      <text x="24" y="283" fill="#e0e4ff" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino</text>
+      <text x="208" y="283" fill="#a2a9ce" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">raw 目录</text>
+      <rect x="232" y="260" width="148" height="36" rx="4" fill="rgba(224,228,255,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="306" y="283" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">完全</text>
+      <rect x="396" y="260" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="470" y="283" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
+      <rect x="560" y="260" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="634" y="283" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
+      <rect x="724" y="260" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="798" y="283" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
 
       <!-- 行 4：Trino 脱敏-staging -->
-      <rect x="12" y="300" width="208" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.8"/>
-      <text x="24" y="323" fill="#29314f" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino</text>
-      <text x="208" y="323" fill="#565e7e" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">脱敏-staging</text>
-      <rect x="232" y="300" width="148" height="36" rx="4" fill="rgba(41,49,79,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="306" y="323" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">完全</text>
-      <rect x="396" y="300" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="470" y="323" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
-      <rect x="560" y="300" width="148" height="36" rx="4" fill="rgba(86,94,126,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="634" y="323" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">SELECT</text>
-      <rect x="724" y="300" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="798" y="323" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
+      <rect x="12" y="300" width="208" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.8"/>
+      <text x="24" y="323" fill="#e0e4ff" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino</text>
+      <text x="208" y="323" fill="#a2a9ce" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">脱敏-staging</text>
+      <rect x="232" y="300" width="148" height="36" rx="4" fill="rgba(224,228,255,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="306" y="323" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">完全</text>
+      <rect x="396" y="300" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="470" y="323" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
+      <rect x="560" y="300" width="148" height="36" rx="4" fill="rgba(162,169,206,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="634" y="323" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">SELECT</text>
+      <rect x="724" y="300" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="798" y="323" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
 
       <!-- 行 5：Trino 指标（焦点格在列 3） -->
-      <rect x="12" y="340" width="208" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.8"/>
-      <text x="24" y="363" fill="#29314f" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino</text>
-      <text x="208" y="363" fill="#565e7e" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">指标</text>
-      <rect x="232" y="340" width="148" height="36" rx="4" fill="rgba(41,49,79,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="306" y="363" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">完全</text>
-      <rect x="396" y="340" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="470" y="363" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
-      <rect x="560" y="340" width="148" height="36" rx="4" fill="rgba(86,94,126,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="634" y="363" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">SELECT</text>
-      <rect x="724" y="340" width="148" height="36" rx="4" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.4"/>
-      <text x="798" y="357" fill="#1a4dd9" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">仅 SELECT</text>
-      <text x="798" y="370" fill="#1a4dd9" opacity="0.85" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">唯一消费出口</text>
+      <rect x="12" y="340" width="208" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.8"/>
+      <text x="24" y="363" fill="#e0e4ff" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino</text>
+      <text x="208" y="363" fill="#a2a9ce" font-size="10" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">指标</text>
+      <rect x="232" y="340" width="148" height="36" rx="4" fill="rgba(224,228,255,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="306" y="363" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">完全</text>
+      <rect x="396" y="340" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="470" y="363" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
+      <rect x="560" y="340" width="148" height="36" rx="4" fill="rgba(162,169,206,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="634" y="363" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">SELECT</text>
+      <rect x="724" y="340" width="148" height="36" rx="4" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1.4"/>
+      <text x="798" y="357" fill="#7d98ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">仅 SELECT</text>
+      <text x="798" y="370" fill="#7d98ff" opacity="0.85" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">唯一消费出口</text>
 
       <!-- 行 6：JupyterHub -->
-      <rect x="12" y="380" width="208" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.8"/>
-      <text x="24" y="403" fill="#29314f" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">JupyterHub</text>
-      <rect x="232" y="380" width="148" height="36" rx="4" fill="rgba(41,49,79,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="306" y="403" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">管理</text>
-      <rect x="396" y="380" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="470" y="403" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
-      <rect x="560" y="380" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="634" y="403" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
-      <rect x="724" y="380" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="798" y="403" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
+      <rect x="12" y="380" width="208" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.8"/>
+      <text x="24" y="403" fill="#e0e4ff" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">JupyterHub</text>
+      <rect x="232" y="380" width="148" height="36" rx="4" fill="rgba(224,228,255,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="306" y="403" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">管理</text>
+      <rect x="396" y="380" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="470" y="403" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
+      <rect x="560" y="380" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="634" y="403" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
+      <rect x="724" y="380" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="798" y="403" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
 
       <!-- 行 7：NiFi -->
-      <rect x="12" y="420" width="208" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.8"/>
-      <text x="24" y="443" fill="#29314f" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">NiFi</text>
-      <rect x="232" y="420" width="148" height="36" rx="4" fill="rgba(41,49,79,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="306" y="443" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">管理</text>
-      <rect x="396" y="420" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="470" y="443" fill="#29314f" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
-      <rect x="560" y="420" width="148" height="36" rx="4" fill="rgba(86,94,126,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="634" y="443" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">只读</text>
-      <rect x="724" y="420" width="148" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="798" y="443" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
+      <rect x="12" y="420" width="208" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.8"/>
+      <text x="24" y="443" fill="#e0e4ff" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">NiFi</text>
+      <rect x="232" y="420" width="148" height="36" rx="4" fill="rgba(224,228,255,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="306" y="443" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">管理</text>
+      <rect x="396" y="420" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="470" y="443" fill="#e0e4ff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
+      <rect x="560" y="420" width="148" height="36" rx="4" fill="rgba(162,169,206,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="634" y="443" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">只读</text>
+      <rect x="724" y="420" width="148" height="36" rx="4" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="798" y="443" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
 
       <!-- 图例条 -->
-      <line x1="12" y1="476" x2="908" y2="476" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <text x="12" y="494" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+      <line x1="12" y1="476" x2="908" y2="476" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <text x="12" y="494" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
 
-      <rect x="84" y="484" width="16" height="12" rx="2" fill="rgba(41,49,79,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="108" y="494" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">管理 / 完全</text>
+      <rect x="84" y="484" width="16" height="12" rx="2" fill="rgba(224,228,255,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="108" y="494" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">管理 / 完全</text>
 
-      <rect x="204" y="484" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="228" y="494" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
+      <rect x="204" y="484" width="16" height="12" rx="2" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="228" y="494" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">读写</text>
 
-      <rect x="292" y="484" width="16" height="12" rx="2" fill="rgba(86,94,126,0.08)" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="316" y="494" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">只读 / 登录</text>
+      <rect x="292" y="484" width="16" height="12" rx="2" fill="rgba(162,169,206,0.08)" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="316" y="494" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">只读 / 登录</text>
 
-      <rect x="412" y="484" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.12)" stroke-width="0.6"/>
-      <text x="436" y="494" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
+      <rect x="412" y="484" width="16" height="12" rx="2" fill="#0a0d1b" stroke="rgba(224,228,255,0.12)" stroke-width="0.6"/>
+      <text x="436" y="494" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">无访问</text>
 
-      <rect x="512" y="484" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.4"/>
-      <text x="536" y="494" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点：关键访问规则</text>
+      <rect x="512" y="484" width="16" height="12" rx="2" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1.4"/>
+      <text x="536" y="494" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点：关键访问规则</text>
     </svg>
   </div>
 </body>

@@ -21,12 +21,12 @@ roles:                                  # 2..6 列，从左到右
   - { name: "数据消费者", code: "DL-DataConsumers"   }
 
 components:                             # 2..14 行，从上到下
-  - { name: "Keycloak",                    hint: "SSO" }   # hint = 标签格内右对齐旁注
-  - { name: "MinIO · raw 桶" }
-  - { name: "MinIO · 脱敏 · staging · 指标" }
-  - { name: "Trino · raw 目录" }
-  - { name: "Trino · 脱敏-staging" }
-  - { name: "Trino · 指标" }
+  - { name: "Keycloak", hint: "SSO" }                  # hint = 标签格右对齐旁注
+  - { name: "MinIO",    hint: "raw 桶" }
+  - { name: "MinIO",    hint: "脱敏 · staging · 指标" }
+  - { name: "Trino",    hint: "raw 目录" }
+  - { name: "Trino",    hint: "脱敏-staging" }
+  - { name: "Trino",    hint: "指标" }
   - { name: "JupyterHub" }
   - { name: "NiFi" }
 
@@ -53,7 +53,7 @@ dark: false
 
 - `roles[j].name`——主角色标签（`node-name` 角色 sans 12px、墨色横幅上的白字）。
 - `roles[j].code`——AD 组标识副标（mono 9px、白字 0.85 透明度）。
-- `components[i].hint`——标签格内可选的右对齐旁标（mono 9px `muted`，如 `"SSO"`、`"S3 API"`）。
+- `components[i].hint`——标签格内可选的右对齐旁标（mono 10px `muted`，如 `"SSO"`、`"raw 桶"`；含汉字 ≥10px）。
 - `cells[k].level`——封闭词表 `full | rw | read | none`，驱动填充 / 描边 / 文字色（§2.4）。
 - `cells[k].value`——自由显示文本。领域标签（`"读写"`、`"SELECT"`、`"登录"`）不用发明新 level。
 - `cells[k].focal: true`——全图**至多一格**。把 `level` 覆写为焦点样式。
@@ -104,13 +104,13 @@ role_col_cx(j)   = role_col_x(j) + 74                    # 306, 470, 634, 798
 
 ### 2.2 表头行（y = 72，h = 52）
 
-**组件列表头格**：rect `(12, 72, 208, 52)` 白底、`ink @ 0.12` 描边 0.8、`rx=6`。两行居中标签：行 1「组件」（`node-name` sans 12px · ink）；行 2「× AD 组」（mono 9px `muted`）。
+**组件列表头格**：rect `(12, 72, 208, 52)` 白底、`ink @ 0.12` 描边 0.8、`rx=6`。两行居中标签：行 1「组件」（`node-name` sans 12px · 600 · ink）；行 2「× AD 组」（mono 9px `muted`）。
 
-**角色横幅（每角色一条）**：rect `(role_col_x(j), 72, 148, 52)`、填充 `ink`、`rx=6`。两行居中：行 1 角色名（sans 12px · 白）；行 2 组代码（mono 9px · 白 · 0.85）。
+**角色横幅（每角色一条）**：rect `(role_col_x(j), 72, 148, 52)`、填充 `ink`、`rx=6`。两行居中：行 1 角色名（sans 12px · 600 · 白）；行 2 组代码（mono 9px · 白 · 0.85）。表头字重 600 是表头行的层级信号；数据区格内文字一律 400（§2.4）。
 
 ### 2.3 数据行（y = row_y(k)，h = 36）
 
-**组件标签格**：rect `(12, row_y(k), 208, 36)` 白底、`ink @ 0.12` 描边 0.8、`rx=4`。名字左对齐 `(24, row_y+24)`：sans 12px · ink。hint（若有）右对齐 `(196, row_y+24)`：mono 9px `muted`。
+**组件标签格**：rect `(12, row_y(k), 208, 36)` 白底、`ink @ 0.12` 描边 0.8、`rx=4`。名字左对齐 `(24, row_y+24)`：sans 12px · 400 · ink。hint（若有）右对齐 `(208, row_y+24)`：mono 10px `muted`。名字与 hint 两端对称（justify-between）：各距格缘 12px。
 
 **值格（每角色 × 每组件一格）**：rect `(role_col_x(j), row_y(k), 148, 36)`、`rx=4`、`ink @ 0.12` 描边 0.6。填充与文字色看 `level`（或焦点标记）——§2.4。值文本居中 `(role_col_cx(j), row_y+24)`：sans 12px。焦点格主值上提到 y=row_y+20、副行 `sub` 在 y=row_y+32（12px）。
 
@@ -118,21 +118,19 @@ role_col_cx(j)   = role_col_x(j) + 74                    # 306, 470, 634, 798
 
 | `level` | 填充 | 描边 | 文字色 | 字重 |
 |---|---|---|---|---|
-| `full` | `ink @ 0.08` | `ink @ 0.12` | `ink` | 600 |
+| `full` | `ink @ 0.08` | `ink @ 0.12` | `ink` | 400 |
 | `rw` | `paper` | `ink @ 0.12` | `ink` | 400 |
 | `read` | `muted @ 0.08` | `ink @ 0.12` | `muted` | 400 |
 | `none` | `paper` | `ink @ 0.12` | `muted` | 400 |
-| **focal** | `accent @ 0.08` | `accent`（1.4） | `accent` | 600 |
+| **focal** | `accent @ 0.08` | `accent`（1.4） | `accent` | 400 |
 
-`none` 的文字用 `muted` 而不是 `soft`——12px 文字要过 AA，`soft` 在纸面上到不了（实测 3.48:1）。焦点格可带第二行（`sub:`）：accent · 12px · 0.85 透明度。
+值格文字一律常规字重（400）——权限等级的强弱由填充/描边/文字色承载，不用字重（2026-08-20 拍板）。`none` 的文字用 `muted` 而不是 `soft`——12px 文字要过 AA，`soft` 在纸面上到不了（实测 3.48:1）。焦点格可带第二行（`sub:`）：accent · 12px · 0.85 透明度。
 
-### 2.5 图例（y_top = legend_y_top，高约 30）
+### 2.5 图例条（y_top = legend_y_top）
 
-`legend_y_top` 处发丝分隔线。线下一行样式样本 + 标签——只出现图内实际用到的类。
+按 style-guide「图例条（底部横条）」节执行（bar 规格）——项 sans 10px、色块 16×12、「图例」标签 mono 10px/0.1em 与项同基线（基线 = `legend_y_top + 18`）、顶部分隔线 `rule @ 0.10` 宽 0.8 即 `legend_y_top`、标签 → 首元素 72px、块 → 文字 8px。只出现图内实际用到的类；样块填充与描边与图内格实物一致（焦点样本带 accent 描边 1.4）。
 
-- `LEGEND` 角标在 `(12, legend_y_top + 20)`：mono 9px · `muted` · 0.18em。
-- 每类：样本 rect（14×12 `rx=2`）+ 中文标签 12px。
-- 条目左→右约 120px 步长排表；`n_roles ≥ 6` 时才折第二行。
+eyebrow 格式「图内容语境 · 图类型」（本类型如「数据平台 · 安全矩阵」），去技能名；标题对齐按 style-guide「标题对齐基线」节——`margin-left = left_pad / viewBox_w`（4 角色时 12/920 ≈ 1.3%），full 版跟框缘无 margin-left。
 
 ---
 
@@ -200,7 +198,7 @@ role_col_cx(j)   = role_col_x(j) + 74                    # 306, 470, 634, 798
 
 每图**恰好一个**焦点格（或零个）。焦点格：
 
-- 焦点样式（accent 填充 + accent 描边 1.4 + accent 文字加粗）
+- 焦点样式（accent 填充 + accent 描边 1.4 + accent 文字 400——强调由色彩承担）
 - 可带两行内容：主 `value` 在 `row_y(k)+20`、`sub` 在 `row_y(k)+32`
 - 点出全图的中心安全主张——把这张图的姿态与通用权限表区分开的那**一条**访问规则
 
@@ -210,19 +208,23 @@ role_col_cx(j)   = role_col_x(j) + 74                    # 306, 470, 634, 798
 
 ## 6. 深色档
 
+按 style-guide「深色换档规则」对称换基、α 不动：
+
 | Token | 浅色 | 深色 |
 |---|---|---|
-| 纸面 / 墨色 | `paper` / `ink` | `ink` / `paper` |
-| muted / soft | `muted` / `soft` | `soft` / `muted` |
-| accent | `accent` | `accent` |
-| 角色横幅填充 | `ink` | `ink`（不变——深色档横幅即纸色同族深块，白字照读） |
-| 表头 / 行描边 | `ink @ 0.12` | `paper @ 0.18` |
-| full 填充 | `ink @ 0.08` | `paper @ 0.10` |
-| rw 填充 | `paper` | `paper @ 0.06` |
-| read 填充 | `muted @ 0.08` | `soft @ 0.12` |
-| none 填充 | `paper` | `paper @ 0.02` |
-| 焦点填充 / 描边 | `accent @ 0.08` / `accent` | `accent @ 0.12` / `accent` |
-| 自定义色 | `C` | `C_light`（提亮 ~15%） |
+| 纸面 | `paper #ffffff` | `paper #0a0d1b` |
+| 墨色 / muted / soft | `ink #29314f` / `muted #565e7e` / `soft #8f94ab` | `ink #e0e4ff` / `muted #a2a9ce` / `soft #787fa2` |
+| accent | `accent #1a4dd9` | `accent #7d98ff` |
+| 表头 / 行描边 | `ink @ 0.12` | `ink 深色基 @ 0.12` |
+| full 填充 | `ink @ 0.08` | `ink 深色基 @ 0.08` |
+| rw / none 填充 | `paper` | `paper`（同纸色） |
+| read 填充 | `muted @ 0.08` | `muted 深色基 @ 0.08` |
+| 焦点填充 / 描边 | `accent @ 0.08` / `accent` | `accent 深色基 @ 0.10`（焦点提档）/ `accent` |
+| **角色横幅** | `ink` 实色 + 白字 | **对称反转**：填 `ink` 深色基（#e0e4ff）亮块、字反转深字（角色名与组代码 `paper` #0a0d1b，组代码 0.85 不动） |
+| hint / 图例文字 | `muted` | `muted` 深色基 |
+| 自定义色 | `C` | `C_light`（提亮 ~15%，§4 表同） |
+
+横幅是本类型特有的「ink 实色表面」用例——深色档不保留深块（对深纸仅 1.52:1，过不了图形 3:1 门），按用户拍板走对称反转：深字对 #e0e4ff 15.4:1、块对深纸 15.4:1，全过。
 
 ---
 
@@ -233,14 +235,16 @@ role_col_cx(j)   = role_col_x(j) + 74                    # 306, 470, 634, 798
 1. `viewBox = "0 0 {viewBox_w} {viewBox_h}"` 经 §2 推导（4 角色 × 8 组件 → 920 × 520）。
 2. 表头行 y=72 h=52。组件表头白底两行「组件 / × AD 组」；角色横幅 ink 填充、白字名 + 组代码。
 3. 数据行 y=140 起、步长 40、高 36；`rows_bottom = 140 + (n−1)·40 + 36`。
-4. 组件标签格 `rx=4`、名字左对齐 x=24、hint 右对齐 x=196。
+4. 组件标签格 `rx=4`、名字左对齐 x=24 · 400、hint 右对齐 x=208（两端各距格缘 12px）。
 5. 每个值格 `rx=4`、描边 `ink @ 0.12` 0.6、填充与文字匹配 §2.4 的 `level`。
 6. **恰好一个**焦点格（或零）。描边 `accent` 宽 1.4；主值 y=row_y+20；`sub`（若有）y=row_y+32。
 7. `cells:` 里缺的格渲染为 `level: "none"` + `none_label` 文本（默认「无访问」）。
 8. 自定义色格 ≤ 2（焦点格之外）。
 9. 全 SVG 无任何连线元素。
-10. 图例条在 `legend_y_top`、实际用到的每类一个样本、上方发丝线。
+10. 图例条在 `legend_y_top` 按 §2.5（style-guide 图例条规格）、实际用到的每类一个样本、上方发丝线。
 11. `viewBox_h` 随 `n_components` 长、`viewBox_w` 随 `n_roles` 宽。
+12. 标题对齐：eyebrow / h1 `margin-left = left_pad / viewBox_w`（三层一线，含图例标签 x=left_pad）；full 版跟 diagram-container 框缘、无 margin-left。
+13. 三件套完整性：浅色基准定稿 → 深色按 §6 换档（横幅反转）→ full 页面级（subtitle / 图框 wash ink@0.03 + rule 边 / 三卡写图内真实数据 / footer 图题+日期 / :root 九角色 token、SVG 自带全幅 paper rect）。
 
 ---
 
@@ -259,7 +263,9 @@ role_col_cx(j)   = role_col_x(j) + 74                    # 306, 470, 634, 798
 
 ## 9. 示例
 
-- [`assets/example-dp-security-matrix.html`](../assets/example-dp-security-matrix.html) — 浅色标准版（4 角色 × 8 组件，焦点 = 数据消费者 × Trino 指标）
+- [`assets/example-dp-security-matrix.html`](../assets/example-dp-security-matrix.html) — 浅色基准（4 角色 × 8 组件，焦点 = 数据消费者 × Trino 指标）
+- [`assets/example-dp-security-matrix-dark.html`](../assets/example-dp-security-matrix-dark.html) — 深色档（§6 换档 + 横幅反转）
+- [`assets/example-dp-security-matrix-full.html`](../assets/example-dp-security-matrix-full.html) — full 页面级（subtitle / 三卡 / footer / 九 token）
 
 ---
 
@@ -276,12 +282,12 @@ roles:
   - { name: "数据消费者", code: "DL-DataConsumers"   }
 
 components:
-  - { name: "Keycloak",                      hint: "SSO" }
-  - { name: "MinIO · raw 桶" }
-  - { name: "MinIO · 脱敏 · staging · 指标" }
-  - { name: "Trino · raw 目录" }
-  - { name: "Trino · 脱敏-staging" }
-  - { name: "Trino · 指标" }
+  - { name: "Keycloak",  hint: "SSO" }
+  - { name: "MinIO",     hint: "raw 桶" }
+  - { name: "MinIO",     hint: "脱敏 · staging · 指标" }
+  - { name: "Trino",     hint: "raw 目录" }
+  - { name: "Trino",     hint: "脱敏-staging" }
+  - { name: "Trino",     hint: "指标" }
   - { name: "JupyterHub" }
   - { name: "NiFi" }
 
