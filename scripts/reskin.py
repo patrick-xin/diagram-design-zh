@@ -54,10 +54,9 @@ SLOTS: dict[str, tuple[str, tuple[int, int, int]]] = {
     "muted":       ("#565e7e", (86, 94, 126)),
     "soft":        ("#8f94ab", (143, 148, 171)),
     "accent":      ("#1a4dd9", (26, 77, 217)),
-    # 深色档：paper-dark 是深色文字的纸色基（hex 形 #faf8ff 与 rgba 基 250,248,255 同源）。
-    # 深色调色仍在调试（2026-08-20 用户指示：先不把 tonex 值写死进槽位，做几张稳定后再固化）。
-    "paper-dark":  ("#faf8ff", (250, 248, 255)),
-    "dark-bg":     ("#13182e", (19, 24, 46)),
+    # 深色档：paper-dark 是深色文字的纸色基（hex 形 #e0e4ff 与 rgba 基 224,228,255 同源）。
+    "paper-dark":  ("#e0e4ff", (224, 228, 255)),
+    "dark-bg":     ("#0a0d1b", (10, 13, 27)),
     "muted-dark":  ("#a2a9ce", (162, 169, 206)),
     "soft-dark":   ("#787fa2", (120, 127, 162)),
     "accent-dark": ("#7d98ff", (125, 152, 255)),
@@ -74,12 +73,18 @@ SLOTS: dict[str, tuple[str, tuple[int, int, int]]] = {
 }
 
 # 语义色族：换皮不换义。出现在皮肤表里即报错；在成品里识别后原样保留。
+# 浅深两档、色相恒定（style-guide「语义色族」表）。
 PINNED: dict[str, tuple[str, tuple[int, int, int]]] = {
     "sem-security":      ("#b85450", (184, 84, 80)),
     "sem-observability": ("#5a7d9a", (90, 125, 154)),
     "sem-governance":    ("#7a8c47", (122, 140, 71)),
     "sem-backup":        ("#8c6d3f", (140, 109, 63)),
     "sem-workspace":     ("#c9a23a", (201, 162, 58)),
+    "sem-security-dark":      ("#bf6561", (191, 101, 97)),
+    "sem-observability-dark": ("#5e83a1", (94, 131, 161)),
+    "sem-governance-dark":    ("#7a8c47", (122, 140, 71)),
+    "sem-backup-dark":        ("#9b7946", (157, 121, 70)),
+    "sem-workspace-dark":     ("#c9a23a", (201, 162, 58)),
 }
 
 DARK_SLOTS = {"paper-dark", "dark-bg", "muted-dark", "soft-dark", "accent-dark"}

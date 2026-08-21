@@ -10,7 +10,7 @@
        用户点名深色 / 暗色 / 夜间，或投放目标是深色站点 / 幻灯时才用本模板。 */
     :root {
       --color-paper:   #0a0d1b;
-      --color-paper-2: #13182e;   /* 深色下 backend 节点填充 */
+      --color-paper-2: #0a0d1b;   /* 深色下 backend 节点填充（与纸面同色，描边成型） */
       --color-ink:     #e0e4ff;
       --color-muted:   #a2a9ce;
       --color-soft:    rgba(224,228,255,0.72);
@@ -64,8 +64,8 @@
 
     <!-- 产出时把 id 换成 {文件名 slug}-title / -desc（SKILL §7 无障碍契约）。
          下面整段 SVG 是演示内容——复制本模板后替换为你的图。
-         深色换档要点：backend 填充 #ffffff → #13182e；ink 基 rgba 翻转为纸色基；
-         箭头标签遮罩 fill 跟 paper 换 #0a0d1b。见 style-guide.md 反转规则。 -->
+         深色换档要点：backend 填充 #ffffff → #0a0d1b（与纸面同色，描边成型）；ink 基 rgba 换纸色基 rgba(224,228,255,α)；
+         箭头标签遮罩 fill 跟 paper 换 #0a0d1b。见 style-guide.md 换档规则。 -->
     <svg viewBox="0 0 960 264" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="template-dark-title template-dark-desc">
       <title id="template-dark-title">深色模板示例图</title>
       <desc id="template-dark-desc">深色档模板演示：用户网站经 API 网关到对话 Agent（焦点），Agent 调用 LLM API 并写 Postgres；实际使用时替换为本图内容。</desc>
@@ -104,7 +104,7 @@
       <text x="104" y="180" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">用户网站</text>
       <text x="104" y="196" fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle">chat widget</text>
 
-      <!-- Node: API 网关（backend；深色档填充 = paper-2 #13182e） -->
+      <!-- Node: API 网关（backend；深色档填充与纸面同色 #0a0d1b） -->
       <rect x="232" y="144" width="144" height="64" rx="6" fill="#0a0d1b"/>
       <rect x="232" y="144" width="144" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
       <rect x="240" y="152" width="28" height="12" rx="2" fill="transparent" stroke="rgba(224,228,255,0.40)" stroke-width="0.8"/>

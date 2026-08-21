@@ -147,7 +147,7 @@ metadata:
 
 - 只引用语义角色名，不内联十六进制值到处写。本文件与各类型文档提到 `ink` / `accent` 等角色时，**现值一律查** [`references/style-guide.md`](references/style-guide.md)——浅 / 深两列 token 的唯一权威。
 - 反模式：彩虹色、两个 accent、给分区上底色。纸面纯白（`paper`）：backend 节点同纸色、靠 `ink @ 0.40` 描边成型（store `muted @ 0.60`）；分区只画发丝线不填充——遮罩才能统一纸色；深色档下 backend 填充才换 `paper-2`。
-- 深色档 **opt-in**：用户点名深色 / 暗色 / 夜间模式，或投放目标本身是深色站点 / 深色幻灯时启用——按 style-guide 深色列 + 反转规则换档，模板 [`assets/template-dark.html`](assets/template-dark.html)，锚点 [`assets/example-architecture-dark.html`](assets/example-architecture-dark.html)。默认仍是浅色；新中式与中国红皮肤暂只有浅色档。
+- 深色档 **opt-in**：用户点名深色 / 暗色 / 夜间模式，或投放目标本身是深色站点 / 深色幻灯时启用——按 style-guide 深色列 + 换档规则换档，模板 [`assets/template-dark.html`](assets/template-dark.html)，锚点 [`assets/example-architecture-dark.html`](assets/example-architecture-dark.html)。默认仍是浅色；新中式与中国红皮肤只有浅色档。
 
 ### 可选皮肤：新中式
 
@@ -200,7 +200,6 @@ metadata:
 - **中文文本最小 10px**。汉字笔画密度高，9px 会糊成一团。10px 是 self_check 强制的**违法下限**，不是设计默认——默认走 §7.3 角色坡道（节点名 14px、中文小字 12px 起），只有空间极限才允许压到 10–11px。
 - 9px 只允许**纯拉丁技术串**（HTTPS、`:5432`、`api/v2`、`jwt`）。
 - 标题 1.75rem serif 400；节点名 14px sans 600；子标签：技术串 mono 9px，中文 12px sans。
-- 存量示例（`assets/example-*.html`）制于字号校准之前，其中 10–11px 中文小字是旧坡道；新产出一律按本节坡道，不照抄示例字号。
 
 ### 7.3 字距与大写
 
@@ -214,7 +213,8 @@ metadata:
 | eyebrow / 类型角标 · 中文 | sans | 12px | 500 | 0.3em |
 | 箭头标签 · 拉丁 | mono | 8px | 400 | 0.06em |
 | 箭头标签 · 中文 | sans | 12px | 500 | 0.12em |
-| 图例文本 | sans | 12px | 400 | 0 |
+| 图例项 | sans | 10px | 400 | 0 |
+| 图例标签 | mono | 10px | 400 | 0.1em |
 
 判断用哪行看**标签内容本身**：含汉字 → 中文行；纯 ASCII 技术串 → 拉丁行。
 
@@ -333,7 +333,7 @@ metadata:
 - [ ] 有明确投放目标时，viewBox / 字号坡道符合 output-spec.md 的预设
 - [ ] 若含动效：控制器逐字节来自 template-motion.html；无 JS / 减弱动效 / `?motion=static` 下都是完整静态画面；self_check 动效层全绿
 - [ ] 若启用皮肤：token 与元素完全来自皮肤文件，未与默认皮肤混用
-- [ ] 若用可选增强层：旁注 ≤2 且斜体宋体；sketchy 未滤到任何文字；图标只来自 primitive-icons.md 且单色系；终端图只用 terminal 九 token；深色图按反转规则换档、无浅色 token 残留
+- [ ] 若用可选增强层：旁注 ≤2 且斜体宋体；sketchy 未滤到任何文字；图标只来自 primitive-icons.md 且单色系；终端图只用 terminal 九 token；深色图按换档规则换档、无浅色 token 残留
 
 **排版**
 
@@ -346,7 +346,7 @@ metadata:
 
 ### 新建一张图
 
-1. 复制**最接近的锚点** `assets/example-*.html`（深色 / 终端 / 动效用对应 `template-{dark,terminal,motion}.html`，且仅在点名时）。**复制示例后先把 `<style>` 与 SVG 里的字号更新为 §7.3 坡道（存量示例是旧字号），再画新内容。**
+1. 复制**最接近的锚点** `assets/example-*.html`（深色 / 终端 / 动效用对应 `template-{dark,terminal,motion}.html`，且仅在点名时）。示例的字号、图例条、配色已是规格值，照抄即可；差异只在内容与几何。
 2. 行为承重先选语义模式；然后载入选定的 `references/type-*.md`。
 3. 替换 eyebrow、h1、SVG 主体；slug 换成本文件名并填 `<title>` / `<desc>`。
 4. 动效被点名才载 `animation.md`；否则 mode `none`、零脚本。
@@ -360,7 +360,7 @@ metadata:
 | 手绘 / 随笔质感 | [`primitive-sketchy.md`](references/primitive-sketchy.md) | 滤镜只挂形状组，文字永远在组外 |
 | 节点配图标（服务器 / 云 / K8s / 数据栈 / 品牌） | [`primitive-icons.md`](references/primitive-icons.md)，预览 [`assets/icons.html`](assets/icons.html) | currentColor 单色继承；描边与填充两种风格不混用 |
 | 终端 / CLI 外壳（开发工具贴、技术社交卡） | [`primitive-terminal.md`](references/primitive-terminal.md)，模板 [`assets/template-terminal.html`](assets/template-terminal.html) | 固定九 token，不吃品牌化；中文 ≥10px 下限不放宽 |
-| 深色 / 暗色 / 夜间 | style-guide 深色列 + 反转规则，模板 [`assets/template-dark.html`](assets/template-dark.html) | opt-in；backend 填充换 `paper-2`；对比度两档同守 |
+| 深色 / 暗色 / 夜间 | style-guide 深色列 + 换档规则，模板 [`assets/template-dark.html`](assets/template-dark.html) | opt-in；backend 填充与深色纸面同色；对比度两档同守 |
 | 动效 / 分步播放 | [`animation.md`](references/animation.md)（§3） | 静态永远是默认 |
 
 增强层之间可叠加（如深色 + 动效、终端 + 图标），但每层纪律不放松。**sketchy 与 terminal 不叠加**——手绘抖动落在终端发丝线上是噪声。

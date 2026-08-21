@@ -142,11 +142,11 @@ bar_w = zone_w - 2*zone_pad_x    # 664
 
 ### 2.5 图例条与页面标题
 
-图例占 viewBox 底部 84px 带（`footer_bottom .. viewBox_h`），单行、整体居中于带中线（基线 `y = footer_bottom + 47`）：
+图例占 viewBox 底部 84px 带（`footer_bottom .. viewBox_h`），单行、基线 `y = footer_bottom + 47`，规格按 style-guide「图例条」：
 
-- 标签「图例」：sans 10px · 500 · 字距 0.3em，fill muted，`x=40`——与源列左缘同一对齐轨。
-- 图例项：文字 10px，与标签同一基线；色块 16×10（`y = 基线−10`）；线样长 28（`y = 基线−4`）、带对应箭头 marker；色样填充 α 与图内实物一致。
-- 图例区与图表之间**不画**分隔线。
+- 顶部分隔线：`rule @0.10`、宽 0.8，基线上方 18px，`x` 从内容左缘到右缘。
+- 标签「图例」：`legend-label` 角色（mono 10px · 0.1em），fill muted，`x=40`——与源列左缘同一对齐轨；标签 → 首个元素 72px。
+- 图例项：`legend` 角色（sans 10px），与标签同一基线；色块 16×12（`y = 基线−10`）；线样长 28（`y = 基线−4`）、带对应箭头 marker；色样填充 α 与图内实物一致。
 
 页面层：eyebrow 格式「图内容语境 · 图类型」（如 数据平台 · 集成图），不带技能名；eyebrow / h1 `margin-left = 40 ÷ viewBox_w ≈ 3.33%`（内容最左标注元素对齐基线，三层一线）。
 

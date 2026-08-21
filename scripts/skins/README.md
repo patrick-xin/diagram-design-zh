@@ -12,12 +12,12 @@
 | `paper` / `paper-2` | `#ffffff` / `#f3f2ff` | 纸面 / 容器底 |
 | `ink` / `muted` / `soft` | `#29314f` / `#565e7e` / `#8f94ab` | 正文 / 二级 / 三级（含各自的 rgba 基） |
 | `accent` | `#1a4dd9` | 焦点 ≤2 处；也是 link 色 |
-| `paper-dark` | `#faf8ff` | 深色档文字的纸色基（hex 与 rgba(250,248,255,α) 同源） |
-| `dark-bg` / `muted-dark` / `soft-dark` / `accent-dark` | `#13182e` / `#a2a9ce` / `#787fa2` / `#7d98ff` | 深色档其余四槽 |
+| `paper-dark` | `#e0e4ff` | 深色档文字的纸色基（hex 与 rgba(224,228,255,α) 同源） |
+| `dark-bg` / `muted-dark` / `soft-dark` / `accent-dark` | `#0a0d1b` / `#a2a9ce` / `#787fa2` / `#7d98ff` | 深色档其余四槽 |
 | `series-1..5`（`-dark`） | 翠绿 / 暖橙 / 绛红 / 靛蓝 / 紫棠 | 图表系列色；不写就保持默认 |
 
-**不在表里、也永远不许进表**：语义色族五色（sem-security `#b85450` /
-sem-observability `#5a7d9a` / sem-governance `#7a8c47` / sem-backup `#8c6d3f` /
+**不在表里、也永远不许进表**：语义色族五色（浅深两档，sem-security `#b85450`/`#bf6561` /
+sem-observability `#5a7d9a`/`#5e83a1` / sem-governance `#7a8c47` / sem-backup `#8c6d3f`/`#9b7946` /
 sem-workspace `#c9a23a`）——换皮不换义，写了会被 gate 拒绝。
 
 ## 现有皮肤
