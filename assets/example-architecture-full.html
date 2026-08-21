@@ -107,7 +107,7 @@
 
     <div class="diagram-container">
 
-    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-architecture-full-title example-architecture-full-desc">
+    <svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-architecture-full-title example-architecture-full-desc">
       <title id="example-architecture-full-title">AI 客服平台生产架构</title>
       <desc id="example-architecture-full-desc">架构图：用户网站请求经 API 网关进入对话 Agent（焦点），Agent 调用外部 LLM API、写入 Postgres 并读写 Redis 缓存。</desc>
         <defs>
@@ -123,118 +123,118 @@
         <rect width="100%" height="100%" fill="#ffffff"/>
 
         <!-- zone: core services -->
-        <rect x="180" y="216" width="408" height="112" rx="8"
+        <rect x="180" y="64" width="408" height="112" rx="8"
               fill="none" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-        <rect x="354" y="220" width="76" height="14" rx="2" fill="#ffffff"/>
-        <text x="384" y="230" fill="rgba(41,49,79,0.40)" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace"
+        <rect x="354" y="68" width="76" height="14" rx="2" fill="#ffffff"/>
+        <text x="384" y="78" fill="rgba(41,49,79,0.40)" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace"
               text-anchor="middle" letter-spacing="0.1em">生产环境</text>
 
         <!-- arrows (behind boxes) -->
-        <line x1="128" y1="272" x2="208" y2="272" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-        <line x1="352" y1="280" x2="416" y2="280" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-        <line x1="576" y1="280" x2="668" y2="280" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="128" y1="120" x2="208" y2="120" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="352" y1="128" x2="416" y2="128" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="576" y1="128" x2="668" y2="128" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
 
         <!-- agent -> llm: top exit, elbow r=8 -->
-        <path d="M 568,248 V 192 Q 568,184 576,184 H 716"
+        <path d="M 568,96 V 40 Q 568,32 576,32 H 716"
               fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
 
         <!-- agent -> redis: dashed bypass -->
-        <path d="M 568,312 V 360 Q 568,368 576,368 H 716"
+        <path d="M 568,160 V 208 Q 568,216 576,216 H 716"
               fill="none" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
 
         <!-- dashed return: gateway -> user -->
-        <line x1="208" y1="296" x2="128" y2="296" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <line x1="208" y1="144" x2="128" y2="144" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
 
         <!-- arrow labels -->
-        <rect x="132" y="252" width="48" height="12" rx="2" fill="#ffffff"/>
-        <text x="156" y="261" fill="#565e7e" font-size="8" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">HTTPS</text>
+        <rect x="132" y="100" width="48" height="12" rx="2" fill="#ffffff"/>
+        <text x="156" y="109" fill="#565e7e" font-size="8" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">HTTPS</text>
 
-        <rect x="136" y="304" width="32" height="12" rx="2" fill="#ffffff"/>
-        <text x="152" y="314" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">应答</text>
+        <rect x="136" y="152" width="32" height="12" rx="2" fill="#ffffff"/>
+        <text x="152" y="162" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">应答</text>
 
-        <rect x="604" y="260" width="44" height="12" rx="2" fill="#ffffff"/>
-        <text x="622" y="270" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">写入</text>
+        <rect x="604" y="108" width="44" height="12" rx="2" fill="#ffffff"/>
+        <text x="622" y="118" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">写入</text>
 
-        <rect x="588" y="164" width="32" height="12" rx="2" fill="#ffffff"/>
-        <text x="604" y="174" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">补全</text>
+        <rect x="588" y="12" width="32" height="12" rx="2" fill="#ffffff"/>
+        <text x="604" y="22" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">补全</text>
 
-        <rect x="578" y="348" width="52" height="12" rx="2" fill="#ffffff"/>
-        <text x="604" y="358" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">缓存读写</text>
+        <rect x="578" y="196" width="52" height="12" rx="2" fill="#ffffff"/>
+        <text x="604" y="206" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">缓存读写</text>
 
         <!-- node: user site (input) -->
-        <rect x="0" y="248" width="128" height="64" rx="6" fill="#ffffff"/>
-        <rect x="0" y="248" width="128" height="64" rx="6" fill="rgba(86,94,126,0.08)" stroke="#8f94ab" stroke-width="1"/>
-        <rect x="6" y="256" width="32" height="14" rx="2" fill="transparent" stroke="rgba(143,148,171,0.40)" stroke-width="0.8"/>
-        <text x="22" y="266" fill="#8f94ab" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">前端</text>
-        <text x="64" y="284" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">用户网站</text>
-        <text x="64" y="300" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">聊天组件</text>
+        <rect x="0" y="96" width="128" height="64" rx="6" fill="#ffffff"/>
+        <rect x="0" y="96" width="128" height="64" rx="6" fill="rgba(86,94,126,0.08)" stroke="#8f94ab" stroke-width="1"/>
+        <rect x="6" y="104" width="32" height="14" rx="2" fill="transparent" stroke="rgba(143,148,171,0.40)" stroke-width="0.8"/>
+        <text x="22" y="114" fill="#8f94ab" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">前端</text>
+        <text x="64" y="132" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">用户网站</text>
+        <text x="64" y="148" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">聊天组件</text>
 
         <!-- node: api gateway (backend) -->
-        <rect x="208" y="248" width="144" height="64" rx="6" fill="#ffffff"/>
-        <rect x="208" y="248" width="144" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="216" y="256" width="28" height="12" rx="2" fill="transparent" stroke="rgba(41,49,79,0.40)" stroke-width="0.8"/>
-        <text x="230" y="265" fill="#29314f" font-size="7" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">API</text>
-        <text x="280" y="284" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">API 网关</text>
-        <text x="280" y="300" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">jwt · 限流</text>
-        <text x="344" y="300" fill="rgba(41,49,79,0.05)" font-size="32" font-weight="600" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="end">01</text>
+        <rect x="208" y="96" width="144" height="64" rx="6" fill="#ffffff"/>
+        <rect x="208" y="96" width="144" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
+        <rect x="216" y="104" width="28" height="12" rx="2" fill="transparent" stroke="rgba(41,49,79,0.40)" stroke-width="0.8"/>
+        <text x="230" y="113" fill="#29314f" font-size="7" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">API</text>
+        <text x="280" y="132" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">API 网关</text>
+        <text x="280" y="148" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">jwt · 限流</text>
+        <text x="344" y="148" fill="rgba(41,49,79,0.05)" font-size="32" font-weight="600" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="end">01</text>
 
         <!-- node: agent (focal) -->
-        <rect x="416" y="248" width="160" height="64" rx="6" fill="#ffffff"/>
-        <rect x="416" y="248" width="160" height="64" rx="6" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1"/>
-        <rect x="424" y="256" width="36" height="12" rx="2" fill="transparent" stroke="rgba(26,77,217,0.50)" stroke-width="0.8"/>
-        <text x="442" y="265" fill="#1a4dd9" font-size="7" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
-        <text x="560" y="300" fill="rgba(26,77,217,0.08)" font-size="32" font-weight="600" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="end">02</text>
-        <text x="488" y="284" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">对话 Agent</text>
-        <text x="488" y="300" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">rag · 工具调用</text>
+        <rect x="416" y="96" width="160" height="64" rx="6" fill="#ffffff"/>
+        <rect x="416" y="96" width="160" height="64" rx="6" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1"/>
+        <rect x="424" y="104" width="36" height="12" rx="2" fill="transparent" stroke="rgba(26,77,217,0.50)" stroke-width="0.8"/>
+        <text x="442" y="113" fill="#1a4dd9" font-size="7" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">AGENT</text>
+        <text x="560" y="148" fill="rgba(26,77,217,0.08)" font-size="32" font-weight="600" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="end">02</text>
+        <text x="488" y="132" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">对话 Agent</text>
+        <text x="488" y="148" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">rag · 工具调用</text>
 
         <!-- node: llm api (external) -->
-        <rect x="680" y="152" width="144" height="64" rx="6" fill="#ffffff"/>
-        <rect x="680" y="152" width="144" height="64" rx="6" fill="rgba(41,49,79,0.03)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-        <rect x="688" y="160" width="28" height="12" rx="2" fill="transparent" stroke="rgba(41,49,79,0.20)" stroke-width="0.8"/>
-        <text x="702" y="169" fill="#8f94ab" font-size="7" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">LLM</text>
-        <text x="752" y="188" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">LLM API</text>
-        <text x="752" y="204" fill="#565e7e" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">claude-sonnet</text>
+        <rect x="680" y="0" width="144" height="64" rx="6" fill="#ffffff"/>
+        <rect x="680" y="0" width="144" height="64" rx="6" fill="rgba(41,49,79,0.03)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+        <rect x="688" y="8" width="28" height="12" rx="2" fill="transparent" stroke="rgba(41,49,79,0.20)" stroke-width="0.8"/>
+        <text x="702" y="17" fill="#8f94ab" font-size="7" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">LLM</text>
+        <text x="752" y="36" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">LLM API</text>
+        <text x="752" y="52" fill="#565e7e" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">claude-sonnet</text>
 
         <!-- node: postgres (store) -->
-        <rect x="680" y="248" width="144" height="64" rx="6" fill="#ffffff"/>
-        <rect x="680" y="248" width="144" height="64" rx="6" fill="rgba(41,49,79,0.05)" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
-        <rect x="686" y="256" width="44" height="14" rx="2" fill="transparent" stroke="rgba(86,94,126,0.50)" stroke-width="0.8"/>
-        <text x="708" y="266" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">数据库</text>
-        <text x="752" y="284" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">Postgres</text>
-        <text x="752" y="300" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">会话记录</text>
+        <rect x="680" y="96" width="144" height="64" rx="6" fill="#ffffff"/>
+        <rect x="680" y="96" width="144" height="64" rx="6" fill="rgba(41,49,79,0.05)" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
+        <rect x="686" y="104" width="44" height="14" rx="2" fill="transparent" stroke="rgba(86,94,126,0.50)" stroke-width="0.8"/>
+        <text x="708" y="114" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">数据库</text>
+        <text x="752" y="132" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">Postgres</text>
+        <text x="752" y="148" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">会话记录</text>
 
         <!-- node: redis (optional) -->
-        <rect x="680" y="336" width="144" height="64" rx="6" fill="#ffffff"/>
-        <rect x="680" y="336" width="144" height="64" rx="6" fill="rgba(41,49,79,0.02)" stroke="rgba(41,49,79,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
-        <rect x="688" y="344" width="36" height="12" rx="2" fill="transparent" stroke="rgba(41,49,79,0.15)" stroke-width="0.8"/>
-        <text x="706" y="353" fill="#8f94ab" font-size="7" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">CACHE</text>
-        <text x="752" y="372" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">Redis 缓存</text>
-        <text x="752" y="388" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">会话 · 5 分钟过期</text>
+        <rect x="680" y="184" width="144" height="64" rx="6" fill="#ffffff"/>
+        <rect x="680" y="184" width="144" height="64" rx="6" fill="rgba(41,49,79,0.02)" stroke="rgba(41,49,79,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
+        <rect x="688" y="192" width="36" height="12" rx="2" fill="transparent" stroke="rgba(41,49,79,0.15)" stroke-width="0.8"/>
+        <text x="706" y="201" fill="#8f94ab" font-size="7" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">CACHE</text>
+        <text x="752" y="220" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">Redis 缓存</text>
+        <text x="752" y="236" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">会话 · 5 分钟过期</text>
 
         <!-- legend strip -->
-        <line x1="0" y1="439" x2="960" y2="439" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-        <text x="0" y="457" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" letter-spacing="0.1em">图例</text>
+        <line x1="0" y1="287" x2="960" y2="287" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
+        <text x="0" y="305" fill="#565e7e" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" letter-spacing="0.1em">图例</text>
 
-        <rect x="72" y="447" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1"/>
-        <text x="96" y="457" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点服务</text>
+        <rect x="72" y="295" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1"/>
+        <text x="96" y="305" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点服务</text>
 
-        <rect x="172" y="447" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <text x="196" y="457" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">后端服务</text>
+        <rect x="172" y="295" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
+        <text x="196" y="305" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">后端服务</text>
 
-        <rect x="272" y="447" width="16" height="12" rx="2" fill="rgba(41,49,79,0.05)" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
-        <text x="296" y="457" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储</text>
+        <rect x="272" y="295" width="16" height="12" rx="2" fill="rgba(41,49,79,0.05)" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
+        <text x="296" y="305" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储</text>
 
-        <rect x="352" y="447" width="16" height="12" rx="2" fill="rgba(41,49,79,0.03)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-        <text x="376" y="457" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">外部服务</text>
+        <rect x="352" y="295" width="16" height="12" rx="2" fill="rgba(41,49,79,0.03)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+        <text x="376" y="305" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">外部服务</text>
 
-        <rect x="456" y="447" width="16" height="12" rx="2" fill="rgba(41,49,79,0.02)" stroke="rgba(41,49,79,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
-        <text x="480" y="457" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">可选 / 异步</text>
+        <rect x="456" y="295" width="16" height="12" rx="2" fill="rgba(41,49,79,0.02)" stroke="rgba(41,49,79,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="480" y="305" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">可选 / 异步</text>
 
-        <line x1="576" y1="453" x2="604" y2="453" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-        <text x="612" y="457" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">请求 / 调用</text>
+        <line x1="576" y1="301" x2="604" y2="301" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <text x="612" y="305" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">请求 / 调用</text>
 
-        <line x1="708" y1="453" x2="736" y2="453" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
-        <text x="744" y="457" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">缓存 / 异步</text>
+        <line x1="708" y1="301" x2="736" y2="301" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <text x="744" y="305" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">缓存 / 异步</text>
       </svg>
     </div>
 
