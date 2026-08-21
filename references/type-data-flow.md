@@ -6,7 +6,7 @@
 
 本类型是**参数化**的——§1 的输入 schema 经 §2 公式驱动每个坐标。相同输入的两次产出必须视觉一致。
 
-> **中文重标定**：本类型硬规则：**含汉字 ≥10px**（9px 只留给纯拉丁技术串）。因此全套网格放大：节点 100×64 → **124×80**，列距 112 → **136**，道高 80 → **96**，表头带 36 → **40**。**不许**为迁就小字号把网格缩回去。
+> **中文重标定**：本类型硬规则：**含汉字 ≥10px**（9px 只留给纯拉丁技术串）。因此全套网格放大：节点 100×64 → **124×80**，列距 112 → **136**，道槽高 80 → **104**（容器 96 + 缝），表头带 36 → **40**。**不许**为迁就小字号把网格缩回去。
 
 ---
 
@@ -30,8 +30,8 @@ nodes:                              # 显式逐格；空格不渲染任何东西
   - { lane: "ADM", step: 0, title: "项目启动",  sub: "建 bucket · 配权限",  tool: "MinIO · LDAP" }
   - { lane: "ADM", step: 1, title: "权限管控",  sub: "桶策略 · 目录同步",   tool: "LDAP 控制台",
       color: "#b85450" }            # 锈红 tint——治理 / 身份关注点
-  - { lane: "ENG", step: 0, title: "源头接入",  sub: "外部源 → 原始层",     tool: "NiFi · SFTP",
-      chips: {in: "WB", out: "DB"} }                # 网页载荷入，数据集出
+  - { lane: "ENG", step: 0, title: "源头接入",  sub: "外部源 → 原始层",     tool: "NiFi · Kafka",
+      chips: {in: "LS", out: "DB"} }                # 实时流入，数据集出
   - { lane: "ENG", step: 1, title: "原始落地",  sub: "原始数据入湖",        tool: "MinIO",
       chips: {in: "DB", out: "DB"} }
   - { lane: "ENG", step: 2, title: "清洗加工",  sub: "原始 → 分析表",       tool: "NiFi · Trino",
@@ -41,7 +41,7 @@ nodes:                              # 显式逐格；空格不渲染任何东西
   - { lane: "SCI", step: 4, title: "发布洞察",  sub: "模型 → 看板",         tool: "Superset",
       chips: {in: "FL", out: "FL"} }
   - { lane: "CON", step: 4, title: "查询消费",  sub: "聚合视图 · 只读",     tool: "Trino",
-      chips: {in: "TB", out: "TB"} }
+      chips: {in: "TB", out: "WB"} }                # 分析表入，网页视图出
 
 arrows:                             # 显式边；样式绑定拓扑（见 §3）
   - { from: {lane: "ADM", step: 0}, to: {lane: "ADM", step: 1}, style: "muted" }     # 同道相邻
@@ -70,6 +70,7 @@ dark: false
 ## 2. 布局公式——确定性几何
 
 ```
+lane_pad         = 24                                  # 行容器左右外距
 label_col_w      = 160
 step_slot_w      = 136                                # 124 节点 + 12 走廊
 right_pad        = 32
@@ -79,19 +80,21 @@ n_lanes          = len(lanes)
 # 画布
 viewBox_w        = label_col_w + n_steps * step_slot_w + right_pad   # 5 步 → 872
 header_h         = 40
-lane_h           = 96
+lane_h           = 104                                 # 道槽：容器 96 + 上下缝各 4（道间白缝 8）
 has_color_row    = any(node.color or step.color or lane.color in inputs)
-legend_h         = 128 if has_color_row else 104      # 有配色时 4 行
-viewBox_h        = header_h + n_lanes * lane_h + legend_h            # 4 道 + 配色 → 552
+legend_h         = 148 if has_color_row else 124      # 有配色时 4 行（行距 30 + 图表间距 32）
+viewBox_h        = header_h + n_lanes * lane_h + legend_h            # 4 道 + 配色 → 604
 
 # 步骤表头带（顶部）
 step_chip_y      = 8                                   # 20×16 芯片（两位数 24 宽）
 step_label_y     = 36                                  # 芯片下方的步骤名
 
-# 道位置
-lane_y_top(k)    = header_h + k * lane_h               # 40, 136, 232, 328
-lane_y_mid(k)    = lane_y_top(k) + lane_h/2            # 88, 184, 280, 376
-lane_label_x     = label_col_w / 2                     # 80
+# 道位置与角色行容器
+lane_y_top(k)    = header_h + k * lane_h               # 40, 144, 248, 352
+lane_box(k)      = rect(lane_pad, lane_y_top+4, viewBox_w−2·lane_pad, 96)   # rx=8
+                                                       # 标签区与节点区连体同色
+lane_y_mid(k)    = lane_y_top(k) + lane_h/2            # 92, 196, 300, 404
+lane_label_x     = (lane_pad + label_col_w) / 2        # 92
 
 # 步骤 / 节点中心 x
 step_cx(j)       = label_col_w + 8 + j * step_slot_w + node_w/2      # 230, 366, 502, 638, 774
@@ -101,20 +104,18 @@ step_cx(j)       = label_col_w + 8 + j * step_slot_w + node_w/2      # 230, 366,
 node_w           = 124
 node_h           = 80
 node_x(j)        = step_cx(j) - node_w/2               # 168, 304, 440, 576, 712
-node_y(k)        = lane_y_top(k) + 8                   # 48, 144, 240, 336
+node_y(k)        = lane_y_top(k) + 12                  # 52, 156, 260, 364
 
 # 图例带（底部）
-legend_y_top     = header_h + n_lanes * lane_h         # 424
-legend_row_y     = [legend_y_top + 16, +38, +60, +82]  # 440, 462, 484, 506
+legend_y_top     = header_h + n_lanes * lane_h         # 456（图表底 → 首行 32px 间距）
+legend_row_y     = [legend_y_top + 40, +70, +100, +130] # 文字基线 496, 526, 556, 586
+legend_label_x   = lane_pad                            # 24；行内首元素 x = 100
 ```
 
 ### 2.1 背景结构
 
 - 全画布 `paper` 填充。
-- 点阵：22×22 网格，`circle r=0.8`，`fill ink@0.10`，整体 opacity 0.55。
-- 交替道染色：奇数下标道（0、2……）自 `x=160` 到 `viewBox_w` 铺 `ink@0.02`。
-- 道分隔：每条 `lane_y_top(k)` 与 `legend_y_top` 处横发丝线，`ink@0.12` 宽 0.8。
-- 标签列右边框：`x=160` 竖发丝线，`ink@0.20` 宽 1，从 `header_h` 到 `legend_y_top`。
+- **角色行容器**：每条道一个整行矩形 `lane_box(k)`（§2 公式），`rx=8`，`fill ink@0.03`——标签区与节点区连体同色、一体成型，道与道之间靠 8px 白缝分隔。**不画**道分隔横线、标签列竖线、图例顶线（容器边缘自己承担），**不铺**背景点阵（点纹理是 dev/editorial 主题预留，默认不画）。
 
 ### 2.2 步骤头芯片 + 步骤名
 
@@ -126,7 +127,7 @@ legend_row_y     = [legend_y_top + 16, +38, +60, +82]  # 440, 462, 484, 506
 
 ### 2.3 道标签
 
-单行中文，eyebrow-zh（sans 12px · 0.3em），fill muted，居中于 `(80, lane_y_mid(k) + 4)`。逐道 `color` 覆盖（§4）时标签 fill 换 `C`、道染色换 `C@0.04`。
+单行中文，eyebrow-zh（sans 12px · 0.3em），fill muted，居中于 `(lane_label_x, lane_y_mid(k) + 4)`——即容器左段（标签区）的中心。逐道 `color` 覆盖（§4）时标签 fill 换 `C`、该道行容器填充换 `C@0.04`。
 
 ### 2.4 节点内容（124×80 矩形内）
 
@@ -161,12 +162,10 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 
 ```svg
 <defs>
-  <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
-    <circle cx="11" cy="11" r="0.8" fill="rgba(41,49,79,0.10)"/>
-  </pattern>
+  <!-- dots pattern: reserved for dev/editorial theme, unused by default -->
   <marker id="arr-muted"  markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#565e7e"/></marker>
   <marker id="arr-accent" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a4dd9"/></marker>
-  <marker id="arr-link"   markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a4dd9"/></marker>
+  <marker id="arr-link"   markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#bf7f0f"/></marker>
 </defs>
 ```
 
@@ -195,7 +194,7 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 
 ### 4.3 逐道 `color`
 
-替换道染色为 `C@0.04`（仅默认有染色的奇数下标道）、道标签 fill 为 `C`。慎用。
+替换该道行容器填充为 `C@0.04`、道标签 fill 为 `C`（其余道容器保持 `ink@0.03`）。慎用。
 
 ### 4.4 规则
 
@@ -229,7 +228,11 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 
 ## 6. 深色档
 
-按 [style-guide.md](style-guide.md) 深色反转规则整体换档：一切 **ink 基** `ink@X` 各档翻为**纸色基** `paper-dark@X`（同透明度），`accent` → `accent-dark`，`link` → `accent-dark`，节点默认填充 `paper` → `paper-dark@0.05`，点阵/道染色/分隔线随纸色基翻转，自定义配色 `C` 提亮 ~15%（如 `sem-security` 基提亮 ~15%）。深色是 opt-in——用户点名才启用。
+**对称换基，α 一律不动**（全套现值照抄 [`assets/example-data-flow-dark.html`](../assets/example-data-flow-dark.html)）：
+
+- 纸 → `#0a0d1b`（页面底 / 行容器上节点底 / 标注遮罩同色成型）；ink 基 → `#e0e4ff` 基（`rgba(224,228,255,X)` 各档）；muted → `#a2a9ce`（连接线 `rgba(162,169,206,0.60)`）；soft → `#787fa2`；accent → `#7d98ff`（焦点 tint 档浅 0.08 → 深 **0.10**，芯片档 0.20 不动）；link 琥珀深色档 `#e8b45a`。
+- 系列芯片换深色档（翠绿 `#5fbf93` 等，见 style-guide 系列表深色列），芯片内文字**深字**（`#0a0d1b`）。
+- 自定义配色（§4）换对应语义色**深色档**基（如 `sem-security` 深色基 `#bf6561`），α 档不变；深色是 opt-in——用户点名才启用。
 
 ---
 
@@ -237,7 +240,7 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 
 1. `viewBox = "0 0 {viewBox_w} {viewBox_h}"` 由 §2 从 `n_steps`/`n_lanes` 推出。
 2. 表头带 `y=0..40`；图例带 `y=legend_y_top..viewBox_h`。
-3. 每个节点落在 `(step_cx(j)-62, lane_y_top(k)+8)`，尺寸 `124×80`。
+3. 每个节点落在 `(step_cx(j)-62, lane_y_top(k)+12)`，尺寸 `124×80`，上下各留 8px 呼吸空间，整体在 `lane_box(k)` 内。
 4. 空格什么都不画。
 5. 恰好一个焦点步骤、一个焦点节点、一条 accent 箭头（带 paper 遮罩标注）。
 6. 其余箭头全部无标注。
@@ -267,7 +270,7 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 | `FL` | `series-3`（绛红） | 文件 / 报表 / 导出 |
 | `LS` | `series-1`（翠绿） | 实时流 / 事件 / 任务单 |
 
-芯片内文字：白，mono 7px · 700。
+芯片内文字：mono 7px · 700——浅色档白字，深色档深字（`#0a0d1b`，见 §6）。
 
 芯片直映 style-guide 系列色（「不回填非图表类型」的唯一例外，见 style-guide 系列色板节）。映射锚点取惯例——蓝=库、绿=流，其余为任意但**全库恒定**的分配；调整映射必须同步图例与本目录的 process 侧。
 
@@ -277,12 +280,12 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 
 ## 9. 图例（3 或 4 行横条）
 
-每行一个类目标签在 `x=164`，行内条目横向单排，**不**在盒内竖叠。默认 3 行（步骤 / 数据类型 / 流向）；有 §4 配色时加第 4 行（关注点），`legend_h` 104 → 128。
+每行一个类目标签在 `x=24`（与行容器左缘同一对齐基线），行内首元素一律 `x=100`，行距 30（§2 `legend_row_y`），横向单排不竖叠。默认 3 行（步骤 / 数据类型 / 流向）；有 §4 配色时加第 4 行（关注点），`legend_h` 124 → 148。图例区与图表之间**不画**分隔线。
 
-- **行 1 步骤**（y+16）：复刻表头芯片与步骤名；焦点步骤保 accent。
-- **行 2 数据类型**（y+38）：图内实际用到的芯片各一枚色板；行尾 muted 提示 `左入 · 右出`。
-- **行 3 关注点**（y+60，仅有配色时）：每个自定义色一枚小矩形 + 语义标签；accent 焦点色也并排展示。
-- **行 4 流向**（y+82）：实际用到的每种箭头样式一段短线 + marker + 标签。
+- **行 1 步骤**：复刻表头芯片与步骤名；焦点步骤保 accent。
+- **行 2 数据类型**：图内实际用到的芯片各一枚（编码文字在芯片右侧，不加中文说明）；示例五色齐落（LS/DB/TB/FL/WB）。
+- **行 3 关注点**（仅有配色时）：每个自定义色一枚小矩形 + 语义标签（示意芯片的填充 α 与实物节点一致）；accent 焦点色也并排展示。
+- **行 4 流向**：实际用到的每种箭头样式一段短线 + marker + 标签。
 
 ---
 
@@ -317,4 +320,6 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 
 ## 12. 示例
 
-- [`assets/example-data-flow.html`](../assets/example-data-flow.html) — 数据平台 4 角色 × 5 步（管理员/工程师/分析师/使用者），焦点 = 分析步骤 + 探索建模节点 + 匿名数据交接；权限管控节点锈红演示 §4 配色覆盖。
+- 浅色：[`assets/example-data-flow.html`](../assets/example-data-flow.html)
+- 深色：[`assets/example-data-flow-dark.html`](../assets/example-data-flow-dark.html)
+- 页面级：[`assets/example-data-flow-full.html`](../assets/example-data-flow-full.html)
