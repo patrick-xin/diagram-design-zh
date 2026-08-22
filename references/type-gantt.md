@@ -1,46 +1,47 @@
 # 甘特图（Gantt）
 
-**最适合**：项目计划与路线图——有明确起止日期的任务、按阶段分组。读者需要一眼看出时间重叠、并行轨道和里程碑次序时用。
+**最适合**：项目计划与路线图——有明确起止日期的任务、按阶段分组。读者需要一眼看出时间重叠、并行轨道和里程碑次序时用。问题若是「谁连谁」的拓扑 → 集成图 / 架构图；若是无日期的先后依赖 → 流程图。
 
 ## 布局
 
-- **左侧标签列**：x=20–200（180px）。任务名 sans 14px · 600。阶段标签 = 每组上方的 eyebrow：中文 sans 12px · 0.3em（**汉字禁止 <10px**），纯拉丁可用 mono。
-- **时间轴区**：x=200–960。时间自左向右。
-- **行高**：每任务 40px。条形 h=24 居中在行内（顶部 8px padding）。
-- **时间轴**：周/月标签在 y=56，x = 200 + i × pitch；y=64 一条发丝分隔线。轴标签纯拉丁（`W01`、`2026-10`）用 mono 8px，含汉字（`10 月`）用 sans 12px。
-- **阶段分组**：每组行后面垫淡色分区 rect（同架构图分区）：`ink@0.02` 填充、`ink@0.10` 描边，阶段 eyebrow 放分区左上。
-- **焦点任务条**：恰好 1 条 accent 填充/描边（关键交付或关键路径任务）。其余：muted @ 0.15 填充 + muted 描边。
-- **今日 / 里程碑标记**（可选）：当前周 x 位置的 muted 竖虚线。
+- **左侧标签列**：x=0–188，坐在阶段分区的底色上。任务名 sans 12px · 600 · ink，下垫 `muted @ 0.08` 淡色垫块（块贯通整列、高 24、与任务条同行同高；文字 x=8 左缩进，基线 = 垫块顶 +16，视觉垂直居中）。阶段标签 = 每组首行上方的 eyebrow（sans 10px · 500 · 0.3em · muted），与任务名同列左对齐。
+- **时间轴区**：x=188–944（宽 756）。时间自左向右。轴线 L 形：x=188 左分隔竖线（画布顶贯到网格底）+ 轴头横线，均 `ink @ 0.30` 宽 1。
+- **行高**：每任务 40。条形 h=24 居中行内（行顶 +8）。
+- **按月分刻度**：月份标签（含汉字 → sans 12px · 600 · ink）居中于月跨度中点，基线在轴头线上方 8。月界 = 竖虚线 4,3 · `ink @ 0.10` · 宽 0.8；月内周界 = 发丝线 `ink @ 0.08` · 宽 0.8；周不标文字。
+- **阶段分组**：每组行后面垫淡色分区 rect，**贯通标签列与时间轴**（左列内容带分区底色）：`ink @ 0.02` 填充 + `ink @ 0.10` 描边、rx=6。
+- **画布**：宽 1000；高 = 内容底向上取整到 40 的倍数；内容顶贴 y=0。标题跟容器线对齐（frame 统一缩进，不写 margin-left）。
 
-### 任务条模式
+## 任务条样式
 
-```svg
-<!-- 常规任务 -->
-<rect x="X_start" y="ROW_Y+8" width="DURATION_PX" height="24" rx="4"
-      fill="rgba(86,94,126,0.15)" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
-<text x="X_start+8" y="ROW_Y+25" fill="#29314f" font-size="10" font-weight="600"
-      font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">任务名</text>
+| 类 | 填充 | 描边 | 条内文字 |
+|---|---|---|---|
+| 常规任务 | `muted @ 0.15` | `muted` 实色 · 宽 1 | 无——靠左列任务名 |
+| 焦点任务（恰好 1 条） | `accent @ 0.12` | `accent` · 宽 1 | 可居中标注：sans 10px · 600 · accent，水平垂直居中 |
 
-<!-- 焦点任务 -->
-<rect x="X_start" y="ROW_Y+8" width="DURATION_PX" height="24" rx="4"
-      fill="rgba(26,77,217,0.12)" stroke="#1a4dd9" stroke-width="1"/>
-<text x="X_start+8" y="ROW_Y+25" fill="#1a4dd9" font-size="10" font-weight="600"
-      font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">关键任务</text>
-```
-
-像素时长：`(结束周 − 起始周) × pitch`，pitch = 时间轴宽度 ÷ 总周数。**如实换算**——条形长度就是时长，不许为好看拉伸。
-
-条内文字放不下（窄条）时，省略条内文字、只靠左列任务名。
+条形 rx=4。像素时长 = 周数 × pitch，pitch = 时间轴宽 ÷ 总周数（十二周 → 63）。**如实换算**——条形长度就是时长，不许为好看拉伸；起止日期归月份刻度，条内不写。
 
 ## 反模式
 
 - 超过 12 个任务（拆子计划或折叠成阶段级视图）
 - 每阶段超过 5 条并行轨道（重叠不可读）
 - 任务间画依赖箭头（v1 不做；确有必要时用旁注标注）
-- 条形标签里写起止日期（日期归 x 轴或注释）
+- 条形标签里写起止日期（日期归刻度）
+- 逐周标文字（月刻度 + 周发丝线足够，逐周文字是噪声）
+- 今日线 / 里程碑竖线（要强调某个时点，用焦点条或旁注承载，不加额外线元素）
 - 所有条等视觉权重（焦点任务必须跳出来）
-- 汉字轴标签 / 阶段标签 <10px
+- 任务名 / 阶段标签（汉字）<10px
+
+## 深色档与 full 版
+
+- 深色档照抄 [`assets/example-gantt-dark.html`](../assets/example-gantt-dark.html)：对称换基、α 不动（焦点条换 accent 深色基 @ 0.12，任务条描边换 muted 深色实色）。
+- full 版照抄 [`assets/example-gantt-full.html`](../assets/example-gantt-full.html)：subtitle → 图表、图表 → 卡片区两个 4rem 层间；三张卡写图内真实数据（焦点任务 / 阶段节奏 / 统计口径）；footer 图题 + 年月。
+
+## 间距（本类型实况）
+
+标题 → 图表 3rem；图例横条距最下分区底 56 / 距网格线末端 40（画布单位）。图例条按 style-guide「图例条（底部横条）」节执行（bar 规格）。
 
 ## 示例
 
-- [`assets/example-gantt.html`](../assets/example-gantt.html) — 十周排期：三阶段分区 + 焦点条 + 今日线
+- [`assets/example-gantt.html`](../assets/example-gantt.html) — 十二周排期：三阶段分区 + 月刻度 + 焦点条（浅色基准）
+- [`assets/example-gantt-dark.html`](../assets/example-gantt-dark.html) — 深色档
+- [`assets/example-gantt-full.html`](../assets/example-gantt-full.html) — full 页面级
