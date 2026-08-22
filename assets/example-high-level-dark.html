@@ -7,10 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -62,153 +62,153 @@
     <p class="eyebrow">数据平台 · 高层架构</p>
     <h1>K8s 数据栈全景</h1>
 
-    <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-high-level-title example-high-level-desc">
-      <title id="example-high-level-title">K8s 数据栈全景</title>
-      <desc id="example-high-level-desc">数据栈全景图：五个阶段（数据源、采集、存储、加工、可视化）横向排开；四个外部源汇入 NiFi 采集，写入 MinIO 对象存储（焦点枢纽）；Trino 对存储做联邦查询，Notebook 加工后与 Trino 查询结果一同交 Superset 出看板；DolphinScheduler 定时触发采集、加工与报表刷新；统一身份（Keycloak · LDAP · OIDC）横贯底部、覆盖全部组件。</desc>
+    <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-high-level-dark-title example-high-level-dark-desc">
+      <title id="example-high-level-dark-title">K8s 数据栈全景</title>
+      <desc id="example-high-level-dark-desc">数据栈全景图：五个阶段（数据源、采集、存储、加工、可视化）横向排开；四个外部源汇入 NiFi 采集，写入 MinIO 对象存储（焦点枢纽）；Trino 对存储做联邦查询，Notebook 加工后与 Trino 查询结果一同交 Superset 出看板；DolphinScheduler 定时触发采集、加工与报表刷新；统一身份（Keycloak · LDAP · OIDC）横贯底部、覆盖全部组件。</desc>
       <defs>
-        <marker id="arrow"        markerWidth="8" markerHeight="6" refX="7" refY="3"   orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#565e7e"/></marker>
-        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3"   orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a4dd9"/></marker>
-        <marker id="arrow-sm"     markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0, 6 2.5, 0 5" fill="#565e7e"/></marker>
+        <marker id="arrow"        markerWidth="8" markerHeight="6" refX="7" refY="3"   orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a2a9ce"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3"   orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#7d98ff"/></marker>
+        <marker id="arrow-sm"     markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0, 6 2.5, 0 5" fill="#a2a9ce"/></marker>
       </defs>
 
-      <rect width="100%" height="100%" fill="#ffffff"/>
+      <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 阶段 chevron 横幅（交替填充；标签即图例） -->
-      <polygon points="0,0 188,0 200,14 188,28 0,28"     fill="#29314f"/>
-      <polygon points="200,0 388,0 400,14 388,28 200,28 212,14" fill="#565e7e"/>
-      <polygon points="400,0 588,0 600,14 588,28 400,28 412,14" fill="#29314f"/>
-      <polygon points="600,0 788,0 800,14 788,28 600,28 612,14" fill="#565e7e"/>
-      <polygon points="800,0 1000,0 1000,28 800,28 812,14"     fill="#29314f"/>
-      <text x="100" y="18" fill="#ffffff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据源</text>
-      <text x="300" y="18" fill="#ffffff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">采集</text>
-      <text x="500" y="18" fill="#ffffff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储</text>
-      <text x="700" y="18" fill="#ffffff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">加工</text>
-      <text x="900" y="18" fill="#ffffff" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">可视化</text>
+      <polygon points="0,0 188,0 200,14 188,28 0,28"     fill="#e0e4ff"/>
+      <polygon points="200,0 388,0 400,14 388,28 200,28 212,14" fill="#a2a9ce"/>
+      <polygon points="400,0 588,0 600,14 588,28 400,28 412,14" fill="#e0e4ff"/>
+      <polygon points="600,0 788,0 800,14 788,28 600,28 612,14" fill="#a2a9ce"/>
+      <polygon points="800,0 1000,0 1000,28 800,28 812,14"     fill="#e0e4ff"/>
+      <text x="100" y="18" fill="#0a0d1b" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据源</text>
+      <text x="300" y="18" fill="#0a0d1b" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">采集</text>
+      <text x="500" y="18" fill="#0a0d1b" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储</text>
+      <text x="700" y="18" fill="#0a0d1b" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">加工</text>
+      <text x="900" y="18" fill="#0a0d1b" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">可视化</text>
 
       <!-- 源区（虚线 = 集群外）与集群边界（实线） -->
-      <rect x="4"   y="36" width="192" height="336" rx="6" fill="rgba(41,49,79,0.02)" stroke="rgba(41,49,79,0.20)" stroke-width="0.8" stroke-dasharray="4,3"/>
-      <rect x="204" y="36" width="796" height="336" rx="8" fill="rgba(41,49,79,0.02)" stroke="rgba(41,49,79,0.20)" stroke-width="1.2"/>
-      <text x="220" y="352" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Kubernetes 集群</text>
+      <rect x="4"   y="36" width="192" height="336" rx="6" fill="rgba(224,228,255,0.02)" stroke="rgba(224,228,255,0.20)" stroke-width="0.8" stroke-dasharray="4,3"/>
+      <rect x="204" y="36" width="796" height="336" rx="8" fill="rgba(224,228,255,0.02)" stroke="rgba(224,228,255,0.20)" stroke-width="1.2"/>
+      <text x="220" y="352" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Kubernetes 集群</text>
 
       <!-- 身份底栏（横贯全宽、覆盖全部组件；不发连线） -->
-      <rect x="4" y="384" width="996" height="40" rx="6" fill="rgba(41,49,79,0.05)" stroke="rgba(41,49,79,0.20)" stroke-width="0.8"/>
-      <text x="500" y="402" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">统一身份</text>
-      <text x="500" y="417" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">Keycloak · LDAP · OIDC</text>
+      <rect x="4" y="384" width="996" height="40" rx="6" fill="rgba(224,228,255,0.05)" stroke="rgba(224,228,255,0.20)" stroke-width="0.8"/>
+      <text x="500" y="402" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">统一身份</text>
+      <text x="500" y="417" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">Keycloak · LDAP · OIDC</text>
 
       <!-- 连接线（先于一切节点 rect；端点一律压盒缘） -->
       <!-- 四源扇入 NiFi：入边以 NiFi 中线对称 16px 等距错开，干线贴集群左边框 -->
-      <path d="M 184,84 H 196 Q 204,84 204,92 V 124 Q 204,132 224,132" fill="none" stroke="#565e7e" stroke-width="1" marker-end="url(#arrow)"/>
-      <path d="M 184,164 H 196 Q 204,164 204,156 Q 204,148 224,148" fill="none" stroke="#565e7e" stroke-width="1" marker-end="url(#arrow)"/>
-      <path d="M 184,244 H 196 Q 204,244 204,236 V 172 Q 204,164 224,164" fill="none" stroke="#565e7e" stroke-width="1" marker-end="url(#arrow)"/>
-      <path d="M 184,324 H 196 Q 204,324 204,316 V 188 Q 204,180 224,180" fill="none" stroke="#565e7e" stroke-width="1" marker-end="url(#arrow)"/>
+      <path d="M 184,84 H 196 Q 204,84 204,92 V 124 Q 204,132 224,132" fill="none" stroke="#a2a9ce" stroke-width="1" marker-end="url(#arrow)"/>
+      <path d="M 184,164 H 196 Q 204,164 204,156 Q 204,148 224,148" fill="none" stroke="#a2a9ce" stroke-width="1" marker-end="url(#arrow)"/>
+      <path d="M 184,244 H 196 Q 204,244 204,236 V 172 Q 204,164 224,164" fill="none" stroke="#a2a9ce" stroke-width="1" marker-end="url(#arrow)"/>
+      <path d="M 184,324 H 196 Q 204,324 204,316 V 188 Q 204,180 224,180" fill="none" stroke="#a2a9ce" stroke-width="1" marker-end="url(#arrow)"/>
 
       <!-- 主链：NiFi → MinIO → Notebook（primary）；Notebook → Superset（secondary） -->
-      <line x1="376" y1="156" x2="424" y2="156" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
-      <line x1="576" y1="156" x2="624" y2="156" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
-      <line x1="776" y1="156" x2="824" y2="156" stroke="#565e7e" stroke-width="1" marker-end="url(#arrow)"/>
+      <line x1="376" y1="156" x2="424" y2="156" stroke="#7d98ff" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+      <line x1="576" y1="156" x2="624" y2="156" stroke="#7d98ff" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+      <line x1="776" y1="156" x2="824" y2="156" stroke="#a2a9ce" stroke-width="1" marker-end="url(#arrow)"/>
 
       <!-- 查询对：Trino ⇄ MinIO（±4px 双竖线——实线请求 / 虚线回写） -->
-      <line x1="496" y1="228" x2="496" y2="196" stroke="#565e7e" stroke-width="1" marker-end="url(#arrow)"/>
-      <line x1="504" y1="196" x2="504" y2="228" stroke="rgba(41,49,79,0.30)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+      <line x1="496" y1="228" x2="496" y2="196" stroke="#a2a9ce" stroke-width="1" marker-end="url(#arrow)"/>
+      <line x1="504" y1="196" x2="504" y2="228" stroke="rgba(224,228,255,0.30)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
 
       <!-- Trino → Superset：行间走廊绕行，入 Superset 底边 -->
-      <path d="M 576,268 H 592 Q 600,268 600,260 V 220 Q 600,212 608,212 H 864 Q 872,212 872,204 V 196" fill="none" stroke="#565e7e" stroke-width="1" marker-end="url(#arrow)"/>
+      <path d="M 576,268 H 592 Q 600,268 600,260 V 220 Q 600,212 608,212 H 864 Q 872,212 872,204 V 196" fill="none" stroke="#a2a9ce" stroke-width="1" marker-end="url(#arrow)"/>
 
       <!-- 调度条下扎（trigger：虚线短竖线，逐节点一根、无弯） -->
-      <line x1="300" y1="92" x2="300" y2="116" stroke="#565e7e" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-sm)"/>
-      <line x1="700" y1="92" x2="700" y2="116" stroke="#565e7e" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-sm)"/>
-      <line x1="900" y1="92" x2="900" y2="116" stroke="#565e7e" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-sm)"/>
+      <line x1="300" y1="92" x2="300" y2="116" stroke="#a2a9ce" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-sm)"/>
+      <line x1="700" y1="92" x2="700" y2="116" stroke="#a2a9ce" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-sm)"/>
+      <line x1="900" y1="92" x2="900" y2="116" stroke="#a2a9ce" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-sm)"/>
 
       <!-- 外部源节点（虚线区内四周 ≥12px；EXT 角标） -->
       <g>
-        <rect x="16" y="52" width="168" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="24" y="58" width="32" height="12" rx="2" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="0.8"/>
-        <text x="40" y="67" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">EXT</text>
-        <text x="100" y="86" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">业务库</text>
-        <text x="100" y="104" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MySQL · 每日全量</text>
+        <rect x="16" y="52" width="168" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="24" y="58" width="32" height="12" rx="2" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="0.8"/>
+        <text x="40" y="67" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">EXT</text>
+        <text x="100" y="86" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">业务库</text>
+        <text x="100" y="104" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MySQL · 每日全量</text>
       </g>
       <g>
-        <rect x="16" y="132" width="168" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="24" y="138" width="32" height="12" rx="2" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="0.8"/>
-        <text x="40" y="147" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">EXT</text>
-        <text x="100" y="166" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">SFTP 落盘</text>
-        <text x="100" y="184" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">定时拉取</text>
+        <rect x="16" y="132" width="168" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="24" y="138" width="32" height="12" rx="2" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="0.8"/>
+        <text x="40" y="147" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">EXT</text>
+        <text x="100" y="166" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">SFTP 落盘</text>
+        <text x="100" y="184" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">定时拉取</text>
       </g>
       <g>
-        <rect x="16" y="212" width="168" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="24" y="218" width="32" height="12" rx="2" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="0.8"/>
-        <text x="40" y="227" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">EXT</text>
-        <text x="100" y="246" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">网页表单</text>
-        <text x="100" y="264" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">活动报名</text>
+        <rect x="16" y="212" width="168" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="24" y="218" width="32" height="12" rx="2" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="0.8"/>
+        <text x="40" y="227" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">EXT</text>
+        <text x="100" y="246" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">网页表单</text>
+        <text x="100" y="264" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">活动报名</text>
       </g>
       <g>
-        <rect x="16" y="292" width="168" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="24" y="298" width="32" height="12" rx="2" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="0.8"/>
-        <text x="40" y="307" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">EXT</text>
-        <text x="100" y="326" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">遗留系统</text>
-        <text x="100" y="344" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">DBF 导出</text>
+        <rect x="16" y="292" width="168" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="24" y="298" width="32" height="12" rx="2" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="0.8"/>
+        <text x="40" y="307" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">EXT</text>
+        <text x="100" y="326" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">遗留系统</text>
+        <text x="100" y="344" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">DBF 导出</text>
       </g>
 
       <!-- 调度条（集群顶部横贯；下扎触发线为虚线） -->
-      <rect x="216" y="48" width="772" height="44" rx="4" fill="rgba(41,49,79,0.05)" stroke="rgba(41,49,79,0.20)" stroke-width="0.8"/>
-      <text x="602" y="67" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">调度编排</text>
-      <text x="602" y="80" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">DolphinScheduler · 定时补数 · 失败告警</text>
+      <rect x="216" y="48" width="772" height="44" rx="4" fill="rgba(224,228,255,0.05)" stroke="rgba(224,228,255,0.20)" stroke-width="0.8"/>
+      <text x="602" y="67" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">调度编排</text>
+      <text x="602" y="80" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">DolphinScheduler · 定时补数 · 失败告警</text>
 
       <!-- 集群节点（cx 对齐 chevron 中心——横幅即图例） -->
       <g>
-        <rect x="224" y="116" width="152" height="80" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="232" y="122" width="36" height="12" rx="2" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="0.8"/>
-        <text x="250" y="131" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">COLL</text>
-        <text x="300" y="162" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">NiFi</text>
-        <text x="300" y="180" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">流式采集</text>
+        <rect x="224" y="116" width="152" height="80" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="232" y="122" width="36" height="12" rx="2" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="0.8"/>
+        <text x="250" y="131" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">COLL</text>
+        <text x="300" y="162" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">NiFi</text>
+        <text x="300" y="180" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">流式采集</text>
       </g>
       <g>
-        <rect x="424" y="116" width="152" height="80" rx="6" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.2"/>
-        <rect x="432" y="122" width="44" height="12" rx="2" fill="none" stroke="rgba(26,77,217,0.40)" stroke-width="0.8"/>
-        <text x="454" y="131" fill="#1a4dd9" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">STORE</text>
-        <text x="500" y="162" fill="#1a4dd9" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MinIO</text>
-        <text x="500" y="180" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">对象存储</text>
+        <rect x="424" y="116" width="152" height="80" rx="6" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1.2"/>
+        <rect x="432" y="122" width="44" height="12" rx="2" fill="none" stroke="rgba(125,152,255,0.40)" stroke-width="0.8"/>
+        <text x="454" y="131" fill="#7d98ff" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">STORE</text>
+        <text x="500" y="162" fill="#7d98ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MinIO</text>
+        <text x="500" y="180" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">对象存储</text>
       </g>
       <g>
-        <rect x="424" y="228" width="152" height="80" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="432" y="234" width="32" height="12" rx="2" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="0.8"/>
-        <text x="448" y="243" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">VIRT</text>
-        <text x="500" y="274" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino</text>
-        <text x="500" y="292" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">联邦查询</text>
+        <rect x="424" y="228" width="152" height="80" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="432" y="234" width="32" height="12" rx="2" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="0.8"/>
+        <text x="448" y="243" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">VIRT</text>
+        <text x="500" y="274" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino</text>
+        <text x="500" y="292" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">联邦查询</text>
       </g>
       <g>
-        <rect x="624" y="116" width="152" height="80" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="632" y="122" width="36" height="12" rx="2" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="0.8"/>
-        <text x="650" y="131" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">ANLZ</text>
-        <text x="700" y="162" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Notebook</text>
-        <text x="700" y="180" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">JupyterHub</text>
+        <rect x="624" y="116" width="152" height="80" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="632" y="122" width="36" height="12" rx="2" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="0.8"/>
+        <text x="650" y="131" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">ANLZ</text>
+        <text x="700" y="162" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Notebook</text>
+        <text x="700" y="180" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">JupyterHub</text>
       </g>
       <g>
-        <rect x="824" y="116" width="152" height="80" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="832" y="122" width="36" height="12" rx="2" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="0.8"/>
-        <text x="850" y="131" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">DASH</text>
-        <text x="900" y="162" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Superset</text>
-        <text x="900" y="180" fill="#565e7e" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">BI 看板</text>
+        <rect x="824" y="116" width="152" height="80" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="832" y="122" width="36" height="12" rx="2" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="0.8"/>
+        <text x="850" y="131" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">DASH</text>
+        <text x="900" y="162" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Superset</text>
+        <text x="900" y="180" fill="#a2a9ce" font-size="12" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">BI 看板</text>
       </g>
 
       <!-- 图例横条 -->
-      <line x1="0" y1="480" x2="1000" y2="480" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <text x="0" y="498" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+      <line x1="0" y1="480" x2="1000" y2="480" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <text x="0" y="498" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
 
-      <rect x="72" y="488" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.2"/>
-      <text x="96" y="498" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点枢纽</text>
+      <rect x="72" y="488" width="16" height="12" rx="2" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1.2"/>
+      <text x="96" y="498" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点枢纽</text>
 
-      <rect x="184" y="488" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="208" y="498" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">集群组件</text>
+      <rect x="184" y="488" width="16" height="12" rx="2" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="208" y="498" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">集群组件</text>
 
-      <rect x="296" y="488" width="16" height="12" rx="2" fill="rgba(41,49,79,0.02)" stroke="rgba(41,49,79,0.20)" stroke-width="0.8" stroke-dasharray="4,3"/>
-      <text x="320" y="498" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">外部源（虚线区）</text>
+      <rect x="296" y="488" width="16" height="12" rx="2" fill="rgba(224,228,255,0.02)" stroke="rgba(224,228,255,0.20)" stroke-width="0.8" stroke-dasharray="4,3"/>
+      <text x="320" y="498" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">外部源（虚线区）</text>
 
-      <line x1="448" y1="494" x2="476" y2="494" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
-      <text x="484" y="498" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">主数据流</text>
+      <line x1="448" y1="494" x2="476" y2="494" stroke="#7d98ff" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+      <text x="484" y="498" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">主数据流</text>
 
-      <line x1="572" y1="494" x2="600" y2="494" stroke="#565e7e" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-sm)"/>
-      <text x="608" y="498" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">调度触发</text>
+      <line x1="572" y1="494" x2="600" y2="494" stroke="#a2a9ce" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-sm)"/>
+      <text x="608" y="498" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">调度触发</text>
     </svg>
   </div>
 </body>

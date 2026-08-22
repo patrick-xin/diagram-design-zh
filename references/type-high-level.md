@@ -77,19 +77,20 @@ strip_margin       = 8   if has_vertical else 0   # 主体与右条的间隙
 effective_w        = 1000 - right_strip_w - strip_margin     # 1000 或 964
 
 n_cross            = kind == "cross-cutting" 的组件数
-strip_y_bot        = max(428, 388 + n_cross * 44 - 4)
-viewBox_h          = max(540, strip_y_bot + 112)             # 112 留给图例
+strip_y_bot        = max(424, 384 + n_cross * 44 - 4)   # 最下横切条底
+legend_line_y      = strip_y_bot + 56                    # 图例线距最下内容元素 56
+viewBox_h          = ceil_40(legend_line_y + 36)          # 40 步进
 viewBox            = "0 0 1000 {viewBox_h}"
 ```
 
 一切横向元素（chevron 横幅、集群、调度条、身份 / 横切条）止于 `effective_w`。右条在 `x = 1000 - right_strip_w`（=972）。中间 8px 是呼吸带——**不放内容**。
 
-横切条多于一条时 `viewBox_h` 变高：1 条 → 540、2 条 → 600（规则取 20 的倍数圆整）。
+横切条多于一条时 `viewBox_h` 变高：1 条 → 520、2 条 → 560（40 步进）。
 
 ### 2.2 横向 chevron 横幅
 
 ```
-y_banner           = 4
+y_banner           = 0                                   # 顶贴
 h_banner           = 28
 horizontals        = 非竖排、非保留名的 chevron
 sum_columns        = Σ c.columns
@@ -102,11 +103,11 @@ chevron_cx(C)      = (x_boundaries[i] + x_boundaries[i+1]) / 2
 
 **多边形形状：**
 
-- 首（最左）：`(x0,4) (x1-12,4) (x1,18) (x1-12,32) (x0,32)`
-- 中间：`(x0,4) (x1-12,4) (x1,18) (x1-12,32) (x0,32) (x0+12,18)`
-- 末（最右）：`(x0,4) (effective_w,4) (effective_w,32) (x0,32) (x0+12,18)`
+- 首（最左）：`(x0,0) (x1-12,0) (x1,14) (x1-12,28) (x0,28)`
+- 中间：`(x0,0) (x1-12,0) (x1,14) (x1-12,28) (x0,28) (x0+12,14)`
+- 末（最右）：`(x0,0) (effective_w,0) (effective_w,28) (x0,28) (x0+12,14)`
 
-填充交替 `ink` / `muted`（浅色档）或 `paper-dark@0.18` / `paper-dark@0.12`（深色档，纸色基梯子）。标签：纸色——纯拉丁走 eyebrow 规格（mono 7–8px · 0.18em + uppercase）；**中文 sans 12px**（竖排条上随条旋转 −90°）。`text-anchor="middle"`、居中 `chevron_cx, 21`。
+填充交替 `ink` / `muted`（浅色档）；深色档**实色反转**：`#e0e4ff` / `#a2a9ce` 交替亮块、标签反转深字 `#0a0d1b`（同 dp-security-matrix 横幅拍板）。浅色标签纸色——纯拉丁走 eyebrow 规格（mono 7–8px · 0.18em + uppercase）；**中文 sans 12px**（竖排条上随条旋转 −90°）。`text-anchor="middle"`、居中 `chevron_cx, 18`。
 
 **颜色覆盖**（逐 chevron，横竖皆可）：可选 `color: "#hex"` 替换该 chevron 的交替填充。用来给与自定义色组件配对的阶段做旗（身份条用 `sem-security` 时「安全」chevron 同色）。规则：
 
@@ -118,23 +119,23 @@ chevron_cx(C)      = (x_boundaries[i] + x_boundaries[i+1]) / 2
 ### 2.3 源区（虚线，外部）
 
 ```
-sources_x / sources_y = 4 / 40
+sources_x / sources_y = 4 / 36
 sources_w             = x_boundaries[1] - 8        # 首 chevron 宽，两侧各让 4px
 sources_h             = 336
 ```
 
-描边 `ink@0.20`、宽 0.8、`stroke-dasharray=6,3`、`rx=6`；区填充 `ink@0.02`。
+描边 `ink@0.20`、宽 0.8、`stroke-dasharray=4,3`、`rx=6`；区填充 `ink@0.02`。
 
 ### 2.4 集群边界（实线）
 
 ```
 cluster_x            = x_boundaries[1] + 4         # 源区右缘 + 4px 泳道
-cluster_y            = 40
+cluster_y            = 36
 cluster_w            = effective_w - cluster_x
 cluster_h            = 336
 ```
 
-描边 `ink@0.18`、宽 1.2、`rx=8`；填充 `ink@0.02`。集群标签（如「Kubernetes 集群」）在 `(cluster_x + 16, 356)`，中文 sans 12px `muted`。
+描边 `ink@0.20`、宽 1.2、`rx=8`；填充 `ink@0.02`。集群标签（如「Kubernetes 集群」）在 `(cluster_x + 16, cluster_y + 316)`，中文 sans 12px `muted`。
 
 ### 2.5 横切条（身份、可观测……）
 
@@ -142,7 +143,7 @@ cluster_h            = 336
 
 ```
 cross_x        = 4
-cross_y(k)     = 388 + k * 44                  # 388, 432, 476, …
+cross_y(k)     = 384 + k * 44                  # 384, 428, 472, …
 cross_w        = effective_w - 4               # 横贯主体宽、止于右条边距
 cross_h        = 40
 ```
@@ -154,12 +155,12 @@ cross_h        = 40
 ### 2.6 调度条组件（集群内）
 
 ```
-bar_x / bar_y   = cluster_x + 12 / 52
+bar_x / bar_y   = cluster_x + 12 / 48
 bar_w           = cluster_w - 24
 bar_h           = 44
 ```
 
-描边 `ink@0.18`、宽 0.8、`rx=4`；填充 `ink@0.05`。名字居中 `(bar_x + bar_w/2, 71)`、副标 `(bar_x + bar_w/2, 84)`。
+描边 `ink@0.20`、宽 0.8、`rx=4`；填充 `ink@0.05`。名字居中 `(bar_x + bar_w/2, 67)`、副标 `(bar_x + bar_w/2, 80)`。
 
 ### 2.7 组件节点（集群内）
 
@@ -220,13 +221,13 @@ heights[-1]    += strip_h_total - sum(heights)       # 末条吸收余数
 ### 2.10 图例
 
 ```
-legend_line_y  = 内容底 + 20        # 内容底 = 376（无横切条）或 strip_y_bot
-line           = x4 → effective_w    # 与横幅 / 分区 / 底栏共享左右缘
-LEGEND 标签    = (4, legend_line_y + 16)   mono 9px · 0.18em
-条目行         = legend_line_y + 28 起；条目自 x4 起、组间 40px
+legend_line_y  = strip_y_bot + 56    # 距最下内容元素 56
+line           = x0 → effective_w    # 与横幅 / 分区 / 底栏共享左右缘
+「图例」标签    = (0, legend_line_y + 18)   mono 10px · 0.1em，与图例项同基线
+条目           = 与标签同基线；色块 16×12（y = 基线−10）、线样长 28（y = 基线−4）
 ```
 
-图例横线与条目左缘**必须**对齐内容左右缘（4 与 effective_w）——内缩的图例线会让图例看起来浮在半空。
+按 style-guide「图例条（底部横条）」节执行（bar 规格）：标签 → 首元素 72px、块 → 文字 8px；样块填充与描边与图内实物一致。图例横线与条目左缘**必须**对齐内容左右缘（0 与 effective_w）——内缩的图例线会让图例看起来浮在半空。页面间距：标题 → 图表 3rem（本图 ink 顶贴 y=0，无画布内顶留白档）。
 
 ---
 
@@ -379,17 +380,16 @@ entry_y(k) = target.cy - ((N - 1) / 2 - k) * 16     # 16px 等距、以中线对
 
 | Token | 浅色 | 深色 |
 |---|---|---|
-| 纸面 | `paper` | 墨色深底（style-guide 深色列） |
+| 纸面 | `paper` | `#0a0d1b`（style-guide 深色列） |
 | 墨色 / muted | `ink` / `muted` | 深色列反转值 |
-| chevron 深填充 | `ink` | `paper-dark@0.18` |
-| chevron 浅填充 | `muted` | `paper-dark@0.12` |
-| chevron 标签 | 纸色 | 纸色（不变） |
-| 虚线框 | `ink@0.20` | `paper-dark@0.20` |
-| 集群框 | `ink@0.18` | `paper-dark@0.18` |
-| 节点填充 | 白 | `paper-dark@0.05` |
-| 节点描边 | `ink@0.40` | `paper-dark@0.20` |
-| 焦点填充 / 描边 | `accent@0.08` / `accent` | `accent-dark@0.12` / `accent-dark` |
-| primary 连线 | `accent` | `accent-dark` |
+| chevron 深填充 | `ink` | `#e0e4ff` 实色亮块 |
+| chevron 浅填充 | `muted` | `#a2a9ce` 实色亮块 |
+| chevron 标签 | 纸色 | **反转深字 `#0a0d1b`**（实色反转、逐色翻：ink 位 15.4:1、muted 位 8.38:1 双门过——ink 位同 dp-security-matrix 横幅拍板，muted 位 2026-08-22 拍板；淡染块对深纸过不了图形 3:1 门，不用） |
+| 一切 `ink@X` 描边 / 淡填充（源区、集群、横切条、角标框、图例线） | `ink@X` | 深色基 `@X`（对称换基、α 不动） |
+| 节点填充 | 白 | `#0a0d1b` 纸面同色（描边成型） |
+| 节点描边 | `ink@0.40` | 深色基 `@0.40` |
+| 焦点填充 / 描边 | `accent@0.08` / `accent` | 深色基 `@0.10`（提档）/ 深色 accent `#7d98ff` |
+| primary 连线 / 箭头 | `accent` | `#7d98ff` |
 
 ---
 
@@ -407,11 +407,11 @@ entry_y(k) = target.cy - ((N - 1) / 2 - k) * 16     # 16px 等距、以中线对
 8. 没有节点出边 > 3；有也是声明的 `focal` / 枢纽。
 9. 所有 `<path>` / `<line>` 先于任何节点 `<rect>`（z 序）。
 10. 每根竖向 chevron 与恰好一个 `bar` / `cross-cutting` 组件配对（§5）；横贯组件可无竖条单独存在（`len(verticals) ≤ len(bars) + len(crosscuts)`）。
-11. `viewBox_h = max(540, strip_y_bot + 112)`——多横切条时加高画布保图例。
+11. `legend_line_y = strip_y_bot + 56`、`viewBox_h = ceil_40(legend_line_y + 36)`——多横切条时加高画布保图例（1 条 → 520）。
 12. 自定义色（§3.4）只上容器 + 名字；连线拓扑驱动。焦点之外自定义色组件 ≤ 2。
 13. 过 SKILL.md §9（4px 网格；accent ≤2；mono 只给技术内容；发丝线；无阴影）。
 14. 连线起止点全部压在盒缘上；每个 `kind: node` 至少一条入边或出边——**无孤岛节点**（终态消费端可以只有入边）。
-15. 图例横线 x4 → effective_w、条目自 x4 起排（§2.10）——与整体内容左右缘齐平。
+15. 图例横线 x0 → effective_w、「图例」与条目自 x0 起排（§2.10）——与整体内容左右缘齐平。
 
 ---
 
@@ -437,3 +437,5 @@ entry_y(k) = target.cy - ((N - 1) / 2 - k) * 16     # 16px 等距、以中线对
 ## 9. 示例
 
 - [`assets/example-high-level.html`](../assets/example-high-level.html) — 纯横向、五阶段、调度条 + 统一身份底栏、浅色档
+- [`assets/example-high-level-dark.html`](../assets/example-high-level-dark.html) — 深色档（§6：换基 α 不动 + chevron 实色反转）
+- [`assets/example-high-level-full.html`](../assets/example-high-level-full.html) — full 页面级（subtitle / 三卡 / footer）
