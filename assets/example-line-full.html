@@ -23,15 +23,15 @@
     body { font-family: var(--font-sans); background: var(--color-paper); min-height: 100vh; padding: 3rem 2rem; color: var(--color-ink); }
     .container { max-width: 1200px; margin: 0 auto; }
 
-    .header { margin-bottom: 2.5rem; }
+    .header { margin-bottom: 4rem; }
     .header-eyebrow { font-family: var(--font-sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.3em; color: var(--color-muted); margin-bottom: 0.75rem; }
     h1 { font-family: var(--font-serif); font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 0.75rem; color: var(--color-ink); }
     .subtitle { font-size: 0.9rem; line-height: 1.7; color: var(--color-muted); max-width: 36em; }
 
-    .diagram-container { background: var(--color-paper-2); border-radius: 8px; border: 1px solid var(--color-rule); padding: 1.5rem; overflow-x: auto; }
-    svg { width: 100%; min-width: 900px; display: block; }
+    .diagram-container { overflow-x: auto; }
+    svg { width: 100%; min-width: 900px; display: block; overflow: visible; }
 
-    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 1.5rem; }
+    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 4rem; }
     @media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
     .card { background: var(--color-paper); border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
     .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.875rem; padding-bottom: 0.875rem; border-bottom: 1px solid rgba(41,49,79,0.08); }
@@ -62,91 +62,91 @@
     </div>
 
     <div class="diagram-container">
-      <svg viewBox="0 0 1000 528" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-line-full-title example-line-full-desc">
+      <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-line-full-title example-line-full-desc">
         <title id="example-line-full-title">近 12 周活跃用户趋势</title>
         <desc id="example-line-full-desc">折线图：十二周内三条用户曲线——付费版（焦点）从 1.2 万稳步涨到 4.4 万，总活跃从 7.2 万涨到 10.6 万，试用版在 4 万到 5 万间徘徊；付费版是增长主线。</desc>
 
         <rect width="100%" height="100%" fill="#ffffff"/>
 
         <!-- y 轴网格线（0–12 万，每 2 万一条） -->
-        <line x1="80" y1="60"  x2="960" y2="60"  stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-        <line x1="80" y1="120" x2="960" y2="120" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-        <line x1="80" y1="180" x2="960" y2="180" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-        <line x1="80" y1="240" x2="960" y2="240" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-        <line x1="80" y1="300" x2="960" y2="300" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-        <line x1="80" y1="360" x2="960" y2="360" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+        <line x1="68" y1="20"  x2="948" y2="20"  stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+        <line x1="68" y1="80" x2="948" y2="80" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+        <line x1="68" y1="140" x2="948" y2="140" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+        <line x1="68" y1="200" x2="948" y2="200" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+        <line x1="68" y1="260" x2="948" y2="260" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+        <line x1="68" y1="320" x2="948" y2="320" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
 
         <!-- 坐标轴 -->
-        <line x1="80" y1="40" x2="80" y2="420" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-        <line x1="80" y1="420" x2="960" y2="420" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+        <line x1="68" y1="0" x2="68" y2="380" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+        <line x1="68" y1="380" x2="948" y2="380" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
 
         <!-- y 轴刻度 -->
-        <text x="72" y="424" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">0</text>
-        <text x="72" y="364" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">2</text>
-        <text x="72" y="304" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">4</text>
-        <text x="72" y="244" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">6</text>
-        <text x="72" y="184" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">8</text>
-        <text x="72" y="124" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">10</text>
-        <text x="72" y="64"  fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">12</text>
+        <text x="36" y="384" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">0</text>
+        <text x="36" y="324" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">2</text>
+        <text x="36" y="264" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">4</text>
+        <text x="36" y="204" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">6</text>
+        <text x="36" y="144" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">8</text>
+        <text x="36" y="84" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">10</text>
+        <text x="36" y="24"  fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">12</text>
 
         <!-- y 轴竖排标题：单位并入标题，刻度保持裸数字 -->
-        <text transform="rotate(-90 24 230)" x="24" y="230" fill="#565e7e" font-size="12" letter-spacing="0.3em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">每周活跃用户（万）</text>
+        <text transform="rotate(-90 12 190)" x="12" y="190" fill="#565e7e" font-size="12" letter-spacing="0.3em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">每周活跃用户（万）</text>
 
         <!-- 非焦点系列：只画线，不画点 -->
-        <polyline points="80,204 160,195 240,186 320,180 400,168 480,162 560,150 640,144 720,135 800,126 880,114 960,102"
+        <polyline points="80,164 160,155 240,146 320,140 400,128 480,122 560,110 640,104 720,95 800,86 880,74 960,62"
                   fill="none" stroke="#3ba272" stroke-width="1.2" stroke-linejoin="round"/>
-        <polyline points="80,300 160,303 240,297 320,294 400,300 480,288 560,285 640,291 720,282 800,276 880,279 960,270"
+        <polyline points="80,260 160,263 240,257 320,254 400,260 480,248 560,245 640,251 720,242 800,236 880,239 960,230"
                   fill="none" stroke="#ed7d31" stroke-width="1.2" stroke-linejoin="round"/>
 
         <!-- 焦点系列面积：闭回基线的极淡强调色，画在焦点线之下 -->
-        <polygon points="80,384 160,378 240,375 320,366 400,360 480,348 560,342 640,333 720,324 800,312 880,300 960,288 960,420 80,420"
+        <polygon points="80,344 160,338 240,335 320,326 400,320 480,308 560,302 640,293 720,284 800,272 880,260 960,248 960,380 80,380"
                  fill="rgba(26,77,217,0.05)"/>
 
         <!-- 焦点系列：1.8px + 顶点圆点 -->
-        <polyline points="80,384 160,378 240,375 320,366 400,360 480,348 560,342 640,333 720,324 800,312 880,300 960,288"
+        <polyline points="80,344 160,338 240,335 320,326 400,320 480,308 560,302 640,293 720,284 800,272 880,260 960,248"
                   fill="none" stroke="#1a4dd9" stroke-width="1.8" stroke-linejoin="round"/>
-        <circle cx="80"  cy="384" r="4" fill="#1a4dd9"/>
-        <circle cx="160" cy="378" r="4" fill="#1a4dd9"/>
-        <circle cx="240" cy="375" r="4" fill="#1a4dd9"/>
-        <circle cx="320" cy="366" r="4" fill="#1a4dd9"/>
-        <circle cx="400" cy="360" r="4" fill="#1a4dd9"/>
-        <circle cx="480" cy="348" r="4" fill="#1a4dd9"/>
-        <circle cx="560" cy="342" r="4" fill="#1a4dd9"/>
-        <circle cx="640" cy="333" r="4" fill="#1a4dd9"/>
-        <circle cx="720" cy="324" r="4" fill="#1a4dd9"/>
-        <circle cx="800" cy="312" r="4" fill="#1a4dd9"/>
-        <circle cx="880" cy="300" r="4" fill="#1a4dd9"/>
-        <circle cx="960" cy="288" r="4" fill="#1a4dd9"/>
+        <circle cx="80"  cy="344" r="4" fill="#1a4dd9"/>
+        <circle cx="160" cy="338" r="4" fill="#1a4dd9"/>
+        <circle cx="240" cy="335" r="4" fill="#1a4dd9"/>
+        <circle cx="320" cy="326" r="4" fill="#1a4dd9"/>
+        <circle cx="400" cy="320" r="4" fill="#1a4dd9"/>
+        <circle cx="480" cy="308" r="4" fill="#1a4dd9"/>
+        <circle cx="560" cy="302" r="4" fill="#1a4dd9"/>
+        <circle cx="640" cy="293" r="4" fill="#1a4dd9"/>
+        <circle cx="720" cy="284" r="4" fill="#1a4dd9"/>
+        <circle cx="800" cy="272" r="4" fill="#1a4dd9"/>
+        <circle cx="880" cy="260" r="4" fill="#1a4dd9"/>
+        <circle cx="960" cy="248" r="4" fill="#1a4dd9"/>
 
         <!-- x 轴周标签 -->
-        <text x="80"  y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W01</text>
-        <text x="160" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W02</text>
-        <text x="240" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W03</text>
-        <text x="320" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W04</text>
-        <text x="400" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W05</text>
-        <text x="480" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W06</text>
-        <text x="560" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W07</text>
-        <text x="640" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W08</text>
-        <text x="720" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W09</text>
-        <text x="800" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W10</text>
-        <text x="880" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W11</text>
-        <text x="960" y="444" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W12</text>
+        <text x="68"  y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W01</text>
+        <text x="148" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W02</text>
+        <text x="228" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W03</text>
+        <text x="308" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W04</text>
+        <text x="388" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W05</text>
+        <text x="468" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W06</text>
+        <text x="548" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W07</text>
+        <text x="628" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W08</text>
+        <text x="708" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W09</text>
+        <text x="788" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W10</text>
+        <text x="868" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W11</text>
+        <text x="948" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">W12</text>
 
         <!-- 图例横条：样本跟随系列画法，焦点线中央带圆点 -->
-        <line x1="40" y1="480" x2="960" y2="480" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-        <text x="40" y="496" fill="#565e7e" font-size="9" letter-spacing="0.18em" font-family="'Sarasa Mono SC', ui-monospace, monospace">LEGEND</text>
+        <line x1="0" y1="440" x2="960" y2="440" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
+        <text x="0" y="458" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
 
-        <line x1="112" y1="492" x2="140" y2="492" stroke="#1a4dd9" stroke-width="2"/>
-        <circle cx="126" cy="492" r="4" fill="#1a4dd9"/>
-        <text x="148" y="496" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">付费版（焦点）</text>
+        <line x1="72" y1="454" x2="100" y2="454" stroke="#1a4dd9" stroke-width="2"/>
+        <circle cx="86" cy="454" r="4" fill="#1a4dd9"/>
+        <text x="108" y="458" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">付费版（焦点）</text>
 
-        <line x1="272" y1="492" x2="300" y2="492" stroke="#3ba272" stroke-width="2"/>
-        <text x="308" y="496" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">总活跃</text>
+        <line x1="232" y1="454" x2="260" y2="454" stroke="#3ba272" stroke-width="2"/>
+        <text x="268" y="458" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">总活跃</text>
 
-        <line x1="384" y1="492" x2="412" y2="492" stroke="#ed7d31" stroke-width="2"/>
-        <text x="420" y="496" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">试用版</text>
+        <line x1="344" y1="454" x2="372" y2="454" stroke="#ed7d31" stroke-width="2"/>
+        <text x="380" y="458" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">试用版</text>
 
-        <text x="960" y="496" text-anchor="end" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">顶点圆点只属于焦点系列</text>
+        <text x="960" y="458" text-anchor="end" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">顶点圆点只属于焦点系列</text>
       </svg>
     </div>
 
