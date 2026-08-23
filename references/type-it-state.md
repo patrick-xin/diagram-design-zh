@@ -13,7 +13,7 @@
 ```yaml
 title:    "现行 IT 版图"
 subtitle: "数据平台建成之前的管道"
-eyebrow:  "制造集团 · 平台之前"
+eyebrow:  "IT 版图 · 现状图"
 
 orientation: horizontal      # horizontal（默认，分区从左到右）| vertical（分区从上到下）
 
@@ -31,7 +31,7 @@ zones:                       # 2..4 个分区，沿主轴排序
     components:
       - { id: shared-drive, name: "共享盘",     sub: "无版本控制 · Windows 文件共享", icon: file, kind: focal }
       - { id: analyst-pc,   name: "分析师工作站", sub: "SPSS · Excel · Python",        icon: desktop }
-      - { id: sqlserver,    name: "SQL Server", sub: "本地部署 · 核心 RDBMS",          icon: sqlserver, color: "#7a8c47" }  # 自定义橄榄绿
+      - { id: sqlserver,    name: "SQL Server", sub: "本地部署 · 核心 RDBMS",          icon: sqlserver, color: "#7a8c47" }  # sem-governance（幸存系统，跨深浅恒定）
   - name: "分发"
     components:
       - { id: legacy-bi, name: "老报表门户",   sub: "手工瓶颈",       icon: cloud,    kind: focal }
@@ -39,14 +39,14 @@ zones:                       # 2..4 个分区，沿主轴排序
       - { id: group-hq,  name: "集团兄弟单位", sub: "约 6 家",         icon: users,    kind: external }
 
 connectors:                   # 有序列表；每条连接两个组件 id
-  - { from: pos,           to: shared-drive, label: "CSV",   icon: csv,  style: link }
+  - { from: pos,           to: shared-drive, label: "表格",  icon: csv,  style: link }
   - { from: dealer-portal, to: shared-drive, label: "邮件",  icon: file, style: link }
-  - { from: supplier-xlsx, to: shared-drive, label: "EXCEL", icon: excel, style: link, dashed: true }
+  - { from: supplier-xlsx, to: shared-drive, label: "报表",  icon: excel, style: link, dashed: true }
   - { from: shared-drive,  to: analyst-pc,   label: "拷贝",              style: accent, dashed: true }
   - { from: analyst-pc,    to: sqlserver,    label: "入库",              style: neutral }
-  - { from: analyst-pc,    to: legacy-bi,    label: "EXCEL", icon: excel, style: accent }
+  - { from: analyst-pc,    to: legacy-bi,    label: "报表",  icon: excel, style: accent }
   - { from: legacy-bi,     to: website,      label: "网页",              style: neutral }
-  - { from: website,       to: group-hq,     label: "CSV 下载", icon: csv, style: link, dashed: true }
+  - { from: website,       to: group-hq,     label: "下载",    icon: csv, style: link, dashed: true }
 
 footer:                       # 0..3 条可选的全宽横条（横切关切）
   - { name: "身份管理", sub: "Active Directory · LDAP · SSO", icon: active-directory }
@@ -64,14 +64,14 @@ dark: false
 **字段语义：**
 
 - `orientation`——`horizontal`（分区分左→右排，组件在分区内竖排）或 `vertical`（分区分上→下排，组件横排）。
-- `zones[i].name`——短标签（中文 ≤ 6 字）。渲染在分区框左上角的边框断口上，paper 色遮罩垫底，中文角标规格（sans 12px · 500 · 0.3em）。
+- `zones[i].name`——短标签（中文 ≤ 6 字）。渲染在分区框左上角的边框断口上，paper 色遮罩垫底，分区标签规格（sans 10px · 500 · 0.3em · muted）。
 - `components[i][k].id`——全局唯一 slug，供 `connectors[].from/to` 引用。
 - `components[i][k].name`——`node-name` 角色（sans 14px 600）。
 - `components[i][k].sub`——中文子标 sans 12px · muted（组件高升到 72 时可两行）。
 - `components[i][k].icon`——primitive-icons.md 里的任意 id，可选；缺省则无图标、名字左移。目录缺 `mail` 图标时邮件交接用 `icon: file` 兜底。
 - `components[i][k].kind`——`standard | focal | external`。`focal` 触发 accent 色板（§5）；`external` 换 4,3 虚线描边 + muted 墨，标记「不在我们范围内」。
 - `components[i][k].color`——可选逐组件颜色覆盖（§4）。`kind: focal` 上被忽略（accent 赢）。
-- `connectors[k].label`——短文本（中文 ≤ 4 字）。中文箭头标签规格（sans 12px · 500 · 0.12em）。
+- `connectors[k].label`——短文本（中文 ≤ 4 字），**一律中文**（协议 / 格式名也译：CSV→表格、EXCEL→报表、下载类→下载）。规格 sans 10px · 500 · 0.12em · muted（accent 边随线色），白底遮罩骑线居中。
 - `connectors[k].icon`——可选，标签文字左侧的内联图标，同组件图标目录。
 - `connectors[k].style`——`neutral | link | accent`，驱动描边色 + 箭头。
 - `connectors[k].dashed`——`true | false`。
@@ -97,11 +97,12 @@ n_zones         = len(zones)
 zone_w(i)       = base + n_components_i * comp_slack             # base ≈ 200, slack ≈ 24
 viewBox_w       = left_pad + Σ zone_w(i) + (n_zones-1) * zone_gap + right_pad
 
-# 分区内组件摆放
+# 分区内组件摆放——行顶跨区对齐（三列同一行同 y），行间净空恒 56
 comp_pad_x      = 20
 comp_h          = 56                     # focal 68（两行副标），双行齐备 72
-comp_gap        = 32
-comp_y(i, k)    = zone_y + 28 + k * (comp_h + comp_gap)
+row_gap         = 56
+row_top(0)      = zone_y + 28            # 首行让出分区名断口 20
+row_top(k+1)    = row_top(k) + max_comp_h(k) + row_gap   # 示例 36 / 160 / 272
 
 # 组件中线（连线路由用）
 comp_x(i)       = zone_x(i) + comp_pad_x
@@ -116,9 +117,10 @@ footer_top      = zone_y + zone_h + 24
 footer_y(k)     = footer_top + k * (footer_bar_h + footer_gap)
 
 # 画布总高
-legend_block_h  = 40
 content_bottom  = N_footer > 0 ? footer_bottom : zone_y + zone_h
-viewBox_h       = content_bottom + legend_block_h + 24
+legend_line_y   = content_bottom + 56    # 图例线距最下内容元素 56
+legend_baseline = legend_line_y + 18     # 「图例」与项同基线
+viewBox_h       = ceil_40(legend_line_y + 36)
 ```
 
 ### 2.1 背景与分区框
@@ -300,17 +302,12 @@ corridor_x = dst_cx                                  # 跨分区路由的走廊 
 
 | 角色 | 浅色 | 深色 |
 |---|---|---|
-| paper / ink | `paper` / `ink` | `ink` / `paper` |
-| muted / accent / link | 同名 token | 同名 token（深色列） |
-| 分区底 | `ink @ 0.02` | `paper @ 0.04` |
-| 分区框 | `ink @ 0.10` | `paper @ 0.14` |
-| standard 组件填充 | `paper` | `paper @ 0.04` |
-| standard 组件描边 | `ink @ 0.40` | `paper @ 0.32` |
-| focal 填充 / 描边 | `accent @ 0.08` / `accent` | `accent @ 0.12` / `accent` |
-| external 描边 | `muted`（虚线） | `muted`（虚线） |
-| 底条填充 / 描边 | `ink @ 0.03` / `ink @ 0.18` | `paper @ 0.05` / `paper @ 0.20` |
-| 标签遮罩 | `paper` | 墨色 |
-| 自定义色组件 | `C` | `C_light`（≈ +15%） |
+| paper / ink / muted / accent | token 值 | 深色列反转值（对称换基） |
+| 一切 `ink@X`（分区底 0.02 / 分区框 0.10 / 组件描边 0.40 / 图例线） | `ink @ X` | 深色基 `@X`（**α 不动**） |
+| focal 填充 / 描边 | `accent @ 0.08` / `accent` | 深色基 `@0.10`（提档）/ 深色 accent |
+| external 描边 | `muted`（虚线） | `muted` 深色档（虚线） |
+| 标签遮罩 / 白底节点填充 | `paper` | `#0a0d1b` 纸面同色（描边成型） |
+| 语义色组件（如 SQL Server 幸存系统） | `sem-*` 浅档 | 语义色深浅两档恒定（sem-governance `#7a8c47` 两档同值） |
 
 ---
 
@@ -318,16 +315,16 @@ corridor_x = dst_cx                                  # 跨分区路由的走廊 
 
 出 SVG 前逐项核：
 
-1. eyebrow + 标题 + 副标在规范 y 位（24 / 36 / 52）；正文边距 32px。
+1. eyebrow / 标题跟容器线（frame 统一缩进，不写 margin-left）；标题 → 图表 3rem。
 2. 2..4 个分区；每个分区的短标签在分区框左上、边框断口上、paper 遮罩垫底。
 3. 每个组件有 `id`、`name`；`sub` / `icon` / `kind` / `color` 可选。
 4. `kind: focal` 组件 ≤ 2；焦点样式自动上（accent 填充 8%、描边 1.4、副标行 1 accent）。
 5. 每条连线从源的右（或下）边出、从目标的左（或上）边进；每个弯正交圆角 Q 贝塞尔 r=8；箭头三角可见地贴在目标矩形边线上。
-6. 连线标签在连线**起点**（不在中段）、垂直于线偏移（水平段上方 5px 净空、竖直线右侧 6px 净空）——绝不压线。文字后垫 paper 色遮罩；图标（若设）在遮罩内文字左侧。
+6. 连线标签一律中文，白底遮罩**骑线居中**（长竖线放中段，短水平线放起点侧）；规格见 §字段语义 `connectors[k].label`；图标（若设）在遮罩内文字左侧。
 7. 自定义色组件 ≤ 3；焦点上没有。
 8. 底条 ≤ 3；每条跨 `viewBox_w − 2×left_pad`；任何底条不发连线。
-9. 底部图例：发丝分隔线 + 实际用到的每类样式一个样本。
-10. `arrow-label` 角色给连线标签、`eyebrow` 给页面角标与分区名、`title` 给页面标题、`node-name` 给副标与组件名、中文子标给技术副标。
+9. 底部图例按 bar 规格：「图例」mono 10px · 0.1em 与项同基线（基线 = 分隔线 +18）、块 16×12、线样长 28；分隔线距最下内容元素 56、右端对齐内容右缘。
+10. 连线标签与分区名按 §字段语义规格；组件名 `node-name`（sans 14px · 600）；技术副标按语言走中文 12px / mono 9px。
 11. 箭头 `#arrow` / `#arrow-link` / `#arrow-accent` 在 `<defs>` 定义一次；无内联箭头定义。
 12. 深色变体：每个语义 token 走深色档取值；自定义色提亮 ~15%。
 
@@ -359,7 +356,7 @@ corridor_x = dst_cx                                  # 跨分区路由的走廊 
 ```yaml
 title:    "现行 IT 版图"
 subtitle: "数据平台建成之前的管道"
-eyebrow:  "制造集团 · 平台之前"
+eyebrow:  "IT 版图 · 现状图"
 
 orientation: horizontal
 
