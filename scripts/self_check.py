@@ -19,7 +19,9 @@
            终端灰阶只在终端外壳文件里合法。
   排版层   中文硬规则：lang=zh-CN、三字体栈齐全且含系统兜底、
            禁用纯西文字体（Geist/Inter/Roboto 等）、含汉字文本 ≥10px、
-           中英混排空格（警告级）。
+           中英混排空格（警告级）；角色值——页面 eyebrow 字号 12px
+           （拉丁 eyebrow 走 mono 7–8px）、h1 下限 1.5rem（style-guide
+           排版角色表 / 字号下限）。
   几何层   4px 网格（rect，警告级）；堆叠条带左侧竖向方向标尺与
            堆叠上下缘的对齐关系（警告级）——网格合规不等于几何关系正确。
 
@@ -52,6 +54,8 @@ SPACING_RE = re.compile(r"([\u4e00-\u9fff])([A-Za-z0-9])|([A-Za-z0-9])([\u4e00-\
 BANNED_FONTS = ["geist", "instrument serif", "jetbrains mono", "inter", "roboto"]
 FONT_VALUE_RE = re.compile(r'font-family\s*[:=]\s*["\']?([^;"\'}]+)', re.IGNORECASE)
 CSS_FONT_SIZE_RE = re.compile(r"font-size\s*:\s*([\d.]+)(px|rem)\b")
+EYEBROW_BLOCK_RE = re.compile(r"(?:^|[^\w-])(?:header-)?eyebrow\s*\{([^}]*)\}")
+H1_BLOCK_RE = re.compile(r"(?:^|[^\w.#-])h1\s*\{([^}]*)\}")
 
 
 class DiagramParser(HTMLParser):
@@ -191,6 +195,14 @@ class DiagramParser(HTMLParser):
 
 def normalized_controller(body: str) -> str:
     return body.replace("\r\n", "\n").replace("\r", "\n").strip()
+
+
+def css_px(value: str) -> float | None:
+    """px/rem 字面量折算成 px；clamp 等函数串返回 None（调用方另取最小档）。"""
+    m = re.fullmatch(r"([\d.]+)\s*(px|rem)", value.strip())
+    if not m:
+        return None
+    return float(m.group(1)) * (16 if m.group(2) == "rem" else 1)
 
 
 def parsed_document(source: str) -> DiagramParser:
@@ -465,6 +477,34 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         px = value * 16 if unit == "rem" else value
         if px < 10:
             warnings.append(f"CSS font-size {m.group(0)} < 10px——若该选择器作用于含汉字文本即违规")
+
+    # 排版角色值（style-guide 排版角色表 / 字号下限）：页面 eyebrow 一律 12px，
+    # 唯一例外 eyebrow-latin（mono 栈）7–8px；h1 下限 1.5rem，clamp() 取其最小档。
+    # 只认块内声明了 font-size 的规则——覆盖性小规则（如卡片内 .eyebrow 只改间距）
+    # 不声明字号，自然跳过。
+    for m in EYEBROW_BLOCK_RE.finditer(css):
+        block = m.group(1)
+        fs = re.search(r"font-size\s*:\s*([^;]+)", block)
+        if not fs:
+            continue
+        ff = re.search(r"font-family\s*:\s*([^;]+)", block)
+        size = css_px(fs.group(1))
+        if size is None:
+            continue
+        if ff and "mono" in ff.group(1).lower():
+            if not 7 <= size <= 8:
+                errors.append(f"eyebrow-latin 字号应为 mono 7–8px；当前 {fs.group(1).strip()}")
+        elif abs(size - 12) > 0.01:
+            errors.append(f"页面 eyebrow 字号应为 12px（0.75rem）；当前 {fs.group(1).strip()}")
+    for m in H1_BLOCK_RE.finditer(css):
+        fs = re.search(r"font-size\s*:\s*([^;]+)", m.group(1))
+        if not fs:
+            continue
+        value = fs.group(1).strip()
+        cm = re.match(r"clamp\(\s*([\d.]+)(px|rem)\s*,", value)
+        size = css_px(f"{cm.group(1)}{cm.group(2)}") if cm else css_px(value)
+        if size is not None and size < 24:
+            errors.append(f"h1 字号下限 1.5rem（24px）；当前 {value}")
 
     # 中英混排空格（警告级）
     seen: set[str] = set()
