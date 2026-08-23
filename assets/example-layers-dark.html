@@ -7,10 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -62,64 +62,64 @@
     <p class="eyebrow">技术栈 · 层级堆叠</p>
     <h1>AI 应用技术栈 · 差异化到底发生在哪一层</h1>
 
-    <svg viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-layers-title example-layers-desc">
-      <title id="example-layers-title">AI 应用技术栈分层图</title>
-      <desc id="example-layers-desc">层级堆叠：从上到下依次是界面层、智能体框架（焦点强调层）、提示词层、SDK 客户端、模型权重层；左侧竖向标尺指示越往上越抽象。</desc>
+    <svg viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-layers-dark-title example-layers-dark-desc">
+      <title id="example-layers-dark-title">AI 应用技术栈分层图</title>
+      <desc id="example-layers-dark-desc">层级堆叠：从上到下依次是界面层、智能体框架（焦点强调层）、提示词层、SDK 客户端、模型权重层；左侧竖向标尺指示越往上越抽象。</desc>
 
-        <rect width="100%" height="100%" fill="#ffffff"/>
+        <rect width="100%" height="100%" fill="#0a0d1b"/>
 
         <!-- 方向标尺（左侧留白；标签以线为中心水平对齐） -->
-        <text x="28" y="12" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">抽象</text>
-        <line x1="28" y1="24" x2="28" y2="344" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-        <polygon points="24,24 32,24 28,16" fill="#565e7e"/>
-        <text x="28" y="356" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">硬件</text>
+        <text x="28" y="12" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">抽象</text>
+        <line x1="28" y1="24" x2="28" y2="344" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+        <polygon points="24,24 32,24 28,16" fill="#a2a9ce"/>
+        <text x="28" y="356" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">硬件</text>
 
         <!-- 堆叠外轮廓（上下边） -->
-        <line x1="92" y1="24" x2="960" y2="24" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
-        <line x1="92" y1="344" x2="960" y2="344" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
+        <line x1="92" y1="24" x2="960" y2="24" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
+        <line x1="92" y1="344" x2="960" y2="344" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
 
         <!-- L5 — 界面层 -->
         <rect x="92" y="24" width="868" height="64" fill="none"/>
-        <line x1="92" y1="88" x2="960" y2="88" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
-        <text x="112" y="60" fill="#565e7e" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" letter-spacing="0.14em">L5</text>
-        <text x="232" y="63" fill="#29314f" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">界面层</text>
-        <text x="940" y="63" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="end">对话 · 编辑器 · 画布</text>
+        <line x1="92" y1="88" x2="960" y2="88" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
+        <text x="112" y="60" fill="#a2a9ce" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" letter-spacing="0.14em">L5</text>
+        <text x="232" y="63" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">界面层</text>
+        <text x="940" y="63" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="end">对话 · 编辑器 · 画布</text>
 
         <!-- L4 — 智能体框架（焦点层） -->
-        <rect x="92" y="88" width="868" height="64" fill="rgba(26,77,217,0.08)"/>
-        <rect x="92" y="88" width="868" height="64" fill="none" stroke="#1a4dd9" stroke-width="1"/>
-        <text x="112" y="124" fill="#1a4dd9" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" letter-spacing="0.14em" font-weight="600">L4</text>
-        <text x="232" y="127" fill="#29314f" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">智能体框架</text>
-        <text x="940" y="127" fill="#1a4dd9" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="end">工具 · 记忆 · 循环</text>
+        <rect x="92" y="88" width="868" height="64" fill="rgba(125,152,255,0.10)"/>
+        <rect x="92" y="88" width="868" height="64" fill="none" stroke="#7d98ff" stroke-width="1"/>
+        <text x="112" y="124" fill="#7d98ff" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" letter-spacing="0.14em" font-weight="600">L4</text>
+        <text x="232" y="127" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">智能体框架</text>
+        <text x="940" y="127" fill="#7d98ff" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="end">工具 · 记忆 · 循环</text>
 
         <!-- L3 — 提示词层 -->
         <rect x="92" y="152" width="868" height="64" fill="none"/>
-        <line x1="92" y1="216" x2="960" y2="216" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
-        <text x="112" y="188" fill="#565e7e" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" letter-spacing="0.14em">L3</text>
-        <text x="232" y="191" fill="#29314f" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">提示词层</text>
-        <text x="940" y="191" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="end">system · few-shot · 缓存</text>
+        <line x1="92" y1="216" x2="960" y2="216" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
+        <text x="112" y="188" fill="#a2a9ce" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" letter-spacing="0.14em">L3</text>
+        <text x="232" y="191" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">提示词层</text>
+        <text x="940" y="191" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="end">system · few-shot · 缓存</text>
 
         <!-- L2 — SDK 客户端 -->
-        <rect x="92" y="216" width="868" height="64" fill="rgba(41,49,79,0.02)"/>
-        <line x1="92" y1="280" x2="960" y2="280" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
-        <text x="112" y="252" fill="#565e7e" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" letter-spacing="0.14em">L2</text>
-        <text x="232" y="255" fill="#29314f" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">SDK 客户端</text>
-        <text x="940" y="255" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="end">鉴权 · 重试 · 流式</text>
+        <rect x="92" y="216" width="868" height="64" fill="rgba(224,228,255,0.02)"/>
+        <line x1="92" y1="280" x2="960" y2="280" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
+        <text x="112" y="252" fill="#a2a9ce" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" letter-spacing="0.14em">L2</text>
+        <text x="232" y="255" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">SDK 客户端</text>
+        <text x="940" y="255" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="end">鉴权 · 重试 · 流式</text>
 
         <!-- L1 — 模型权重层 -->
-        <rect x="92" y="280" width="868" height="64" fill="rgba(41,49,79,0.02)"/>
-        <text x="112" y="316" fill="#565e7e" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" letter-spacing="0.14em">L1</text>
-        <text x="232" y="319" fill="#29314f" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">模型权重层</text>
-        <text x="940" y="319" fill="#565e7e" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="end" letter-spacing="0.08em">opus · sonnet · haiku</text>
+        <rect x="92" y="280" width="868" height="64" fill="rgba(224,228,255,0.02)"/>
+        <text x="112" y="316" fill="#a2a9ce" font-size="8" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" letter-spacing="0.14em">L1</text>
+        <text x="232" y="319" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">模型权重层</text>
+        <text x="940" y="319" fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="end" letter-spacing="0.08em">opus · sonnet · haiku</text>
 
         <!-- 图例横条 -->
-        <line x1="0" y1="400" x2="960" y2="400" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-        <text x="0" y="418" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">图例</text>
+        <line x1="0" y1="400" x2="960" y2="400" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+        <text x="0" y="418" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">图例</text>
 
-        <rect x="72" y="408" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1"/>
-        <text x="96" y="418" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点层</text>
+        <rect x="72" y="408" width="16" height="12" rx="2" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1"/>
+        <text x="96" y="418" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点层</text>
 
-        <text x="200" y="418" fill="#565e7e" font-size="14" font-style="italic" font-family="'Noto Serif SC', 'Songti SC', 'SimSun', serif">产品的差异化大多落在框架层——工具、记忆，以及把模型调用缝合成实际工作的那个循环。</text>
+        <text x="200" y="418" fill="#a2a9ce" font-size="14" font-style="italic" font-family="'Noto Serif SC', 'Songti SC', 'SimSun', serif">产品的差异化大多落在框架层——工具、记忆，以及把模型调用缝合成实际工作的那个循环。</text>
     </svg>
   </div>
 </body>
