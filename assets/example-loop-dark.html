@@ -7,10 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -62,92 +62,92 @@
     <p class="eyebrow">产品增长 · 飞轮图</p>
     <h1>开发者工具的增长飞轮</h1>
 
-    <svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-loop-title example-loop-desc">
-      <title id="example-loop-title">开发者工具的增长飞轮</title>
-      <desc id="example-loop-desc">飞轮图：免费产品、内容触达、注册激活、付费转化、收入再投入、产品变好六个环节顺时针循环，每一圈都把沉淀写回中间的社区知识库。</desc>
+    <svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-loop-dark-title example-loop-dark-desc">
+      <title id="example-loop-dark-title">开发者工具的增长飞轮</title>
+      <desc id="example-loop-dark-desc">飞轮图：免费产品、内容触达、注册激活、付费转化、收入再投入、产品变好六个环节顺时针循环，每一圈都把沉淀写回中间的社区知识库。</desc>
         <defs>
-          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#565e7e"/></marker>
-          <marker id="arrow-soft" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#8f94ab"/></marker>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a2a9ce"/></marker>
+          <marker id="arrow-soft" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#787fa2"/></marker>
         </defs>
 
-        <rect width="100%" height="100%" fill="#ffffff"/>
+        <rect width="100%" height="100%" fill="#0a0d1b"/>
 
         <!-- 环形主流：站点圆上的同半径圆弧，顺时针（M exit → A R R 0 0 1 → 下一站点） -->
-        <path d="M 560 45.726 A 240 240 0 0 1 664.969 119.073" fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-        <path d="M 703.285 184 A 240 240 0 0 1 703.722 358.882" fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-        <path d="M 665.731 424 A 240 240 0 0 1 561.13 497.871" fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-        <path d="M 400 498.274 A 240 240 0 0 1 295.031 424.927" fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-        <path d="M 256.715 360 A 240 240 0 0 1 256.278 185.118" fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-        <path d="M 294.269 120 A 240 240 0 0 1 398.87 46.129" fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 560 45.726 A 240 240 0 0 1 664.969 119.073" fill="none" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 703.285 184 A 240 240 0 0 1 703.722 358.882" fill="none" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 665.731 424 A 240 240 0 0 1 561.13 497.871" fill="none" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 400 498.274 A 240 240 0 0 1 295.031 424.927" fill="none" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 256.715 360 A 240 240 0 0 1 256.278 185.118" fill="none" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 294.269 120 A 240 240 0 0 1 398.87 46.129" fill="none" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
 
         <!-- 虚线写回辐条：站点内缘 → hub 描边外 6px -->
-        <line x1="480" y1="64" x2="480" y2="214" stroke="#8f94ab" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
-        <line x1="632.574" y1="184" x2="575.263" y2="217" stroke="#8f94ab" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
-        <line x1="632.574" y1="360" x2="575.263" y2="327" stroke="#8f94ab" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
-        <line x1="480" y1="480" x2="480" y2="330" stroke="#8f94ab" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
-        <line x1="327.426" y1="360" x2="384.737" y2="327" stroke="#8f94ab" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
-        <line x1="327.426" y1="184" x2="384.737" y2="217" stroke="#8f94ab" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
+        <line x1="480" y1="64" x2="480" y2="214" stroke="#787fa2" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
+        <line x1="632.574" y1="184" x2="575.263" y2="217" stroke="#787fa2" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
+        <line x1="632.574" y1="360" x2="575.263" y2="327" stroke="#787fa2" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
+        <line x1="480" y1="480" x2="480" y2="330" stroke="#787fa2" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
+        <line x1="327.426" y1="360" x2="384.737" y2="327" stroke="#787fa2" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
+        <line x1="327.426" y1="184" x2="384.737" y2="217" stroke="#787fa2" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
 
         <!-- 辐条标签（少而精）：遮罩 + 净空 -->
-        <rect x="462" y="126" width="36" height="12" rx="2" fill="#ffffff"/>
-        <text x="480" y="136" fill="#8f94ab" font-size="10" font-weight="500" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle" letter-spacing="0.12em">写入</text>
+        <rect x="462" y="126" width="36" height="12" rx="2" fill="#0a0d1b"/>
+        <text x="480" y="136" fill="#787fa2" font-size="10" font-weight="500" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle" letter-spacing="0.12em">写入</text>
 
         <!-- 站点 0（顶部）：免费产品 -->
-        <rect x="400" y="0" width="160" height="64" rx="6" fill="#ffffff"/>
-        <rect x="400" y="0" width="160" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <text x="480" y="28" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">免费产品</text>
-        <text x="480" y="48" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">cli · 模板库</text>
+        <rect x="400" y="0" width="160" height="64" rx="6" fill="#0a0d1b"/>
+        <rect x="400" y="0" width="160" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <text x="480" y="28" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">免费产品</text>
+        <text x="480" y="48" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">cli · 模板库</text>
 
         <!-- 站点 1：内容触达 -->
-        <rect x="608" y="120" width="160" height="64" rx="6" fill="#ffffff"/>
-        <rect x="608" y="120" width="160" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <text x="688" y="148" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">内容触达</text>
-        <text x="688" y="168" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">教程 · 案例展示</text>
+        <rect x="608" y="120" width="160" height="64" rx="6" fill="#0a0d1b"/>
+        <rect x="608" y="120" width="160" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <text x="688" y="148" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">内容触达</text>
+        <text x="688" y="168" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">教程 · 案例展示</text>
 
         <!-- 站点 2：注册激活 -->
-        <rect x="608" y="360" width="160" height="64" rx="6" fill="#ffffff"/>
-        <rect x="608" y="360" width="160" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <text x="688" y="388" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">注册激活</text>
-        <text x="688" y="408" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">首跑 5 分钟出结果</text>
+        <rect x="608" y="360" width="160" height="64" rx="6" fill="#0a0d1b"/>
+        <rect x="608" y="360" width="160" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <text x="688" y="388" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">注册激活</text>
+        <text x="688" y="408" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">首跑 5 分钟出结果</text>
 
         <!-- 站点 3（底部，焦点）：付费转化 -->
-        <rect x="400" y="480" width="160" height="64" rx="6" fill="#ffffff"/>
-        <rect x="400" y="480" width="160" height="64" rx="6" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1"/>
-        <text x="480" y="508" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">付费转化</text>
-        <text x="480" y="528" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">pro · 团队版订阅</text>
+        <rect x="400" y="480" width="160" height="64" rx="6" fill="#0a0d1b"/>
+        <rect x="400" y="480" width="160" height="64" rx="6" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1"/>
+        <text x="480" y="508" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">付费转化</text>
+        <text x="480" y="528" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">pro · 团队版订阅</text>
 
         <!-- 站点 4：收入再投入 -->
-        <rect x="192" y="360" width="160" height="64" rx="6" fill="#ffffff"/>
-        <rect x="192" y="360" width="160" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <text x="272" y="388" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">收入再投入</text>
-        <text x="272" y="408" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">招人 · 做深功能</text>
+        <rect x="192" y="360" width="160" height="64" rx="6" fill="#0a0d1b"/>
+        <rect x="192" y="360" width="160" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <text x="272" y="388" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">收入再投入</text>
+        <text x="272" y="408" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">招人 · 做深功能</text>
 
         <!-- 站点 5：产品变好 -->
-        <rect x="192" y="120" width="160" height="64" rx="6" fill="#ffffff"/>
-        <rect x="192" y="120" width="160" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <text x="272" y="148" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">产品变好</text>
-        <text x="272" y="168" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">口碑 · 自然推荐</text>
+        <rect x="192" y="120" width="160" height="64" rx="6" fill="#0a0d1b"/>
+        <rect x="192" y="120" width="160" height="64" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <text x="272" y="148" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">产品变好</text>
+        <text x="272" y="168" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">口碑 · 自然推荐</text>
 
         <!-- hub：全图唯一深色元素 —— 沉淀的共享状态 -->
-        <rect x="380" y="220" width="200" height="104" rx="8" fill="#29314f"/>
-        <text x="480" y="268" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">社区知识库</text>
-        <text x="480" y="288" fill="rgba(224,228,255,0.72)" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">每一圈都在变厚</text>
+        <rect x="380" y="220" width="200" height="104" rx="8" fill="#e0e4ff"/>
+        <text x="480" y="268" fill="#0a0d1b" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">社区知识库</text>
+        <text x="480" y="288" fill="rgba(10,13,27,0.72)" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">每一圈都在变厚</text>
 
         <!-- 图例横条 -->
-        <line x1="0" y1="600" x2="1000" y2="600" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-        <text x="0" y="618" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+        <line x1="0" y1="600" x2="1000" y2="600" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+        <text x="0" y="618" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
 
-        <line x1="72" y1="614" x2="100" y2="614" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-        <text x="108" y="618" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">运营循环（顺时针）</text>
+        <line x1="72" y1="614" x2="100" y2="614" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <text x="108" y="618" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">运营循环（顺时针）</text>
 
-        <line x1="246" y1="614" x2="274" y2="614" stroke="#8f94ab" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
-        <text x="282" y="618" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写回知识库</text>
+        <line x1="246" y1="614" x2="274" y2="614" stroke="#787fa2" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-soft)"/>
+        <text x="282" y="618" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写回知识库</text>
 
-        <rect x="380" y="608" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1"/>
-        <text x="404" y="618" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点环节</text>
+        <rect x="380" y="608" width="16" height="12" rx="2" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1"/>
+        <text x="404" y="618" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点环节</text>
 
-        <rect x="492" y="608" width="16" height="12" rx="2" fill="#29314f"/>
-        <text x="516" y="618" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">共享积累</text>
+        <rect x="492" y="608" width="16" height="12" rx="2" fill="#e0e4ff"/>
+        <text x="516" y="618" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">共享积累</text>
       </svg>
   </div>
 </body>
