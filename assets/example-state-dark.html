@@ -7,10 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -62,85 +62,85 @@
     <p class="eyebrow">内容生产 · 状态机</p>
     <h1>文章生命周期 · 从草稿到归档</h1>
 
-    <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-state-title example-state-desc">
-      <title id="example-state-title">文章生命周期状态机</title>
-      <desc id="example-state-desc">状态机：文章从草稿起步，提交后进入审核中，通过后发布上线（焦点强调），过期后归档并最终清理；驳回时带修改意见退回草稿。</desc>
+    <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-state-dark-title example-state-dark-desc">
+      <title id="example-state-dark-title">文章生命周期状态机</title>
+      <desc id="example-state-dark-desc">状态机：文章从草稿起步，提交后进入审核中，通过后发布上线（焦点强调），过期后归档并最终清理；驳回时带修改意见退回草稿。</desc>
         <defs>
-          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#565e7e"/></marker>
-          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a4dd9"/></marker>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a2a9ce"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#7d98ff"/></marker>
         </defs>
 
-        <rect width="100%" height="100%" fill="#ffffff"/>
+        <rect width="100%" height="100%" fill="#0a0d1b"/>
 
         <!-- 转移线（先画） -->
         <!-- 起点 → 草稿 -->
-        <line x1="12" y1="112" x2="160" y2="112" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="12" y1="112" x2="160" y2="112" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
         <!-- 草稿 → 审核中 -->
-        <line x1="320" y1="112" x2="480" y2="112" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="320" y1="112" x2="480" y2="112" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
         <!-- 审核中 → 已发布（焦瑚 · 正向主路径） -->
-        <line x1="640" y1="112" x2="800" y2="112" stroke="#1a4dd9" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+        <line x1="640" y1="112" x2="800" y2="112" stroke="#7d98ff" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
         <!-- 已发布 → 已归档（向下） -->
-        <line x1="880" y1="152" x2="880" y2="212" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="880" y1="152" x2="880" y2="212" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
         <!-- 已归档 → 终点（向下） -->
-        <line x1="880" y1="312" x2="880" y2="344" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <line x1="880" y1="312" x2="880" y2="344" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
         <!-- 审核中 → 草稿（驳回回退，虚线弧） -->
-        <path d="M 560 68 C 560 4, 240 4, 240 68" fill="none" stroke="#565e7e" stroke-width="1.2" stroke-dasharray="4,3" stroke-dashoffset="6.01" marker-end="url(#arrow)"/>
+        <path d="M 560 68 C 560 4, 240 4, 240 68" fill="none" stroke="#a2a9ce" stroke-width="1.2" stroke-dasharray="4,3" stroke-dashoffset="6.01" marker-end="url(#arrow)"/>
 
         <!-- 转移标签：中文事件词 sans 10px · 0.12em -->
-        <rect x="66" y="92" width="40" height="16" rx="2" fill="#ffffff"/>
-        <text x="86" y="104" fill="#565e7e" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">创建</text>
+        <rect x="66" y="92" width="40" height="16" rx="2" fill="#0a0d1b"/>
+        <text x="86" y="104" fill="#a2a9ce" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">创建</text>
 
-        <rect x="384" y="92" width="40" height="16" rx="2" fill="#ffffff"/>
-        <text x="404" y="104" fill="#565e7e" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">提交</text>
+        <rect x="384" y="92" width="40" height="16" rx="2" fill="#0a0d1b"/>
+        <text x="404" y="104" fill="#a2a9ce" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">提交</text>
 
-        <rect x="698" y="92" width="44" height="16" rx="2" fill="#ffffff"/>
-        <text x="720" y="104" fill="#1a4dd9" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">通过</text>
+        <rect x="698" y="92" width="44" height="16" rx="2" fill="#0a0d1b"/>
+        <text x="720" y="104" fill="#7d98ff" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">通过</text>
 
-        <rect x="856" y="172" width="48" height="16" rx="2" fill="#ffffff"/>
-        <text x="880" y="184" fill="#565e7e" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">过期</text>
+        <rect x="856" y="172" width="48" height="16" rx="2" fill="#0a0d1b"/>
+        <text x="880" y="184" fill="#a2a9ce" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">过期</text>
 
-        <rect x="852" y="324" width="56" height="16" rx="2" fill="#ffffff"/>
-        <text x="880" y="336" fill="#565e7e" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">清理</text>
+        <rect x="852" y="324" width="56" height="16" rx="2" fill="#0a0d1b"/>
+        <text x="880" y="336" fill="#a2a9ce" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">清理</text>
 
         <!-- 驳回 · 修改（回退弧上的标签） -->
-        <rect x="360" y="8" width="80" height="16" rx="2" fill="#ffffff"/>
-        <text x="400" y="20" fill="#565e7e" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">驳回 · 修改</text>
+        <rect x="360" y="8" width="80" height="16" rx="2" fill="#0a0d1b"/>
+        <text x="400" y="20" fill="#a2a9ce" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">驳回 · 修改</text>
 
         <!-- 起点实心圆 -->
-        <circle cx="4" cy="112" r="6" fill="#29314f"/>
+        <circle cx="4" cy="112" r="6" fill="#e0e4ff"/>
 
         <!-- 状态：草稿 -->
-        <rect x="160" y="72" width="160" height="80" rx="8" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="168" y="80" width="40" height="12" rx="2" fill="transparent" stroke="rgba(41,49,79,0.40)" stroke-width="0.8"/>
-        <text x="188" y="89" fill="#29314f" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
-        <text x="240" y="120" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">草稿</text>
-        <text x="240" y="138" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">未发布 · 可编辑</text>
+        <rect x="160" y="72" width="160" height="80" rx="8" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="168" y="80" width="40" height="12" rx="2" fill="transparent" stroke="rgba(224,228,255,0.40)" stroke-width="0.8"/>
+        <text x="188" y="89" fill="#e0e4ff" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+        <text x="240" y="120" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">草稿</text>
+        <text x="240" y="138" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">未发布 · 可编辑</text>
 
         <!-- 状态：审核中 -->
-        <rect x="480" y="72" width="160" height="80" rx="8" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="488" y="80" width="40" height="12" rx="2" fill="transparent" stroke="rgba(41,49,79,0.40)" stroke-width="0.8"/>
-        <text x="508" y="89" fill="#29314f" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
-        <text x="560" y="120" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">审核中</text>
-        <text x="560" y="138" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">等待编辑审批</text>
+        <rect x="480" y="72" width="160" height="80" rx="8" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="488" y="80" width="40" height="12" rx="2" fill="transparent" stroke="rgba(224,228,255,0.40)" stroke-width="0.8"/>
+        <text x="508" y="89" fill="#e0e4ff" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+        <text x="560" y="120" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">审核中</text>
+        <text x="560" y="138" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">等待编辑审批</text>
 
         <!-- 状态：已发布（焦点） -->
-        <rect x="800" y="72" width="160" height="80" rx="8" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.4"/>
-        <rect x="808" y="80" width="40" height="12" rx="2" fill="transparent" stroke="rgba(26,77,217,0.50)" stroke-width="0.8"/>
-        <text x="828" y="89" fill="#1a4dd9" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
-        <text x="880" y="120" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">已发布</text>
-        <text x="880" y="138" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">对外可见 · 收录生效</text>
+        <rect x="800" y="72" width="160" height="80" rx="8" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1.4"/>
+        <rect x="808" y="80" width="40" height="12" rx="2" fill="transparent" stroke="rgba(125,152,255,0.50)" stroke-width="0.8"/>
+        <text x="828" y="89" fill="#7d98ff" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+        <text x="880" y="120" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">已发布</text>
+        <text x="880" y="138" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">对外可见 · 收录生效</text>
 
         <!-- 状态：已归档 -->
-        <rect x="800" y="212" width="160" height="100" rx="8" fill="rgba(41,49,79,0.05)" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
-        <rect x="808" y="220" width="40" height="12" rx="2" fill="transparent" stroke="rgba(86,94,126,0.50)" stroke-width="0.8"/>
-        <text x="828" y="229" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
-        <text x="880" y="260" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">已归档</text>
-        <text x="880" y="278" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">noindex · 隐藏</text>
-        <text x="880" y="296" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">旧链接跳转保留</text>
+        <rect x="800" y="212" width="160" height="100" rx="8" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+        <rect x="808" y="220" width="40" height="12" rx="2" fill="transparent" stroke="rgba(162,169,206,0.50)" stroke-width="0.8"/>
+        <text x="828" y="229" fill="#a2a9ce" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.08em">STATE</text>
+        <text x="880" y="260" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">已归档</text>
+        <text x="880" y="278" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">noindex · 隐藏</text>
+        <text x="880" y="296" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">旧链接跳转保留</text>
 
         <!-- 终点双环圆 -->
-        <circle cx="880" cy="352" r="8" fill="none" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <circle cx="880" cy="352" r="5" fill="#29314f"/>
+        <circle cx="880" cy="352" r="8" fill="none" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <circle cx="880" cy="352" r="5" fill="#e0e4ff"/>
       </svg>
   </div>
 </body>
