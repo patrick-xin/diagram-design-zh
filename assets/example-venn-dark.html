@@ -7,11 +7,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
       --color-soft:    #8f94ab;
-      --color-accent:  #1a4dd9;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -63,10 +63,10 @@
     <p class="eyebrow">数据团队 · 维恩图</p>
     <h1>数据团队成员画像</h1>
 
-    <svg viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-venn-title example-venn-desc">
-      <title id="example-venn-title">数据团队成员画像</title>
-      <desc id="example-venn-desc">维恩图：工程、分析、业务三个能力集合交叠，三环共同交出的甜点位是数据产品负责人（焦点）。</desc>
-        <rect width="100%" height="100%" fill="#ffffff"/>
+    <svg viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-venn-dark-title example-venn-dark-desc">
+      <title id="example-venn-dark-title">数据团队成员画像</title>
+      <desc id="example-venn-dark-desc">维恩图：工程、分析、业务三个能力集合交叠，三环共同交出的甜点位是数据产品负责人（焦点）。</desc>
+        <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <defs>
         <!-- 链式裁剪隔离三环公共区：裁到工程，再裁到分析，最后用业务圆填色 -->
@@ -79,30 +79,30 @@
       </defs>
 
       <!-- 三个集合圆（描边分档 ink / muted / soft；极低淡染在交叠区自然叠深） -->
-      <circle cx="500" cy="140" r="140" fill="rgba(41,49,79,0.05)"   stroke="#29314f" stroke-width="1"/>
-      <circle cx="428" cy="280" r="140" fill="rgba(86,94,126,0.05)"  stroke="#565e7e" stroke-width="1"/>
-      <circle cx="572" cy="280" r="140" fill="rgba(143,148,171,0.05)" stroke="#8f94ab" stroke-width="1"/>
+      <circle cx="500" cy="140" r="140" fill="rgba(224,228,255,0.05)"   stroke="#e0e4ff" stroke-width="1"/>
+      <circle cx="428" cy="280" r="140" fill="rgba(162,169,206,0.05)"  stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="572" cy="280" r="140" fill="rgba(120,127,162,0.05)" stroke="#787fa2" stroke-width="1"/>
 
       <!-- 焦点：三环公共区填 ink 实色，标签反白 -->
       <g clip-path="url(#clip-eng)">
         <g clip-path="url(#clip-ana)">
-          <circle cx="572" cy="280" r="140" fill="#29314f"/>
+          <circle cx="572" cy="280" r="140" fill="#e0e4ff"/>
         </g>
       </g>
 
       <!-- 集合名：放在各圆专属耳叶（不与其他圆交叠）内，整体收在圆内、距描边留边距 -->
-      <text x="500" y="56" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工程</text>
-      <text x="500" y="72" fill="#565e7e" font-size="10" letter-spacing="0.14em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">写代码 · 建管道</text>
+      <text x="500" y="56" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工程</text>
+      <text x="500" y="72" fill="#a2a9ce" font-size="10" letter-spacing="0.14em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">写代码 · 建管道</text>
 
-      <text x="382" y="340" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">分析</text>
-      <text x="382" y="356" fill="#565e7e" font-size="10" letter-spacing="0.14em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">看数据 · 讲证据</text>
+      <text x="382" y="340" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">分析</text>
+      <text x="382" y="356" fill="#a2a9ce" font-size="10" letter-spacing="0.14em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">看数据 · 讲证据</text>
 
-      <text x="618" y="340" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">业务</text>
-      <text x="618" y="356" fill="#565e7e" font-size="10" letter-spacing="0.14em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">提需求 · 定价值</text>
+      <text x="618" y="340" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">业务</text>
+      <text x="618" y="356" fill="#a2a9ce" font-size="10" letter-spacing="0.14em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">提需求 · 定价值</text>
 
       <!-- 焦点标签：ink 实色底上反白 -->
-      <text x="500" y="228" fill="#ffffff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据产品负责人</text>
-      <text x="500" y="244" fill="rgba(255,255,255,0.72)" font-size="10" letter-spacing="0.14em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">三环交汇的甜点位</text>
+      <text x="500" y="228" fill="#0a0d1b" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据产品负责人</text>
+      <text x="500" y="244" fill="rgba(10,13,27,0.72)" font-size="10" letter-spacing="0.14em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">三环交汇的甜点位</text>
     </svg>
   </div>
 </body>
