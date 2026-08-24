@@ -7,11 +7,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
       --color-soft:    #8f94ab;
-      --color-accent:  #1a4dd9;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -63,103 +63,103 @@
     <p class="eyebrow">采购管理 · 泳道图</p>
     <h1>采购审批流 · 谁在什么时候接手</h1>
 
-    <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-swimlane-title example-swimlane-desc">
-      <title id="example-swimlane-title">采购审批流 · 谁在什么时候接手</title>
-      <desc id="example-swimlane-desc">泳道图：申请人、直属主管、财务、采购部四条横向泳道——填写申请单、提交审批后交接给直属主管，主管审批转财务复核，预算核对、核价批准后触发采购部下单，到货签收闭环（焦点终点）。</desc>
+    <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-swimlane-dark-title example-swimlane-dark-desc">
+      <title id="example-swimlane-dark-title">采购审批流 · 谁在什么时候接手</title>
+      <desc id="example-swimlane-dark-desc">泳道图：申请人、直属主管、财务、采购部四条横向泳道——填写申请单、提交审批后交接给直属主管，主管审批转财务复核，预算核对、核价批准后触发采购部下单，到货签收闭环（焦点终点）。</desc>
       <defs>
-        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#565e7e"/></marker>
-        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a4dd9"/></marker>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a2a9ce"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#7d98ff"/></marker>
       </defs>
-        <rect width="100%" height="100%" fill="#ffffff"/>
+        <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 泳道分隔线：外框重、内线轻 -->
-      <line x1="0" y1="0" x2="1000" y2="0" stroke="rgba(41,49,79,0.20)" stroke-width="1"/>
-      <line x1="0" y1="80" x2="1000" y2="80" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
-      <line x1="0" y1="160" x2="1000" y2="160" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
-      <line x1="0" y1="240" x2="1000" y2="240" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
-      <line x1="0" y1="320" x2="1000" y2="320" stroke="rgba(41,49,79,0.20)" stroke-width="1"/>
+      <line x1="0" y1="0" x2="1000" y2="0" stroke="rgba(224,228,255,0.20)" stroke-width="1"/>
+      <line x1="0" y1="80" x2="1000" y2="80" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
+      <line x1="0" y1="160" x2="1000" y2="160" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
+      <line x1="0" y1="240" x2="1000" y2="240" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
+      <line x1="0" y1="320" x2="1000" y2="320" stroke="rgba(224,228,255,0.20)" stroke-width="1"/>
 
       <!-- 角色列分隔线 -->
-      <line x1="120" y1="0" x2="120" y2="320" stroke="rgba(41,49,79,0.20)" stroke-width="1"/>
+      <line x1="120" y1="0" x2="120" y2="320" stroke="rgba(224,228,255,0.20)" stroke-width="1"/>
 
       <!-- 道标签（角色列内） -->
-      <text x="20" y="44" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">申请人</text>
-      <text x="20" y="124" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">直属主管</text>
-      <text x="20" y="204" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">财务</text>
-      <text x="20" y="284" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">采购部</text>
+      <text x="20" y="44" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">申请人</text>
+      <text x="20" y="124" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">直属主管</text>
+      <text x="20" y="204" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">财务</text>
+      <text x="20" y="284" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">采购部</text>
 
       <!-- 流转箭头（先画） -->
       <!-- 1. 填写申请单 → 提交审批（道内水平直线） -->
-      <line x1="260" y1="40" x2="308" y2="40" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="260" y1="40" x2="308" y2="40" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
       <!-- 2. 提交审批 → 主管审批（跨道交接，直线斜穿） -->
-      <line x1="428" y1="64" x2="476" y2="96" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="428" y1="64" x2="476" y2="96" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
       <!-- 3. 主管审批 → 预算核对（复核类流转，虚线竖穿） -->
-      <line x1="546" y1="144" x2="546" y2="176" stroke="#565e7e" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+      <line x1="546" y1="144" x2="546" y2="176" stroke="#a2a9ce" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
       <!-- 4. 预算核对 → 核价批准（道内水平直线） -->
-      <line x1="616" y1="200" x2="668" y2="200" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="616" y1="200" x2="668" y2="200" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
       <!-- 5. 核价批准 → 采购下单（关键交接，accent 直线斜穿） -->
-      <line x1="738" y1="224" x2="708" y2="256" stroke="#1a4dd9" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <line x1="738" y1="224" x2="708" y2="256" stroke="#7d98ff" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
       <!-- 6. 采购下单 → 到货签收（道内水平直线） -->
-      <line x1="768" y1="280" x2="800" y2="280" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="768" y1="280" x2="800" y2="280" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
 
       <!-- 箭头小签（白底遮罩 + 说明） -->
-      <rect x="430" y="66" width="44" height="14" fill="#ffffff"/>
-      <text x="452" y="76.5" fill="#565e7e" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.2em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">交接</text>
+      <rect x="430" y="66" width="44" height="14" fill="#0a0d1b"/>
+      <text x="452" y="76.5" fill="#a2a9ce" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.2em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">交接</text>
 
-      <rect x="524" y="146" width="44" height="14" fill="#ffffff"/>
-      <text x="546" y="156.5" fill="#565e7e" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.2em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">复核</text>
+      <rect x="524" y="146" width="44" height="14" fill="#0a0d1b"/>
+      <text x="546" y="156.5" fill="#a2a9ce" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.2em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">复核</text>
 
-      <rect x="689" y="228" width="68" height="14" fill="#ffffff"/>
-      <text x="723" y="238.5" fill="#1a4dd9" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.2em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">下单触发</text>
+      <rect x="689" y="228" width="68" height="14" fill="#0a0d1b"/>
+      <text x="723" y="238.5" fill="#7d98ff" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0.2em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">下单触发</text>
 
       <!-- 步骤盒：落在执行者的道内 -->
-      <rect x="140" y="16" width="120" height="48" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="200" y="36" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">填写申请单</text>
-      <text x="200" y="50" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">需求 · 预算科目</text>
+      <rect x="140" y="16" width="120" height="48" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="200" y="36" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">填写申请单</text>
+      <text x="200" y="50" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">需求 · 预算科目</text>
 
-      <rect x="308" y="16" width="120" height="48" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="368" y="36" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">提交审批</text>
-      <text x="368" y="50" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">OA 流转</text>
+      <rect x="308" y="16" width="120" height="48" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="368" y="36" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">提交审批</text>
+      <text x="368" y="50" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">OA 流转</text>
 
-      <rect x="476" y="96" width="140" height="48" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="546" y="116" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">主管审批</text>
-      <text x="546" y="130" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">额度内 · 当日</text>
+      <rect x="476" y="96" width="140" height="48" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="546" y="116" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">主管审批</text>
+      <text x="546" y="130" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">额度内 · 当日</text>
 
-      <rect x="476" y="176" width="140" height="48" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="546" y="196" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">预算核对</text>
-      <text x="546" y="210" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">科目 · 余额</text>
+      <rect x="476" y="176" width="140" height="48" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="546" y="196" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">预算核对</text>
+      <text x="546" y="210" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">科目 · 余额</text>
 
-      <rect x="668" y="176" width="140" height="48" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="738" y="196" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">核价批准</text>
-      <text x="738" y="210" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">询价 · 比价</text>
+      <rect x="668" y="176" width="140" height="48" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="738" y="196" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">核价批准</text>
+      <text x="738" y="210" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">询价 · 比价</text>
 
-      <rect x="648" y="256" width="120" height="48" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="708" y="276" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">采购下单</text>
-      <text x="708" y="290" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">合同 · 订单</text>
+      <rect x="648" y="256" width="120" height="48" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="708" y="276" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">采购下单</text>
+      <text x="708" y="290" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">合同 · 订单</text>
 
       <!-- 焦点终点：到货签收 -->
-      <rect x="800" y="256" width="120" height="48" rx="6" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.4"/>
-      <text x="860" y="276" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">到货签收</text>
-      <text x="860" y="290" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">验收 · 归档</text>
+      <rect x="800" y="256" width="120" height="48" rx="6" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1.4"/>
+      <text x="860" y="276" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">到货签收</text>
+      <text x="860" y="290" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">验收 · 归档</text>
 
       <!-- 图例横条 -->
-      <line x1="0" y1="376" x2="1000" y2="376" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <text x="0" y="394" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+      <line x1="0" y1="376" x2="1000" y2="376" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <text x="0" y="394" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
 
-      <rect x="72" y="384" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="96" y="394" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">流程步骤</text>
+      <rect x="72" y="384" width="16" height="12" rx="2" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="96" y="394" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">流程步骤</text>
 
-      <rect x="184" y="384" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.4"/>
-      <text x="208" y="394" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点终点</text>
+      <rect x="184" y="384" width="16" height="12" rx="2" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1.4"/>
+      <text x="208" y="394" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点终点</text>
 
-      <line x1="292" y1="390" x2="320" y2="390" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-      <text x="328" y="394" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">道内流转</text>
+      <line x1="292" y1="390" x2="320" y2="390" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="328" y="394" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">道内流转</text>
 
-      <line x1="412" y1="390" x2="440" y2="390" stroke="#565e7e" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
-      <text x="448" y="394" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">复核 / 退回</text>
+      <line x1="412" y1="390" x2="440" y2="390" stroke="#a2a9ce" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+      <text x="448" y="394" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">复核 / 退回</text>
 
-      <line x1="546" y1="390" x2="574" y2="390" stroke="#1a4dd9" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
-      <text x="582" y="394" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">关键交接</text>
+      <line x1="546" y1="390" x2="574" y2="390" stroke="#7d98ff" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <text x="582" y="394" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">关键交接</text>
     </svg>
   </div>
 </body>
