@@ -46,7 +46,7 @@
       letter-spacing: 0;
       line-height: 1.15;
       color: var(--color-ink);
-      margin-bottom: 1.5rem;
+      margin-bottom: 3rem;
     }
 
     svg { width: 100%; min-width: 900px; display: block; overflow: visible; }
@@ -63,7 +63,7 @@
     <p class="eyebrow">架构图 · 深色档 · 图表设计</p>
     <h1>AI 客服平台 · 生产架构</h1>
 
-    <svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-architecture-dark-title example-architecture-dark-desc">
+    <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-architecture-dark-title example-architecture-dark-desc">
       <title id="example-architecture-dark-title">AI 客服平台生产架构</title>
       <desc id="example-architecture-dark-desc">架构图：用户网站请求经 API 网关进入对话 Agent（焦点），Agent 调用外部 LLM API、写入 Postgres 并读写 Redis 缓存。</desc>
         <defs>
@@ -168,29 +168,29 @@
         <text x="752" y="236" fill="#a2a9ce" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" text-anchor="middle">会话 · 5 分钟过期</text>
 
         <!-- legend strip -->
-        <line x1="0" y1="287" x2="960" y2="287" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
-        <text x="0" y="305" fill="#a2a9ce" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" letter-spacing="0.1em">图例</text>
+        <line x1="0" y1="304" x2="1000" y2="304" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+        <text x="0" y="322" fill="#a2a9ce" font-size="10" font-family="'Sarasa Mono SC', ui-monospace, monospace" letter-spacing="0.1em">图例</text>
 
-        <rect x="72" y="295" width="16" height="12" rx="2" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1"/>
-        <text x="96" y="305" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点服务</text>
+        <rect x="72" y="312" width="16" height="12" rx="2" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1"/>
+        <text x="96" y="322" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点服务</text>
 
-        <rect x="172" y="295" width="16" height="12" rx="2" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
-        <text x="196" y="305" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">后端服务</text>
+        <rect x="172" y="312" width="16" height="12" rx="2" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <text x="196" y="322" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">后端服务</text>
 
-        <rect x="272" y="295" width="16" height="12" rx="2" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
-        <text x="296" y="305" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储</text>
+        <rect x="272" y="312" width="16" height="12" rx="2" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+        <text x="296" y="322" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储</text>
 
-        <rect x="352" y="295" width="16" height="12" rx="2" fill="rgba(224,228,255,0.03)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
-        <text x="376" y="305" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">外部服务</text>
+        <rect x="352" y="312" width="16" height="12" rx="2" fill="rgba(224,228,255,0.03)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+        <text x="376" y="322" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">外部服务</text>
 
-        <rect x="456" y="295" width="16" height="12" rx="2" fill="rgba(224,228,255,0.02)" stroke="rgba(224,228,255,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
-        <text x="480" y="305" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">可选 / 异步</text>
+        <rect x="456" y="312" width="16" height="12" rx="2" fill="rgba(224,228,255,0.02)" stroke="rgba(224,228,255,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="480" y="322" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">可选 / 异步</text>
 
-        <line x1="576" y1="301" x2="604" y2="301" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
-        <text x="612" y="305" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">请求 / 调用</text>
+        <line x1="576" y1="318" x2="604" y2="318" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <text x="612" y="322" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">请求 / 调用</text>
 
-        <line x1="708" y1="301" x2="736" y2="301" stroke="#a2a9ce" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
-        <text x="744" y="305" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">缓存 / 异步</text>
+        <line x1="708" y1="318" x2="736" y2="318" stroke="#a2a9ce" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <text x="744" y="322" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">缓存 / 异步</text>
       </svg>
   </div>
 </body>
