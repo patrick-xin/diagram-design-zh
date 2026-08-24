@@ -391,7 +391,7 @@ metadata:
 
 - 单文件 HTML：内联 CSS + SVG，**零外部引用**（字体见 §7.1 自托管方案）；`<html lang="zh-CN">`。
 - 产出默认不含任何 `<script>`。唯一的例外是动效：仅按 [`references/animation.md`](references/animation.md) 契约、以 [`assets/template-motion.html`](assets/template-motion.html) 为模板添加，控制器脚本逐字节复制，不得改写。
-- `<svg width="100%" …>` + CSS `min-width: 900px` + 按类型设定 viewBox。
+- 画布与容器按 [`references/style-guide.md`](references/style-guide.md)「容器对齐与画布基线」执行：container 四件套（frame padding-left 4% / svg width 100% / 内容 x=0 起排 / overflow visible）、viewBox 宽 1000 定死、高按 40 步进、坐标 4 的倍数、CSS `min-width: 900px`。
 - 有明确投放目标（幻灯、公众号封面、小红书、打印、社交卡）时，viewBox 与字号坡道按 [`references/output-spec.md`](references/output-spec.md) 的尺寸预设执行；无明确目标用 `doc-inline`（960×600）。
 - 无障碍：`role="img"` + `<title id="{slug}-title">` + `<desc id="{slug}-desc">`，**slug 必须等于文件名去扩展名**（如 `ai-support-architecture.html` → `ai-support-architecture-title`）。
 - 文件名 kebab-case，中文文件名不行。
