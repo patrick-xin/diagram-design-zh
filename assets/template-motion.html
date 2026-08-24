@@ -42,7 +42,7 @@
       letter-spacing: 0.3em;
     }
     h1 { margin: 0 0 24px; font: 400 32px/1.15 var(--font-serif); }
-    svg { display: block; width: 100%; min-width: 720px; }
+    svg { display: block; width: 100%; min-width: 900px; overflow: visible; }
 
     /* 静态源是完整的：只有初始化成功的增强才接管条目透明度。
        幽灵预显（2026-08-18 真机定案）：未揭示 = opacity .12 压暗预告，
@@ -193,7 +193,7 @@
     <p class="eyebrow">流程 · 可选动效</p>
     <h1>请求评估</h1>
 
-    <svg viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="template-motion-title template-motion-desc">
+    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="template-motion-title template-motion-desc">
       <title id="template-motion-title">请求评估</title>
       <desc id="template-motion-desc">请求先做字段校验，再过策略检查，进入排队，最后追加到审计日志；全程可分步回放。</desc>
       <defs>
@@ -201,41 +201,41 @@
           <polygon points="0 0, 8 3, 0 6" fill="#565e7e"/>
         </marker>
       </defs>
-      <rect width="960" height="480" fill="#ffffff"/>
+      <rect width="1000" height="480" fill="#ffffff"/>
 
       <!-- 常驻连线承载静态语义。 -->
-      <path d="M248 180 H356" fill="none" stroke="#565e7e" marker-end="url(#template-motion-arrow)"/>
-      <path d="M556 180 H664" fill="none" stroke="#565e7e" marker-end="url(#template-motion-arrow)"/>
-      <path d="M764 232 V328" fill="none" stroke="#565e7e" marker-end="url(#template-motion-arrow)"/>
+      <path d="M200 180 H400" fill="none" stroke="#565e7e" marker-end="url(#template-motion-arrow)"/>
+      <path d="M600 180 H800" fill="none" stroke="#565e7e" marker-end="url(#template-motion-arrow)"/>
+      <path d="M900 232 V328" fill="none" stroke="#565e7e" marker-end="url(#template-motion-arrow)"/>
 
       <g data-motion-item data-step="1" aria-label="第 1 步：收到请求，字段齐全">
-        <rect x="48" y="128" width="200" height="104" rx="8" fill="#ffffff" stroke="#29314f"/>
-        <text x="148" y="172" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">请求</text>
-        <text x="148" y="196" text-anchor="middle" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">字段齐全</text>
+        <rect x="0" y="128" width="200" height="104" rx="8" fill="#ffffff" stroke="#29314f"/>
+        <text x="100" y="172" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">请求</text>
+        <text x="100" y="196" text-anchor="middle" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">字段齐全</text>
       </g>
       <g data-motion-item data-step="2" aria-label="第 2 步：策略检查通过">
-        <rect x="356" y="128" width="200" height="104" rx="8" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9"/>
-        <text x="456" y="168" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">策略检查</text>
-        <text x="456" y="196" text-anchor="middle" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">✓ 通过 · 规则 2</text>
+        <rect x="400" y="128" width="200" height="104" rx="8" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.4"/>
+        <text x="500" y="168" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">策略检查</text>
+        <text x="500" y="196" text-anchor="middle" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">✓ 通过 · 规则 2</text>
       </g>
       <g data-motion-item data-step="3" aria-label="第 3 步：三条排队">
-        <rect x="664" y="128" width="200" height="104" rx="8" fill="#ffffff" stroke="#29314f"/>
-        <text x="764" y="164" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">队列</text>
-        <rect x="700" y="184" width="16" height="16" fill="#565e7e"/><rect x="724" y="184" width="16" height="16" fill="#565e7e"/><rect x="748" y="184" width="16" height="16" fill="#565e7e"/>
-        <text x="772" y="196" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">3 项排队</text>
+        <rect x="800" y="128" width="200" height="104" rx="8" fill="#ffffff" stroke="#29314f"/>
+        <text x="900" y="164" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">队列</text>
+        <rect x="836" y="184" width="16" height="16" fill="#565e7e"/><rect x="860" y="184" width="16" height="16" fill="#565e7e"/><rect x="884" y="184" width="16" height="16" fill="#565e7e"/>
+        <text x="908" y="196" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">3 项排队</text>
       </g>
       <g data-motion-item data-step="4" aria-label="第 4 步：追加审计日志">
-        <rect x="664" y="328" width="200" height="88" rx="8" fill="#ffffff" stroke="#29314f"/>
-        <text x="764" y="364" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">审计日志</text>
-        <text x="764" y="388" text-anchor="middle" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">0042 · 已追加</text>
+        <rect x="800" y="328" width="200" height="88" rx="8" fill="#ffffff" stroke="#29314f"/>
+        <text x="900" y="364" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">审计日志</text>
+        <text x="900" y="388" text-anchor="middle" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">0042 · 已追加</text>
       </g>
       <g data-motion-item data-step="5" aria-label="第 5 步：评估完成">
-        <text x="48" y="376" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">结果：受理并已记录</text>
+        <text x="0" y="376" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">结果：受理并已记录</text>
       </g>
 
       <!-- 装饰性重复路径与流动令牌不承载独有语义。 -->
-      <path data-motion-item data-step="2" data-motion-decorative aria-hidden="true" focusable="false" pathLength="1" class="draw-path" d="M248 180 H356"/>
-      <circle data-motion-item data-step="3" data-motion-decorative aria-hidden="true" focusable="false" class="flow-token" cx="556" cy="180" r="6" fill="#1a4dd9"/>
+      <path data-motion-item data-step="2" data-motion-decorative aria-hidden="true" focusable="false" pathLength="1" class="draw-path" d="M200 180 H400"/>
+      <circle data-motion-item data-step="3" data-motion-decorative aria-hidden="true" focusable="false" class="flow-token" cx="600" cy="180" r="6" fill="#1a4dd9"/>
     </svg>
 
     <div data-motion-controls role="group" aria-label="图表播放控件">
