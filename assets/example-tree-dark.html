@@ -7,11 +7,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
       --color-soft:    #8f94ab;
-      --color-accent:  #1a4dd9;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -63,89 +63,89 @@
     <p class="eyebrow">电商系统 · 树状图</p>
     <h1>订单系统模块分解</h1>
 
-    <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-tree-title example-tree-desc">
-      <title id="example-tree-title">订单系统模块分解</title>
-      <desc id="example-tree-desc">树状图：订单系统为根（焦点），下分商品、支付、风控三个一级分支，共五个二级叶子模块；连接线全部正交。</desc>
-        <rect width="100%" height="100%" fill="#ffffff"/>
+    <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-tree-dark-title example-tree-dark-desc">
+      <title id="example-tree-dark-title">订单系统模块分解</title>
+      <desc id="example-tree-dark-desc">树状图：订单系统为根（焦点），下分商品、支付、风控三个一级分支，共五个二级叶子模块；连接线全部正交。</desc>
+        <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 层级标签（左缘） -->
-      <text x="0" y="28" fill="#565e7e" font-size="9" letter-spacing="0.18em" font-family="'Sarasa Mono SC', ui-monospace, monospace">TIER 0 · ROOT</text>
-      <text x="0" y="144" fill="#565e7e" font-size="9" letter-spacing="0.18em" font-family="'Sarasa Mono SC', ui-monospace, monospace">TIER 1</text>
-      <text x="0" y="244" fill="#565e7e" font-size="9" letter-spacing="0.18em" font-family="'Sarasa Mono SC', ui-monospace, monospace">TIER 2</text>
+      <text x="0" y="28" fill="#a2a9ce" font-size="9" letter-spacing="0.18em" font-family="'Sarasa Mono SC', ui-monospace, monospace">TIER 0 · ROOT</text>
+      <text x="0" y="144" fill="#a2a9ce" font-size="9" letter-spacing="0.18em" font-family="'Sarasa Mono SC', ui-monospace, monospace">TIER 1</text>
+      <text x="0" y="244" fill="#a2a9ce" font-size="9" letter-spacing="0.18em" font-family="'Sarasa Mono SC', ui-monospace, monospace">TIER 2</text>
 
       <!-- 连接线先画（正交肘线，端点压准盒子中心） -->
-      <path d="M 480 48 L 480 88 L 180 88 L 180 128" fill="none" stroke="#565e7e" stroke-width="1"/>
-      <path d="M 480 88 L 480 128" fill="none" stroke="#565e7e" stroke-width="1"/>
-      <path d="M 480 88 L 780 88 L 780 128" fill="none" stroke="#565e7e" stroke-width="1"/>
+      <path d="M 480 48 L 480 88 L 180 88 L 180 128" fill="none" stroke="#a2a9ce" stroke-width="1"/>
+      <path d="M 480 88 L 480 128" fill="none" stroke="#a2a9ce" stroke-width="1"/>
+      <path d="M 480 88 L 780 88 L 780 128" fill="none" stroke="#a2a9ce" stroke-width="1"/>
 
-      <path d="M 180 176 L 180 216 L 92 216 L 92 256" fill="none" stroke="#565e7e" stroke-width="1"/>
-      <path d="M 180 216 L 268 216 L 268 256" fill="none" stroke="#565e7e" stroke-width="1"/>
+      <path d="M 180 176 L 180 216 L 92 216 L 92 256" fill="none" stroke="#a2a9ce" stroke-width="1"/>
+      <path d="M 180 216 L 268 216 L 268 256" fill="none" stroke="#a2a9ce" stroke-width="1"/>
 
-      <path d="M 480 176 L 480 216 L 464 216 L 464 256" fill="none" stroke="#565e7e" stroke-width="1"/>
-      <path d="M 480 216 L 640 216 L 640 256" fill="none" stroke="#565e7e" stroke-width="1"/>
+      <path d="M 480 176 L 480 216 L 464 216 L 464 256" fill="none" stroke="#a2a9ce" stroke-width="1"/>
+      <path d="M 480 216 L 640 216 L 640 256" fill="none" stroke="#a2a9ce" stroke-width="1"/>
 
-      <path d="M 780 176 L 780 216 L 836 216 L 836 256" fill="none" stroke="#565e7e" stroke-width="1"/>
+      <path d="M 780 176 L 780 216 L 836 216 L 836 256" fill="none" stroke="#a2a9ce" stroke-width="1"/>
 
       <!-- 根节点（焦点：accent 淡染 + accent 描边） -->
-      <rect x="400" y="0" width="160" height="48" rx="6" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.4"/>
-      <rect x="408" y="8" width="34" height="14" rx="2" fill="none" stroke="rgba(26,77,217,0.50)" stroke-width="0.8"/>
-      <text x="425" y="18.5" fill="#1a4dd9" font-size="9" letter-spacing="0.08em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">ROOT</text>
-      <text x="480" y="36" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">订单系统</text>
+      <rect x="400" y="0" width="160" height="48" rx="6" fill="rgba(125,152,255,0.08)" stroke="#7d98ff" stroke-width="1.4"/>
+      <rect x="408" y="8" width="34" height="14" rx="2" fill="none" stroke="rgba(125,152,255,0.50)" stroke-width="0.8"/>
+      <text x="425" y="18.5" fill="#7d98ff" font-size="9" letter-spacing="0.08em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">ROOT</text>
+      <text x="480" y="36" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">订单系统</text>
 
       <!-- 一级分支：白底 + ink 描边 -->
-      <rect x="100" y="128" width="160" height="48" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <rect x="108" y="136" width="30" height="14" rx="2" fill="none" stroke="rgba(41,49,79,0.40)" stroke-width="0.8"/>
-      <text x="123" y="146.5" fill="#565e7e" font-size="9" letter-spacing="0.08em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">CAT</text>
-      <text x="180" y="158" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">商品</text>
-      <text x="180" y="169" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">信息 · 价格</text>
+      <rect x="100" y="128" width="160" height="48" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <rect x="108" y="136" width="30" height="14" rx="2" fill="none" stroke="rgba(224,228,255,0.40)" stroke-width="0.8"/>
+      <text x="123" y="146.5" fill="#a2a9ce" font-size="9" letter-spacing="0.08em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">CAT</text>
+      <text x="180" y="158" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">商品</text>
+      <text x="180" y="169" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">信息 · 价格</text>
 
-      <rect x="400" y="128" width="160" height="48" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <rect x="408" y="136" width="30" height="14" rx="2" fill="none" stroke="rgba(41,49,79,0.40)" stroke-width="0.8"/>
-      <text x="423" y="146.5" fill="#565e7e" font-size="9" letter-spacing="0.08em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">CAT</text>
-      <text x="480" y="158" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">支付</text>
-      <text x="480" y="169" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">收单 · 结算</text>
+      <rect x="400" y="128" width="160" height="48" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <rect x="408" y="136" width="30" height="14" rx="2" fill="none" stroke="rgba(224,228,255,0.40)" stroke-width="0.8"/>
+      <text x="423" y="146.5" fill="#a2a9ce" font-size="9" letter-spacing="0.08em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">CAT</text>
+      <text x="480" y="158" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">支付</text>
+      <text x="480" y="169" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">收单 · 结算</text>
 
-      <rect x="700" y="128" width="160" height="48" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <rect x="708" y="136" width="30" height="14" rx="2" fill="none" stroke="rgba(41,49,79,0.40)" stroke-width="0.8"/>
-      <text x="723" y="146.5" fill="#565e7e" font-size="9" letter-spacing="0.08em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">CAT</text>
-      <text x="780" y="158" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">风控</text>
-      <text x="780" y="169" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">拦截 · 审单</text>
+      <rect x="700" y="128" width="160" height="48" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <rect x="708" y="136" width="30" height="14" rx="2" fill="none" stroke="rgba(224,228,255,0.40)" stroke-width="0.8"/>
+      <text x="723" y="146.5" fill="#a2a9ce" font-size="9" letter-spacing="0.08em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">CAT</text>
+      <text x="780" y="158" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">风控</text>
+      <text x="780" y="169" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">拦截 · 审单</text>
 
       <!-- 二级叶子：淡染 + 细描边 -->
-      <rect x="12" y="256" width="160" height="48" rx="6" fill="rgba(41,49,79,0.05)" stroke="#565e7e" stroke-width="0.8"/>
-      <text x="92" y="279" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">商品档案</text>
-      <text x="92" y="292" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">SPU · SKU</text>
+      <rect x="12" y="256" width="160" height="48" rx="6" fill="rgba(224,228,255,0.05)" stroke="#a2a9ce" stroke-width="0.8"/>
+      <text x="92" y="279" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">商品档案</text>
+      <text x="92" y="292" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">SPU · SKU</text>
 
-      <rect x="188" y="256" width="160" height="48" rx="6" fill="rgba(41,49,79,0.05)" stroke="#565e7e" stroke-width="0.8"/>
-      <text x="268" y="279" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">类目管理</text>
-      <text x="268" y="292" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">层级 · 属性</text>
+      <rect x="188" y="256" width="160" height="48" rx="6" fill="rgba(224,228,255,0.05)" stroke="#a2a9ce" stroke-width="0.8"/>
+      <text x="268" y="279" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">类目管理</text>
+      <text x="268" y="292" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">层级 · 属性</text>
 
-      <rect x="384" y="256" width="160" height="48" rx="6" fill="rgba(41,49,79,0.05)" stroke="#565e7e" stroke-width="0.8"/>
-      <text x="464" y="279" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">支付网关</text>
-      <text x="464" y="292" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">路由 · 重试</text>
+      <rect x="384" y="256" width="160" height="48" rx="6" fill="rgba(224,228,255,0.05)" stroke="#a2a9ce" stroke-width="0.8"/>
+      <text x="464" y="279" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">支付网关</text>
+      <text x="464" y="292" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">路由 · 重试</text>
 
-      <rect x="560" y="256" width="160" height="48" rx="6" fill="rgba(41,49,79,0.05)" stroke="#565e7e" stroke-width="0.8"/>
-      <text x="640" y="279" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">清结算</text>
-      <text x="640" y="292" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">T+1 · 对账</text>
+      <rect x="560" y="256" width="160" height="48" rx="6" fill="rgba(224,228,255,0.05)" stroke="#a2a9ce" stroke-width="0.8"/>
+      <text x="640" y="279" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">清结算</text>
+      <text x="640" y="292" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">T+1 · 对账</text>
 
-      <rect x="756" y="256" width="160" height="48" rx="6" fill="rgba(41,49,79,0.05)" stroke="#565e7e" stroke-width="0.8"/>
-      <text x="836" y="279" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">规则引擎</text>
-      <text x="836" y="292" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">实时 · 离线</text>
+      <rect x="756" y="256" width="160" height="48" rx="6" fill="rgba(224,228,255,0.05)" stroke="#a2a9ce" stroke-width="0.8"/>
+      <text x="836" y="279" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">规则引擎</text>
+      <text x="836" y="292" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">实时 · 离线</text>
 
       <!-- 图例横条 -->
-      <line x1="0" y1="360" x2="1000" y2="360" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <text x="0" y="378" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+      <line x1="0" y1="360" x2="1000" y2="360" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <text x="0" y="378" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
 
-      <rect x="72" y="368" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.4"/>
-      <text x="96" y="378" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">根（焦点）</text>
+      <rect x="72" y="368" width="16" height="12" rx="2" fill="rgba(125,152,255,0.08)" stroke="#7d98ff" stroke-width="1.4"/>
+      <text x="96" y="378" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">根（焦点）</text>
 
-      <rect x="194" y="368" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="218" y="378" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">一级分支</text>
+      <rect x="194" y="368" width="16" height="12" rx="2" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="218" y="378" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">一级分支</text>
 
-      <rect x="306" y="368" width="16" height="12" rx="2" fill="rgba(41,49,79,0.05)" stroke="#565e7e" stroke-width="0.8"/>
-      <text x="330" y="378" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">二级叶子</text>
+      <rect x="306" y="368" width="16" height="12" rx="2" fill="rgba(224,228,255,0.05)" stroke="#a2a9ce" stroke-width="0.8"/>
+      <text x="330" y="378" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">二级叶子</text>
 
-      <text x="1000" y="378" text-anchor="end" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">正交连线；焦点只标根——所有分支同源</text>
+      <text x="1000" y="378" text-anchor="end" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">正交连线；焦点只标根——所有分支同源</text>
     </svg>
   </div>
 </body>
