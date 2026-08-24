@@ -7,11 +7,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
       --color-soft:    #8f94ab;
-      --color-accent:  #1a4dd9;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -63,64 +63,64 @@
     <p class="eyebrow">数据治理 · 嵌套图</p>
     <h1>数据访问边界</h1>
 
-    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-nested-title example-nested-desc">
-      <title id="example-nested-title">数据访问边界</title>
-      <desc id="example-nested-desc">嵌套图：数据访问边界从外向内逐层收窄——全公司之内是业务域，业务域之内是项目，项目内是生产环境，最内层的机密数据（焦点）只对项目维护者开放写入。</desc>
+    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-nested-dark-title example-nested-dark-desc">
+      <title id="example-nested-dark-title">数据访问边界</title>
+      <desc id="example-nested-dark-desc">嵌套图：数据访问边界从外向内逐层收窄——全公司之内是业务域，业务域之内是项目，项目内是生产环境，最内层的机密数据（焦点）只对项目维护者开放写入。</desc>
 
-      <rect width="100%" height="100%" fill="#ffffff"/>
+      <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 嵌套层（描边由淡到重，填充透明度递增；最内层全宽扁盒 + 焦点） -->
-      <rect x="0"  y="24"  width="920" height="380" rx="8" fill="rgba(41,49,79,0.02)"  stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <rect x="32"  y="60"  width="856" height="308" rx="8" fill="rgba(41,49,79,0.03)"   stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <rect x="64" y="96" width="792" height="236" rx="8" fill="rgba(41,49,79,0.05)"  stroke="rgba(41,49,79,0.50)" stroke-width="1"/>
-      <rect x="96" y="132" width="728" height="164" rx="8" fill="rgba(41,49,79,0.03)"   stroke="#565e7e" stroke-width="1"/>
-      <rect x="128" y="168" width="664" height="92"  rx="8" fill="rgba(26,77,217,0.08)"  stroke="#1a4dd9" stroke-width="1.4"/>
+      <rect x="0"  y="24"  width="920" height="380" rx="8" fill="rgba(224,228,255,0.02)"  stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <rect x="32"  y="60"  width="856" height="308" rx="8" fill="rgba(224,228,255,0.03)"   stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <rect x="64" y="96" width="792" height="236" rx="8" fill="rgba(224,228,255,0.05)"  stroke="rgba(224,228,255,0.50)" stroke-width="1"/>
+      <rect x="96" y="132" width="728" height="164" rx="8" fill="rgba(224,228,255,0.03)"   stroke="#a2a9ce" stroke-width="1"/>
+      <rect x="128" y="168" width="664" height="92"  rx="8" fill="rgba(125,152,255,0.10)"  stroke="#7d98ff" stroke-width="1.4"/>
 
       <!-- 层标签（骑上边框，纸色遮罩垫底） -->
-      <rect x="20"  y="16"  width="72" height="16" fill="#ffffff"/>
-      <text x="24"  y="28"  fill="rgba(41,49,79,0.60)" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">全公司</text>
+      <rect x="20"  y="16"  width="72" height="16" fill="#0a0d1b"/>
+      <text x="24"  y="28"  fill="rgba(224,228,255,0.60)" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">全公司</text>
 
-      <rect x="52"  y="52"  width="72" height="16" fill="#ffffff"/>
-      <text x="56"  y="64" fill="rgba(41,49,79,0.60)" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">业务域</text>
+      <rect x="52"  y="52"  width="72" height="16" fill="#0a0d1b"/>
+      <text x="56"  y="64" fill="rgba(224,228,255,0.60)" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">业务域</text>
 
-      <rect x="84" y="88" width="56" height="16" fill="#ffffff"/>
-      <text x="88" y="100" fill="rgba(41,49,79,0.60)" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">项目</text>
+      <rect x="84" y="88" width="56" height="16" fill="#0a0d1b"/>
+      <text x="88" y="100" fill="rgba(224,228,255,0.60)" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">项目</text>
 
-      <rect x="116" y="124" width="88" height="16" fill="#ffffff"/>
-      <text x="120" y="136" fill="rgba(41,49,79,0.60)" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">生产环境</text>
+      <rect x="116" y="124" width="88" height="16" fill="#0a0d1b"/>
+      <text x="120" y="136" fill="rgba(224,228,255,0.60)" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">生产环境</text>
 
-      <rect x="148" y="160" width="72" height="16" fill="#ffffff"/>
-      <text x="152" y="172" fill="#1a4dd9" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">机密库</text>
+      <rect x="148" y="160" width="72" height="16" fill="#0a0d1b"/>
+      <text x="152" y="172" fill="#7d98ff" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">机密库</text>
 
       <!-- 每层环带的文件 glyph（折角矩形，右下角错落） -->
       <g transform="translate(868,372)">
-        <path d="M0 0 L16 0 L20 4 L20 20 L0 20 Z" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <path d="M16 0 L16 4 L20 4" fill="none" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
+        <path d="M0 0 L16 0 L20 4 L20 20 L0 20 Z" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <path d="M16 0 L16 4 L20 4" fill="none" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
       </g>
       <g transform="translate(836,336)">
-        <path d="M0 0 L16 0 L20 4 L20 20 L0 20 Z" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <path d="M16 0 L16 4 L20 4" fill="none" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
+        <path d="M0 0 L16 0 L20 4 L20 20 L0 20 Z" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <path d="M16 0 L16 4 L20 4" fill="none" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
       </g>
       <g transform="translate(804,300)">
-        <path d="M0 0 L16 0 L20 4 L20 20 L0 20 Z" fill="#ffffff" stroke="rgba(41,49,79,0.50)" stroke-width="1"/>
-        <path d="M16 0 L16 4 L20 4" fill="none" stroke="rgba(41,49,79,0.50)" stroke-width="1"/>
+        <path d="M0 0 L16 0 L20 4 L20 20 L0 20 Z" fill="#0a0d1b" stroke="rgba(224,228,255,0.50)" stroke-width="1"/>
+        <path d="M16 0 L16 4 L20 4" fill="none" stroke="rgba(224,228,255,0.50)" stroke-width="1"/>
       </g>
       <g transform="translate(772,264)">
-        <path d="M0 0 L16 0 L20 4 L20 20 L0 20 Z" fill="#ffffff" stroke="#565e7e" stroke-width="1"/>
-        <path d="M16 0 L16 4 L20 4" fill="none" stroke="#565e7e" stroke-width="1"/>
+        <path d="M0 0 L16 0 L20 4 L20 20 L0 20 Z" fill="#0a0d1b" stroke="#a2a9ce" stroke-width="1"/>
+        <path d="M16 0 L16 4 L20 4" fill="none" stroke="#a2a9ce" stroke-width="1"/>
       </g>
 
       <!-- 最内层内容：大号可读标签 + 副标 -->
-      <text x="460" y="212" fill="#29314f" font-size="16" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">机密数据</text>
-      <text x="460" y="236" fill="#565e7e" font-size="10" letter-spacing="0.08em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">仅项目维护者可写</text>
+      <text x="460" y="212" fill="#e0e4ff" font-size="16" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">机密数据</text>
+      <text x="460" y="236" fill="#a2a9ce" font-size="10" letter-spacing="0.08em" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">仅项目维护者可写</text>
 
       <!-- 右上旁注：斜体 + 虚线弧线引到最内层，端点圆点 -->
-      <text x="864" y="4" fill="#29314f" font-size="16" font-style="italic" text-anchor="end" font-family="'Noto Serif SC', 'Songti SC', 'SimSun', serif">权限逐层收窄，无需重复授权</text>
-      <path d="M 780 12 Q 660 64 480 180" fill="none" stroke="rgba(41,49,79,0.40)" stroke-width="1" stroke-dasharray="4,3"/>
-      <circle cx="480" cy="180" r="2" fill="#29314f"/>
+      <text x="864" y="4" fill="#e0e4ff" font-size="16" font-style="italic" text-anchor="end" font-family="'Noto Serif SC', 'Songti SC', 'SimSun', serif">权限逐层收窄，无需重复授权</text>
+      <path d="M 780 12 Q 660 64 480 180" fill="none" stroke="rgba(224,228,255,0.40)" stroke-width="1" stroke-dasharray="4,3"/>
+      <circle cx="480" cy="180" r="2" fill="#e0e4ff"/>
 
       <!-- 左下旁注：斜体点题 -->
-      <text x="0" y="448" fill="#565e7e" font-size="16" font-style="italic" font-family="'Noto Serif SC', 'Songti SC', 'SimSun', serif">边界就写在结构里</text>
+      <text x="0" y="448" fill="#a2a9ce" font-size="16" font-style="italic" font-family="'Noto Serif SC', 'Songti SC', 'SimSun', serif">边界就写在结构里</text>
     </svg>
   </div>
 </body>
