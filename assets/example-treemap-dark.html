@@ -7,10 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -62,62 +62,62 @@
     <p class="eyebrow">对象存储 · 矩形树图</p>
     <h1>对象存储占用分布</h1>
 
-    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-treemap-title example-treemap-desc">
-      <title id="example-treemap-title">对象存储占用分布</title>
-      <desc id="example-treemap-desc">矩形树图：4.78 TB 对象存储按业务拆分——备份归档占 31% 最大，视频素材 24% 是增长最快的业务线（焦点），日志 16%、用户上传 12%、数仓分层 8.8%、临时区 4%、元数据 2.4%、其他 1.6%；面积即存储量。</desc>
-        <rect width="100%" height="100%" fill="#ffffff"/>
+    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-treemap-dark-title example-treemap-dark-desc">
+      <title id="example-treemap-dark-title">对象存储占用分布</title>
+      <desc id="example-treemap-dark-desc">矩形树图：4.78 TB 对象存储按业务拆分——备份归档占 31% 最大，视频素材 24% 是增长最快的业务线（焦点），日志 16%、用户上传 12%、数仓分层 8.8%、临时区 4%、元数据 2.4%、其他 1.6%；面积即存储量。</desc>
+        <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 格子（squarified；名次 ink 梯，焦点格摘出梯外） -->
-      <rect x="0"   y="0"  width="308" height="380" rx="2" fill="rgba(41,49,79,0.16)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <rect x="312" y="0"  width="236" height="380" rx="2" fill="rgba(26,77,217,0.15)" stroke="#1a4dd9" stroke-width="1.4"/>
-      <rect x="552" y="0"  width="280" height="216" rx="2" fill="rgba(41,49,79,0.13)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <rect x="552" y="220" width="280" height="160" rx="2" fill="rgba(41,49,79,0.11)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <rect x="836" y="0"  width="164" height="192" rx="2" fill="rgba(41,49,79,0.09)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <rect x="836" y="196" width="164" height="88" rx="2" fill="rgba(41,49,79,0.07)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <rect x="836" y="288" width="164" height="52" rx="2" fill="rgba(41,49,79,0.05)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <rect x="836" y="344" width="164" height="36" rx="2" fill="rgba(41,49,79,0.04)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+      <rect x="0"   y="0"  width="308" height="380" rx="2" fill="rgba(224,228,255,0.16)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <rect x="312" y="0"  width="236" height="380" rx="2" fill="rgba(125,152,255,0.15)" stroke="#7d98ff" stroke-width="1.4"/>
+      <rect x="552" y="0"  width="280" height="216" rx="2" fill="rgba(224,228,255,0.13)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <rect x="552" y="220" width="280" height="160" rx="2" fill="rgba(224,228,255,0.11)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <rect x="836" y="0"  width="164" height="192" rx="2" fill="rgba(224,228,255,0.09)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <rect x="836" y="196" width="164" height="88" rx="2" fill="rgba(224,228,255,0.07)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <rect x="836" y="288" width="164" height="52" rx="2" fill="rgba(224,228,255,0.05)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <rect x="836" y="344" width="164" height="36" rx="2" fill="rgba(224,228,255,0.04)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
 
       <!-- 格内标签：大格 = 名 + 值 + 占比 -->
-      <text x="16"  y="28"  fill="#29314f" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">备份归档</text>
-      <text x="16"  y="46"  fill="#565e7e" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">1.48 TB · 31%</text>
+      <text x="16"  y="28"  fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">备份归档</text>
+      <text x="16"  y="46"  fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">1.48 TB · 31%</text>
 
-      <text x="328" y="28"  fill="#1a4dd9" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">视频素材</text>
-      <text x="328" y="46"  fill="#1a4dd9" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">1.15 TB · 24%</text>
+      <text x="328" y="28"  fill="#7d98ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">视频素材</text>
+      <text x="328" y="46"  fill="#7d98ff" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">1.15 TB · 24%</text>
 
-      <text x="568" y="28"  fill="#29314f" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">日志</text>
-      <text x="568" y="46"  fill="#565e7e" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">0.77 TB · 16%</text>
+      <text x="568" y="28"  fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">日志</text>
+      <text x="568" y="46"  fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">0.77 TB · 16%</text>
 
-      <text x="568" y="248" fill="#29314f" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">用户上传</text>
-      <text x="568" y="266" fill="#565e7e" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">0.57 TB · 12%</text>
+      <text x="568" y="248" fill="#e0e4ff" font-size="14" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">用户上传</text>
+      <text x="568" y="266" fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">0.57 TB · 12%</text>
 
       <!-- 中格 = 名 + 值 -->
-      <text x="852" y="28"  fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数仓分层</text>
-      <text x="852" y="46"  fill="#565e7e" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">0.42 TB · 8.8%</text>
+      <text x="852" y="28"  fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数仓分层</text>
+      <text x="852" y="46"  fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">0.42 TB · 8.8%</text>
 
-      <text x="852" y="224" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">临时区</text>
-      <text x="852" y="242" fill="#565e7e" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">0.19 TB</text>
+      <text x="852" y="224" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">临时区</text>
+      <text x="852" y="242" fill="#a2a9ce" font-size="9" font-family="'Sarasa Mono SC', ui-monospace, monospace">0.19 TB</text>
 
       <!-- 小格 = 短名；细条 = 无字 + 信息圆点（名字进图例） -->
-      <text x="852" y="320" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">元数据</text>
-      <circle cx="912" cy="362" r="5" fill="#29314f"/>
-      <text x="912" y="365.5" fill="#ffffff" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">i</text>
+      <text x="852" y="320" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">元数据</text>
+      <circle cx="912" cy="362" r="5" fill="#e0e4ff"/>
+      <text x="912" y="365.5" fill="#0a0d1b" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">i</text>
 
       <!-- 图例与数据源行 -->
-      <line x1="0" y1="436" x2="1000" y2="436" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <text x="0" y="454" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
-      <text x="1000" y="454" fill="#565e7e" font-size="10" text-anchor="end" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">面积 = 存储量 · 对象存储集群 2026-06 · 数值经舍入</text>
+      <line x1="0" y1="436" x2="1000" y2="436" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <text x="0" y="454" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+      <text x="1000" y="454" fill="#a2a9ce" font-size="10" text-anchor="end" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">面积 = 存储量 · 对象存储集群 2026-06 · 数值经舍入</text>
 
-      <rect x="72" y="444" width="16" height="12" rx="2" fill="rgba(26,77,217,0.15)" stroke="#1a4dd9" stroke-width="1.4"/>
-      <text x="96" y="454" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">视频素材（焦点，增长最快）</text>
+      <rect x="72" y="444" width="16" height="12" rx="2" fill="rgba(125,152,255,0.15)" stroke="#7d98ff" stroke-width="1.4"/>
+      <text x="96" y="454" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">视频素材（焦点，增长最快）</text>
 
-      <rect x="274" y="444" width="16" height="12" rx="2" fill="rgba(41,49,79,0.16)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <text x="298" y="454" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">占比大</text>
+      <rect x="274" y="444" width="16" height="12" rx="2" fill="rgba(224,228,255,0.16)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <text x="298" y="454" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">占比大</text>
 
-      <rect x="376" y="444" width="16" height="12" rx="2" fill="rgba(41,49,79,0.04)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <text x="400" y="454" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">占比小</text>
+      <rect x="376" y="444" width="16" height="12" rx="2" fill="rgba(224,228,255,0.04)" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <text x="400" y="454" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">占比小</text>
 
-      <circle cx="483" cy="450" r="5" fill="#29314f"/>
-      <text x="496" y="454" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">其他：归档碎片等 · 1.6%</text>
+      <circle cx="483" cy="450" r="5" fill="#e0e4ff"/>
+      <text x="496" y="454" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">其他：归档碎片等 · 1.6%</text>
     </svg>
   </div>
 </body>
