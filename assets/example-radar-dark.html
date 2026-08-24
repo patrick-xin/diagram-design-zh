@@ -7,10 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -62,72 +62,72 @@
     <p class="eyebrow">存储选型 · 雷达图</p>
     <h1>存储方案选型评估</h1>
 
-    <svg viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-radar-title example-radar-desc">
-      <title id="example-radar-title">存储方案选型评估</title>
-      <desc id="example-radar-desc">雷达图：四个存储方案在吞吐量、响应、生态、运维、成本五项维度上按十分制对比，OpenSearch 综合面最均衡（推荐焦点），ClickHouse 吞吐突出但运维与成本弱。</desc>
-        <rect width="100%" height="100%" fill="#ffffff"/>
+    <svg viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-radar-dark-title example-radar-dark-desc">
+      <title id="example-radar-dark-title">存储方案选型评估</title>
+      <desc id="example-radar-dark-desc">雷达图：四个存储方案在吞吐量、响应、生态、运维、成本五项维度上按十分制对比，OpenSearch 综合面最均衡（推荐焦点），ClickHouse 吞吐突出但运维与成本弱。</desc>
+        <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 网格环（内四环淡、外环略重） -->
-      <polygon points="500,144 530,166 519,202 481,202 470,166" fill="none" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <polygon points="500,112 561,156 538,228 462,228 439,156" fill="none" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <polygon points="500,80 591,147 556,253 444,253 409,147" fill="none" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <polygon points="500,48 622,137 575,279 425,279 378,137" fill="none" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <polygon points="500,16 652,127 594,305 406,305 348,127" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+      <polygon points="500,144 530,166 519,202 481,202 470,166" fill="none" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <polygon points="500,112 561,156 538,228 462,228 439,156" fill="none" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <polygon points="500,80 591,147 556,253 444,253 409,147" fill="none" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <polygon points="500,48 622,137 575,279 425,279 378,137" fill="none" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <polygon points="500,16 652,127 594,305 406,305 348,127" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
 
       <!-- 轴辐条（无箭头） -->
-      <line x1="500" y1="176" x2="500" y2="16"  stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <line x1="500" y1="176" x2="652" y2="127" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <line x1="500" y1="176" x2="594" y2="305" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <line x1="500" y1="176" x2="406" y2="305" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <line x1="500" y1="176" x2="348" y2="127" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+      <line x1="500" y1="176" x2="500" y2="16"  stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <line x1="500" y1="176" x2="652" y2="127" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <line x1="500" y1="176" x2="594" y2="305" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <line x1="500" y1="176" x2="406" y2="305" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <line x1="500" y1="176" x2="348" y2="127" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
 
       <!-- 轴标签（一个词） -->
-      <text x="500" y="0"  fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">吞吐量</text>
-      <text x="668" y="123" fill="#29314f" font-size="12" font-weight="600" text-anchor="start" dominant-baseline="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">响应</text>
-      <text x="606" y="328" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">生态</text>
-      <text x="394" y="328" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">运维</text>
-      <text x="332" y="123" fill="#29314f" font-size="12" font-weight="600" text-anchor="end" dominant-baseline="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">成本</text>
+      <text x="500" y="0"  fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">吞吐量</text>
+      <text x="668" y="123" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="start" dominant-baseline="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">响应</text>
+      <text x="606" y="328" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">生态</text>
+      <text x="394" y="328" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">运维</text>
+      <text x="332" y="123" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="end" dominant-baseline="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">成本</text>
 
       <!-- 刻度只标顶部轴 -->
-      <text x="492" y="148" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">2</text>
-      <text x="492" y="116" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">4</text>
-      <text x="492" y="84" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">6</text>
-      <text x="492" y="52" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">8</text>
+      <text x="492" y="148" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">2</text>
+      <text x="492" y="116" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">4</text>
+      <text x="492" y="84" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">6</text>
+      <text x="492" y="52" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">8</text>
 
       <!-- 非焦点系列（先画面积小的） -->
       <polygon points="500,80 622,137 585,292 415,292 363,132"
-               fill="rgba(217,96,91,0.18)" stroke="#d9605b" stroke-width="1.5"/>
+               fill="rgba(231,140,136,0.22)" stroke="#e78c88" stroke-width="1.5"/>
       <polygon points="500,48 591,147 566,266 434,266 394,142"
-               fill="rgba(237,125,49,0.18)" stroke="#ed7d31" stroke-width="1.5"/>
+               fill="rgba(242,162,103,0.22)" stroke="#f2a267" stroke-width="1.5"/>
       <polygon points="500,80 622,137 566,266 415,292 409,147"
-               fill="rgba(59,162,114,0.18)" stroke="#3ba272" stroke-width="1.5"/>
+               fill="rgba(95,191,147,0.22)" stroke="#5fbf93" stroke-width="1.5"/>
 
       <!-- 焦点系列（1.8px + 顶点圆点） -->
       <polygon points="500,32 622,137 585,292 425,279 363,132"
-               fill="rgba(26,77,217,0.18)" stroke="#1a4dd9" stroke-width="1.8"/>
-      <circle cx="500" cy="32"  r="4" fill="#1a4dd9"/>
-      <circle cx="622" cy="137" r="4" fill="#1a4dd9"/>
-      <circle cx="585" cy="292" r="4" fill="#1a4dd9"/>
-      <circle cx="425" cy="279" r="4" fill="#1a4dd9"/>
-      <circle cx="363" cy="132" r="4" fill="#1a4dd9"/>
+               fill="rgba(125,152,255,0.22)" stroke="#7d98ff" stroke-width="1.8"/>
+      <circle cx="500" cy="32"  r="4" fill="#7d98ff"/>
+      <circle cx="622" cy="137" r="4" fill="#7d98ff"/>
+      <circle cx="585" cy="292" r="4" fill="#7d98ff"/>
+      <circle cx="425" cy="279" r="4" fill="#7d98ff"/>
+      <circle cx="363" cy="132" r="4" fill="#7d98ff"/>
 
       <!-- 图例横条 -->
-      <line x1="0" y1="388" x2="1000" y2="388" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <text x="0" y="406" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+      <line x1="0" y1="388" x2="1000" y2="388" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <text x="0" y="406" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
 
-      <rect x="72" y="396" width="16" height="12" rx="2" fill="#1a4dd9"/>
-      <text x="96" y="406" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">OpenSearch</text>
+      <rect x="72" y="396" width="16" height="12" rx="2" fill="#7d98ff"/>
+      <text x="96" y="406" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">OpenSearch</text>
 
-      <rect x="200" y="396" width="16" height="12" rx="2" fill="#3ba272"/>
-      <text x="224" y="406" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">PostgreSQL</text>
+      <rect x="200" y="396" width="16" height="12" rx="2" fill="#5fbf93"/>
+      <text x="224" y="406" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">PostgreSQL</text>
 
-      <rect x="330" y="396" width="16" height="12" rx="2" fill="#ed7d31"/>
-      <text x="354" y="406" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MongoDB</text>
+      <rect x="330" y="396" width="16" height="12" rx="2" fill="#f2a267"/>
+      <text x="354" y="406" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MongoDB</text>
 
-      <rect x="444" y="396" width="16" height="12" rx="2" fill="#d9605b"/>
-      <text x="468" y="406" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">ClickHouse</text>
+      <rect x="444" y="396" width="16" height="12" rx="2" fill="#e78c88"/>
+      <text x="468" y="406" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">ClickHouse</text>
 
-      <text x="1000" y="406" text-anchor="end" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">十分制，越高越好</text>
+      <text x="1000" y="406" text-anchor="end" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">十分制，越高越好</text>
     </svg>
   </div>
 </body>
