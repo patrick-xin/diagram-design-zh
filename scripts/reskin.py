@@ -54,12 +54,14 @@ SLOTS: dict[str, tuple[str, tuple[int, int, int]]] = {
     "muted":       ("#565e7e", (86, 94, 126)),
     "soft":        ("#8f94ab", (143, 148, 171)),
     "accent":      ("#1a4dd9", (26, 77, 217)),
+    "link":        ("#217e7b", (33, 126, 123)),
     # 深色档：paper-dark 是深色文字的纸色基（hex 形 #e0e4ff 与 rgba 基 224,228,255 同源）。
     "paper-dark":  ("#e0e4ff", (224, 228, 255)),
     "dark-bg":     ("#0a0d1b", (10, 13, 27)),
     "muted-dark":  ("#a2a9ce", (162, 169, 206)),
     "soft-dark":   ("#787fa2", (120, 127, 162)),
     "accent-dark": ("#7d98ff", (125, 152, 255)),
+    "link-dark":   ("#55b8b4", (85, 184, 180)),
     "series-1":    ("#3ba272", (59, 162, 114)),
     "series-2":    ("#ed7d31", (237, 125, 49)),
     "series-3":    ("#d9605b", (217, 96, 91)),
@@ -87,7 +89,7 @@ PINNED: dict[str, tuple[str, tuple[int, int, int]]] = {
     "sem-workspace-dark":     ("#c9a23a", (201, 162, 58)),
 }
 
-DARK_SLOTS = {"paper-dark", "dark-bg", "muted-dark", "soft-dark", "accent-dark"}
+DARK_SLOTS = {"paper-dark", "dark-bg", "muted-dark", "soft-dark", "accent-dark", "link-dark"}
 
 # 终端外壳灰阶（assets/template-terminal.html 的题材专用色系，按 RGB 基收录，
 # hex 与 rgba 两种写法同时盖住）。换肤与普查均原样保留。

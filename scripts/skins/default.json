@@ -23,6 +23,8 @@
   "series-2-dark": "#f2a267",
   "series-3-dark": "#e78c88",
   "series-4-dark": "#8498dc",
-  "series-5-dark": "#b795cf"
+  "series-5-dark": "#b795cf",
+  "link": "#217e7b",
+  "link-dark": "#55b8b4"
  }
 }

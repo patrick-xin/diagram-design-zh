@@ -165,7 +165,7 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
   <!-- dots pattern: reserved for dev/editorial theme, unused by default -->
   <marker id="arr-muted"  markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#565e7e"/></marker>
   <marker id="arr-accent" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a4dd9"/></marker>
-  <marker id="arr-link"   markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#bf7f0f"/></marker>
+  <marker id="arr-link"   markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#217e7b"/></marker>
 </defs>
 ```
 
@@ -230,7 +230,7 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 
 **对称换基，α 一律不动**（全套现值照抄 [`assets/example-data-flow-dark.html`](../assets/example-data-flow-dark.html)）：
 
-- 纸 → `#0a0d1b`（页面底 / 行容器上节点底 / 标注遮罩同色成型）；ink 基 → `#e0e4ff` 基（`rgba(224,228,255,X)` 各档）；muted → `#a2a9ce`（连接线 `rgba(162,169,206,0.60)`）；soft → `#787fa2`；accent → `#7d98ff`（焦点 tint 档浅 0.08 → 深 **0.10**，芯片档 0.20 不动）；link 琥珀深色档 `#e8b45a`。
+- 纸 → `#0a0d1b`（页面底 / 行容器上节点底 / 标注遮罩同色成型）；ink 基 → `#e0e4ff` 基（`rgba(224,228,255,X)` 各档）；muted → `#a2a9ce`（连接线 `rgba(162,169,206,0.60)`）；soft → `#787fa2`；accent → `#7d98ff`（焦点 tint 档浅 0.08 → 深 **0.10**，芯片档 0.20 不动）；link 深色档 `#55b8b4`（青）。
 - 系列芯片换深色档（翠绿 `#5fbf93` 等，见 style-guide 系列表深色列），芯片内文字**深字**（`#0a0d1b`）。
 - 自定义配色（§4）换对应语义色**深色档**基（如 `sem-security` 深色基 `#bf6561`），α 档不变；深色是 opt-in——用户点名才启用。
 
