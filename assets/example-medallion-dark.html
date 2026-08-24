@@ -7,7 +7,7 @@ tiers: [原始 raw-bucket outer, 脱敏 anon-bucket default, 暂存 staging-buck
         指标 aggregated-bucket focal, 归档 archive-bucket cold]
 promotions: [去 PII normal, 清洗加权 normal(继承目标层色), 汇聚 focal, 归档 lifecycle]
 paths: [SQL 路径 Trino INSERT INTO … SELECT, 笔记本路径 DuckDB + Python/R · JupyterHub]
-dark: false
+dark: true
 -->
 <html lang="zh-CN">
 <head>
@@ -17,10 +17,10 @@ dark: false
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -82,63 +82,63 @@ dark: false
     <h1>五层奖章架构 · 季度调研数据</h1>
     <p class="subtitle">季度调研数据从左到右经过五层——原始层含 PII，去标识化后进脱敏层，清洗加权进暂存工作区，汇聚为作为焦点的指标层，最终归档冷存；层间晋升弧从卡顶跨过，全程单向无回流。</p>
 
-    <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-medallion-title example-medallion-desc">
-      <title id="example-medallion-title">五层奖章架构</title>
-      <desc id="example-medallion-desc">奖章架构：季度调研数据从左到右经过五层——原始数据含 PII，去标识化后进脱敏层，清洗加权进暂存工作区，汇聚成业务指标，最终归档冷存。</desc>
+    <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-medallion-dark-title example-medallion-dark-desc">
+      <title id="example-medallion-dark-title">五层奖章架构</title>
+      <desc id="example-medallion-dark-desc">奖章架构：季度调研数据从左到右经过五层——原始数据含 PII，去标识化后进脱敏层，清洗加权进暂存工作区，汇聚成业务指标，最终归档冷存。</desc>
       <defs>
-        <marker id="arrow"        markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#565e7e"/></marker>
-        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a4dd9"/></marker>
+        <marker id="arrow"        markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a2a9ce"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#7d98ff"/></marker>
         <marker id="arrow-yellow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#c9a23a"/></marker>
       </defs>
 
-      <rect width="100%" height="100%" fill="#ffffff"/>
+      <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 晋升弧（先画；锚在层卡顶部中心，控制点 y=0） -->
-<path d="M 650,72 C 650,0 838,0 838,80" fill="none" stroke="#565e7e" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
-<path d="M 462,72 C 462,0 650,0 650,80" fill="none" stroke="#1a4dd9" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+<path d="M 650,72 C 650,0 838,0 838,80" fill="none" stroke="#a2a9ce" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<path d="M 462,72 C 462,0 650,0 650,80" fill="none" stroke="#7d98ff" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
 <path d="M 274,72 C 274,0 462,0 462,80" fill="none" stroke="#c9a23a" stroke-width="1.2" marker-end="url(#arrow-yellow)"/>
-<path d="M 86,80 C 86,0 274,0 274,80"   fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M 86,80 C 86,0 274,0 274,80"   fill="none" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
 
       <!-- 弧内标签 -->
-      <text x="180" y="50" fill="#565e7e" font-size="12" font-weight="500" letter-spacing="0.12em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">去 PII</text>
+      <text x="180" y="50" fill="#a2a9ce" font-size="12" font-weight="500" letter-spacing="0.12em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">去 PII</text>
       <text x="368" y="50" fill="#c9a23a" font-size="12" font-weight="500" letter-spacing="0.12em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">清洗加权</text>
-      <text x="556" y="50" fill="#1a4dd9" font-size="12" font-weight="500" letter-spacing="0.12em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">汇聚</text>
-      <text x="744" y="50" fill="#565e7e" font-size="12" font-weight="500" letter-spacing="0.12em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">归档</text>
+      <text x="556" y="50" fill="#7d98ff" font-size="12" font-weight="500" letter-spacing="0.12em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">汇聚</text>
+      <text x="744" y="50" fill="#a2a9ce" font-size="12" font-weight="500" letter-spacing="0.12em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">归档</text>
 
       <!-- 层卡 1：原始（outer） -->
       <g>
-        <rect x="0" y="80" width="172" height="368" rx="6" fill="#ffffff" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
-        <rect x="0" y="80" width="172" height="40" rx="6" fill="rgba(86,94,126,0.10)"/>
-        <rect x="0" y="112" width="172" height="8" fill="rgba(86,94,126,0.10)"/>
-        <text x="86" y="106" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">原始</text>
-        <text x="86" y="144" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">raw-bucket</text>
-        <text x="16" y="180" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工具</text>
-        <text x="16" y="198" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">NiFi · 原始写入</text>
-        <text x="16" y="220" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">格式</text>
-        <text x="16" y="238" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">CSV · Parquet · JSON</text>
-        <text x="16" y="260" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写入者</text>
-        <text x="16" y="278" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据工程师</text>
-        <text x="16" y="360" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">季度调研示例</text>
-        <text x="16" y="378" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Q1 全量 · 含 PII</text>
-        <text x="16" y="396" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">CAPI 原始记录</text>
+        <rect x="0" y="80" width="172" height="368" rx="6" fill="#0a0d1b" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+        <rect x="0" y="80" width="172" height="40" rx="6" fill="rgba(162,169,206,0.10)"/>
+        <rect x="0" y="112" width="172" height="8" fill="rgba(162,169,206,0.10)"/>
+        <text x="86" y="106" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">原始</text>
+        <text x="86" y="144" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">raw-bucket</text>
+        <text x="16" y="180" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工具</text>
+        <text x="16" y="198" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">NiFi · 原始写入</text>
+        <text x="16" y="220" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">格式</text>
+        <text x="16" y="238" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">CSV · Parquet · JSON</text>
+        <text x="16" y="260" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写入者</text>
+        <text x="16" y="278" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据工程师</text>
+        <text x="16" y="360" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">季度调研示例</text>
+        <text x="16" y="378" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Q1 全量 · 含 PII</text>
+        <text x="16" y="396" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">CAPI 原始记录</text>
       </g>
 
       <!-- 层卡 2：脱敏（default） -->
       <g>
-        <rect x="188" y="80" width="172" height="368" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <rect x="188" y="80" width="172" height="40" rx="6" fill="rgba(41,49,79,0.05)"/>
-        <rect x="188" y="112" width="172" height="8" fill="rgba(41,49,79,0.05)"/>
-        <text x="274" y="106" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">脱敏</text>
-        <text x="274" y="144" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">anon-bucket</text>
-        <text x="204" y="180" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工具</text>
-        <text x="204" y="198" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino INSERT</text>
-        <text x="204" y="220" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">格式</text>
-        <text x="204" y="238" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Iceberg · 分区</text>
-        <text x="204" y="260" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写入者</text>
-        <text x="204" y="278" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据工程师</text>
-        <text x="204" y="360" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">季度调研示例</text>
-        <text x="204" y="378" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">去姓名 · 去地址</text>
-        <text x="204" y="396" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">稳定家庭 ID</text>
+        <rect x="188" y="80" width="172" height="368" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+        <rect x="188" y="80" width="172" height="40" rx="6" fill="rgba(224,228,255,0.05)"/>
+        <rect x="188" y="112" width="172" height="8" fill="rgba(224,228,255,0.05)"/>
+        <text x="274" y="106" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">脱敏</text>
+        <text x="274" y="144" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">anon-bucket</text>
+        <text x="204" y="180" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工具</text>
+        <text x="204" y="198" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino INSERT</text>
+        <text x="204" y="220" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">格式</text>
+        <text x="204" y="238" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Iceberg · 分区</text>
+        <text x="204" y="260" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写入者</text>
+        <text x="204" y="278" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据工程师</text>
+        <text x="204" y="360" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">季度调研示例</text>
+        <text x="204" y="378" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">去姓名 · 去地址</text>
+        <text x="204" y="396" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">稳定家庭 ID</text>
       </g>
 
       <!-- 层卡 3：暂存（自定义暖黄——分析工作区） -->
@@ -146,69 +146,69 @@ dark: false
         <rect x="376" y="80" width="172" height="368" rx="6" fill="rgba(201,162,58,0.08)" stroke="#c9a23a" stroke-width="1.2"/>
         <rect x="376" y="80" width="172" height="40" rx="6" fill="rgba(201,162,58,0.15)"/>
         <rect x="376" y="112" width="172" height="8" fill="rgba(201,162,58,0.15)"/>
-        <text x="462" y="106" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">暂存</text>
+        <text x="462" y="106" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">暂存</text>
         <text x="462" y="144" fill="#c9a23a" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">staging-bucket</text>
-        <text x="392" y="180" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工具</text>
-        <text x="392" y="198" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino · JupyterHub</text>
-        <text x="392" y="220" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">格式</text>
-        <text x="392" y="238" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Iceberg · 清洗</text>
-        <text x="392" y="260" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写入者</text>
-        <text x="392" y="278" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据科学家</text>
-        <text x="392" y="360" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">季度调研示例</text>
+        <text x="392" y="180" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工具</text>
+        <text x="392" y="198" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino · JupyterHub</text>
+        <text x="392" y="220" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">格式</text>
+        <text x="392" y="238" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Iceberg · 清洗</text>
+        <text x="392" y="260" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写入者</text>
+        <text x="392" y="278" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据科学家</text>
+        <text x="392" y="360" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">季度调研示例</text>
         <text x="392" y="378" fill="#c9a23a" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">加权记录</text>
         <text x="392" y="396" fill="#c9a23a" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">口径对齐</text>
       </g>
 
       <!-- 层卡 4：指标（焦点） -->
       <g>
-        <rect x="564" y="80" width="172" height="368" rx="6" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.4"/>
-        <rect x="564" y="80" width="172" height="40" rx="6" fill="rgba(26,77,217,0.15)"/>
-        <rect x="564" y="112" width="172" height="8" fill="rgba(26,77,217,0.15)"/>
-        <text x="650" y="106" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">指标</text>
-        <text x="650" y="144" fill="#1a4dd9" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">aggregated-bucket</text>
-        <text x="580" y="180" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工具</text>
-        <text x="580" y="198" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino · JDBC 写入</text>
-        <text x="580" y="220" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">格式</text>
-        <text x="580" y="238" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Iceberg · 指标</text>
-        <text x="580" y="260" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写入者</text>
-        <text x="580" y="278" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据科学家</text>
-        <text x="580" y="360" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">季度调研示例</text>
-        <text x="580" y="378" fill="#1a4dd9" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">失业率</text>
-        <text x="580" y="396" fill="#1a4dd9" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">劳动参与率</text>
+        <rect x="564" y="80" width="172" height="368" rx="6" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1.4"/>
+        <rect x="564" y="80" width="172" height="40" rx="6" fill="rgba(125,152,255,0.15)"/>
+        <rect x="564" y="112" width="172" height="8" fill="rgba(125,152,255,0.15)"/>
+        <text x="650" y="106" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">指标</text>
+        <text x="650" y="144" fill="#7d98ff" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">aggregated-bucket</text>
+        <text x="580" y="180" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工具</text>
+        <text x="580" y="198" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino · JDBC 写入</text>
+        <text x="580" y="220" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">格式</text>
+        <text x="580" y="238" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Iceberg · 指标</text>
+        <text x="580" y="260" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写入者</text>
+        <text x="580" y="278" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据科学家</text>
+        <text x="580" y="360" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">季度调研示例</text>
+        <text x="580" y="378" fill="#7d98ff" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">失业率</text>
+        <text x="580" y="396" fill="#7d98ff" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">劳动参与率</text>
       </g>
 
       <!-- 层卡 5：归档（cold，虚线 + ink@0.02 垫底） -->
       <g>
-        <rect x="752" y="80" width="172" height="368" rx="6" fill="rgba(41,49,79,0.02)" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3"/>
-        <rect x="752" y="80" width="172" height="40" rx="6" fill="rgba(86,94,126,0.18)"/>
-        <rect x="752" y="112" width="172" height="8" fill="rgba(86,94,126,0.18)"/>
-        <text x="838" y="106" fill="#29314f" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">归档</text>
-        <text x="838" y="144" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">archive-bucket</text>
-        <text x="768" y="180" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工具</text>
-        <text x="768" y="198" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MinIO lifecycle</text>
-        <text x="768" y="220" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">格式</text>
-        <text x="768" y="238" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">冷层 · 不可变</text>
-        <text x="768" y="260" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写入者</text>
-        <text x="768" y="278" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据管理员</text>
-        <text x="768" y="360" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">季度调研示例</text>
-        <text x="768" y="378" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">历史 Q1–Q4</text>
-        <text x="768" y="396" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">保留 5 年以上</text>
+        <rect x="752" y="80" width="172" height="368" rx="6" fill="rgba(224,228,255,0.02)" stroke="rgba(162,169,206,0.60)" stroke-width="1" stroke-dasharray="4,3"/>
+        <rect x="752" y="80" width="172" height="40" rx="6" fill="rgba(162,169,206,0.18)"/>
+        <rect x="752" y="112" width="172" height="8" fill="rgba(162,169,206,0.18)"/>
+        <text x="838" y="106" fill="#e0e4ff" font-size="14" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">归档</text>
+        <text x="838" y="144" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">archive-bucket</text>
+        <text x="768" y="180" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">工具</text>
+        <text x="768" y="198" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">MinIO lifecycle</text>
+        <text x="768" y="220" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">格式</text>
+        <text x="768" y="238" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">冷层 · 不可变</text>
+        <text x="768" y="260" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">写入者</text>
+        <text x="768" y="278" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据管理员</text>
+        <text x="768" y="360" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">季度调研示例</text>
+        <text x="768" y="378" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">历史 Q1–Q4</text>
+        <text x="768" y="396" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">保留 5 年以上</text>
       </g>
 
       <!-- 底部路径卡：两种写入方式（层卡底 448 + 56 = 504 起） -->
       <g>
-        <rect x="0" y="504" width="460" height="56" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.20)" stroke-width="1"/>
-        <rect x="8" y="510" width="76" height="18" rx="2" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="0.8"/>
-        <text x="46" y="523" fill="#29314f" font-size="12" font-weight="500" letter-spacing="0.3em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">SQL 路径</text>
-        <text x="96" y="526" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino INSERT INTO … SELECT</text>
-        <text x="96" y="544" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">过滤 · 整形 · 关联 · 聚合——集合式变换</text>
+        <rect x="0" y="504" width="460" height="56" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.20)" stroke-width="1"/>
+        <rect x="8" y="510" width="76" height="18" rx="2" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="0.8"/>
+        <text x="46" y="523" fill="#e0e4ff" font-size="12" font-weight="500" letter-spacing="0.3em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">SQL 路径</text>
+        <text x="96" y="526" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Trino INSERT INTO … SELECT</text>
+        <text x="96" y="544" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">过滤 · 整形 · 关联 · 聚合——集合式变换</text>
       </g>
       <g>
-        <rect x="476" y="504" width="460" height="56" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.20)" stroke-width="1"/>
-        <rect x="484" y="510" width="100" height="18" rx="2" fill="none" stroke="rgba(41,49,79,0.30)" stroke-width="0.8"/>
-        <text x="534" y="523" fill="#29314f" font-size="12" font-weight="500" letter-spacing="0.3em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">笔记本路径</text>
-        <text x="596" y="526" fill="#29314f" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">DuckDB + Python/R · JupyterHub</text>
-        <text x="596" y="544" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">统计 · ML · 交互分析——逐行迭代</text>
+        <rect x="476" y="504" width="460" height="56" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.20)" stroke-width="1"/>
+        <rect x="484" y="510" width="100" height="18" rx="2" fill="none" stroke="rgba(224,228,255,0.30)" stroke-width="0.8"/>
+        <text x="534" y="523" fill="#e0e4ff" font-size="12" font-weight="500" letter-spacing="0.3em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">笔记本路径</text>
+        <text x="596" y="526" fill="#e0e4ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">DuckDB + Python/R · JupyterHub</text>
+        <text x="596" y="544" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">统计 · ML · 交互分析——逐行迭代</text>
       </g>
     </svg>
   </div>
