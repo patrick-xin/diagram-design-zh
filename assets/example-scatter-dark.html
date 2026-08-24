@@ -7,10 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -62,96 +62,96 @@
     <p class="eyebrow">广告投放 · 散点图</p>
     <h1>广告计划：展示量 × 转化率</h1>
 
-    <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-scatter-title example-scatter-desc">
-      <title id="example-scatter-title">广告计划：展示量 × 转化率</title>
-      <desc id="example-scatter-desc">散点图：三十个广告计划按展示量与转化率分布，整体呈温和正相关；投放 A-17 以中低展示量拿到约 4% 转化率，是显著超绩效的离群焦点。</desc>
-        <rect width="100%" height="100%" fill="#ffffff"/>
+    <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-scatter-dark-title example-scatter-dark-desc">
+      <title id="example-scatter-dark-title">广告计划：展示量 × 转化率</title>
+      <desc id="example-scatter-dark-desc">散点图：三十个广告计划按展示量与转化率分布，整体呈温和正相关；投放 A-17 以中低展示量拿到约 4% 转化率，是显著超绩效的离群焦点。</desc>
+        <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 网格线 -->
-      <line x1="40" y1="20"  x2="1000" y2="20"  stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="40" y1="92" x2="1000" y2="92" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="40" y1="164" x2="1000" y2="164" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="40" y1="236" x2="1000" y2="236" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="40" y1="308" x2="1000" y2="308" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="233" y1="20" x2="233" y2="380" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="425" y1="20" x2="425" y2="380" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="617" y1="20" x2="617" y2="380" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
-      <line x1="809" y1="20" x2="809" y2="380" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+      <line x1="40" y1="20"  x2="1000" y2="20"  stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="40" y1="92" x2="1000" y2="92" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="40" y1="164" x2="1000" y2="164" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="40" y1="236" x2="1000" y2="236" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="40" y1="308" x2="1000" y2="308" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="233" y1="20" x2="233" y2="380" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="425" y1="20" x2="425" y2="380" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="617" y1="20" x2="617" y2="380" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+      <line x1="809" y1="20" x2="809" y2="380" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
 
       <!-- 坐标轴 -->
-      <line x1="40" y1="0" x2="40" y2="380" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <line x1="40" y1="380" x2="1000" y2="380" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+      <line x1="40" y1="0" x2="40" y2="380" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+      <line x1="40" y1="380" x2="1000" y2="380" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
 
       <!-- 轴刻度 -->
-      <text x="32" y="384" fill="#565e7e" font-size="9" text-anchor="end"  font-family="'Sarasa Mono SC', ui-monospace, monospace">0</text>
-      <text x="32" y="312" fill="#565e7e" font-size="9" text-anchor="end"  font-family="'Sarasa Mono SC', ui-monospace, monospace">1</text>
-      <text x="32" y="240" fill="#565e7e" font-size="9" text-anchor="end"  font-family="'Sarasa Mono SC', ui-monospace, monospace">2</text>
-      <text x="32" y="168" fill="#565e7e" font-size="9" text-anchor="end"  font-family="'Sarasa Mono SC', ui-monospace, monospace">3</text>
-      <text x="32" y="96" fill="#565e7e" font-size="9" text-anchor="end"  font-family="'Sarasa Mono SC', ui-monospace, monospace">4</text>
-      <text x="32" y="24" fill="#565e7e" font-size="9" text-anchor="end" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">5</text>
-      <text x="40"  y="404" fill="#565e7e" font-size="9" text-anchor="start" font-family="'Sarasa Mono SC', ui-monospace, monospace">0</text>
-      <text x="233" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">10</text>
-      <text x="425" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">20</text>
-      <text x="617" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">30</text>
-      <text x="809" y="404" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">40</text>
-      <text x="1000" y="404" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">50</text>
+      <text x="32" y="384" fill="#a2a9ce" font-size="9" text-anchor="end"  font-family="'Sarasa Mono SC', ui-monospace, monospace">0</text>
+      <text x="32" y="312" fill="#a2a9ce" font-size="9" text-anchor="end"  font-family="'Sarasa Mono SC', ui-monospace, monospace">1</text>
+      <text x="32" y="240" fill="#a2a9ce" font-size="9" text-anchor="end"  font-family="'Sarasa Mono SC', ui-monospace, monospace">2</text>
+      <text x="32" y="168" fill="#a2a9ce" font-size="9" text-anchor="end"  font-family="'Sarasa Mono SC', ui-monospace, monospace">3</text>
+      <text x="32" y="96" fill="#a2a9ce" font-size="9" text-anchor="end"  font-family="'Sarasa Mono SC', ui-monospace, monospace">4</text>
+      <text x="32" y="24" fill="#a2a9ce" font-size="9" text-anchor="end" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">5</text>
+      <text x="40"  y="404" fill="#a2a9ce" font-size="9" text-anchor="start" font-family="'Sarasa Mono SC', ui-monospace, monospace">0</text>
+      <text x="233" y="404" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">10</text>
+      <text x="425" y="404" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">20</text>
+      <text x="617" y="404" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">30</text>
+      <text x="809" y="404" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">40</text>
+      <text x="1000" y="404" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">50</text>
 
       <!-- 轴名（极简：轴端一个词 + 单位） -->
-      <text x="1000" y="432" fill="#565e7e" font-size="12" text-anchor="end" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">展示量（万次）</text>
-      <text transform="rotate(-90 6 200)" x="6" y="200" fill="#565e7e" font-size="12" letter-spacing="0.3em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">转化率（%）</text>
+      <text x="1000" y="432" fill="#a2a9ce" font-size="12" text-anchor="end" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">展示量（万次）</text>
+      <text transform="rotate(-90 6 200)" x="6" y="200" fill="#a2a9ce" font-size="12" letter-spacing="0.3em" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">转化率（%）</text>
 
       <!-- 趋势线（温和正相关，虚线） -->
-      <line x1="74" y1="364" x2="957" y2="108" stroke="rgba(41,49,79,0.30)" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="74" y1="364" x2="957" y2="108" stroke="rgba(224,228,255,0.30)" stroke-width="1" stroke-dasharray="4,3"/>
 
       <!-- 常规点（muted 淡染） -->
-      <circle cx="98" cy="344" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="126" cy="328" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="152" cy="352" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="179" cy="300" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="205" cy="316" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="232" cy="272" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="259" cy="288" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="285" cy="256" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="313" cy="268" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="339" cy="232" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="367" cy="248" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="393" cy="212" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="419" cy="224" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="446" cy="196" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="473" cy="208" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="500" cy="176" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="527" cy="188" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="554" cy="160" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="580" cy="172" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="608" cy="144" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="634" cy="156" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="660" cy="132" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="687" cy="144" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="714" cy="116" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="740" cy="128" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="768" cy="104" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="795" cy="116" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="821" cy="88" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <circle cx="914" cy="72" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
+      <circle cx="98" cy="344" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="126" cy="328" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="152" cy="352" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="179" cy="300" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="205" cy="316" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="232" cy="272" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="259" cy="288" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="285" cy="256" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="313" cy="268" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="339" cy="232" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="367" cy="248" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="393" cy="212" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="419" cy="224" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="446" cy="196" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="473" cy="208" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="500" cy="176" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="527" cy="188" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="554" cy="160" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="580" cy="172" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="608" cy="144" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="634" cy="156" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="660" cy="132" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="687" cy="144" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="714" cy="116" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="740" cy="128" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="768" cy="104" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="795" cy="116" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="821" cy="88" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <circle cx="914" cy="72" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
 
       <!-- 焦点离群点：光晕 + accent -->
-      <circle cx="219" cy="140" r="10" fill="rgba(26,77,217,0.08)"/>
-      <circle cx="219" cy="140" r="6" fill="rgba(26,77,217,0.15)" stroke="#1a4dd9" stroke-width="1.4"/>
-      <rect x="237" y="126" width="84" height="16" rx="2" fill="#ffffff"/>
-      <text x="245" y="138" fill="#1a4dd9" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">投放 A-17</text>
+      <circle cx="219" cy="140" r="10" fill="rgba(125,152,255,0.10)"/>
+      <circle cx="219" cy="140" r="6" fill="rgba(125,152,255,0.15)" stroke="#7d98ff" stroke-width="1.4"/>
+      <rect x="237" y="126" width="84" height="16" rx="2" fill="#0a0d1b"/>
+      <text x="245" y="138" fill="#7d98ff" font-size="12" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">投放 A-17</text>
 
       <!-- 图例横条 -->
-      <line x1="0" y1="492" x2="1000" y2="492" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <text x="0" y="510" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+      <line x1="0" y1="492" x2="1000" y2="492" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <text x="0" y="510" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
 
-      <circle cx="77" cy="506" r="6" fill="rgba(26,77,217,0.15)" stroke="#1a4dd9" stroke-width="1.4"/>
-      <text x="90" y="510" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">超绩效计划</text>
+      <circle cx="77" cy="506" r="6" fill="rgba(125,152,255,0.15)" stroke="#7d98ff" stroke-width="1.4"/>
+      <text x="90" y="510" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">超绩效计划</text>
 
-      <circle cx="188" cy="506" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
-      <text x="201" y="510" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">常规计划</text>
+      <circle cx="188" cy="506" r="5" fill="rgba(162,169,206,0.20)" stroke="#a2a9ce" stroke-width="1"/>
+      <text x="201" y="510" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">常规计划</text>
 
-      <line x1="289" y1="506" x2="317" y2="506" stroke="rgba(41,49,79,0.30)" stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="325" y="510" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">趋势</text>
+      <line x1="289" y1="506" x2="317" y2="506" stroke="rgba(224,228,255,0.30)" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="325" y="510" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">趋势</text>
     </svg>
   </div>
 </body>

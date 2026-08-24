@@ -4,9 +4,10 @@
 
 ## 布局惯例
 
-- **绘图区边距**：左 80px、下 60px、上 40px、右 40px——`0 0 1000 500` viewBox 内。
+- **绘图区贴满画布**：y 轴在 x=40、x 轴右缘到 1000；左侧从外到内三列——竖排轴题（rotate −90°，x=6 列贴 x=0，左缘即页面/图例对齐线）、刻度数字右对齐贴轴（x=32）、轴线。轴题与数字留 ~14px、数字与轴 8px。
+- **轴名放轴外，不放表内**：竖排轴外最左、垂直居中于轴（y=画布绘图区中点）；横轴名在刻度下方 16px、右缘对齐。不居中压轴顶——那需要顶部标签带 + 轴右移半标签宽的整体重排，仅用户点名时按此配方执行。
 - **点数**：5–30 个。更少 → 用一段话说清关系；更多 → 分箱成密度轮廓。
-- **轴**：x 轴在 y=420（基线）、y 轴在 x=80。刻度标签 mono 9px；每轴 4–6 条等距网格线（`ink @ 0.08`）。
+- **轴**：y 轴 x=40 起于 y=0（顶贴）、x 轴基线贴最下网格。刻度标签 mono 9px（横轴首尾刻度用 start/end 锚防溢出）；每轴 4–6 条等距网格线（`ink @ 0.08`）。
 - **点形**：`<circle>` 常规 r=5，焦点 r=6。焦点点 `accent-tint` 填充 + `accent` 描边；其余 `muted @ 0.20` 填充 + `muted` 描边。
 - **轴名**：一个词， mono 9px（拉丁）或 sans 12px（中文），放轴端外侧——同象限图的极简轴标签纪律。
 - **点标签（可选）**：点旁 mono 9px 或中文 sans 12px，标签下垫 paper 色遮罩。至多标 2–3 个点，不许全标。
@@ -21,7 +22,7 @@
 
 <!-- 焦点点（含光晕） -->
 <circle cx="X" cy="Y" r="10" fill="rgba(26,77,217,0.08)"/>
-<circle cx="X" cy="Y" r="6" fill="rgba(26,77,217,0.15)" stroke="#1a4dd9" stroke-width="1.2"/>
+<circle cx="X" cy="Y" r="6" fill="rgba(26,77,217,0.15)" stroke="#1a4dd9" stroke-width="1.4"/>
 ```
 
 ## 反模式
@@ -35,3 +36,5 @@
 ## 示例
 
 - [`assets/example-scatter.html`](../assets/example-scatter.html) — 广告计划：展示量 × 转化率（焦点 = 超绩效离群计划）
+- [`assets/example-scatter-dark.html`](../assets/example-scatter-dark.html) — 深色档（对称换基 α 不动，焦点光晕提档 0.10）
+- [`assets/example-scatter-full.html`](../assets/example-scatter-full.html) — full 页面级（副题 + 三卡 + 页脚）
