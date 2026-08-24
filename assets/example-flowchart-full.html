@@ -67,7 +67,7 @@
 
     .diagram-container { overflow-x: auto; padding: 2px 0; }
 
-    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 4rem; }
+    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 2rem; }
     @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
     .card { background: var(--color-paper); border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
     .card .eyebrow { margin-bottom: 0.5rem; }
@@ -83,7 +83,7 @@
     .card li::before { content: '—'; position: absolute; left: 0; color: rgba(41,49,79,0.20); }
 
     .footer {
-      margin-top: 2rem; padding-top: 1.5rem;
+      margin-top: 1rem; padding-top: 1.5rem;
       border-top: 1px solid rgba(41,49,79,0.10);
       font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em;
       color: var(--color-soft);
@@ -170,24 +170,26 @@
       <text x="500" y="452" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">热修并验证</text>
       <text x="500" y="468" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">修复 · 复盘</text>
 
-      <!-- 图例条：标签行在上，样本行在下（项多时两行式，不与标签同排） -->
-      <line x1="0" y1="500" x2="920" y2="500" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <text x="0" y="518" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例 · 形状承载类型</text>
+      <!-- 图例横条：标签与图例项同一基线；分隔线贯通 0→1000，距最下内容底 56 -->
+      <line x1="0" y1="536" x2="1000" y2="536" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
+      <text x="0" y="554" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
 
-      <rect x="0" y="532" width="24" height="12" rx="6" fill="rgba(41,49,79,0.03)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-      <text x="32" y="542" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">起 / 终</text>
+      <rect x="72" y="544" width="24" height="12" rx="6" fill="rgba(41,49,79,0.03)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+      <text x="104" y="554" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">起 / 终</text>
 
-      <rect x="112" y="532" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="136" y="542" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">步骤</text>
+      <rect x="184" y="544" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
+      <text x="208" y="554" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">步骤</text>
 
-      <polygon points="208,538 220,532 232,538 220,544" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="240" y="542" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">判断</text>
+      <polygon points="280,550 292,544 304,550 292,556" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
+      <text x="312" y="554" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">判断</text>
 
-      <line x1="312" y1="538" x2="340" y2="538" stroke="#1a4dd9" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
-      <text x="348" y="542" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">主路径</text>
+      <line x1="384" y1="550" x2="412" y2="550" stroke="#1a4dd9" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <text x="420" y="554" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">主路径</text>
 
-      <line x1="424" y1="538" x2="452" y2="538" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-      <text x="460" y="542" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">分支</text>
+      <line x1="496" y1="550" x2="524" y2="550" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="532" y="554" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">分支</text>
+
+      <text x="1000" y="554" text-anchor="end" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">形状承载类型</text>
     </svg>
     </div>
 

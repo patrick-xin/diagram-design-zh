@@ -65,7 +65,7 @@
 
     .diagram-container { overflow-x: auto; padding: 2px 0; }
 
-    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 4rem; }
+    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 2rem; }
     @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
     .card { background: var(--color-paper); border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
     .card .eyebrow { margin-bottom: 0.5rem; }
@@ -81,7 +81,7 @@
     .card li::before { content: '—'; position: absolute; left: 0; color: rgba(41,49,79,0.20); }
 
     .footer {
-      margin-top: 2rem; padding-top: 1.5rem;
+      margin-top: 1rem; padding-top: 1.5rem;
       border-top: 1px solid rgba(41,49,79,0.10);
       font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em;
       color: var(--color-soft);
@@ -105,8 +105,8 @@
 
     <div class="diagram-container">
 
-    <!-- 几何：type-data-flow.md §2 重标定网格。label_col 160 · slot 136 · 节点 124×80 · 道槽 104（容器 96）· 表头 40 · 图例 148（4 行，含配色） -->
-    <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-data-flow-full-title example-data-flow-full-desc">
+    <!-- 几何：type-data-flow.md §2 重标定网格。label_col 160 · slot 136 · 节点 124×80 · 道槽 104（容器 96）· 表头 40 · 图例底横条 4 行含配色（分隔线锚最下内容底 +56 · 右缘贯通 0→1000 · 画布高按 40 步进） -->
+    <svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-data-flow-full-title example-data-flow-full-desc">
       <title id="example-data-flow-full-title">数据平台数据流图</title>
       <desc id="example-data-flow-full-desc">数据流图：管理员、工程师、分析师、使用者四条角色道，采集、存储、加工、分析、发布五个步骤；焦点为分析步骤的探索建模节点与工程师向分析师的匿名数据交接；权限管控节点锈红标注治理关注点。</desc>
         <defs>
@@ -254,54 +254,54 @@
         <text x="958" y="430" fill="#ffffff" font-size="7" font-weight="700" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">WB</text>
 
         <!-- 图例 · 顶部分隔线 + 行 1 步骤 -->
-        <line x1="0" y1="470" x2="984" y2="470" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-        <text x="0" y="488" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">步骤</text>
-        <rect x="76" y="476" width="24" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
-        <text x="88" y="487" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">01</text>
-        <text x="108" y="488" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">采集</text>
-        <rect x="164" y="476" width="24" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
-        <text x="176" y="487" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">02</text>
-        <text x="196" y="488" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储</text>
-        <rect x="252" y="476" width="24" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
-        <text x="264" y="487" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">03</text>
-        <text x="284" y="488" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">加工</text>
-        <rect x="340" y="476" width="24" height="16" rx="8" fill="rgba(26,77,217,0.20)"/>
-        <text x="352" y="487" fill="#1a4dd9" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">04</text>
-        <text x="372" y="488" fill="#1a4dd9" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">分析</text>
-        <rect x="428" y="476" width="24" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
-        <text x="440" y="487" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">05</text>
-        <text x="460" y="488" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">发布</text>
+        <line x1="0" y1="500" x2="1000" y2="500" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
+        <text x="0" y="518" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">步骤</text>
+        <rect x="76" y="506" width="24" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
+        <text x="88" y="517" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">01</text>
+        <text x="108" y="518" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">采集</text>
+        <rect x="164" y="506" width="24" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
+        <text x="176" y="517" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">02</text>
+        <text x="196" y="518" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储</text>
+        <rect x="252" y="506" width="24" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
+        <text x="264" y="517" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">03</text>
+        <text x="284" y="518" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">加工</text>
+        <rect x="340" y="506" width="24" height="16" rx="8" fill="rgba(26,77,217,0.20)"/>
+        <text x="352" y="517" fill="#1a4dd9" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">04</text>
+        <text x="372" y="518" fill="#1a4dd9" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">分析</text>
+        <rect x="428" y="506" width="24" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
+        <text x="440" y="517" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">05</text>
+        <text x="460" y="518" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">发布</text>
 
         <!-- 图例 · 行 2 数据类型 -->
-        <text x="0" y="518" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">数据类型</text>
-        <rect x="76" y="508" width="16" height="12" rx="2" fill="#9a6fb8"/>
-        <text x="98" y="518" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">WB</text>
-        <rect x="136" y="508" width="16" height="12" rx="2" fill="#5470c6"/>
-        <text x="158" y="518" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">DB</text>
-        <rect x="196" y="508" width="16" height="12" rx="2" fill="#ed7d31"/>
-        <text x="218" y="518" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">TB</text>
-        <rect x="256" y="508" width="16" height="12" rx="2" fill="#d9605b"/>
-        <text x="278" y="518" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">FL</text>
-        <rect x="316" y="508" width="16" height="12" rx="2" fill="#3ba272"/>
-        <text x="338" y="518" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">LS</text>
+        <text x="0" y="548" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">数据类型</text>
+        <rect x="76" y="538" width="16" height="12" rx="2" fill="#9a6fb8"/>
+        <text x="98" y="548" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">WB</text>
+        <rect x="136" y="538" width="16" height="12" rx="2" fill="#5470c6"/>
+        <text x="158" y="548" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">DB</text>
+        <rect x="196" y="538" width="16" height="12" rx="2" fill="#ed7d31"/>
+        <text x="218" y="548" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">TB</text>
+        <rect x="256" y="538" width="16" height="12" rx="2" fill="#d9605b"/>
+        <text x="278" y="548" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">FL</text>
+        <rect x="316" y="538" width="16" height="12" rx="2" fill="#3ba272"/>
+        <text x="338" y="548" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">LS</text>
 
         <!-- 图例 · 行 3 关注点 -->
-        <text x="0" y="548" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">关注点</text>
-        <rect x="76" y="538" width="16" height="12" rx="2" fill="rgba(184,84,80,0.06)" stroke="#b85450" stroke-width="0.8"/>
-        <text x="98" y="548" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">权限治理</text>
-        <rect x="176" y="538" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="0.8"/>
-        <text x="198" y="548" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点</text>
+        <text x="0" y="578" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">关注点</text>
+        <rect x="76" y="568" width="16" height="12" rx="2" fill="rgba(184,84,80,0.06)" stroke="#b85450" stroke-width="0.8"/>
+        <text x="98" y="578" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">权限治理</text>
+        <rect x="176" y="568" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="0.8"/>
+        <text x="198" y="578" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点</text>
 
         <!-- 图例 · 行 4 流向 -->
-        <text x="0" y="578" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">流向</text>
-        <line x1="76" y1="574" x2="104" y2="574" stroke="rgba(86,94,126,0.60)" stroke-width="1" marker-end="url(#arr-muted)"/>
-        <text x="112" y="578" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">常规交接</text>
-        <line x1="196" y1="574" x2="224" y2="574" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr-muted)"/>
-        <text x="232" y="578" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">治理触发</text>
-        <line x1="316" y1="574" x2="344" y2="574" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arr-accent)"/>
-        <text x="352" y="578" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点交接</text>
-        <line x1="436" y1="574" x2="464" y2="574" stroke="#217e7b" stroke-width="1" marker-end="url(#arr-link)"/>
-        <text x="472" y="578" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">对外消费</text>
+        <text x="0" y="608" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">流向</text>
+        <line x1="76" y1="604" x2="104" y2="604" stroke="rgba(86,94,126,0.60)" stroke-width="1" marker-end="url(#arr-muted)"/>
+        <text x="112" y="608" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">常规交接</text>
+        <line x1="196" y1="604" x2="224" y2="604" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr-muted)"/>
+        <text x="232" y="608" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">治理触发</text>
+        <line x1="316" y1="604" x2="344" y2="604" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arr-accent)"/>
+        <text x="352" y="608" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点交接</text>
+        <line x1="436" y1="604" x2="464" y2="604" stroke="#217e7b" stroke-width="1" marker-end="url(#arr-link)"/>
+        <text x="472" y="608" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">对外消费</text>
       </svg>
     </div>
 

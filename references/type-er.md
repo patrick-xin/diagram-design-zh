@@ -5,7 +5,7 @@
 ## 布局
 
 - 实体 = 两段式盒子：
-  - **头部**：类型角标 + 实体名。角标按语言选行——`ENTITY`、`JOIN` 纯拉丁走 eyebrow-latin（mono 7–8px）；**混合角标**（如 `ENTITY · 聚合根`）拆两段同基线拼行：拉丁段跟 eyebrow-latin 原规格，中文段 mono 8px · 500 · 0.18em（混合角标专用档）。实体名走 `node-name`。
+  - **头部**：类型角标 + 实体名。角标按语言选行——`ENTITY`、`JOIN` 纯拉丁走 eyebrow-latin（mono 7–8px）；**混合角标**（如 `ENTITY · 聚合根`）拆两段同基线拼行：拉丁段跟 eyebrow-latin 原规格，中文段 mono 10px · 500 · 0.18em（混合角标专用档；汉字 ≥10px 硬规则）。实体名走 `node-name`。
   - **字段区**：一行一字段，mono 9px（sublabel-tech）。PK 前缀 `#`，FK 前缀 `→`；右端对齐字段类型（`uuid`、`text`）。字段名与类型是纯拉丁技术串，保持 9px 合法。
 - 关系 = 实体间直线，两端标基数：`1`、`N`、`0..1`、`1..*`（mono，落在实体边外 10–12px，配 paper 不透明遮罩）。
 - 关系动词（撰写、属于、打标）居中于线上：中文走 sans 12px · 0.1em，配不透明 paper 遮罩与线 6px 净空。
@@ -14,7 +14,7 @@
 - 联表 / 纯关联实体用降一级处理：浅填充 + `muted` 描边 + 虚线，不与一等实体争夺注意力。
 - 背景默认无纹理（dots pattern 预留 dev/editorial 主题，不铺）。
 - 图例条按 style-guide「图例条（底部横条）」节执行；符号样本（`#` 主键、`→` 外键、`1 / N` 基数）符号即样本、后跟中文标签。
-- 标题对齐：margin-left = 最左实体框 x ÷ viewBox 宽（示例 60/1000 = 6%）；full 版跟 diagram-container 框缘。
+- 标题对齐：跟 style-guide「容器对齐与画布基线」container 四件套（内容 x=0 起排，eyebrow / h1 不写 margin-left）。
 
 ## 反模式
 
