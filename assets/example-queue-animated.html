@@ -28,21 +28,23 @@
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 32px;
+      padding: 3rem 2rem;
       color: var(--ink);
       background: var(--paper);
       font-family: var(--font-sans);
+      display: flex;
+      justify-content: center;
     }
     [data-motion-root] {
-      width: min(100%, 1280px);
-      margin: 0 auto;
+      width: min(100%, 1200px);
+      padding-left: 4%;
     }
     .page-header {
       display: flex;
-      align-items: end;
+      align-items: center;
       justify-content: space-between;
-      gap: 32px;
-      margin-bottom: 16px;
+      gap: 4rem;
+      margin-bottom: 4rem;
     }
     .eyebrow {
       margin: 0 0 8px;
@@ -56,24 +58,29 @@
     h1 {
       margin: 0;
       font-family: var(--font-serif);
-      font-size: clamp(28px, 3vw, 40px);
+      font-size: 1.75rem;
       font-weight: 400;
       line-height: 1.08;
       letter-spacing: 0;
     }
     .lede {
-      max-width: 540px;
-      margin: 0 0 4px;
+      flex: 0 1 420px;
+      max-width: 420px;
+      margin: 0;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
+      font-size: 1rem;
+      line-height: 1.55;
     }
     .diagram-wrap {
       overflow-x: auto;
-      border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
+      padding: 2px 0;
     }
-    svg { display: block; width: 100%; min-width: 920px; }
+    svg { display: block; width: 100%; min-width: 900px; overflow: visible; }
+
+    @media (max-width: 800px) {
+      .page-header { display: block; }
+      .lede { margin-top: 12px; }
+    }
 
     /* 动效条目状态：幽灵预显（见 animation.md）——
        未揭示 = opacity .12 压暗预告；transition 挂基态，显隐双向平滑。 */
@@ -136,8 +143,9 @@
       display: none;
       align-items: center;
       gap: 8px;
-      min-height: 60px;
-      padding: 8px 0;
+      min-height: 44px;
+      margin-top: 1rem;
+      padding: 0;
     }
     .motion-ready [data-motion-controls] { display: flex; }
     [data-motion-controls][hidden] { display: none !important; }
@@ -231,10 +239,10 @@
     </header>
 
     <div class="diagram-wrap">
-      <svg role="img" aria-labelledby="example-queue-animated-title example-queue-animated-desc" viewBox="0 0 1160 620" xmlns="http://www.w3.org/2000/svg" data-motion-primitive="fan-in-queue">
+      <svg role="img" aria-labelledby="example-queue-animated-title example-queue-animated-desc" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" data-motion-primitive="fan-in-queue">
         <title id="example-queue-animated-title">汇聚排队与瓶颈分析</title>
         <desc id="example-queue-animated-desc">分步演示请求汇聚入口、队列缓冲、限流背压与工作服务处理的全过程。</desc>
-        <rect width="1160" height="620" fill="#ffffff"/>
+        <rect width="1000" height="600" fill="#ffffff"/>
         <defs>
           <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M 0 1 L 10 5 L 0 9 z" fill="#29314f" />
@@ -244,128 +252,129 @@
           </marker>
         </defs>
 
-        <!-- 基础布局：入口流量来源分区（静态） -->
-        <rect x="40" y="40" width="240" height="512" rx="8" fill="#f3f2ff" stroke="rgba(41,49,79,0.10)" stroke-width="1" />
-        <text x="60" y="72" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10" letter-spacing="3">入口流量来源</text>
+        <g transform="translate(0 -40)">
+          <!-- 基础布局：入口流量来源分区（静态） -->
+          <rect x="0" y="40" width="220" height="512" rx="8" fill="none" stroke="rgba(41,49,79,0.10)" stroke-width="0.8" />
+          <rect x="12" y="58" width="118" height="22" fill="#ffffff" />
+          <text x="16" y="74" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" letter-spacing="0.3em">入口流量来源</text>
 
-        <!-- 生产者 1：Web 控制台（平稳流 4 请求/秒） -->
-        <rect x="60" y="96" width="200" height="72" rx="6" fill="#ffffff" stroke="#29314f" stroke-width="1.5" />
-        <text x="76" y="128" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">Web 控制台</text>
-        <text x="76" y="148" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11">速率：4 请求/秒（平稳）</text>
+          <!-- 生产者 1：Web 控制台（平稳流 4 请求/秒） -->
+          <rect x="16" y="96" width="188" height="72" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="32" y="128" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">Web 控制台</text>
+          <text x="32" y="148" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">速率：4 请求/秒（平稳）</text>
 
-        <!-- 生产者 2：移动端 API（平稳流 3 请求/秒） -->
-        <rect x="60" y="196" width="200" height="72" rx="6" fill="#ffffff" stroke="#29314f" stroke-width="1.5" />
-        <text x="76" y="228" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">移动端 API</text>
-        <text x="76" y="248" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11">速率：3 请求/秒（平稳）</text>
+          <!-- 生产者 2：移动端 API（平稳流 3 请求/秒） -->
+          <rect x="16" y="196" width="188" height="72" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="32" y="228" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">移动端 API</text>
+          <text x="32" y="248" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">速率：3 请求/秒（平稳）</text>
 
-        <!-- 生产者 3：支付回调（尖峰流 8 请求/秒） -->
-        <rect x="60" y="296" width="200" height="72" rx="6" fill="#ffffff" stroke="#29314f" stroke-width="1.5" />
-        <text x="76" y="328" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">支付回调</text>
-        <text x="76" y="348" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11">速率：8 请求/秒（尖峰）</text>
+          <!-- 生产者 3：支付回调（尖峰流 8 请求/秒） -->
+          <rect x="16" y="296" width="188" height="72" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="32" y="328" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">支付回调</text>
+          <text x="32" y="348" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">速率：8 请求/秒（尖峰）</text>
 
-        <!-- 生产者 4：遗留 ERP 批任务（尖峰流 12 请求/秒） -->
-        <rect x="60" y="396" width="200" height="72" rx="6" fill="#ffffff" stroke="#29314f" stroke-width="1.5" />
-        <text x="76" y="428" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">遗留 ERP 批任务</text>
-        <text x="76" y="448" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11">速率：12 请求/秒（尖峰）</text>
+          <!-- 生产者 4：遗留 ERP 批任务（尖峰流 12 请求/秒） -->
+          <rect x="16" y="396" width="188" height="72" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="32" y="428" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">遗留 ERP 批任务</text>
+          <text x="32" y="448" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">速率：12 请求/秒（尖峰）</text>
 
-        <!-- 中央队列缓冲分区 -->
-        <rect x="340" y="152" width="368" height="320" rx="8" fill="#f3f2ff" stroke="rgba(41,49,79,0.10)" stroke-width="1" />
-        <text x="360" y="184" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">中央入口队列缓冲</text>
-        <text x="360" y="202" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11">容量：5 槽（有界 FIFO）</text>
+          <!-- 中央队列缓冲分区 -->
+          <rect x="260" y="152" width="368" height="320" rx="8" fill="none" stroke="rgba(41,49,79,0.10)" stroke-width="0.8" />
+          <rect x="272" y="165" width="136" height="20" fill="#ffffff" />
+          <text x="280" y="184" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">中央入口队列缓冲</text>
+          <text x="280" y="204" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">容量：5 槽（有界 FIFO）</text>
 
         <!-- 第 1 步：平稳入口先占两个槽（附初始 2/5 深度徽章） -->
         <g data-motion-item data-step="1" aria-label="第 1 步：Web 控制台与移动端 API 以合计 7 请求/秒的平稳流量进入队列槽 1、2">
-          <path d="M 260 132 L 340 234" fill="none" stroke="#29314f" stroke-width="2" marker-end="url(#arrow-ink)" />
-          <path d="M 260 232 L 340 282" fill="none" stroke="#29314f" stroke-width="2" marker-end="url(#arrow-ink)" />
+          <path d="M 204 132 H 240 Q 248 132 248 140 V 226 Q 248 234 256 234 H 280" fill="none" stroke="#29314f" stroke-width="1.2" marker-end="url(#arrow-ink)" />
+          <path d="M 204 232 H 232 Q 240 232 240 240 V 270 Q 240 278 248 278 H 280" fill="none" stroke="#29314f" stroke-width="1.2" marker-end="url(#arrow-ink)" />
 
-          <rect x="360" y="216" width="264" height="36" rx="4" fill="#ffffff" stroke="#29314f" stroke-width="1.5" />
-          <text x="372" y="239" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10.5">槽 1 · req_web_8019 [GET /api]</text>
+          <rect x="280" y="216" width="252" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="292" y="239" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">槽 1 · req_web_8019 [GET /api]</text>
 
-          <rect x="360" y="260" width="264" height="36" rx="4" fill="#ffffff" stroke="#29314f" stroke-width="1.5" />
-          <text x="372" y="283" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10.5">槽 2 · req_mob_4412 [POST /auth]</text>
+          <rect x="280" y="260" width="252" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="292" y="283" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">槽 2 · req_mob_4412 [POST /auth]</text>
 
           <g class="queue-depth-step1">
-            <rect x="636" y="216" width="60" height="212" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.10)" stroke-width="1" />
-            <text x="666" y="300" text-anchor="middle" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">深度</text>
-            <text x="666" y="330" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="600">2/5</text>
+            <rect x="548" y="216" width="60" height="212" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+            <text x="578" y="300" text-anchor="middle" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">深度</text>
+            <text x="578" y="330" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="600">2/5</text>
           </g>
         </g>
 
         <!-- 第 2 步：尖峰涌满队列（槽 3–5 + 满载 5/5 预警徽章） -->
         <g data-motion-item data-step="2" aria-label="第 2 步：支付与 ERP 尖峰流量合计 20 请求/秒把队列填满至 5/5 槽">
-          <path d="M 260 332 L 340 322" fill="none" stroke="#1a4dd9" stroke-width="2" marker-end="url(#arrow-accent)" />
-          <path d="M 260 432 L 340 370" fill="none" stroke="#1a4dd9" stroke-width="2" marker-end="url(#arrow-accent)" />
+          <path d="M 204 332 H 252 Q 260 332 260 324 V 322 Q 260 314 268 314 H 280" fill="none" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arrow-accent)" />
+          <path d="M 204 432 H 240 Q 248 432 248 424 V 370 Q 248 362 256 362 H 280" fill="none" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arrow-accent)" />
 
-          <rect x="360" y="304" width="264" height="36" rx="4" fill="#ffffff" stroke="#1a4dd9" stroke-width="1.5" />
-          <text x="372" y="327" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10.5">槽 3 · req_pay_9920 [WEBHOOK]</text>
+          <rect x="280" y="304" width="252" height="36" rx="4" fill="#ffffff" stroke="#1a4dd9" stroke-width="1.2" />
+          <text x="292" y="327" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">槽 3 · req_pay_9920 [WEBHOOK]</text>
 
-          <rect x="360" y="348" width="264" height="36" rx="4" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.5" />
-          <text x="372" y="371" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10.5" font-weight="600">槽 4 · req_erp_1044 [BATCH]</text>
+          <rect x="280" y="348" width="252" height="36" rx="4" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.2" />
+          <text x="292" y="371" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10" font-weight="600">槽 4 · req_erp_1044 [BATCH]</text>
 
-          <rect x="360" y="392" width="264" height="36" rx="4" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.5" />
-          <text x="372" y="415" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10.5" font-weight="600">槽 5 · req_erp_1045 [FULL]</text>
+          <rect x="280" y="392" width="252" height="36" rx="4" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.2" />
+          <text x="292" y="415" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10" font-weight="600">槽 5 · req_erp_1045 [FULL]</text>
 
-          <rect x="636" y="216" width="60" height="212" rx="4" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.5" />
-          <text x="666" y="290" text-anchor="middle" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10" font-weight="600">满载</text>
-          <text x="666" y="325" text-anchor="middle" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="24" font-weight="600">5/5</text>
-          <text x="666" y="355" text-anchor="middle" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10" font-weight="600">预警</text>
+          <rect x="548" y="216" width="60" height="212" rx="4" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.2" />
+          <text x="578" y="290" text-anchor="middle" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10" font-weight="600">满载</text>
+          <text x="578" y="325" text-anchor="middle" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="24" font-weight="600">5/5</text>
+          <text x="578" y="355" text-anchor="middle" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10" font-weight="600">预警</text>
         </g>
 
         <!-- 第 3 步：限流器分流多余流量（429 丢弃槽） -->
         <g data-motion-item data-step="3" aria-label="第 3 步：溢出背压激活，把多余的 19 请求/秒卸载到 429 限流丢弃槽">
-          <path d="M 525 152 L 525 92 L 760 92" fill="none" stroke="#1a4dd9" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow-accent)" />
+          <path d="M 520 152 V 100 Q 520 92 528 92 H 660" fill="none" stroke="#1a4dd9" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#arrow-accent)" />
 
-          <rect x="760" y="48" width="352" height="84" rx="6" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.5" />
-          <text x="780" y="80" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">429 限流器与溢出槽</text>
-          <text x="780" y="102" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11">状态：429 背压（丢弃 19 请求/秒）</text>
+          <rect x="660" y="48" width="340" height="84" rx="6" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.2" />
+          <text x="676" y="80" fill="#1a4dd9" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">429 限流器与溢出槽</text>
+          <text x="676" y="104" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">状态：429 背压（丢弃 19 请求/秒）</text>
         </g>
 
         <!-- 第 4 步：工作服务处理与下游产出 -->
         <g data-motion-item data-step="4" aria-label="第 4 步：受限工作节点以最高 8 请求/秒处理队列，向下游发出 200 OK 响应">
-          <path d="M 708 310 L 760 280" fill="none" stroke="#29314f" stroke-width="2" marker-end="url(#arrow-ink)" />
+          <path d="M 608 310 H 636 Q 644 310 644 302 V 290 Q 644 282 652 282 H 660" fill="none" stroke="#29314f" stroke-width="1.2" marker-end="url(#arrow-ink)" />
 
-          <rect x="760" y="216" width="352" height="132" rx="6" fill="#ffffff" stroke="#29314f" stroke-width="1.5" />
-          <text x="780" y="248" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">受限工作服务</text>
-          <text x="780" y="270" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11">实例：Worker-Node-01</text>
-          <text x="780" y="292" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11">服务容量：8 请求/秒上限</text>
-          <text x="780" y="314" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600">状态：处理中 [FIFO]</text>
+          <rect x="660" y="216" width="340" height="132" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="676" y="248" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">受限工作服务</text>
+          <text x="676" y="272" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">实例：Worker-Node-01</text>
+          <text x="676" y="294" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">服务容量：8 请求/秒上限</text>
+          <text x="676" y="316" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600">状态：处理中 [FIFO]</text>
 
-          <path d="M 935 348 L 935 412" fill="none" stroke="#29314f" stroke-width="2" marker-end="url(#arrow-ink)" />
+          <path d="M 830 348 V 412" fill="none" stroke="#29314f" stroke-width="1.2" marker-end="url(#arrow-ink)" />
 
-          <rect x="760" y="412" width="352" height="84" rx="6" fill="#f3f2ff" stroke="rgba(41,49,79,0.10)" stroke-width="1" />
-          <text x="780" y="442" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">下游数据库与核心 API</text>
-          <text x="780" y="466" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11">结果：200 OK 已接纳流量（8 请求/秒）</text>
+          <rect x="660" y="412" width="340" height="84" rx="6" fill="none" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="676" y="442" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">下游数据库与核心 API</text>
+          <text x="676" y="468" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">结果：200 OK 已接纳流量（8 请求/秒）</text>
         </g>
 
         <!-- 第 5 步：均衡状态与指标小结 -->
         <g data-motion-item data-step="5" aria-label="第 5 步：系统进入受控均衡，工作节点受保护，多余流量被卸载">
-          <rect x="340" y="492" width="368" height="64" rx="6" fill="#ffffff" stroke="#29314f" stroke-width="1.5" />
-          <text x="360" y="518" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600">系统状态：受控均衡</text>
-          <text x="360" y="538" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11">工作节点受保护 · 背压已激活</text>
+          <rect x="260" y="492" width="360" height="64" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="280" y="518" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600">系统状态：受控均衡</text>
+          <text x="280" y="540" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">工作节点受保护 · 背压已激活</text>
         </g>
 
-        <!-- SVG 图例（装饰性） -->
-        <g data-motion-decorative aria-hidden="true">
-          <line x1="40" y1="584" x2="65" y2="584" stroke="#29314f" stroke-width="2" marker-end="url(#arrow-ink)" />
-          <text x="73" y="588" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">已接纳流</text>
+        </g>
 
-          <line x1="165" y1="584" x2="190" y2="584" stroke="#1a4dd9" stroke-width="2" marker-end="url(#arrow-accent)" />
-          <text x="198" y="588" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">高峰入口</text>
-
-          <line x1="285" y1="584" x2="310" y2="584" stroke="#1a4dd9" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arrow-accent)" />
-          <text x="318" y="588" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">429 背压</text>
-
-          <rect x="430" y="577" width="16" height="12" rx="2" fill="#ffffff" stroke="#29314f" stroke-width="1.5" />
-          <text x="452" y="588" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">常规槽位</text>
-
-          <rect x="540" y="577" width="16" height="12" rx="2" fill="#ffffff" stroke="#1a4dd9" stroke-width="1.5" />
-          <text x="562" y="588" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">容量预警</text>
-
-          <rect x="660" y="577" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.5" />
-          <text x="682" y="588" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">溢出（429）</text>
-
-          <rect x="790" y="577" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.30)" stroke-width="1" />
-          <text x="812" y="588" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">深度徽章</text>
+        <!-- SVG 图例 -->
+        <g aria-label="图例">
+          <line x1="0" y1="572" x2="1000" y2="572" stroke="rgba(41,49,79,0.10)" stroke-width="0.8" />
+          <text x="0" y="594" fill="#565e7e" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace" font-size="10" letter-spacing="1">图例</text>
+          <line x1="72" y1="590" x2="100" y2="590" stroke="#29314f" stroke-width="1.2" marker-end="url(#arrow-ink)" />
+          <text x="108" y="594" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">已接纳流</text>
+          <line x1="200" y1="590" x2="228" y2="590" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arrow-accent)" />
+          <text x="236" y="594" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">高峰入口</text>
+          <line x1="328" y1="590" x2="356" y2="590" stroke="#1a4dd9" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrow-accent)" />
+          <text x="364" y="594" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">429 背压</text>
+          <rect x="460" y="584" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="484" y="594" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">常规槽位</text>
+          <rect x="584" y="584" width="16" height="12" rx="2" fill="#ffffff" stroke="#1a4dd9" stroke-width="1.2" />
+          <text x="608" y="594" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">容量预警</text>
+          <rect x="708" y="584" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1.2" />
+          <text x="732" y="594" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">溢出（429）</text>
+          <rect x="844" y="584" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
+          <text x="868" y="594" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">深度徽章</text>
         </g>
       </svg>
     </div>

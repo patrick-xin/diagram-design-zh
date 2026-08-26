@@ -115,7 +115,7 @@ legend_label_x   = lane_pad                            # 24；行内首元素 x 
 ### 2.1 背景结构
 
 - 全画布 `paper` 填充。
-- **角色行容器**：每条道一个整行矩形 `lane_box(k)`（§2 公式），`rx=8`，`fill ink@0.03`——标签区与节点区连体同色、一体成型，道与道之间靠 8px 白缝分隔。**不画**道分隔横线、标签列竖线、图例顶线（容器边缘自己承担），**不铺**背景点阵（点纹理是 dev/editorial 主题预留，默认不画）。
+- **角色行容器**：每条道一个整行矩形 `lane_box(k)`（§2 公式），`rx=8`，`fill ink@0.03`——标签区与节点区连体同色、一体成型，道与道之间靠 8px 白缝分隔。**不画**道分隔横线、标签列竖线、图例顶线（容器边缘自己承担），**不铺**背景点阵。
 
 ### 2.2 步骤头芯片 + 步骤名
 
@@ -162,7 +162,6 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 
 ```svg
 <defs>
-  <!-- dots pattern: reserved for dev/editorial theme, unused by default -->
   <marker id="arr-muted"  markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#565e7e"/></marker>
   <marker id="arr-accent" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a4dd9"/></marker>
   <marker id="arr-link"   markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#217e7b"/></marker>
