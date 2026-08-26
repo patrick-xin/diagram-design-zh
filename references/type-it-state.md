@@ -84,29 +84,29 @@ dark: false
 
 ```
 # 水平朝向（默认）
-left_pad        = 16
+left_pad        = 0
 right_pad       = 16
-zone_gap        = 20
-zone_y          = 52
+zone_gap        = 48
+zone_y          = 8
 zone_h          = 360
 n_zones         = len(zones)
 
-# 分区宽：基线 200 + 每组件 24（给图标与两行副标留竖向空间）。
-# 标准示例（3/3/3 组件）实际用 256 / 360 / 272——公式是近似，
-# 精确宽度由 §10 走例 YAML 手工给定。
-zone_w(i)       = base + n_components_i * comp_slack             # base ≈ 200, slack ≈ 24
-viewBox_w       = left_pad + Σ zone_w(i) + (n_zones-1) * zone_gap + right_pad
+# 分区宽：按组件名与两行副标的实际宽度定（标准示例 3/3/3 组件 = 256 / 360 / 272），
+# 精确宽度由 §10 走例给定；右缘合计 984、留 16。画布宽 1000 定死，
+# 标题对齐见 style-guide「容器对齐与画布基线」。
+zone_w(i)       = 走例给定（256 / 360 / 272）
+viewBox_w       = 1000
 
 # 分区内组件摆放——行顶跨区对齐（三列同一行同 y），行间净空恒 56
 comp_pad_x      = 20
-comp_h          = 56                     # focal 68（两行副标），双行齐备 72
+comp_h          = 56                     # focal 68（两行副标）
 row_gap         = 56
-row_top(0)      = zone_y + 28            # 首行让出分区名断口 20
+row_top(0)      = zone_y + 28            # 36；首行让出分区名断口
 row_top(k+1)    = row_top(k) + max_comp_h(k) + row_gap   # 示例 36 / 160 / 272
 
 # 组件中线（连线路由用）
-comp_x(i)       = zone_x(i) + comp_pad_x
-comp_w(i)       = zone_w(i) - 2 * comp_pad_x
+comp_x(i)       = zone_x(i) + comp_pad_x          # 20 / 324 / 732
+comp_w(i)       = zone_w(i) - 2 * comp_pad_x      # 216 / 320 / 232
 comp_cx(i)      = comp_x(i) + comp_w(i)/2
 comp_cy(i, k)   = comp_y(i, k) + comp_h/2
 
@@ -117,10 +117,10 @@ footer_top      = zone_y + zone_h + 24
 footer_y(k)     = footer_top + k * (footer_bar_h + footer_gap)
 
 # 画布总高
-content_bottom  = N_footer > 0 ? footer_bottom : zone_y + zone_h
-legend_line_y   = content_bottom + 56    # 图例线距最下内容元素 56
-legend_baseline = legend_line_y + 18     # 「图例」与项同基线
-viewBox_h       = ceil_40(legend_line_y + 36)
+content_bottom  = N_footer > 0 ? footer_bottom : zone_y + zone_h   # 368
+legend_line_y   = content_bottom + 56    # 424；线贯通 0→1000
+legend_baseline = legend_line_y + 18     # 442
+viewBox_h       = ceil40(legend_baseline + 10)   # 480
 ```
 
 ### 2.1 背景与分区框
@@ -148,12 +148,12 @@ viewBox_h       = ceil_40(legend_line_y + 36)
 
 **图标摆放**（24×24，currentColor 单色——可选，点名才上；见 primitive-icons.md）：图标占 24×24 → 含 12px 左垫共 36px 横向足迹，名字与副标基线右移 40px。无图标时名字左移、盒宽不变。
 
-**名 + 副标基线**（左对齐）：
+**名 + 副标基线**（左对齐；shipped 示例无图标，名字贴 comp_x+16）：
 
 ```
 name_x = comp_x + (icon ? 44 : 16)
 name_y = comp_y + comp_h/2 - 2
-sub_y  = comp_y + comp_h/2 + 14
+sub_y  = comp_y + comp_h/2 + 14    # focal 68 时副标 y = comp_y + 50
 ```
 
 ### 2.3 连线几何（路由规则在 §3）
@@ -167,17 +167,17 @@ corridor_x = dst_cx                                  # 跨分区路由的走廊 
 ### 2.4 底条
 
 ```svg
-<rect x="16" y="{footer_y}" width="{viewBox_w-32}" height="56"
+<rect x="0" y="{footer_y}" width="984" height="56"
       fill="rgba(41,49,79,0.03)" stroke="rgba(41,49,79,0.18)" stroke-width="0.8" rx="8"/>
-<text x="72" y="{footer_y+24}" font-size="14" font-weight="600" fill="#29314f">{name}</text>
-<text x="72" y="{footer_y+40}" font-size="12" fill="#565e7e">{sub}</text>
+<text x="56" y="{footer_y+24}" font-size="14" font-weight="600" fill="#29314f">{name}</text>
+<text x="56" y="{footer_y+40}" font-size="12" fill="#565e7e">{sub}</text>
 ```
 
 底条是层内全体共享的服务。**不发任何连线。** 视觉上垫在分区下方，读者一眼扫到横切关切。
 
 ### 2.5 图例条
 
-`y = content_bottom + 16` 发丝分隔线，`y = content_bottom + 36` 一行样本 + 标签。只出现 `connectors[]` 实际用到的样式（外加 focal / external 组件 kind 若在图中出现）。
+`y = content_bottom + 56` 发丝分隔线（贯通 0→1000），`y = content_bottom + 74` 一行样本 + 标签（与「图例」同基线）。只出现 `connectors[]` 实际用到的样式（外加 focal / external 组件 kind 若在图中出现）。
 
 ---
 
@@ -323,7 +323,7 @@ corridor_x = dst_cx                                  # 跨分区路由的走廊 
 6. 连线标签一律中文，白底遮罩**骑线居中**（长竖线放中段，短水平线放起点侧）；规格见 §字段语义 `connectors[k].label`；图标（若设）在遮罩内文字左侧。
 7. 自定义色组件 ≤ 3；焦点上没有。
 8. 底条 ≤ 3；每条跨 `viewBox_w − 2×left_pad`；任何底条不发连线。
-9. 底部图例按 bar 规格：「图例」mono 10px · 0.1em 与项同基线（基线 = 分隔线 +18）、块 16×12、线样长 28；分隔线距最下内容元素 56、右端对齐内容右缘。
+9. 底部图例按 bar 规格：「图例」mono 10px · 0.1em 与项同基线（基线 = 分隔线 +18）、块 16×12、线样长 28；分隔线距最下内容元素 56、贯通 0→1000。
 10. 连线标签与分区名按 §字段语义规格；组件名 `node-name`（sans 14px · 600）；技术副标按语言走中文 12px / mono 9px。
 11. 箭头 `#arrow` / `#arrow-link` / `#arrow-accent` 在 `<defs>` 定义一次；无内联箭头定义。
 12. 深色变体：每个语义 token 走深色档取值；自定义色提亮 ~15%。
@@ -363,43 +363,45 @@ orientation: horizontal
 zones:
   - name: "采集"
     components:
-      - { id: pos,           name: "门店 POS",     sub: "零售流水 · MySQL",           icon: postgres }
-      - { id: dealer-portal, name: "经销商门户",   sub: "B2B · 订单录入",              icon: server   }
-      - { id: supplier-xlsx, name: "供应商报表",   sub: "外部 · 手工报送",             icon: database, kind: external }
+      - { id: pos,           name: "门店 POS",     sub: "零售流水 · MySQL" }
+      - { id: dealer-portal, name: "经销商门户",   sub: "B2B · 订单录入" }
+      - { id: supplier-xlsx, name: "供应商报表",   sub: "外部 · 手工报送", kind: external }
   - name: "处理"
     components:
-      - { id: shared-drive, name: "共享盘",       sub: "无版本控制 · Windows 文件共享", icon: file,      kind: focal }
-      - { id: analyst-pc,   name: "分析师工作站", sub: "SPSS · Excel · Python",        icon: desktop }
-      - { id: sqlserver,    name: "SQL Server",   sub: "本地部署 · 核心 RDBMS",        icon: sqlserver, color: "#7a8c47" }
+      - { id: shared-drive, name: "共享盘",       sub: "无版本控制 · Windows 文件共享", kind: focal }
+      - { id: analyst-pc,   name: "分析师工作站", sub: "SPSS · Excel · Python" }
+      - { id: sqlserver,    name: "SQL Server",   sub: "本地部署 · 核心 RDBMS", color: "#7a8c47" }
   - name: "分发"
     components:
-      - { id: legacy-bi, name: "老报表门户",   sub: "手工瓶颈",     icon: cloud,    kind: focal }
-      - { id: website,   name: "公司官网",     sub: "对外 · 静态页", icon: internet }
-      - { id: group-hq,  name: "集团兄弟单位", sub: "约 6 家",       icon: users,    kind: external }
+      - { id: legacy-bi, name: "老报表门户",   sub: "手工瓶颈", kind: focal }
+      - { id: website,   name: "公司官网",     sub: "对外 · 静态页" }
+      - { id: group-hq,  name: "集团兄弟单位", sub: "约 6 家", kind: external }
 
 connectors:
-  - { from: pos,           to: shared-drive, label: "CSV",     icon: csv,   style: link }
-  - { from: dealer-portal, to: shared-drive, label: "邮件",     icon: file, style: link }
-  - { from: supplier-xlsx, to: shared-drive, label: "EXCEL",   icon: excel, style: link, dashed: true }
-  - { from: shared-drive,  to: analyst-pc,   label: "拷贝",                 style: accent, dashed: true }
-  - { from: analyst-pc,    to: sqlserver,    label: "入库",                 style: neutral }
-  - { from: analyst-pc,    to: legacy-bi,    label: "EXCEL",   icon: excel, style: accent }
-  - { from: legacy-bi,     to: website,      label: "网页",                 style: neutral }
-  - { from: website,       to: group-hq,     label: "CSV 下载", icon: csv,  style: link, dashed: true }
+  - { from: pos,           to: shared-drive, label: "表格",   style: link }
+  - { from: dealer-portal, to: shared-drive, label: "邮件",   style: link }
+  - { from: supplier-xlsx, to: shared-drive, label: "报表",   style: link, dashed: true }
+  - { from: shared-drive,  to: analyst-pc,   label: "拷贝",   style: accent, dashed: true }
+  - { from: analyst-pc,    to: sqlserver,    label: "入库",   style: neutral }
+  - { from: analyst-pc,    to: legacy-bi,    label: "报表",   style: accent }
+  - { from: legacy-bi,     to: website,      label: "网页",   style: neutral }
+  - { from: website,       to: group-hq,     label: "下载",   style: link, dashed: true }
 
 dark: false
 ```
 
+> 走例与 shipped 资产一致：组件**不带图标**（`icon` 字段是可选契约，点名才上；上了图标名字右移 §2.2）、连线标签全中文（CSV→表格、EXCEL→报表）。
+
 ### 10.1 这份 YAML 证明了什么
 
 - `n_zones = 3`，每分区组件 `[3, 3, 3]`，自定义色 1 个（SQL Server），焦点 2 个（共享盘、老报表门户），external 2 个（供应商报表、集团兄弟单位）。
-- 分区宽 256 / 360 / 272 ⇒ `viewBox_w = 16 + 256 + 20 + 360 + 20 + 272 + 16 = 960`；`viewBox_h = 52 + 360 + 40 + 24 = 500`（无底条）。
-- 共享盘（焦点）分区 2 行 0：`x=340, y=80, w=264, h=68`（焦点撑高装两行副标）。
-- **三根采集侧 → 共享盘连线（C1/C2/C3）都进共享盘的左缘。** 走上缘的话，箭头体（`refX=7` 下沿行进方向回退 7px）会落进目标盒内、被纸色填充掩蔽——只剩 1px 尖探出描边。左缘进入 + 向右路径让箭头体留在盒外、完整可见（盒缘左侧露出约 7px）。三个左缘附着点扇开在 **y = 108 / 124 / 140**（16px 间距，远超 12px 最小值）。
-- **C1**（门店 POS → 共享盘）源 y 与落点同高：单根水平线。
-- **C2**（经销商门户 → 共享盘）从分区 2 背景上方绕行——竖直段 x=316（避开共享盘左缘 x=340）——落 `(340, 124)`。
-- **C3**（供应商报表 → 共享盘）同样绕行——竖直段 x=332（避开 x=340 起步的分析师工作站）——末段 Q 弯落 `(340, 140)`。
-- **C6**（分析师工作站 → 老报表门户）不能直插左缘（不同行，直横线会穿过公司官网）——经分区间隙与老报表门户**上方**绕行：竖直段 x=662（分区间隙内）、水平段 y=64（门户上缘之上）、再下扎进门户顶部中心。从上方下行进入，箭头体留在盒上方（可见）。
+- 分区宽 256 / 360 / 272 ⇒ `viewBox_w = 0 + 256 + 48 + 360 + 48 + 272 + 16 = 1000`；`viewBox_h`：分区底 368 → 图例线 424、基线 442 → `ceil40(452) = 480`（无底条）。
+- 共享盘（焦点）分区 2 行 0：`x=324, y=36, w=320, h=68`（焦点撑高装两行副标）。
+- **三根采集侧 → 共享盘连线（C1/C2/C3）都进共享盘的左缘（x=324）。** 走上缘的话，箭头体（`refX=7` 下沿行进方向回退 7px）会落进目标盒内、被纸色填充掩蔽——只剩 1px 尖探出描边。左缘进入 + 向右路径让箭头体留在盒外、完整可见。三个左缘附着点扇开在 **y = 64 / 80 / 96**（16px 间距，远超 12px 最小值）。
+- **C1**（门店 POS → 共享盘）源 y 与落点同高：单根水平线 (236,64)→(324,64)。
+- **C2**（经销商门户 → 共享盘）从分区 2 背景上方绕行——竖直段 x=256（分区间隙 256..304 内）——落 `(324, 80)`。
+- **C3**（供应商报表 → 共享盘）同样绕行——竖直段 x=288（避开 x=324 起步的分析师工作站）——末段 Q 弯落 `(324, 96)`。
+- **C6**（分析师工作站 → 老报表门户）不能直插（不同行，直横线会穿过公司官网）——经分区间隙（664..712）绕行：竖直段 x=676、水平段 y=70、侧边进门户左缘 `(732, 70)`。侧边进入让箭头体留在盒外、完整可见。
 
 **箭头可见性经验法则**：标准箭头（`markerWidth=8`、`refX=7`）的箭头体沿路径方向从终点向回伸 7px。要可见，这 7px 尾巴必须在目标盒**外**。翻译：
 

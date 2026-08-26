@@ -63,37 +63,40 @@ dark: false
 ## 2. 布局公式——确定性几何
 
 ```
-# 画布
-viewBox_w        = 1200
+# 画布（宽 1000 定死；容器四件套与标题对齐见 style-guide「容器对齐与画布基线」）
+viewBox_w        = 1000
 n_sources / n_consumers / n_footer
 
-# 两侧列（源在左、消费在右）
-col_top          = 92
+# 两侧列（源在左、消费在右；内容 x=0 起排）
+col_top          = 28
 col_node_h       = 64
 col_gap          = 24                    # 步长 = 64 + 24 = 88
-col_h_min        = 336                   # 默认装 4 个源（4*88-24）
-col_h            = max(col_h_min, max(n_sources, n_consumers) * 88 - 24)
-left_x / left_w  = 40 / 160
-right_x / right_w = 1000 / 160
+left_x / left_w  = 0 / 160
+right_x / right_w = 800 / 160
 col_node_y(k)    = col_top + k * 88
-col_node_cy(k)   = col_node_y(k) + 32    # 124, 212, 300, 388
+col_node_cy(k)   = col_node_y(k) + 32    # 60, 148, 236
+col_bottom       = col_node_y(n−1) + 64  # 3 节点 → 268
 
 # 平台分区
-zone_x / zone_w  = 260 / 696
-zone_y           = 72
-zone_h           = col_h                 # 分区高恒等于列高
-zone_cx          = 608
+zone_x / zone_w  = 220 / 536
+zone_y           = 8
+zone_h           = max(336, col_bottom + 8 − zone_y)
+zone_cx          = 488
 zone_pad_x       = 16                    # 横条在分区内的左右内缩
-zone_label_y     = zone_y + 3            # 标签骑在顶边框上、paper 遮罩垫底
+zone_label_y     = zone_y + 3            # 标签骑在顶边框上、居中于 zone_cx、paper 遮罩垫底
 
 # 底条（分区下方——每条横切关切一行全宽条）
-footer_top       = zone_y + zone_h + 52  # 分区下方 52px
+footer_top       = zone_y + zone_h + 52  # 分区下方 52px（标准 → 396）
 footer_bar_h     = 56
-footer_bar_x     = 40                    # 与源列左缘对齐
-footer_bar_w     = viewBox_w - 80        # = 1120
+footer_bar_x     = 0                     # 与源列左缘对齐
+footer_bar_w     = 960                   # 与消费列右缘对齐
 footer_gap       = 8
 
-viewBox_h        = max(600, footer_bottom + 84)   # 84 留给图例
+# 图例条（style-guide「图例条」规格）
+content_bottom   = N_footer > 0 ? footer_bottom : zone_y + zone_h
+legend_line_y    = content_bottom + 56   # 标准 → 516 + 56 = 572；线贯通 0→1000
+legend_baseline  = legend_line_y + 18    # 590
+viewBox_h        = ceil40(legend_baseline + 10)   # 600
 
 # platform.rows 在分区内的高度
 bar_h_focal      = 56
@@ -108,30 +111,30 @@ row_gap          = 16
 
 ```
 primary_row_idx  = 首个 kind=row 的下标
-primary_row_top  = col_node_y(1) - (row_h - col_node_h)/2   # 176——微调让 cy 对齐侧列第 2 行
+primary_row_top  = zone_y + 104          # 112——与侧列第 2 行（cy=148）连线水平
 
 # 主行上方：倒序上堆
 # 主行下方：依次下堆
 # 约束：y <= zone_y + zone_h
 ```
 
-标准形状（上条 / 双节点主行，即 shipped 示例）产出：调度器条 y=116 h=44（非焦点）、主行 y=176 h=72（两个焦点节点）。若再声明底部横条，按同一游标继续下堆；主行底到下条之间有意留出约 76px——底部横条与源 / 消费第 4 行（cy=388）同读一个 y 带，视觉上是侧列末行的兄弟。
+标准形状（上条 / 双节点主行，即 shipped 示例）产出：调度器条 y=52 h=44（非焦点）、主行 y=112 h=72（两个焦点节点）。若再声明底部横条，按同一游标继续下堆；底部横条垫在分区下方（§2 footer 公式），与侧列末行同读一个 y 带，视觉上是侧列末行的兄弟。
 
 ### 2.2 `row` 内的节点摆放
 
 ```
 N            = len(row.nodes)
-node_w       = (zone_w - 2*zone_pad_x - (N-1) * 16) / N
-node_x(j)    = zone_x + zone_pad_x + j * (node_w + 16)
+node_w       = 160
+node_x(j)    = zone_cx − (N·160 + (N−1)·16)/2 + j·176    # N=2 → 320, 496
 ```
 
-标准三节点行公式宽 210.67；示例也可用固定 `node_w=160` + 定制 x（`288, 480, 672`）让每个节点 cx 对齐连线方便的列（368, 560, 752）。**两种都合法**；公式是新图默认。偏差在渲染的 SVG 里加注释说明。
+节点 cx（400 / 576）沿分区中线对称，trigger 下扎线从条底落在 `node_cx(target)`。均布公式与固定 x 定制列位（连线走廊方便为准）**两种都合法**；公式是新图默认。偏差在渲染的 SVG 里加注释说明。
 
 ### 2.3 横条（整分区宽）
 
 ```
-bar_x = zone_x + zone_pad_x      # 276
-bar_w = zone_w - 2*zone_pad_x    # 664
+bar_x = zone_x + zone_pad_x      # 236
+bar_w = zone_w - 2*zone_pad_x    # 504
 ```
 
 `focal: true` 的条用 `bar_h_focal=56` + accent 样式（填充 `accent@0.08`、描边 accent）。非焦点条 `bar_h_default=44` + 中性样式（填充 `ink@0.05`、描边 `ink@0.30`）。
@@ -142,13 +145,9 @@ bar_w = zone_w - 2*zone_pad_x    # 664
 
 ### 2.5 图例条与页面标题
 
-图例占 viewBox 底部 84px 带（`footer_bottom .. viewBox_h`），单行、基线 `y = footer_bottom + 47`，规格按 style-guide「图例条」：
+图例按 style-guide「图例条（底部横条）」规格：分隔线 `y = 最下内容底 + 56`（标准 516+56=572）、`x` 贯通 0→1000；「图例」标签 `legend-label` 角色（mono 10px · 0.1em）、fill muted、`x=0`——与源列左缘同一对齐轨、基线 = 线 +18；标签 → 首个元素 72px；图例项 `legend` 角色（sans 10px）与标签同基线，色块 16×12（`y = 基线−10`）、线样长 28（`y = 基线−4`）、带对应箭头 marker；色样填充 α 与图内实物一致。
 
-- 顶部分隔线：`rule @0.10`、宽 0.8，基线上方 18px，`x` 从内容左缘到右缘。
-- 标签「图例」：`legend-label` 角色（mono 10px · 0.1em），fill muted，`x=40`——与源列左缘同一对齐轨；标签 → 首个元素 72px。
-- 图例项：`legend` 角色（sans 10px），与标签同一基线；色块 16×12（`y = 基线−10`）；线样长 28（`y = 基线−4`）、带对应箭头 marker；色样填充 α 与图内实物一致。
-
-页面层：eyebrow 格式「图内容语境 · 图类型」（如 数据平台 · 集成图），不带技能名；eyebrow / h1 `margin-left = 40 ÷ viewBox_w ≈ 3.33%`（内容最左标注元素对齐基线，三层一线）。
+页面层：eyebrow 格式「图内容语境 · 图类型」（如 数据平台 · 集成图），不带技能名；标题—图—图例标签的三层一线由容器四件套承担（`.frame padding-left 4%`、SVG 内容 x=0 起排、overflow visible，见 style-guide「容器对齐与画布基线」）。
 
 ---
 
@@ -188,7 +187,7 @@ bar_w = zone_w - 2*zone_pad_x    # 664
 ### 3.2 路由
 
 - 正交肘线、每路径至多两弯；每个弯 Q 贝塞尔 r=8。
-- **扇出错开**：一个节点向同侧 N 个目标扇出时，出边 y 按下标 ±4px 错开（如 Trino → 4 个消费从 y=124, 132, 140, 148 出）；竖直段走在分区缘与消费列之间的走廊里，同样错 y。
+- **扇出错开**：一个节点向同侧 N 个目标扇出时，出边 y 沿节点边缘高均布错开（如查询引擎 → 3 个消费从 y=124, 148, 172 出）；竖直段走在分区缘与消费列之间的走廊（740..800）里，同样错 y。
 - **z 序**：所有连线先于任何 rect（节点填充掩蔽线端）。分区框也在连线**之前**——线压过分区边框走，不被边框切断。
 - **半透明节点垫纸色 mask**：淡染样式框掩不住线——每个可能被线经过的盒子（调度条、底条、横条）先输出同几何的 `paper` 色不透明矩形，再叠淡染框，线才真正「藏在框后」。穿越不为终点（如 AUTH 虚线穿过身份条）也靠这层 mask 隐去；跨盒穿越的 mask 要**延伸盖住盒间缝隙**，否则缝里露出的残段会读成一根不存在的假连线。
 - **标签**：`primary` / `secondary` / `federated` / `auth` 每条都要协议标签（拉丁 mono 9px 或中文 sans 12px，paper 色遮罩、线上方 6–10px 净空）。源侧标签贴**源端**同一列（出源盒 12px），mask 不越过分区边框、不贴后画盒子的角。`trigger` 边无标签。
@@ -203,7 +202,7 @@ N≥2 条：AUTH 线错开免叠。底条 k：
 footer_auth_x(k) = zone_cx + (k - (N-1)/2) * 32     # 每条 32px 步长
 ```
 
-例：N=1 → 608；N=2 → 592, 624；N=3 → 576, 608, 640。每根 AUTH 线从 `(footer_auth_x(k), footer_y(k))` 上行到 `(footer_auth_x(k), zone_y + zone_h)`。AUTH 标签贴在箭头头上方、分区下缘处。
+例：N=1 → 488；N=2 → 472, 504；N=3 → 456, 488, 520。每根 AUTH 线从 `(footer_auth_x(k), footer_y(k))` 上行到 `(footer_auth_x(k), zone_y + zone_h)`。AUTH 标签贴在箭头头上方、分区下缘处。
 
 ### 3.4 交越
 
@@ -268,10 +267,10 @@ footer_auth_x(k) = zone_cx + (k - (N-1)/2) * 32     # 每条 32px 步长
 
 出 SVG 前逐项核：
 
-1. `viewBox = "0 0 1200 {viewBox_h}"`，`viewBox_h = max(600, footer_bottom + 84)`。
-2. 平台分区 `x=260 y=72 w=696 h=col_h`；标签骑顶边框 `y=zone_y+3`、paper 遮罩。
-3. 左列 `x=40..200`、右列 `x=1000..1160`——都 160 宽。
-4. 源 / 消费行顶 y=92、步长 88px。
+1. `viewBox = "0 0 1000 {viewBox_h}"`，`viewBox_h = ceil40(图例基线 + 10)`（标准 600）。
+2. 平台分区 `x=220 y=8 w=536 h=zone_h`；标签骑顶边框、居中于 `zone_cx=488`、paper 遮罩。
+3. 左列 `x=0..160`、右列 `x=800..960`——都 160 宽。
+4. 源 / 消费行顶 y=28、步长 88px。
 5. `platform.rows` 经 §2.1 游标算法在分区内堆叠；总跨 ≤ `zone_h`。
 6. 每个 `kind: row` 内节点 cx 沿分区宽均布（§2.2）。
 7. **恰好 2** 个焦点组件（`focal: true`）。
@@ -291,7 +290,7 @@ footer_auth_x(k) = zone_cx + (k - (N-1)/2) * 32     # 每条 32px 步长
 **挂点（由本类型几何推导，不另行取位）**：
 
 - 侧列（源 / 消费）：图标中心 `(node_x + 24, node_cy)`——左内缘 24px、垂直居中；色 muted；文字仍居中不动。
-- 底条：图标中心 `(footer_bar_x + 32, 条中心线)`——落在文字左轨上；色 = 底条自己的语义色；名字 / 副标左缘从 72 右移到 96。
+- 底条：图标中心 `(footer_bar_x + 32, 条中心线)`——落在文字左轨上；色 = 底条自己的语义色；名字 / 副标左缘 `footer_bar_x + 56`（图标右缘净空 12）。
 - 平台分区（调度条、焦点节点）**不上图标**——DAG / STORE / SQL 角色芯片已承担身份。
 
 ---

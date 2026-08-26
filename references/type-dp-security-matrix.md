@@ -66,12 +66,10 @@ dark: false
 
 ```
 # 常量
-left_pad         = 12
-right_pad        = 48
 comp_col_w       = 208
-comp_role_gap    = 12
+comp_role_gap    = 56
 role_col_w       = 148
-role_col_gap     = 16
+role_col_gap     = 32
 header_h         = 52
 row_h            = 36
 row_stride       = 40
@@ -80,39 +78,41 @@ row_stride       = 40
 n_roles          = len(roles)        # 2..6
 n_components     = len(components)   # 2..14
 
-# 画布
-viewBox_w        = left_pad + comp_col_w + comp_role_gap
-                   + n_roles * role_col_w + (n_roles - 1) * role_col_gap
-                   + right_pad
-                   # 4 角色 → 12 + 208 + 12 + 592 + 48 + 48 = 920
+# 画布（宽 1000 定死；内容左缘 x=0 起排，标题对齐见 style-guide「容器对齐与画布基线」）
+viewBox_w        = 1000
+content_right    = comp_col_w + comp_role_gap + n_roles*role_col_w + (n_roles-1)*role_col_gap
+                   # 4 角色 → 208 + 56 + 592 + 96 = 952（右侧留白到 1000）
 
-header_y         = 72
-row_y(k)         = 140 + k * 40                  # 140, 180, 220, ...
-rows_bottom      = row_y(n_components - 1) + row_h       # 8 行 → 456
-legend_y_top     = rows_bottom + 20                      # 476
-viewBox_h        = legend_y_top + 44                     # 520
+header_y         = 0
+row_y(k)         = 68 + k * 40                  # 68, 108, ..., 348
+rows_bottom      = row_y(n_components - 1) + row_h       # 8 行 → 384
+
+# 图例条（style-guide 规格）
+legend_line_y    = rows_bottom + 56             # 440；线贯通 0→1000
+legend_baseline  = legend_line_y + 18           # 458
+viewBox_h        = ceil40(legend_baseline + 10) # 480
 
 # 列位置
-comp_col_x       = 12
-role_col_x(j)    = 12 + 208 + 12 + j * (148 + 16)        # 232, 396, 560, 724
-role_col_cx(j)   = role_col_x(j) + 74                    # 306, 470, 634, 798
+comp_col_x       = 0
+role_col_x(j)    = 264 + j * (148 + 32)         # 264, 444, 624, 804
+role_col_cx(j)   = role_col_x(j) + 74           # 338, 518, 698, 878
 ```
 
 ### 2.1 背景
 
 整个 viewBox 铺纸色实底，无纹理。
 
-### 2.2 表头行（y = 72，h = 52）
+### 2.2 表头行（y = 0，h = 52）
 
-**组件列表头格**：rect `(12, 72, 208, 52)` 白底、`ink @ 0.12` 描边 0.8、`rx=6`。两行居中标签：行 1「组件」（`node-name` sans 12px · 600 · ink）；行 2「× AD 组」（mono 9px `muted`）。
+**组件列表头格**：rect `(0, 0, 208, 52)` 白底、`ink @ 0.12` 描边 0.8、`rx=6`。两行居中标签：行 1「组件」（`node-name` sans 12px · 600 · ink，基线 y=22）；行 2「× AD 组」（mono 9px `muted`，基线 y=40）。
 
-**角色横幅（每角色一条）**：rect `(role_col_x(j), 72, 148, 52)`、填充 `ink`、`rx=6`。两行居中：行 1 角色名（sans 12px · 600 · 白）；行 2 组代码（mono 9px · 白 · 0.85）。表头字重 600 是表头行的层级信号；数据区格内文字一律 400（§2.4）。
+**角色横幅（每角色一条）**：rect `(role_col_x(j), 0, 148, 52)`、填充 `ink`、`rx=6`。两行居中：行 1 角色名（sans 12px · 600 · 白，基线 y=22）；行 2 组代码（mono 9px · 白 · 0.85，基线 y=40）。表头字重 600 是表头行的层级信号；数据区格内文字一律 400（§2.4）。
 
 ### 2.3 数据行（y = row_y(k)，h = 36）
 
-**组件标签格**：rect `(12, row_y(k), 208, 36)` 白底、`ink @ 0.12` 描边 0.8、`rx=4`。名字左对齐 `(24, row_y+24)`：sans 12px · 400 · ink。hint（若有）右对齐 `(208, row_y+24)`：mono 10px `muted`。名字与 hint 两端对称（justify-between）：各距格缘 12px。
+**组件标签格**：rect `(0, row_y(k), 208, 36)` 白底、`ink @ 0.12` 描边 0.8、`rx=4`。名字左对齐 `(12, row_y+23)`：sans 12px · 400 · ink。hint（若有）右对齐 `(196, row_y+23)`：mono 10px `muted`。名字与 hint 两端对称（justify-between）：各距格缘 12px。
 
-**值格（每角色 × 每组件一格）**：rect `(role_col_x(j), row_y(k), 148, 36)`、`rx=4`、`ink @ 0.12` 描边 0.6。填充与文字色看 `level`（或焦点标记）——§2.4。值文本居中 `(role_col_cx(j), row_y+24)`：sans 12px。焦点格主值上提到 y=row_y+20、副行 `sub` 在 y=row_y+32（12px）。
+**值格（每角色 × 每组件一格）**：rect `(role_col_x(j), row_y(k), 148, 36)`、`rx=4`、`ink @ 0.12` 描边 0.6。填充与文字色看 `level`（或焦点标记）——§2.4。值文本居中 `(role_col_cx(j), row_y+23)`：sans 12px。焦点格主值上提到 y=row_y+17、副行 `sub` 在 y=row_y+30（12px）。
 
 ### 2.4 格样式表
 
@@ -126,11 +126,11 @@ role_col_cx(j)   = role_col_x(j) + 74                    # 306, 470, 634, 798
 
 值格文字一律常规字重（400）——权限等级的强弱由填充/描边/文字色承载，不用字重（2026-08-20 拍板）。`none` 的文字用 `muted` 而不是 `soft`——12px 文字要过 AA，`soft` 在纸面上到不了（实测 3.48:1）。焦点格可带第二行（`sub:`）：accent · 12px · 0.85 透明度。
 
-### 2.5 图例条（y_top = legend_y_top）
+### 2.5 图例条（line y = 440）
 
-按 style-guide「图例条（底部横条）」节执行（bar 规格）——项 sans 10px、色块 16×12、「图例」标签 mono 10px/0.1em 与项同基线（基线 = `legend_y_top + 18`）、顶部分隔线 `rule @ 0.10` 宽 0.8 即 `legend_y_top`、标签 → 首元素 72px、块 → 文字 8px。只出现图内实际用到的类；样块填充与描边与图内格实物一致（焦点样本带 accent 描边 1.4）。
+按 style-guide「图例条（底部横条）」节执行（bar 规格）——分隔线 `rule @0.10` 宽 0.8、`y=440`、贯通 0→1000；「图例」标签 mono 10px/0.1em `x=0` 与项同基线（基线 458）；标签 → 首元素 72px、块 → 文字 8px；色块 16×12（`y=448`）。只出现图内实际用到的类；样块填充与描边与图内格实物一致（焦点样本带 accent 描边 1.4）。
 
-eyebrow 格式「图内容语境 · 图类型」（本类型如「数据平台 · 安全矩阵」），去技能名；标题对齐按 style-guide「标题对齐基线」节——`margin-left = left_pad / viewBox_w`（4 角色时 12/920 ≈ 1.3%），full 版跟框缘无 margin-left。
+eyebrow 格式「图内容语境 · 图类型」（本类型如「数据平台 · 安全矩阵」），去技能名；标题对齐走容器四件套（`.frame padding-left 4%`、SVG 内容 x=0 起排，见 style-guide「容器对齐与画布基线」）；full 版跟框缘无缩进。
 
 ---
 
@@ -232,18 +232,18 @@ eyebrow 格式「图内容语境 · 图类型」（本类型如「数据平台 �
 
 出 SVG 前逐项核：
 
-1. `viewBox = "0 0 {viewBox_w} {viewBox_h}"` 经 §2 推导（4 角色 × 8 组件 → 920 × 520）。
-2. 表头行 y=72 h=52。组件表头白底两行「组件 / × AD 组」；角色横幅 ink 填充、白字名 + 组代码。
-3. 数据行 y=140 起、步长 40、高 36；`rows_bottom = 140 + (n−1)·40 + 36`。
-4. 组件标签格 `rx=4`、名字左对齐 x=24 · 400、hint 右对齐 x=208（两端各距格缘 12px）。
+1. `viewBox = "0 0 1000 {viewBox_h}"` 经 §2 推导（4 角色 × 8 组件 → 1000 × 480）。
+2. 表头行 y=0 h=52。组件表头白底两行「组件 / × AD 组」（基线 22 / 40）；角色横幅 ink 填充、白字名 + 组代码。
+3. 数据行 y=68 起、步长 40、高 36；`rows_bottom = 68 + (n−1)·40 + 36`。
+4. 组件标签格 `rx=4`、名字左对齐 x=12 · 400、hint 右对齐 x=196（两端各距格缘 12px）。
 5. 每个值格 `rx=4`、描边 `ink @ 0.12` 0.6、填充与文字匹配 §2.4 的 `level`。
-6. **恰好一个**焦点格（或零）。描边 `accent` 宽 1.4；主值 y=row_y+20；`sub`（若有）y=row_y+32。
+6. **恰好一个**焦点格（或零）。描边 `accent` 宽 1.4；主值 y=row_y+17；`sub`（若有）y=row_y+30。
 7. `cells:` 里缺的格渲染为 `level: "none"` + `none_label` 文本（默认「无访问」）。
 8. 自定义色格 ≤ 2（焦点格之外）。
 9. 全 SVG 无任何连线元素。
-10. 图例条在 `legend_y_top` 按 §2.5（style-guide 图例条规格）、实际用到的每类一个样本、上方发丝线。
-11. `viewBox_h` 随 `n_components` 长、`viewBox_w` 随 `n_roles` 宽。
-12. 标题对齐：eyebrow / h1 `margin-left = left_pad / viewBox_w`（三层一线，含图例标签 x=left_pad）；full 版跟 diagram-container 框缘、无 margin-left。
+10. 图例条在 `legend_line_y=440` 按 §2.5（style-guide 图例条规格）、实际用到的每类一个样本、上方发丝线。
+11. `viewBox_h` 随 `n_components` 长（40 步进收口）；画布宽 1000 定死，`content_right` 随 `n_roles` 长。
+12. 标题对齐：容器四件套（`.frame padding-left 4%`、三层一线，含图例标签 x=0）；full 版跟 diagram-container 框缘、无缩进。
 13. 三件套完整性：浅色基准定稿 → 深色按 §6 换档（横幅反转）→ full 页面级（subtitle / 图框 wash ink@0.03 + rule 边 / 三卡写图内真实数据 / footer 图题+日期 / :root 九角色 token、SVG 自带全幅 paper rect）。
 
 ---
@@ -339,9 +339,9 @@ dark: false
 ### 10.1 这份 YAML 证明了什么
 
 - `n_roles=4`、`n_components=8`、无颜色覆盖、一个焦点格。
-- `viewBox_w = 12 + 208 + 12 + 4·148 + 3·16 + 48 = 920`。
-- `row_y(k)` 产出 140, 180, 220, 260, 300, 340, 380, 420；`rows_bottom = 456`、`legend_y_top = 476`、`viewBox_h = 520`。
-- `role_col_x(j) = [232, 396, 560, 724]`。
-- 焦点格 `(row=5, col=3)` → rect `(724, 340, 148, 36)`、accent 描边 1.4。
+- `content_right = 208 + 56 + 4·148 + 3·32 = 952`；画布 `1000 × 480`。
+- `row_y(k)` 产出 68, 108, 148, 188, 228, 268, 308, 348；`rows_bottom = 384`、`legend_line_y = 440`、`legend_baseline = 458`、`viewBox_h = 480`。
+- `role_col_x(j) = [264, 444, 624, 804]`、`role_col_cx(j) = [338, 518, 698, 878]`。
+- 焦点格 `(row=5, col=3)` → rect `(804, 268, 148, 36)`、accent 描边 1.4。
 
 同一 YAML 重新生成，产出与 shipped `example-dp-security-matrix.html` 视觉无异。

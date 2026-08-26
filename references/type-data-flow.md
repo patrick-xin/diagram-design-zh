@@ -6,7 +6,7 @@
 
 本类型是**参数化**的——§1 的输入 schema 经 §2 公式驱动每个坐标。相同输入的两次产出必须视觉一致。
 
-> **中文重标定**：本类型硬规则：**含汉字 ≥10px**（9px 只留给纯拉丁技术串）。因此全套网格放大：节点 100×64 → **124×80**，列距 112 → **136**，道槽高 80 → **104**（容器 96 + 缝），表头带 36 → **40**。**不许**为迁就小字号把网格缩回去。
+> **中文重标定**：本类型硬规则：**含汉字 ≥10px**（9px 只留给纯拉丁技术串）。因此全套网格放大：节点 100×64 → **124×80**，列距 112 → **176**，道槽高 80 → **104**（容器 96 + 缝），表头带 **36**（芯片 0..16、步骤名基线 28）。**不许**为迁就小字号把网格缩回去。
 
 ---
 
@@ -59,7 +59,7 @@ dark: false
 
 **保留字段语义：**
 - `lanes[k].key`——3 字母角色芯片文（`ADM`、`ENG`……），在该道每个节点内显示。
-- `lanes[k].name`——道标签，中文走 eyebrow-zh（sans 12px · 0.3em）。
+- `lanes[k].name`——道标签，中文走 eyebrow-zh（sans 10px · 500 · 0.3em）。
 - `steps[j].focal: true`——恰好**一个**步骤可声明。头芯片 accent 填充。
 - `nodes[i].focal: true`——恰好**一个**节点可声明。accent 描边（§5）。
 - `nodes[i].chips`——节点数据类型芯片，对象式 `{in: "<CODE>", out: "<CODE>"}`（任一侧可省）。编码取自 §8（`WB`/`DB`/`TB`/`FL`/`LS`）。**位置固定**：入芯片在节点**左下**，出芯片在**右下**。
@@ -70,46 +70,42 @@ dark: false
 ## 2. 布局公式——确定性几何
 
 ```
-lane_pad         = 24                                  # 行容器左右外距
-label_col_w      = 160
-step_slot_w      = 136                                # 124 节点 + 12 走廊
-right_pad        = 32
+lane_pad         = 0                                   # 行容器左缘贴 0；右缘 984（留 16 呼吸）
+label_col_w      = 144                                 # 首列节点左缘
+step_slot_w      = 176                                 # 124 节点 + 52 走廊
 n_steps          = len(steps)
 n_lanes          = len(lanes)
 
 # 画布
-viewBox_w        = label_col_w + n_steps * step_slot_w + right_pad   # 5 步 → 872
-header_h         = 40
+viewBox_w        = 1000                                # 定死；标题对齐见 style-guide「容器对齐与画布基线」
+header_h         = 36                                  # 芯片 y=0..16、步骤名基线 28
 lane_h           = 104                                 # 道槽：容器 96 + 上下缝各 4（道间白缝 8）
+lane_box_y(k)    = header_h + k * lane_h               # 36, 140, 244, 348
+lane_box(k)      = rect(0, lane_box_y(k), 984, 96)     # rx=8；标签区与节点区连体同色
+lane_y_mid(k)    = lane_box_y(k) + 48                  # 84, 188, 292, 396
+lane_label_x     = 68                                  # 道标签锚点（0.3em 尾距已补偿）
 has_color_row    = any(node.color or step.color or lane.color in inputs)
-legend_h         = 148 if has_color_row else 124      # 有配色时 4 行（行距 30 + 图表间距 32）
-viewBox_h        = header_h + n_lanes * lane_h + legend_h            # 4 道 + 配色 → 604
+n_legend_rows    = 4 if has_color_row else 3
 
 # 步骤表头带（顶部）
-step_chip_y      = 8                                   # 20×16 芯片（两位数 24 宽）
-step_label_y     = 36                                  # 芯片下方的步骤名
-
-# 道位置与角色行容器
-lane_y_top(k)    = header_h + k * lane_h               # 40, 144, 248, 352
-lane_box(k)      = rect(lane_pad, lane_y_top+4, viewBox_w−2·lane_pad, 96)   # rx=8
-                                                       # 标签区与节点区连体同色
-lane_y_mid(k)    = lane_y_top(k) + lane_h/2            # 92, 196, 300, 404
-lane_label_x     = (lane_pad + label_col_w) / 2        # 92
+step_chip_y      = 0                                   # 两位数芯片 24×16（x = step_cx−12）
+step_label_y     = 28                                  # 芯片下方的步骤名基线
 
 # 步骤 / 节点中心 x
-step_cx(j)       = label_col_w + 8 + j * step_slot_w + node_w/2      # 230, 366, 502, 638, 774
-                                                                      #（内容区 8px 内沟）
+step_cx(j)       = 206 + j * step_slot_w               # 206, 382, 558, 734, 910
 
 # 节点
 node_w           = 124
 node_h           = 80
-node_x(j)        = step_cx(j) - node_w/2               # 168, 304, 440, 576, 712
-node_y(k)        = lane_y_top(k) + 12                  # 52, 156, 260, 364
+node_x(j)        = step_cx(j) - node_w/2               # 144, 320, 496, 672, 848
+node_y(k)        = lane_box_y(k) + 8                   # 44, 148, 252, 356
 
-# 图例带（底部）
-legend_y_top     = header_h + n_lanes * lane_h         # 456（图表底 → 首行 32px 间距）
-legend_row_y     = [legend_y_top + 40, +70, +100, +130] # 文字基线 496, 526, 556, 586
-legend_label_x   = lane_pad                            # 24；行内首元素 x = 100
+# 图例带（底部，多行横条）
+legend_line_y    = lane_box_y(n_lanes−1) + 96 + 56     # 444 + 56 = 500；线贯通 0→1000
+legend_row_y(i)  = legend_line_y + 18 + i * 30         # 文字基线 518, 548, 578, 608
+legend_label_x   = 0                                   # 行类目标签（mono 10px · 0.1em）
+legend_first_x   = 76                                  # 行内首元素
+viewBox_h        = ceil40(末行基线 + 10)               # 4 道 + 配色 → 640
 ```
 
 ### 2.1 背景结构
@@ -119,7 +115,7 @@ legend_label_x   = lane_pad                            # 24；行内首元素 x 
 
 ### 2.2 步骤头芯片 + 步骤名
 
-每步 `j`：芯片（`step_cx±chip_w/2`，y=8，高 16，`rx=8` 药丸），数字锚点 `(step_cx, 19)`，步骤名锚点 `(step_cx, 36)`。
+每步 `j`：芯片（`step_cx±12`，y=0，24×16，`rx=8` 药丸），数字锚点 `(step_cx, 11)`，步骤名锚点 `(step_cx, 28)`。
 
 - 默认：芯片填 `ink@0.12`，数字 ink，步骤名 muted。
 - 焦点：芯片填 `accent-dark@0.20`，数字与步骤名 accent。
@@ -127,7 +123,7 @@ legend_label_x   = lane_pad                            # 24；行内首元素 x 
 
 ### 2.3 道标签
 
-单行中文，eyebrow-zh（sans 12px · 0.3em），fill muted，居中于 `(lane_label_x, lane_y_mid(k) + 4)`——即容器左段（标签区）的中心。逐道 `color` 覆盖（§4）时标签 fill 换 `C`、该道行容器填充换 `C@0.04`。
+单行中文，eyebrow-zh（sans 10px · 500 · 0.3em），fill muted，居中锚点 `(68, lane_y_mid(k) + 4)`——即容器左段（标签区 0..144）的中心（0.3em 尾距已补偿）。逐道 `color` 覆盖（§4）时标签 fill 换 `C`、该道行容器填充换 `C@0.04`。
 
 ### 2.4 节点内容（124×80 矩形内）
 
@@ -237,9 +233,9 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 
 ## 7. 复现清单（输出前逐条核对）
 
-1. `viewBox = "0 0 {viewBox_w} {viewBox_h}"` 由 §2 从 `n_steps`/`n_lanes` 推出。
-2. 表头带 `y=0..40`；图例带 `y=legend_y_top..viewBox_h`。
-3. 每个节点落在 `(step_cx(j)-62, lane_y_top(k)+12)`，尺寸 `124×80`，上下各留 8px 呼吸空间，整体在 `lane_box(k)` 内。
+1. `viewBox = "0 0 1000 {viewBox_h}"` 由 §2 从 `n_steps`/`n_lanes` 推出（高按 40 步进收口）。
+2. 表头带 `y=0..36`（芯片 0..16、步骤名基线 28）；图例带 `y=legend_line_y..viewBox_h`。
+3. 每个节点落在 `(step_cx(j)-62, lane_box_y(k)+8)`，尺寸 `124×80`，上下各留 8px 呼吸空间，整体在 `lane_box(k)` 内。
 4. 空格什么都不画。
 5. 恰好一个焦点步骤、一个焦点节点、一条 accent 箭头（带 paper 遮罩标注）。
 6. 其余箭头全部无标注。
@@ -279,12 +275,12 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 
 ## 9. 图例（3 或 4 行横条）
 
-规格按 style-guide「图例条」：顶部**画**分隔线（`rule @0.10`、宽 0.8，首行基线上方 18px）；行类目标签用 `legend-label` 角色（mono 10px · 0.1em），每行一个在 `x=24`（与行容器左缘同一对齐基线）；行内首元素一律 `x=100`；图例项文字用 `legend` 角色（sans 10px）；行距 30（§2 `legend_row_y`），横向单排不竖叠。默认 3 行（步骤 / 数据类型 / 流向）；有 §4 配色时加第 4 行（关注点），`legend_h` 124 → 148。
+规格按 style-guide「图例条」：顶部**画**分隔线（`rule @0.10`、宽 0.8、`y=500`、贯通 0→1000）；行类目标签用 `legend-label` 角色（mono 10px · 0.1em），每行一个在 `x=0`（与行容器左缘同一对齐轨）；行内首元素一律 `x=76`；图例项文字用 `legend` 角色（sans 10px）；行距 30（§2 `legend_row_y`），横向单排不竖叠。默认 3 行（步骤 / 数据类型 / 流向）；有 §4 配色时加第 3 行关注点并顺延（`n_legend_rows` 3 → 4）。
 
-- **行 1 步骤**：复刻表头芯片与步骤名（芯片按图内实际尺寸 24×16 复刻；步骤名 10px）；焦点步骤保 accent。
+- **行 1 步骤**：复刻表头芯片与步骤名（芯片按图内实际尺寸 24×16 复刻、数字基线 −1；步骤名距芯片 32）；焦点步骤保 accent。
 - **行 2 数据类型**：图内实际用到的芯片各一枚（16×12 色块 + 编码文字在右侧，不加中文说明）；示例五色齐落（LS/DB/TB/FL/WB）。
 - **行 3 关注点**（仅有配色时）：每个自定义色一枚 16×12 色块 + 语义标签（示意芯片的填充 α 与实物节点一致）；accent 焦点色也并排展示。
-- **行 4 流向**：实际用到的每种箭头样式一段短线（长 28、基线−4）+ marker + 标签（10px）。
+- **行 4 流向**：实际用到的每种箭头样式一段短线（长 28、基线−4）+ marker + 标签（10px，距线样 8px）。
 
 ---
 
