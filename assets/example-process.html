@@ -45,7 +45,7 @@
       letter-spacing: 0;
       line-height: 1.15;
       color: var(--color-ink);
-      margin-bottom: 1.5rem;
+      margin-bottom: 3rem;
     }
 
     svg { width: 100%; min-width: 900px; display: block; overflow: visible; }
@@ -62,28 +62,24 @@
     <p class="eyebrow">流程 · 图表设计</p>
     <h1>季度入户调查 · 从问卷设计到公开发布</h1>
 
-    <!-- 几何：type-process.md §2 重标定网格。label_col 160 · slot 136 · 节点 124×80 · 道高 96 · 表头 40 · 图例 104（3 行，无配色） -->
-    <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-process-title example-process-desc">
+    <!-- 几何：type-process.md §2 重标定网格。label_col 80 · slot 128 · 节点 124×80 · 道高 96 · 表头 32 · 图例横条 3 行（分隔线锚最下内容底 +56 · 右缘贯通 0→1000 · 行距 30 · 画布高按 40 步进） -->
+    <svg viewBox="0 0 1000 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-process-title example-process-desc">
       <title id="example-process-title">季度入户调查流程图</title>
       <desc id="example-process-desc">流程图：研究设计、数据工程、现场执行、质控审核、内容发布五条角色道，设计、分配、采集、审核、清洗、制表、发布七个步骤接力；焦点为采集步骤的数据采集节点；现场异常以虚线触发上报回数据工程。</desc>
         <defs>
-          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
-            <circle cx="11" cy="11" r="0.8" fill="rgba(41,49,79,0.10)"/>
-          </pattern>
           <marker id="arrow"        markerWidth="8" markerHeight="6" refX="7" refY="3"   orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#565e7e"/></marker>
           <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3"   orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a4dd9"/></marker>
           <marker id="arrow-sm"     markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0, 6 2.5, 0 5" fill="#565e7e"/></marker>
         </defs>
 
         <rect width="100%" height="100%" fill="#ffffff"/>
-        <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
 
         <!-- 交替道染色（道 0、2、4） -->
         <rect x="80" y="32"  width="920" height="96" fill="rgba(41,49,79,0.02)"/>
         <rect x="80" y="224" width="920" height="96" fill="rgba(41,49,79,0.02)"/>
         <rect x="80" y="416" width="920" height="96" fill="rgba(41,49,79,0.02)"/>
 
-        <!-- 道分隔 + 图例顶线 -->
+        <!-- 道分隔（末线 512 = 步骤条收底；图例顶线独立，锚 512+56） -->
         <line x1="80" y1="32"  x2="1000" y2="32"  stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
         <line x1="80" y1="128" x2="1000" y2="128" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
         <line x1="80" y1="224" x2="1000" y2="224" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
@@ -220,50 +216,53 @@
         <rect x="956" y="490" width="20" height="10" rx="2" fill="#9a6fb8"/>
         <text x="966" y="498" fill="#ffffff" font-size="7" font-weight="700" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">WB</text>
 
-        <!-- 图例 · 行 1 步骤 -->
-        <text x="84" y="532" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">步骤</text>
-        <rect x="140" y="520" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
-        <text x="150" y="531" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">1</text>
-        <text x="168" y="532" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">设计</text>
-        <rect x="228" y="520" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
-        <text x="238" y="531" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">2</text>
-        <text x="256" y="532" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">分配</text>
-        <rect x="316" y="520" width="20" height="16" rx="8" fill="rgba(26,77,217,0.20)"/>
-        <text x="326" y="531" fill="#1a4dd9" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">3</text>
-        <text x="344" y="532" fill="#1a4dd9" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">采集</text>
-        <rect x="404" y="520" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
-        <text x="414" y="531" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">4</text>
-        <text x="432" y="532" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">审核</text>
-        <rect x="492" y="520" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
-        <text x="502" y="531" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">5</text>
-        <text x="520" y="532" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">清洗</text>
-        <rect x="580" y="520" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
-        <text x="590" y="531" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">6</text>
-        <text x="608" y="532" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">制表</text>
-        <rect x="668" y="520" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
-        <text x="678" y="531" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">7</text>
-        <text x="696" y="532" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">发布</text>
+        <!-- 图例 · 顶部分隔线（步骤条底 512 + 56 = 568 · 贯通 0→1000） -->
+        <line x1="0" y1="568" x2="1000" y2="568" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
 
-        <!-- 图例 · 行 2 数据类型 -->
-        <text x="84" y="554" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据类型</text>
-        <rect x="160" y="544" width="16" height="10" rx="2" fill="#3ba272"/>
-        <text x="182" y="554" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">LS</text>
-        <rect x="220" y="544" width="16" height="10" rx="2" fill="#5470c6"/>
-        <text x="242" y="554" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">DB</text>
-        <rect x="280" y="544" width="16" height="10" rx="2" fill="#d9605b"/>
-        <text x="302" y="554" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">FL</text>
-        <rect x="340" y="544" width="16" height="10" rx="2" fill="#9a6fb8"/>
-        <text x="362" y="554" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">WB</text>
-        <text x="420" y="554" fill="#8f94ab" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">左入 · 右出</text>
+        <!-- 图例 · 行 1 步骤（首行基线 = 分隔线 +18 = 586 · 行距 30） -->
+        <text x="84" y="586" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">步骤</text>
+        <rect x="140" y="574" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
+        <text x="150" y="585" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">1</text>
+        <text x="168" y="586" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">设计</text>
+        <rect x="228" y="574" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
+        <text x="238" y="585" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">2</text>
+        <text x="256" y="586" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">分配</text>
+        <rect x="316" y="574" width="20" height="16" rx="8" fill="rgba(26,77,217,0.20)"/>
+        <text x="326" y="585" fill="#1a4dd9" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">3</text>
+        <text x="344" y="586" fill="#1a4dd9" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">采集</text>
+        <rect x="404" y="574" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
+        <text x="414" y="585" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">4</text>
+        <text x="432" y="586" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">审核</text>
+        <rect x="492" y="574" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
+        <text x="502" y="585" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">5</text>
+        <text x="520" y="586" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">清洗</text>
+        <rect x="580" y="574" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
+        <text x="590" y="585" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">6</text>
+        <text x="608" y="586" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">制表</text>
+        <rect x="668" y="574" width="20" height="16" rx="8" fill="rgba(41,49,79,0.12)"/>
+        <text x="678" y="585" fill="#29314f" font-size="7" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">7</text>
+        <text x="696" y="586" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">发布</text>
 
-        <!-- 图例 · 行 3 流向 -->
-        <text x="84" y="576" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">流向</text>
-        <line x1="160" y1="572" x2="188" y2="572" stroke="rgba(86,94,126,0.60)" stroke-width="1" marker-end="url(#arrow)"/>
-        <text x="196" y="576" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">常规交接</text>
-        <line x1="280" y1="572" x2="308" y2="572" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
-        <text x="316" y="576" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点进出</text>
-        <line x1="400" y1="572" x2="428" y2="572" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-sm)"/>
-        <text x="436" y="576" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">触发上报</text>
+        <!-- 图例 · 行 2 数据类型（色块 16×12 · y = 基线−10 · 块底 = 基线+2） -->
+        <text x="84" y="616" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据类型</text>
+        <rect x="160" y="606" width="16" height="12" rx="2" fill="#3ba272"/>
+        <text x="182" y="616" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">LS</text>
+        <rect x="220" y="606" width="16" height="12" rx="2" fill="#5470c6"/>
+        <text x="242" y="616" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">DB</text>
+        <rect x="280" y="606" width="16" height="12" rx="2" fill="#d9605b"/>
+        <text x="302" y="616" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">FL</text>
+        <rect x="340" y="606" width="16" height="12" rx="2" fill="#9a6fb8"/>
+        <text x="362" y="616" fill="#565e7e" font-size="7" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">WB</text>
+        <text x="420" y="616" fill="#8f94ab" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">左入 · 右出</text>
+
+        <!-- 图例 · 行 3 流向（线样 y = 基线−4） -->
+        <text x="84" y="646" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">流向</text>
+        <line x1="160" y1="642" x2="188" y2="642" stroke="rgba(86,94,126,0.60)" stroke-width="1" marker-end="url(#arrow)"/>
+        <text x="196" y="646" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">常规交接</text>
+        <line x1="280" y1="642" x2="308" y2="642" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+        <text x="316" y="646" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点进出</text>
+        <line x1="400" y1="642" x2="428" y2="642" stroke="rgba(86,94,126,0.60)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-sm)"/>
+        <text x="436" y="646" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">触发上报</text>
       </svg>
   </div>
 </body>
