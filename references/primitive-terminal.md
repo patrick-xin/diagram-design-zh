@@ -14,7 +14,7 @@
     <div class="dot accent"></div>
     <div class="dot"></div>
     <div class="dot"></div>
-    <div class="titlebar-name">deploy.sh — ai-support-architecture</div>
+    <div class="titlebar-name">deploy.sh — AI 支持架构</div>
   </div>
   <main class="frame">
     <p class="prompt">
