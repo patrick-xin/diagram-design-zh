@@ -333,7 +333,7 @@ metadata:
 - [ ] 有明确投放目标时，viewBox / 字号坡道符合 output-spec.md 的预设
 - [ ] 若含动效：控制器逐字节来自 template-motion.html；无 JS / 减弱动效 / `?motion=static` 下都是完整静态画面；self_check 动效层全绿
 - [ ] 若启用皮肤：token 与元素完全来自皮肤文件，未与默认皮肤混用
-- [ ] 若用可选增强层：旁注 ≤2 且斜体宋体；sketchy 未滤到任何文字；图标只来自 primitive-icons.md 且单色系；终端图只用 terminal 九 token；深色图按换档规则换档、无浅色 token 残留
+- [ ] 若用可选增强层：旁注 ≤2 且宋体正体；sketchy 未滤到任何文字；图标只来自 primitive-icons.md 且单色系；终端图只用 terminal 九 token；深色图按换档规则换档、无浅色 token 残留
 
 **排版**
 
@@ -356,7 +356,7 @@ metadata:
 
 | 触发 | 载入 | 一句话纪律 |
 |---|---|---|
-| 编辑旁注 / 页边批注 | [`primitive-annotation.md`](references/primitive-annotation.md) | 斜体宋体 + 虚线引线，每图 ≤2 条 |
+| 编辑旁注 / 页边批注 | [`primitive-annotation.md`](references/primitive-annotation.md) | 宋体正体 + 虚线引线，每图 ≤2 条 |
 | 手绘 / 随笔质感 | [`primitive-sketchy.md`](references/primitive-sketchy.md) | 滤镜只挂形状组，文字永远在组外 |
 | 节点配图标（服务器 / 云 / K8s / 数据栈 / 品牌） | [`primitive-icons.md`](references/primitive-icons.md)，预览 [`assets/icons.html`](assets/icons.html) | currentColor 单色继承；描边与填充两种风格不混用 |
 | 终端 / CLI 外壳（开发工具贴、技术社交卡） | [`primitive-terminal.md`](references/primitive-terminal.md)，模板 [`assets/template-terminal.html`](assets/template-terminal.html) | 固定九 token，不吃品牌化；中文 ≥10px 下限不放宽 |

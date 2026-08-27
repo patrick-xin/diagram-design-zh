@@ -47,7 +47,7 @@
 | `eyebrow-zh` | sans | 12px | 500 | 0.3em | 中文角标（生产环境、核心区） |
 | `arrow-label-latin` | mono | 8px | 400 | 0.06em | 拉丁箭头标签 |
 | `arrow-label-zh` | sans | 12px；短嵌线标签 10px | 500 | 0.12em | 中文箭头标签 |
-| `callout` | serif italic | 16px | 400 | 0 | 编辑旁注（少用） |
+| `callout` | serif 正体 | 16px | 400 | 0 | 编辑旁注（少用；中文无斜体，不伪斜） |
 | `legend` | sans | 10px | 400 | 0 | 图例项文字 |
 | `legend-label` | mono | 10px | 400 | 0.1em | 图例标签（「图例」、图例行类目） |
 

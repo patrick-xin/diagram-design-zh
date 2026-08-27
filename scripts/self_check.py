@@ -646,7 +646,7 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
 
     for (px, py, kind, tag_src, _vb) in endpoint_specs:
         holders = [
-            (x, y, w, h) for (x, y, w, h) in surfaces
+            (x, y, w, h) for (x, y, w, h, _b) in surfaces
             if x - 1 <= px <= x + w + 1 and y - 1 <= py <= y + h + 1
         ]
         if not holders:
@@ -659,7 +659,7 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         # hub-and-spoke 豁免：≥3 根辐条从同一盒内部同一点辐射（radar 轴辐 / 全景 hub）
         # ——辐条压在 hub 底下是设计，不是埋箭头。
         cluster = sum(
-            1 for (qx, qy, _k, _t) in endpoint_specs
+            1 for (qx, qy, _k, _t, _vb) in endpoint_specs
             if abs(qx - px) <= 8 and abs(qy - py) <= 8
         )
         if cluster >= 3:
