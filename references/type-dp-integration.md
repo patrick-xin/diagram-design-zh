@@ -249,16 +249,18 @@ footer_auth_x(k) = zone_cx + (k - (N-1)/2) * 32     # 每条 32px 步长
 
 ## 6. 深色档
 
+照抄 [`assets/example-dp-integration-dark.html`](../assets/example-dp-integration-dark.html)：对称换基、α 不动——
+
 | Token | 浅色 | 深色 |
 |---|---|---|
-| 纸面 / 墨色 | `paper` / `ink` | `ink` / `paper` |
+| 纸面 / 墨色 | `paper` / `ink` | `ink` / `paper`（深色档） |
 | muted / accent / link | 同名 token | 同名 token（深色列） |
-| 侧列填充 | `muted@0.05` | `paper-dark@0.05` |
-| 侧列描边 | `soft` | `paper-dark@0.30` |
-| 分区填充 | `ink@0.02` | `paper-dark@0.05` |
-| 分区描边 | `ink@0.30` | `paper-dark@0.30` |
-| 非焦点条填充 | `ink@0.05` | `paper-dark@0.05` |
-| 焦点填充 / 描边 | `accent@0.08` / `accent` | `accent-dark@0.12` / `accent-dark` |
+| 侧列填充 | `muted@0.05` | `ink` 深基 @0.05 |
+| 侧列描边 | `soft` | `ink` 深基 @0.30 |
+| 分区填充 | `ink@0.02` | `ink` 深基 @0.05 |
+| 分区描边 | `ink@0.30` | `ink` 深基 @0.30 |
+| 非焦点条填充 | `ink@0.05` | `ink` 深基 @0.05 |
+| 焦点填充 / 描边 | `accent@0.08` / `accent` | `accent` 深基 @0.10（提档）/ `accent` 深色档 |
 | 自定义色 | `C` | `C_light`（提亮 ~15%） |
 
 ---

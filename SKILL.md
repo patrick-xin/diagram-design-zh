@@ -123,7 +123,7 @@ metadata:
 | 竖排 `writing-mode` 文字 | 不可读 |
 | 阴影 / 渐变 / 3D / emoji | 边框是唯一的分层手段 |
 | 大圆角（>8px） | 圆角 4 / 6 / 8 或没有 |
-| 焦点色落在每个"重要"节点上 | accent 是 1–2 处编辑焦点，不是信号系统 |
+| 焦点色落在每个"重要"节点上 | accent 是 1–2 处焦点强调，不是信号系统 |
 | 复刻 Mermaid / draw.io 渲染布局 | 把自动间距和自动路由又搬了回来 |
 | 斜线连接 | 正交圆角肘线强制（§8 规则 1） |
 | 箭头标签贴线 / 压线 | 遮罩与线保持 6–10px 净空（§8 规则 3） |
@@ -356,7 +356,7 @@ metadata:
 
 | 触发 | 载入 | 一句话纪律 |
 |---|---|---|
-| 编辑旁注 / 页边批注 | [`primitive-annotation.md`](references/primitive-annotation.md) | 宋体正体 + 虚线引线，每图 ≤2 条 |
+| 旁注 / 页边批注 | [`primitive-annotation.md`](references/primitive-annotation.md) | 宋体正体 + 虚线引线，每图 ≤2 条 |
 | 手绘 / 随笔质感 | [`primitive-sketchy.md`](references/primitive-sketchy.md) | 滤镜只挂形状组，文字永远在组外 |
 | 节点配图标（服务器 / 云 / K8s / 数据栈 / 品牌） | [`primitive-icons.md`](references/primitive-icons.md)，预览 [`assets/icons.html`](assets/icons.html) | currentColor 单色继承；描边与填充两种风格不混用 |
 | 终端 / CLI 外壳（开发工具贴、技术社交卡） | [`primitive-terminal.md`](references/primitive-terminal.md)，模板 [`assets/template-terminal.html`](assets/template-terminal.html) | 固定九 token，不吃品牌化；中文 ≥10px 下限不放宽 |
@@ -398,4 +398,4 @@ metadata:
 
 ### 导出 PNG / SVG
 
-用户要求导出、保存、转换、下载 `.png` / `.svg`，或**点名投放平台要成品**（"给我一个公众号封面版""出个小红书版本"——此时先按 §0 第 9 条走 output-spec 预设重画）时，载入 [`references/export.md`](references/export.md) 并照做。两种格式都只交付图本身（`<svg>` 节点），页眉、卡片等编辑包装按设计丢弃。导出是**手动操作**——绝不主动附带导出文件。像素尺寸来自 `viewBox` × 倍率，尺寸决策属于 output-spec，不属于导出。
+用户要求导出、保存、转换、下载 `.png` / `.svg`，或**点名投放平台要成品**（"给我一个公众号封面版""出个小红书版本"——此时先按 §0 第 9 条走 output-spec 预设重画）时，载入 [`references/export.md`](references/export.md) 并照做。两种格式都只交付图本身（`<svg>` 节点），页眉、卡片等讲解包装按设计丢弃。导出是**手动操作**——绝不主动附带导出文件。像素尺寸来自 `viewBox` × 倍率，尺寸决策属于 output-spec，不属于导出。

@@ -47,7 +47,7 @@
 | `eyebrow-zh` | sans | 12px | 500 | 0.3em | 中文角标（生产环境、核心区） |
 | `arrow-label-latin` | mono | 8px | 400 | 0.06em | 拉丁箭头标签 |
 | `arrow-label-zh` | sans | 12px；短嵌线标签 10px | 500 | 0.12em | 中文箭头标签 |
-| `callout` | serif 正体 | 16px | 400 | 0 | 编辑旁注（少用；中文无斜体，不伪斜） |
+| `callout` | serif 正体 | 16px | 400 | 0 | 旁注（少用；中文无斜体，不伪斜） |
 | `legend` | sans | 10px | 400 | 0 | 图例项文字 |
 | `legend-label` | mono | 10px | 400 | 0.1em | 图例标签（「图例」、图例行类目） |
 
@@ -102,7 +102,7 @@
 - full 的 `.frame` **无 padding-left**（页面四周 3rem / 2rem 已承担缩进），svg width 100% / 内容 x=0 / overflow visible 三件同标准档。
 - 无图框：`.diagram-container { overflow-x: auto; padding: 2px 0; }`——**padding 2px 必须有**：overflow-x:auto 会把容器变纵向裁剪上下文，吃掉 svg overflow:visible 的贴边描边。
 - 卡片三张写图内真实数据 + 绘制要点——**卡片是对 agent 的重复强调**：full 是带讲解的完整页，焦点 / 读法 / 口径三卡把这张图的绘制决策在成品里再讲一遍，与 type 文档同一套话。
-- footer 图题 + 年月；`:root` 九角色 token。
+- footer 只放图题，不带落款年月（次月即过时）；图题内的数据期间（如「2026 H1」）是口径，保留。`:root` 九角色 token。
 
 **eyebrow → h1 下距 0.5rem**（标准档与卡内 eyebrow 同值）。
 
