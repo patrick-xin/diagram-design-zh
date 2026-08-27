@@ -24,9 +24,8 @@
 
 ## 一次性直取图标
 
-- **SAS** — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:SAS_logo_horiz.svg)（公有领域）
-- **Stata** — [IcePanel Technology Icons](https://icon.icepanel.io/Technology/svg/Stata.svg)（techicons.dev）
-- **Apache Hop / Pentaho / Dagster** — 各自官网 / 公共图库直取，**使用前核实许可**（primitive-icons.md 源行已标注），仅作示意用途
+- **Apache Hop** — hop.apache.org 官方 SVG；ASF [商标政策](https://www.apache.org/foundation/marks/)将项目图形 logo 按 **Apache License 2.0** 向公众授权（字标仍受商标政策约束）
+- **SAS** — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:SAS_logo_horiz.svg)，**PD-textlogo**（纯文字标志，低于版权原创性门槛，公有领域；商标权另论）
 
 ## 商标
 
