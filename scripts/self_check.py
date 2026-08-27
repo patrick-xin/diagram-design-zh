@@ -573,6 +573,97 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
                     )
                 break
 
+    # 连线端点贴边（警告级）：line/path 端点落进节点盒或菱形内部（距各边 >2px）
+    # = 箭头埋进盒子或起点悬空在盒内。家族规矩是端点贴盒边（type-it-state §3.3）；
+    # 容器（分区/道槽）边缘是合法附着面，图例贯通线不参与。
+    # 支撑面 = rect（≥40×20，白垫板与节点同几何不碍事）与 polygon（判定菱形等，
+    # 按外接框算——marker/微型箭头的 polygon 因尺寸不足自动出局）；
+    # <g transform="translate()"> 内的坐标按累计偏移换算。
+    surfaces: list[tuple[float, float, float, float]] = []
+    endpoint_specs: list[tuple[float, float, str, str]] = []
+
+    def _apply(tx: float, ty: float, nums: list[float]) -> list[float]:
+        return [nums[0] + tx, nums[1] + ty]
+
+    translate_stack: list[tuple[float, float]] = []
+    for m in re.finditer(r"<g\b[^>]*>|</g>|<rect\s[^>]*>|<polygon\s[^>]*>|<line\s[^>]*>|<path\s[^>]*>", source):
+        tag = m.group(0)
+        if tag.startswith("<g"):
+            t = re.search(r"translate\(([-\d.]+)[ ,]+([-\d.]+)\)", tag)
+            translate_stack.append((float(t.group(1)), float(t.group(2))) if t else (0.0, 0.0))
+            continue
+        if tag == "</g>":
+            if translate_stack:
+                translate_stack.pop()
+            continue
+        tx = sum(o[0] for o in translate_stack)
+        ty = sum(o[1] for o in translate_stack)
+        if tag.startswith("<rect") or tag.startswith("<polygon"):
+            coords = {a: re.search(rf'{a}="([-\d.]+)"', tag) for a in ("x", "y", "width", "height")}
+            if tag.startswith("<rect") and all(coords.values()):
+                x, y = float(coords["x"].group(1)) + tx, float(coords["y"].group(1)) + ty
+                w, h = float(coords["width"].group(1)), float(coords["height"].group(1))
+            elif tag.startswith("<polygon"):
+                pts = [float(v) for v in re.findall(r"-?\d+\.?\d*", re.search(r'points="([^"]+)"', tag).group(1))]
+                xs, ys = pts[0::2], pts[1::2]
+                x, y, w, h = min(xs) + tx, min(ys) + ty, max(xs) - min(xs), max(ys) - min(ys)
+            else:
+                continue
+            if w >= 40 and h >= 20:
+                surfaces.append((x, y, w, h))
+        elif tag.startswith("<line"):
+            coords = {a: re.search(rf'{a}="([-\d.]+)"', tag) for a in ("x1", "y1", "x2", "y2")}
+            if not all(coords.values()):
+                continue
+            x1, y1, x2, y2 = (float(c.group(1)) for c in coords.values())
+            if abs(y1 - y2) < 0.5 and abs(x2 - x1) > 500 and "0.10" in tag:
+                continue  # 图例贯通线
+            endpoint_specs.append((x1 + tx, y1 + ty, "起", tag))
+            endpoint_specs.append((x2 + tx, y2 + ty, "终", tag))
+        elif tag.startswith("<path"):
+            d = re.search(r' d="(M [\d.]+,[\d.]+ [^"]+)"', tag)
+            if not d:
+                continue
+            nums = re.findall(r"[\d.]+", d.group(1))
+            cur = [float(nums[0]) + tx, float(nums[1]) + ty]
+            endpoint_specs.append((cur[0], cur[1], "path起", tag))
+            for cmd, argstr in re.findall(r"([MHVLQ]) ([\d., ]+)", d.group(1)):
+                args = [float(v) for v in re.findall(r"-?\d+\.?\d*", argstr)]
+                if cmd == "M":
+                    cur = [args[0] + tx, args[1] + ty]
+                elif cmd == "H":
+                    cur[0] = args[-1] + tx
+                elif cmd == "V":
+                    cur[1] = args[-1] + ty
+                else:  # L / Q：终点取最后两个数
+                    cur = [args[-2] + tx, args[-1] + ty]
+            endpoint_specs.append((cur[0], cur[1], "path终", tag))
+
+    for (px, py, kind, tag_src) in endpoint_specs:
+        holders = [
+            (x, y, w, h) for (x, y, w, h) in surfaces
+            if x - 1 <= px <= x + w + 1 and y - 1 <= py <= y + h + 1
+        ]
+        if not holders:
+            continue
+        if any(
+            abs(px - x) <= 2 or abs(px - x - w) <= 2 or abs(py - y) <= 2 or abs(py - y - h) <= 2
+            for (x, y, w, h) in holders
+        ):
+            continue
+        # hub-and-spoke 豁免：≥3 根辐条从同一盒内部同一点辐射（radar 轴辐 / 全景 hub）
+        # ——辐条压在 hub 底下是设计，不是埋箭头。
+        cluster = sum(
+            1 for (qx, qy, _k, _t) in endpoint_specs
+            if abs(qx - px) <= 8 and abs(qy - py) <= 8
+        )
+        if cluster >= 3:
+            continue
+        if any(not (w >= 400 or h >= 150) for (x, y, w, h) in holders):
+            warnings.append(f"连线{kind}端点埋进节点盒/菱形内 ({px:g},{py:g})——端点应贴边线 | {tag_src[:70]}")
+        else:
+            warnings.append(f"连线{kind}端点悬在容器内空白处 ({px:g},{py:g})——应贴容器边或目标盒边 | {tag_src[:70]}")
+
     # 动效层（存在动效标记或脚本时才检查）
     check_scripts(parser, errors)
     check_motion(parser, source, errors)
