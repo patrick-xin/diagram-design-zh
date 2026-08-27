@@ -479,7 +479,7 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
             warnings.append(f"CSS font-size {m.group(0)} < 10px——若该选择器作用于含汉字文本即违规")
 
     # 排版角色值（style-guide 排版角色表 / 字号下限）：页面 eyebrow 一律 12px，
-    # 唯一例外 eyebrow-latin（mono 栈）7–8px；h1 下限 1.5rem，clamp() 取其最小档。
+    # 唯一例外 eyebrow-tech（mono 栈）7–8px；h1 下限 1.5rem，clamp() 取其最小档。
     # 只认块内声明了 font-size 的规则——覆盖性小规则（如卡片内 .eyebrow 只改间距）
     # 不声明字号，自然跳过。
     for m in EYEBROW_BLOCK_RE.finditer(css):
@@ -493,7 +493,7 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
             continue
         if ff and "mono" in ff.group(1).lower():
             if not 7 <= size <= 8:
-                errors.append(f"eyebrow-latin 字号应为 mono 7–8px；当前 {fs.group(1).strip()}")
+                errors.append(f"eyebrow-tech 字号应为 mono 7–8px；当前 {fs.group(1).strip()}")
         elif abs(size - 12) > 0.01:
             errors.append(f"页面 eyebrow 字号应为 12px（0.75rem）；当前 {fs.group(1).strip()}")
     for m in H1_BLOCK_RE.finditer(css):
@@ -572,6 +572,87 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
                         f"{stack_top:g}–{stack_bottom:g} 不咬合——方向标尺两端应精确对齐堆叠上下缘（±4px）"
                     )
                 break
+
+    # 图例基线一致性（警告级）：图例横线（最底部贯通全宽的发丝横线）下方 30px 内的
+    # 全部文字（「图例」标签、图例项、口径注）应共用同一条基线——分用「样本中心 /
+    # 文字基线」两套参照会肉眼可见地错落（实测 agent 漂移 4px）。
+    legend_line_y: float | None = None
+    through_lines: list[float] = []
+    for m in re.finditer(r"<line\s+[^>]*>", source):
+        tag = m.group(0)
+        coords = {a: re.search(rf'{a}="([-\d.]+)"', tag) for a in ("x1", "y1", "x2", "y2")}
+        if not all(coords.values()):
+            continue
+        x1, y1, x2, y2 = (float(c.group(1)) for c in coords.values())
+        if abs(y1 - y2) <= 0.5 and x1 <= 20 and x2 >= 900:
+            through_lines.append(y1)
+    if through_lines:
+        legend_line_y = max(through_lines)  # 最底部的贯通横线是图例线（道框/分区线更靠上）
+        baselines: dict[float, str] = {}
+        for t in re.finditer(r"<text\s+[^>]*>", source):
+            ty = re.search(r'\by="([-\d.]+)"', t.group(0))
+            tfs = re.search(r'font-size="([\d.]+)"', t.group(0))
+            if not ty:
+                continue
+            if tfs and float(tfs.group(1)) < 10:
+                continue  # 图例样本芯片内的码字（7px）与项文字本就异层，不参与同线判定
+            y = float(ty.group(1))
+            if legend_line_y < y <= legend_line_y + 30:
+                snippet = re.search(r">\s*([^<\s][^<]{0,11})", source[t.end():t.end() + 80])
+                baselines.setdefault(y, (snippet.group(1).strip() if snippet else "?"))
+        if len(baselines) > 1:
+            detail = "、".join(f"y={y:g}（{txt}…）" for y, txt in sorted(baselines.items()))
+            warnings.append(f"图例行文字基线不一致：{detail}——同行图例文字应共用一条基线")
+
+    # 焦点信号簇计数（警告级）：accent 系的「面与线」语义簇 ≤2——焦点盒
+    # （rect ≥40×20、fill 为 accent 且 α≥0.08）+ 焦点线（line stroke accent、
+    # 长 ≥20px）分簇累计；焦点淡染面积（α<0.08）、文字、圆点、图例样本不占预算。
+    # 「都重要 = 都不重要」——状态条 / 分组标题再拿 accent 就是第三簇。
+    ACCENT_RE = r"(?:#1a4dd9|#7d98ff|rgba\((?:26,\s*77,\s*217|125,\s*152,\s*255),)"
+    focal_boxes = 0
+    for m in re.finditer(r"<rect\s+[^>]*>", source):
+        tag = m.group(0)
+        w = re.search(r'width="([\d.]+)"', tag)
+        h = re.search(r'height="([\d.]+)"', tag)
+        fill = re.search(r'fill="([^"]+)"', tag)
+        ry = re.search(r'\by="([-\d.]+)"', tag)
+        if not (w and h and fill and ry):
+            continue
+        if float(w.group(1)) < 40 or float(h.group(1)) < 20:
+            continue
+        if not re.match(ACCENT_RE, fill.group(1)):
+            continue
+        alpha_m = re.search(r",\s*0\.(\d+)\)", fill.group(1))
+        if alpha_m and float(f"0.{alpha_m.group(1)}") < 0.08:
+            continue
+        if legend_line_y is not None and float(ry.group(1)) > legend_line_y:
+            continue
+        focal_boxes += 1
+    focal_lines_count = 0
+    for m in re.finditer(r"<line\s+[^>]*>", source):
+        tag = m.group(0)
+        stroke = re.search(r'stroke="([^"]+)"', tag)
+        xy = {a: re.search(rf'{a}="([-\d.]+)"', tag) for a in ("x1", "y1", "x2", "y2")}
+        if not (stroke and all(xy.values())):
+            continue
+        if not re.match(ACCENT_RE, stroke.group(1)):
+            continue
+        x1, y1, x2, y2 = (float(c.group(1)) for c in xy.values())
+        length = ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
+        if length < 20:
+            continue
+        if legend_line_y is not None and max(y1, y2) > legend_line_y:
+            continue
+        focal_lines_count += 1
+    # 焦点盒 >2 必警；无焦点盒的纯线焦点图（折线 / 雷达），焦点线 >2 警。
+    # 焦点盒的关联线不计数——「任一端是焦点的连线默认 accent」是正当模式。
+    if "data-step=" in source:
+        pass  # 分步动效图豁免：accent 按步骤轮换是叙事强调，预算归 animation.md 管
+    elif focal_boxes > 2 or (focal_boxes == 0 and focal_lines_count > 2):
+        warnings.append(
+            f"焦点信号簇过多（焦点盒 {focal_boxes} + 焦点线 {focal_lines_count}）"
+            "——accent 至多落在 1–2 处，再多「都重要 = 都不重要」"
+        )
 
     # 连线端点贴边（警告级）：line/path 端点落进节点盒或菱形内部（距各边 >2px）
     # = 箭头埋进盒子或起点悬空在盒内。家族规矩是端点贴盒边（type-it-state §3.3）；
