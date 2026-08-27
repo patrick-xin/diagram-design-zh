@@ -20,7 +20,7 @@ lanes:                              # 1..6 横向泳道（上→下）
   - { name: ["质控审核"], key: "QC"  }
   - { name: ["内容发布"], key: "COM" }
 
-steps:                              # 1..12 步骤列（左→右）
+steps:                              # 1..7 步骤列（左→右；画布定宽约束）
   - { number: "1", label: "设计" }
   - { number: "2", label: "分配" }
   - { number: "3", label: "采集", focal: true }       # 焦点步骤头芯片——accent 填充
@@ -59,7 +59,7 @@ dark: false
 
 **保留字段语义：**
 - `lanes[k].key`——3 字母角色徽标，显示在该道每个节点内。
-- `lanes[k].name`——1–2 行道标签；中文走 eyebrow-zh（sans 12px · 0.3em）。
+- `lanes[k].name`——1–2 行道标签；中文走 eyebrow-zh（sans 10px · 500 · 0.3em）。
 - `steps[j].focal: true`——恰好**一个**步骤可声明。头芯片 accent。
 - `nodes[i].focal: true`——恰好**一个**节点可声明。accent 描边（§5）。
 - `nodes[i].chips`——`{in: "<CODE>", out: "<CODE>"}`，任一侧 `null` 省略。编码见 §8。首步节点**省入芯片**，末步节点**省出芯片**。
@@ -69,59 +69,61 @@ dark: false
 
 ## 2. 布局公式——确定性几何
 
-与数据流同一套重标定网格：
+数据流同族的道网格，本类型用窄标签列：
 
 ```
-label_col_w      = 160
-step_slot_w      = 136                                # 124 节点 + 12 走廊
-right_pad        = 32
-n_steps          = len(steps)
+label_col_w      = 80
+step_slot_w      = 128                                # 124 节点 + 4 走廊
+n_steps          = len(steps)                         # ≤7（画布定宽约束）
 n_lanes          = len(lanes)
 
 # 画布
-viewBox_w        = label_col_w + n_steps * step_slot_w + right_pad   # 7 步 → 1144
-header_h         = 40
+viewBox_w        = 1000                               # 定死；标题对齐见 style-guide「容器对齐与画布基线」
+header_h         = 32                                 # 芯片 0..16、步骤名基线 28
 lane_h           = 96
+lane_y_top(k)    = header_h + k * lane_h              # 32, 128, 224, 320, 416
+lane_y_mid(k)    = lane_y_top(k) + 48                 # 80, 176, 272, 368, 464
+lane_label_x     = label_col_w / 2                    # 40
 has_color_row    = any(node.color or step.color or lane.color in inputs)
-legend_h         = 128 if has_color_row else 104
-viewBox_h        = header_h + n_lanes * lane_h + legend_h            # 5 道 · 无配色 → 624
+n_legend_rows    = 4 if has_color_row else 3
 
-# 表头带
-chip_y           = 8
-chip_w           = 24 if len(step.number) >= 2 else 20
-chip_h           = 16
-chip_rx          = 8                                  # 药丸
+# 步骤表头带（顶部）
+chip_y           = 0                                  # 单数字芯片 20×16（x = step_cx−10）
+chip_h / chip_rx = 16 / 8                             # 药丸；双数字宽 24（x = step_cx−12）
 
-# 道位置
-lane_y_top(k)    = header_h + k * lane_h               # 40, 136, 232, 328, 424
-lane_y_mid(k)    = lane_y_top(k) + lane_h/2            # 88, 184, 280, 376, 472
-lane_label_x     = label_col_w / 2                     # 80
-
-# 步骤 / 节点中心
-step_cx(j)       = label_col_w + 8 + j * step_slot_w + node_w/2      # 230, 366, ..., 1046
+# 步骤 / 节点中心 x
+step_cx(j)       = label_col_w + 8 + j * step_slot_w + node_w/2   # 150, 278, ..., 918
 
 # 节点
 node_w           = 124
 node_h           = 80
-node_x(j)        = step_cx(j) - node_w/2
-node_y(k)        = lane_y_top(k) + 8                   # 道内上下各 8px 边距
+node_x(j)        = step_cx(j) - node_w/2              # 88, 216, ..., 856（右缘 980）
+node_y(k)        = lane_y_top(k) + 8
 
-# 图例带
-legend_y_top     = header_h + n_lanes * lane_h
-legend_row_y     = [legend_y_top + 16, +38, +60, +82]
+# 图例带（底部，多行横条）
+content_bottom   = header_h + n_lanes * lane_h        # 512（末道分隔线）
+legend_line_y    = content_bottom + 56                # 568；贯通 0→1000
+legend_row_y(i)  = legend_line_y + 18 + i * 30        # 文字基线 586, 616, 646（+配色行顺延）
+legend_label_x   = 0                                  # 行类目标签（mono 10px · 0.1em）
+legend_first_x   = 76
+viewBox_h        = ceil40(末行基线 + 10)              # 3 行 → 680
 ```
 
 ### 2.1 背景结构
 
-与数据流 §2.1 完全一致：paper 底、22×22 点阵（0.10 ink、opacity 0.55）、奇数下标道染色 `ink@0.02`（自 x=160 起）、道分隔与图例顶发丝线 0.12 ink、标签列右边框 x=160 竖线 0.20 ink。
+- 全画布 `paper` 实底，**不铺点阵**。
+- **交替道染色**：偶数下标道 `ink@0.02`，rect `(80, lane_y_top(k), 920, 96)`——标签列右缘起、到内容右缘。
+- **道分隔横线**：`ink@0.10` 宽 0.8，`x=80→1000`，落在每条道界（`header_h, header_h+96, …`）；末线即 `content_bottom`。
+- **标签列右缘竖线**：`ink@0.20` 宽 1，`x=80`，`y=header_h..content_bottom`。
+- 图例顶线独立锚 `content_bottom + 56`（不与末道分隔线共用）。
 
 ### 2.2 步骤头芯片 + 步骤名
 
-每步 `j`：芯片居中 `step_cx`、y=8；数字锚点 `(step_cx, 19)` mono 7px；步骤名锚点 `(step_cx, 36)`，中文 12px · 500 · 0.12em（纯拉丁 mono 8px）。默认芯片 `ink@0.12` + ink 数字；焦点芯片 `accent-dark@0.20` + accent 数字与步骤名。步骤名 ≤4 字。
+每步 `j`：芯片居中 `step_cx`、y=0；数字锚点 `(step_cx, 11)` mono 7px；步骤名锚点 `(step_cx, 28)`，中文 10px · 500 · 0.12em（纯拉丁 mono 8px）。默认芯片 `ink@0.12` + ink 数字与步骤名；焦点芯片 `accent-dark@0.20` + accent 数字与步骤名。步骤名 ≤4 字。
 
 ### 2.3 道标签
 
-单行中文 eyebrow-zh（sans 12px · 0.3em）fill muted，居中 `(80, lane_y_mid(k) + 4)`。逐道 `color` 覆盖时 fill 换 `C`、道染色换 `C@0.04`。
+单行中文 eyebrow-zh（sans 10px · 500 · 0.3em）fill muted，居中 `(40, lane_y_mid(k) + 4)`。逐道 `color` 覆盖时 fill 换 `C`、道染色换 `C@0.04`。
 
 ### 2.4 节点内容（124×80 内）
 
@@ -222,8 +224,8 @@ legend_row_y     = [legend_y_top + 16, +38, +60, +82]
 
 ## 7. 复现清单（输出前逐条核对）
 
-1. `viewBox = "0 0 {viewBox_w} {viewBox_h}"` 由 §2 推出。
-2. 表头带 `y=0..40`；图例带 `y=legend_y_top..viewBox_h`。
+1. `viewBox = "0 0 1000 {viewBox_h}"` 由 §2 推出（高按 40 步进收口）。
+2. 表头带 `y=0..32`（芯片 0..16、步骤名基线 28）；图例带 `y=legend_line_y..viewBox_h`。
 3. 每个节点落在 `(step_cx(j)-62, lane_y_top(k)+8)`，尺寸 `124×80`。
 4. 空格什么都不画。
 5. 恰好一个焦点步骤、一个焦点节点。
@@ -249,7 +251,7 @@ legend_row_y     = [legend_y_top + 16, +38, +60, +82]
 
 ## 9. 图例（3 或 4 行横条）
 
-与数据流 §9 同构：行 1 **步骤**（复刻表头芯片）、行 2 **数据类型**（实际用到的芯片 + `左入 · 右出` 提示）、行 3 **关注点**（仅有配色时）、行 4 **流向**（实际用到的箭头样式各一段）。类目标签 x=164，行内横排不竖叠。
+与数据流 §9 同构：行 1 **步骤**（复刻表头芯片 20×16、数字基线 −1、步骤名距芯片 28）、行 2 **数据类型**（实际用到的芯片 + `左入 · 右出` 提示）、行 3 **关注点**（仅有配色时）、行 4 **流向**（实际用到的箭头样式各一段，线样 28 长、基线−4）。行类目标签 `legend-label` 角色（mono 10px · 0.1em）`x=0`、行内首元素一律 `x=76`、行距 30（§2 `legend_row_y`），行内横排不竖叠。
 
 ---
 
@@ -258,13 +260,13 @@ legend_row_y     = [legend_y_top + 16, +38, +60, +82]
 | 维度 | 上限 |
 |---|---|
 | 道（角色） | 6 |
-| 步骤 | 12 |
+| 步骤 | 7（画布 1000 定宽约束：末节点右缘 ≤980） |
 | 每道节点数 | 只算活跃步骤——空格不可见 |
 | 带标注箭头 | 默认 0（只给非步骤概念标注） |
 | 每节点数据芯片 | 2（入 + 出） |
 | 自定义配色元素 | 3（焦点对之外） |
 
-超 6 道或 12 步：拆总览 + 细节两张。
+超 6 道或 7 步：拆总览 + 细节两张。
 
 ---
 
@@ -280,7 +282,7 @@ legend_row_y     = [legend_y_top + 16, +38, +60, +82]
 - **节点配色传染箭头**——连接线拓扑驱动。
 - **道染色铺满**——≤1 道。
 - **两行节点名还硬塞芯片**——省芯片或缩成一行。
-- **超过 12 步不拆图**——总览 + 细节成对。
+- **超过 7 步不拆图**——总览 + 细节成对（画布 1000 定宽，末节点右缘 ≤980）。
 
 ---
 
