@@ -6,7 +6,7 @@
 
 ## 语法
 
-以 [`assets/template-terminal.html`](../assets/template-terminal.html) 为模板（中文版，mono 栈）。结构：
+以 [`assets/template-terminal.html`](../assets/template-terminal.html) 为模板（mono 栈）。结构：
 
 ```html
 <div class="terminal">
