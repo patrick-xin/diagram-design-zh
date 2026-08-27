@@ -31,7 +31,7 @@ metadata:
 6. 行为、状态、执行、风险承载含义时，先按 §3 的语义路由选模式再选类型；用户点名动效 / 动画 / 分步播放，或动效确实能讲清顺序、累积、评估时，再载入 [`references/animation.md`](references/animation.md)——**静态永远是默认**。
 7. 用户提供 Mermaid 源（`.mmd` / `.mermaid` / Markdown 里的 mermaid 代码块）时载入 [`references/import-mermaid.md`](references/import-mermaid.md)；给 `.drawio` / `.drawio.xml` / `.drawio.png` / `.drawio.svg` 时载入 [`references/import-drawio.md`](references/import-drawio.md)——都是先跑提取器拿结构摘要，再按 §12 流程重绘。
 8. 可选增强层只在被点名或题材匹配时载入（总表见 §11）。
-9. 用户点名**投放平台或成品形态**——公众号、小红书、微信封面、朋友圈、社交卡、OG 图、幻灯、A4 打印——时，**不论有没有说"导出"**：载入 [`references/output-spec.md`](references/output-spec.md) 按投放表和尺寸预设重画（预设尺寸是重画不是缩放，公众号封面 900×380 / 小红书 3:4 1080×1440，字号跟 presentation 坡道）；用户要图片文件时再按 [`references/export.md`](references/export.md) 出 PNG。**不许自己心算平台尺寸**——预设表是唯一权威。
+9. 用户点名**投放平台或成品形态**——公众号、小红书、微信封面、朋友圈、社交卡、OG 图、幻灯、投屏 / 投影、A4 打印——时（「投屏用的」即点名 slide 预设），**不论有没有说"导出"**：载入 [`references/output-spec.md`](references/output-spec.md) 按投放表和尺寸预设重画（预设尺寸是重画不是缩放，公众号封面 900×380 / 小红书 3:4 1080×1440，字号跟 presentation 坡道）；用户要图片文件时再按 [`references/export.md`](references/export.md) 出 PNG。**不许自己心算平台尺寸**——预设表是唯一权威。
 10. 用户要管理**品牌档案**——保存 / 切换 / 列出 / 看当前 / 更新 / 恢复默认 / 删除（"把现在这个皮肤存成档案""换 acme 的品牌""这台机器上有哪些品牌档案"）——载入 [`references/profiles.md`](references/profiles.md) 按动词流程执行。
 
 ## 1. 理念
@@ -57,6 +57,8 @@ metadata:
 ## 3. 选型：语义模式先行，再选视觉类型
 
 行为、状态、执行、风险承载含义（排队争抢、策略判定、信任边界、纵深防御……）时，先载入 [`references/semantic-patterns.md`](references/semantic-patterns.md) 选**一个**主模式，再选最近的视觉类型做布局。模式拥有语义基元和更紧的预算；类型拥有布局语法。无模式匹配就直接选类型。
+
+**类型歧义即问**：用户留了选择余地（「画个柱状图吧还是啥你看」「随便什么图」）或语义模式 / 类型各有两个合理候选时，列 2–3 个候选、各一句话说读法差别，让用户选——叙事形态是用户的决策，不替用户拍板。只有唯一合理候选时直接做并说明选型理由。
 
 | 行为信号 | 语义模式 → 最近类型 |
 |---|---|

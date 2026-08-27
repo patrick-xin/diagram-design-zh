@@ -1,6 +1,6 @@
 # 第三方许可
 
-本仓库 MIT 许可（见 [`LICENSE`](LICENSE)）。技能包内再分发的第三方内容及其许可如下；每个图标的逐枚来源记录在 [`skills/diagram-design-zh/references/primitive-icons.md`](skills/diagram-design-zh/references/primitive-icons.md) 各图标的 `Source:` 行，以该文件为准。
+本仓库 MIT 许可（见 [`LICENSE`](LICENSE)）。技能包内再分发的第三方内容及其许可如下；每个图标的逐枚来源记录在 [`references/primitive-icons.md`](references/primitive-icons.md) 各图标的 `Source:` 行，以该文件为准。
 
 ## Tabler Icons
 
@@ -26,6 +26,11 @@
 
 - **Apache Hop** — hop.apache.org 官方 SVG；ASF [商标政策](https://www.apache.org/foundation/marks/)将项目图形 logo 按 **Apache License 2.0** 向公众授权（字标仍受商标政策约束）
 - **SAS** — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:SAS_logo_horiz.svg)，**PD-textlogo**（纯文字标志，低于版权原创性门槛，公有领域；商标权另论）
+
+## 字体
+
+- **Noto Sans SC / Noto Serif SC** — [SIL Open Font License 1.1](https://openfontlicense.org/)，全文见 [`fonts/OFL.txt`](fonts/OFL.txt)。仓库分发 woff2 全量与各图内嵌的子集化 base64 均为该许可允许的用途；子集由开发侧工具从官方发布版生成。
+- MiSans、Sarasa Mono SC、PingFang SC、Microsoft YaHei 等仅作为字体栈回退名引用，本仓库不分发其字体文件。
 
 ## 商标
 
