@@ -59,7 +59,7 @@ dark: false
 
 **保留字段语义：**
 - `lanes[k].key`——3 字母角色芯片文（`ADM`、`ENG`……），在该道每个节点内显示。
-- `lanes[k].name`——道标签，中文走 eyebrow-zh（sans 10px · 500 · 0.3em）。
+- `lanes[k].name`——道标签，中文走 eyebrow-text（sans 10px · 500 · 0.3em）。
 - `steps[j].focal: true`——恰好**一个**步骤可声明。头芯片 accent 填充。
 - `nodes[i].focal: true`——恰好**一个**节点可声明。accent 描边（§5）。
 - `nodes[i].chips`——节点数据类型芯片，对象式 `{in: "<CODE>", out: "<CODE>"}`（任一侧可省）。编码取自 §8（`WB`/`DB`/`TB`/`FL`/`LS`）。**位置固定**：入芯片在节点**左下**，出芯片在**右下**。
@@ -123,7 +123,7 @@ viewBox_h        = ceil40(末行基线 + 10)               # 4 道 + 配色 → 
 
 ### 2.3 道标签
 
-单行中文，eyebrow-zh（sans 10px · 500 · 0.3em），fill muted，居中锚点 `(68, lane_y_mid(k) + 4)`——即容器左段（标签区 0..144）的中心（0.3em 尾距已补偿）。逐道 `color` 覆盖（§4）时标签 fill 换 `C`、该道行容器填充换 `C@0.04`。
+单行中文，eyebrow-text（sans 10px · 500 · 0.3em），fill muted，居中锚点 `(68, lane_y_mid(k) + 4)`——即容器左段（标签区 0..144）的中心（0.3em 尾距已补偿）。逐道 `color` 覆盖（§4）时标签 fill 换 `C`、该道行容器填充换 `C@0.04`。
 
 ### 2.4 节点内容（124×80 矩形内）
 
@@ -306,7 +306,7 @@ data chip OUT      rect 20×10 @ (node_x+100, node_y+66)，rx=2      # 出载荷
 - **斜线箭头**——永远先横后纵，单右角拐弯。
 - **`title` 角色写节点名**——节点名走 `node-name`；`title` 只属于页面 `<h1>`。
 - **accent 落在多个节点/步骤/箭头上**——焦点 = 一节点 + 一步骤 + 一箭头，封顶。
-- **道标签用 node-name 排**——道标签是标识符，走 eyebrow（中文 eyebrow-zh）。
+- **道标签用 node-name 排**——道标签是标识符，走 eyebrow（中文 eyebrow-text）。
 - **焦点元素上叠 `color`**——被忽略，accent 永远赢。
 - **节点配色传染箭头**——连接线拓扑驱动。
 - **道染色铺满每道**——染色是信号不是装饰，≤1 道。

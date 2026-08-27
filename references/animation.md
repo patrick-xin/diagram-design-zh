@@ -93,7 +93,7 @@
 
 提供可见的操作说明和作用域内的 `role="status" aria-live="polite" aria-atomic="true"` 播报区。播报区放在动效根之内、`[data-motion-controls]` 之外——这样减弱动效/静态状态隐藏控件时不会连带隐藏播报。播报用户动作（如「第 3 步 / 共 5 步：首个分歧点」）；不逐帧播报自动播放。控件只作用于最近的 `[data-motion-root]`。
 
-**用 [`assets/template-motion.html`](../assets/template-motion.html)（中文版），不要另造控制器。**它的内联控制器就是可执行的实现契约：把 `<script data-diagram-controls>` 的脚本体逐字节原样复制，只替换图表内容与 slug 前缀的 ID。自检器会拒绝被修改或新增的控制器。控制按钮、播报文案、`<noscript>` 说明照抄模板的中文文案，不自行改写。
+**用 [`assets/template-motion.html`](../assets/template-motion.html)，不要另造控制器。**它的内联控制器就是可执行的实现契约：把 `<script data-diagram-controls>` 的脚本体逐字节原样复制，只替换图表内容与 slug 前缀的 ID。自检器会拒绝被修改或新增的控制器。控制按钮、播报文案、`<noscript>` 说明照抄模板的中文文案，不自行改写。
 
 ## 减弱动效、颜色与无障碍
 

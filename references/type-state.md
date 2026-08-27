@@ -4,9 +4,9 @@
 
 ## 布局
 
-- 状态 = 圆角矩形（`rx=8`），名称走 `node-name`（sans 14px · 600）；状态子标注按语言选行：中文走 `sublabel-zh`（sans 12px），纯拉丁技术串走 `sublabel-tech`（mono 9px）。
+- 状态 = 圆角矩形（`rx=8`），名称走 `node-name`（sans 14px · 600）；状态子标注按语言选行：中文走 `sublabel-text`（sans 12px），纯拉丁技术串走 `sublabel-tech`（mono 9px）。
 - **起点**：实心 ink 圆点（`r=6`）。**终点**：双环圆点（外圈 `r=8` 描边，内芯 `r=5` 实心）。
-- 转移 = 直线或弧线箭头，标签格式 `事件 [守卫] / 动作`（不需要的段省略）。事件词按语言选行：中文事件（提交、通过、驳回）走 arrow-label-zh（sans 12px · 0.12em），纯拉丁事件名（`SUBMIT`、`timeout`）走 arrow-label-latin（mono 8px · 0.06em）；守卫与动作保持半角技术串写法。
+- 转移 = 直线或弧线箭头，标签格式 `事件 [守卫] / 动作`（不需要的段省略）。事件词按语言选行：中文事件（提交、通过、驳回）走 arrow-label-text（sans 12px · 0.12em），纯拉丁事件名（`SUBMIT`、`timeout`）走 arrow-label-tech（mono 8px · 0.06em）；守卫与动作保持半角技术串写法。
 - 自循环在状态上方画弧。
 - 沿主流程方向排布（左→右或上→下）；宁可重排状态也不要让转移交叉。
 - 焦点色落在读者最该注意的那个状态——通常是错误态，或“顺利完结”态。

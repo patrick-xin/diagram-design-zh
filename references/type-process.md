@@ -59,7 +59,7 @@ dark: false
 
 **保留字段语义：**
 - `lanes[k].key`——3 字母角色徽标，显示在该道每个节点内。
-- `lanes[k].name`——1–2 行道标签；中文走 eyebrow-zh（sans 10px · 500 · 0.3em）。
+- `lanes[k].name`——1–2 行道标签；中文走 eyebrow-text（sans 10px · 500 · 0.3em）。
 - `steps[j].focal: true`——恰好**一个**步骤可声明。头芯片 accent。
 - `nodes[i].focal: true`——恰好**一个**节点可声明。accent 描边（§5）。
 - `nodes[i].chips`——`{in: "<CODE>", out: "<CODE>"}`，任一侧 `null` 省略。编码见 §8。首步节点**省入芯片**，末步节点**省出芯片**。
@@ -123,7 +123,7 @@ viewBox_h        = ceil40(末行基线 + 10)              # 3 行 → 680
 
 ### 2.3 道标签
 
-单行中文 eyebrow-zh（sans 10px · 500 · 0.3em）fill muted，居中 `(40, lane_y_mid(k) + 4)`。逐道 `color` 覆盖时 fill 换 `C`、道染色换 `C@0.04`。
+单行中文 eyebrow-text（sans 10px · 500 · 0.3em）fill muted，居中 `(40, lane_y_mid(k) + 4)`。逐道 `color` 覆盖时 fill 换 `C`、道染色换 `C@0.04`。
 
 ### 2.4 节点内容（124×80 内）
 

@@ -1,4 +1,4 @@
-# 样式指南（中文版唯一权威）
+# 样式指南（唯一权威）
 
 色板、字距、描边、间距的唯一事实来源，产出时色值以此为准。
 
@@ -42,11 +42,11 @@
 | `title` | serif | 1.75rem | 400 | 0 | 页面 H1 |
 | `node-name` | sans | 14px | 600 | 0 | 节点名（含汉字与混排） |
 | `sublabel-tech` | mono | 9px | 400 | 0.04em | 纯拉丁技术串：协议、端口、URL |
-| `sublabel-zh` | sans | 12px | 400 | 0 | 中文子标签 |
-| `eyebrow-latin` | mono | 7–8px | 500 | 0.18em + uppercase | 拉丁角标（PROD、API） |
-| `eyebrow-zh` | sans | 12px | 500 | 0.3em | 中文角标（生产环境、核心区） |
-| `arrow-label-latin` | mono | 8px | 400 | 0.06em | 拉丁箭头标签 |
-| `arrow-label-zh` | sans | 12px；短嵌线标签 10px | 500 | 0.12em | 中文箭头标签 |
+| `sublabel-text` | sans | 12px | 400 | 0 | 中文子标签 |
+| `eyebrow-tech` | mono | 7–8px | 500 | 0.18em + uppercase | 拉丁角标（PROD、API） |
+| `eyebrow-text` | sans | 12px | 500 | 0.3em | 中文角标（生产环境、核心区） |
+| `arrow-label-tech` | mono | 8px | 400 | 0.06em | 拉丁箭头标签 |
+| `arrow-label-text` | sans | 12px；短嵌线标签 10px | 500 | 0.12em | 中文箭头标签 |
 | `callout` | serif 正体 | 16px | 400 | 0 | 旁注（少用；中文无斜体，不伪斜） |
 | `legend` | sans | 10px | 400 | 0 | 图例项文字 |
 | `legend-label` | mono | 10px | 400 | 0.1em | 图例标签（「图例」、图例行类目） |
