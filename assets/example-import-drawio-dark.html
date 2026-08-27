@@ -7,10 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-paper:   #ffffff;
-      --color-ink:     #29314f;
-      --color-muted:   #565e7e;
-      --color-accent:  #1a4dd9;
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
       --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
       --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
       --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -62,111 +62,111 @@
     <p class="eyebrow">架构图 · draw.io 导入</p>
     <h1>订单平台 · 请求链路</h1>
 
-    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-import-drawio-title example-import-drawio-desc">
-      <title id="example-import-drawio-title">订单平台请求链路架构图</title>
-      <desc id="example-import-drawio-desc">从 draw.io 重绘的架构图：Web 应用与移动 App 两路客户端经 API 网关（焦点强调）进入，分别到达认证服务与订单服务，订单写入 Postgres 与对象存储，认证走 Redis 缓存会话。</desc>
+    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-import-drawio-dark-title example-import-drawio-dark-desc">
+      <title id="example-import-drawio-dark-title">订单平台请求链路架构图</title>
+      <desc id="example-import-drawio-dark-desc">从 draw.io 重绘的架构图：Web 应用与移动 App 两路客户端经 API 网关（焦点强调）进入，分别到达认证服务与订单服务，订单写入 Postgres 与对象存储，认证走 Redis 缓存会话。</desc>
       <defs>
-        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#565e7e"/></marker>
-        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1a4dd9"/></marker>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a2a9ce"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#7d98ff"/></marker>
       </defs>
 
-      <rect width="100%" height="100%" fill="#ffffff"/>
+      <rect width="100%" height="100%" fill="#0a0d1b"/>
 
       <!-- 分区（源里的泳道容器变分区，不是盒子） -->
-      <rect x="0" y="0" width="200" height="224" rx="8" fill="none" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
-      <text x="16" y="24" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">接入端</text>
+      <rect x="0" y="0" width="200" height="224" rx="8" fill="none" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
+      <text x="16" y="24" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">接入端</text>
 
-      <rect x="320" y="0" width="640" height="224" rx="8" fill="none" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
-      <text x="336" y="24" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">核心服务</text>
+      <rect x="320" y="0" width="640" height="224" rx="8" fill="none" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
+      <text x="336" y="24" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">核心服务</text>
 
-      <rect x="320" y="272" width="640" height="116" rx="8" fill="none" stroke="rgba(41,49,79,0.10)" stroke-width="1"/>
-      <text x="336" y="296" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据</text>
+      <rect x="320" y="272" width="640" height="116" rx="8" fill="none" stroke="rgba(224,228,255,0.10)" stroke-width="1"/>
+      <text x="336" y="296" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">数据</text>
 
       <!-- 连接线（先画；Q 肘线） -->
-      <path d="M 180,68 H 360" fill="none" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arrow-link)"/>
-      <path d="M 180,156 H 336 Q 344,156 344,148 V 96 Q 344,88 352,88 H 360" fill="none" stroke="#1a4dd9" stroke-width="1.2" marker-end="url(#arrow-link)"/>
-      <path d="M 560,60 H 720" fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-      <path d="M 560,88 H 688 Q 696,88 696,96 V 156 Q 696,164 704,164 H 720" fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-      <path d="M 760,192 V 224 Q 760,232 752,232 H 432 Q 424,232 424,240 V 312" fill="none" stroke="#565e7e" stroke-width="1.2" marker-end="url(#arrow)"/>
-      <path d="M 832,192 V 240 Q 832,248 824,248 H 648 Q 640,248 640,256 V 312" fill="none" stroke="#565e7e" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
-      <path d="M 920,60 H 936 Q 944,60 944,68 V 280 Q 944,288 936,288 H 864 Q 856,288 856,296 V 312" fill="none" stroke="#565e7e" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+      <path d="M 180,68 H 360" fill="none" stroke="#7d98ff" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+      <path d="M 180,156 H 336 Q 344,156 344,148 V 96 Q 344,88 352,88 H 360" fill="none" stroke="#7d98ff" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+      <path d="M 560,60 H 720" fill="none" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <path d="M 560,88 H 688 Q 696,88 696,96 V 156 Q 696,164 704,164 H 720" fill="none" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <path d="M 760,192 V 224 Q 760,232 752,232 H 432 Q 424,232 424,240 V 312" fill="none" stroke="#a2a9ce" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <path d="M 832,192 V 240 Q 832,248 824,248 H 648 Q 640,248 640,256 V 312" fill="none" stroke="#a2a9ce" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+      <path d="M 920,60 H 936 Q 944,60 944,68 V 280 Q 944,288 936,288 H 864 Q 856,288 856,296 V 312" fill="none" stroke="#a2a9ce" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
 
       <!-- 连接线标签：统一中文 sans 10px · 500 · 0.12em，白底遮罩骑线 -->
-      <rect x="230" y="60" width="44" height="16" rx="2" fill="#ffffff"/>
-      <text x="252" y="72" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">请求</text>
+      <rect x="230" y="60" width="44" height="16" rx="2" fill="#0a0d1b"/>
+      <text x="252" y="72" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">请求</text>
 
-      <rect x="230" y="148" width="44" height="16" rx="2" fill="#ffffff"/>
-      <text x="252" y="160" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">请求</text>
+      <rect x="230" y="148" width="44" height="16" rx="2" fill="#0a0d1b"/>
+      <text x="252" y="160" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">请求</text>
 
-      <rect x="620" y="52" width="44" height="16" rx="2" fill="#ffffff"/>
-      <text x="642" y="64" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">校验</text>
+      <rect x="620" y="52" width="44" height="16" rx="2" fill="#0a0d1b"/>
+      <text x="642" y="64" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">校验</text>
 
-      <rect x="676" y="116" width="44" height="16" rx="2" fill="#ffffff"/>
-      <text x="698" y="128" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">路由</text>
+      <rect x="676" y="116" width="44" height="16" rx="2" fill="#0a0d1b"/>
+      <text x="698" y="128" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">路由</text>
 
-      <rect x="570" y="224" width="44" height="16" rx="2" fill="#ffffff"/>
-      <text x="592" y="236" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">写入</text>
+      <rect x="570" y="224" width="44" height="16" rx="2" fill="#0a0d1b"/>
+      <text x="592" y="236" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">写入</text>
 
-      <rect x="714" y="240" width="44" height="16" rx="2" fill="#ffffff"/>
-      <text x="736" y="252" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">归档</text>
+      <rect x="714" y="240" width="44" height="16" rx="2" fill="#0a0d1b"/>
+      <text x="736" y="252" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">归档</text>
 
-      <rect x="922" y="146" width="36" height="16" rx="2" fill="#ffffff"/>
-      <text x="944" y="158" fill="#565e7e" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">缓存</text>
+      <rect x="922" y="146" width="36" height="16" rx="2" fill="#0a0d1b"/>
+      <text x="944" y="158" fill="#a2a9ce" font-size="10" font-weight="500" letter-spacing="0.12em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">缓存</text>
 
       <!-- 节点：接入端（input：muted@0.08 填充 + soft 描边） -->
-      <rect x="20" y="40" width="160" height="56" rx="6" fill="rgba(86,94,126,0.08)" stroke="#8f94ab" stroke-width="1"/>
-      <text x="100" y="73" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Web 应用</text>
+      <rect x="20" y="40" width="160" height="56" rx="6" fill="rgba(162,169,206,0.08)" stroke="#787fa2" stroke-width="1"/>
+      <text x="100" y="73" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Web 应用</text>
 
-      <rect x="20" y="128" width="160" height="56" rx="6" fill="rgba(86,94,126,0.08)" stroke="#8f94ab" stroke-width="1"/>
-      <text x="100" y="161" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">移动 App</text>
+      <rect x="20" y="128" width="160" height="56" rx="6" fill="rgba(162,169,206,0.08)" stroke="#787fa2" stroke-width="1"/>
+      <text x="100" y="161" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">移动 App</text>
 
       <!-- 节点：核心服务（网关 = 焦点） -->
-      <rect x="360" y="40" width="200" height="64" rx="6" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1"/>
-      <text x="460" y="68" fill="#1a4dd9" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">API 网关</text>
-      <text x="460" y="86" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">唯一入口</text>
+      <rect x="360" y="40" width="200" height="64" rx="6" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1"/>
+      <text x="460" y="68" fill="#7d98ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">API 网关</text>
+      <text x="460" y="86" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">唯一入口</text>
 
-      <rect x="720" y="32" width="200" height="56" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="820" y="57" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">认证服务</text>
-      <text x="820" y="75" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">令牌校验</text>
+      <rect x="720" y="32" width="200" height="56" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="820" y="57" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">认证服务</text>
+      <text x="820" y="75" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">令牌校验</text>
 
-      <rect x="720" y="136" width="200" height="56" rx="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="820" y="161" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">订单服务</text>
-      <text x="820" y="179" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">订单写入</text>
+      <rect x="720" y="136" width="200" height="56" rx="6" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="820" y="161" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">订单服务</text>
+      <text x="820" y="179" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">订单写入</text>
 
       <!-- 节点：数据（store：ink@0.05 填充 + muted@0.60 描边） -->
-      <rect x="344" y="312" width="160" height="64" rx="6" fill="rgba(41,49,79,0.05)" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
-      <text x="424" y="340" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Postgres</text>
-      <text x="424" y="358" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">orders</text>
+      <rect x="344" y="312" width="160" height="64" rx="6" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+      <text x="424" y="340" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Postgres</text>
+      <text x="424" y="358" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">orders</text>
 
-      <rect x="560" y="312" width="160" height="64" rx="6" fill="rgba(41,49,79,0.05)" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
-      <text x="640" y="340" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">对象存储</text>
-      <text x="640" y="358" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">归档冷数据</text>
+      <rect x="560" y="312" width="160" height="64" rx="6" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+      <text x="640" y="340" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">对象存储</text>
+      <text x="640" y="358" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">归档冷数据</text>
 
-      <rect x="776" y="312" width="160" height="64" rx="6" fill="rgba(41,49,79,0.05)" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
-      <text x="856" y="340" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Redis</text>
-      <text x="856" y="358" fill="#565e7e" font-size="10" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">会话缓存</text>
+      <rect x="776" y="312" width="160" height="64" rx="6" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+      <text x="856" y="340" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">Redis</text>
+      <text x="856" y="358" fill="#a2a9ce" font-size="10" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">会话缓存</text>
 
       <!-- 图例横条 -->
-      <line x1="0" y1="444" x2="1000" y2="444" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-      <text x="0" y="462" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">图例</text>
+      <line x1="0" y1="444" x2="1000" y2="444" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+      <text x="0" y="462" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, monospace">图例</text>
 
-      <rect x="72" y="452" width="16" height="12" rx="2" fill="rgba(26,77,217,0.08)" stroke="#1a4dd9" stroke-width="1"/>
-      <text x="96" y="462" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点</text>
+      <rect x="72" y="452" width="16" height="12" rx="2" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1"/>
+      <text x="96" y="462" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">焦点</text>
 
-      <rect x="152" y="452" width="16" height="12" rx="2" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-      <text x="176" y="462" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">服务</text>
+      <rect x="152" y="452" width="16" height="12" rx="2" fill="#0a0d1b" stroke="rgba(224,228,255,0.40)" stroke-width="1"/>
+      <text x="176" y="462" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">服务</text>
 
-      <rect x="232" y="452" width="16" height="12" rx="2" fill="rgba(41,49,79,0.05)" stroke="rgba(86,94,126,0.60)" stroke-width="1"/>
-      <text x="256" y="462" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储</text>
+      <rect x="232" y="452" width="16" height="12" rx="2" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+      <text x="256" y="462" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储</text>
 
-      <rect x="312" y="452" width="16" height="12" rx="2" fill="rgba(86,94,126,0.08)" stroke="#8f94ab" stroke-width="1"/>
-      <text x="336" y="462" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">客户端</text>
+      <rect x="312" y="452" width="16" height="12" rx="2" fill="rgba(162,169,206,0.08)" stroke="#787fa2" stroke-width="1"/>
+      <text x="336" y="462" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">客户端</text>
 
-      <line x1="408" y1="458" x2="436" y2="458" stroke="#1a4dd9" stroke-width="1.2"/>
-      <text x="444" y="462" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">HTTP 调用</text>
+      <line x1="408" y1="458" x2="436" y2="458" stroke="#7d98ff" stroke-width="1.2"/>
+      <text x="444" y="462" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">HTTP 调用</text>
 
-      <line x1="536" y1="458" x2="564" y2="458" stroke="#565e7e" stroke-width="1.2" stroke-dasharray="4,3"/>
-      <text x="572" y="462" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">异步</text>
+      <line x1="536" y1="458" x2="564" y2="458" stroke="#a2a9ce" stroke-width="1.2" stroke-dasharray="4,3"/>
+      <text x="572" y="462" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">异步</text>
     </svg>
   </div>
 </body>
