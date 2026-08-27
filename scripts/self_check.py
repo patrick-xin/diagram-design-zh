@@ -586,8 +586,13 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         return [nums[0] + tx, nums[1] + ty]
 
     translate_stack: list[tuple[float, float]] = []
-    for m in re.finditer(r"<g\b[^>]*>|</g>|<rect\s[^>]*>|<polygon\s[^>]*>|<line\s[^>]*>|<path\s[^>]*>", source):
+    current_vb: tuple[float, float] | None = None
+    for m in re.finditer(r"<g\b[^>]*>|</g>|<svg\b[^>]*>|<rect\s[^>]*>|<polygon\s[^>]*>|<line\s[^>]*>|<path\s[^>]*>", source):
         tag = m.group(0)
+        if tag.startswith("<svg"):
+            vbm = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', tag)
+            current_vb = (float(vbm.group(1)), float(vbm.group(2))) if vbm else None
+            continue
         if tag.startswith("<g"):
             t = re.search(r"translate\(([-\d.]+)[ ,]+([-\d.]+)\)", tag)
             translate_stack.append((float(t.group(1)), float(t.group(2))) if t else (0.0, 0.0))
@@ -610,7 +615,7 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
             else:
                 continue
             if w >= 40 and h >= 20:
-                surfaces.append((x, y, w, h))
+                surfaces.append((x, y, w, h, current_vb))
         elif tag.startswith("<line"):
             coords = {a: re.search(rf'{a}="([-\d.]+)"', tag) for a in ("x1", "y1", "x2", "y2")}
             if not all(coords.values()):
@@ -618,15 +623,15 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
             x1, y1, x2, y2 = (float(c.group(1)) for c in coords.values())
             if abs(y1 - y2) < 0.5 and abs(x2 - x1) > 500 and "0.10" in tag:
                 continue  # 图例贯通线
-            endpoint_specs.append((x1 + tx, y1 + ty, "起", tag))
-            endpoint_specs.append((x2 + tx, y2 + ty, "终", tag))
+            endpoint_specs.append((x1 + tx, y1 + ty, "起", tag, current_vb))
+            endpoint_specs.append((x2 + tx, y2 + ty, "终", tag, current_vb))
         elif tag.startswith("<path"):
             d = re.search(r' d="(M [\d.]+,[\d.]+ [^"]+)"', tag)
             if not d:
                 continue
             nums = re.findall(r"[\d.]+", d.group(1))
             cur = [float(nums[0]) + tx, float(nums[1]) + ty]
-            endpoint_specs.append((cur[0], cur[1], "path起", tag))
+            endpoint_specs.append((cur[0], cur[1], "path起", tag, current_vb))
             for cmd, argstr in re.findall(r"([MHVLQ]) ([\d., ]+)", d.group(1)):
                 args = [float(v) for v in re.findall(r"-?\d+\.?\d*", argstr)]
                 if cmd == "M":
@@ -637,9 +642,9 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
                     cur[1] = args[-1] + ty
                 else:  # L / Q：终点取最后两个数
                     cur = [args[-2] + tx, args[-1] + ty]
-            endpoint_specs.append((cur[0], cur[1], "path终", tag))
+            endpoint_specs.append((cur[0], cur[1], "path终", tag, current_vb))
 
-    for (px, py, kind, tag_src) in endpoint_specs:
+    for (px, py, kind, tag_src, _vb) in endpoint_specs:
         holders = [
             (x, y, w, h) for (x, y, w, h) in surfaces
             if x - 1 <= px <= x + w + 1 and y - 1 <= py <= y + h + 1
@@ -663,6 +668,15 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
             warnings.append(f"连线{kind}端点埋进节点盒/菱形内 ({px:g},{py:g})——端点应贴边线 | {tag_src[:70]}")
         else:
             warnings.append(f"连线{kind}端点悬在容器内空白处 ({px:g},{py:g})——应贴容器边或目标盒边 | {tag_src[:70]}")
+
+    # 内容越界（警告级）：有效坐标（含组平移）超出 viewBox——动效图曾因此溢出
+    # 画布 80 单位而 EXEMPT 漏检（paved 右列 1080>1000 一案），此为回归闸。
+    for (x, y, w, h, vb) in surfaces:
+        if vb and (x + w > vb[0] + 2 or y + h > vb[1] + 2):
+            warnings.append(f"元素 ({x:g},{y:g},{w:g},{h:g}) 越出画布 {vb[0]:g}×{vb[1]:g}")
+    for (px, py, kind, tag_src, vb) in endpoint_specs:
+        if vb and (px > vb[0] + 2 or py > vb[1] + 2):
+            warnings.append(f"连线{kind}端点 ({px:g},{py:g}) 越出画布 {vb[0]:g}×{vb[1]:g} | {tag_src[:60]}")
 
     # 动效层（存在动效标记或脚本时才检查）
     check_scripts(parser, errors)
