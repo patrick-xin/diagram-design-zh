@@ -119,7 +119,7 @@ viewBox_h        = ceil40(末行基线 + 10)              # 3 行 → 680
 
 ### 2.2 步骤头芯片 + 步骤名
 
-每步 `j`：芯片居中 `step_cx`、y=0；数字锚点 `(step_cx, 11)` mono 7px；步骤名锚点 `(step_cx, 28)`，中文 10px · 500 · 0.12em（纯拉丁 mono 8px）。默认芯片 `ink@0.12` + ink 数字与步骤名；焦点芯片 `accent-dark@0.20` + accent 数字与步骤名。步骤名 ≤4 字。
+每步 `j`：芯片居中 `step_cx`、y=0；数字锚点 `(step_cx, 11)` mono 7px；步骤名锚点 `(step_cx, 28)`，中文 10px · 500 · 0.12em（纯拉丁 mono 8px）。默认芯片 `ink@0.12` + ink 数字与步骤名；焦点芯片 `accent@0.20` + accent 数字与步骤名。步骤名 ≤4 字。
 
 ### 2.3 道标签
 
@@ -218,7 +218,7 @@ viewBox_h        = ceil40(末行基线 + 10)              # 3 行 → 680
 
 ## 6. 深色档
 
-按 [style-guide.md](style-guide.md) 深色反转规则整体换档：ink 基 `ink@X` 各档 → 纸色基 `paper-dark@X`（同透明度）；`accent` → `accent-dark`；节点默认填充白 → `paper-dark@0.05`；焦点节点填充 `accent-dark@0.08` → `accent-dark@0.12`；自定义配色 `C` 提亮 ~15%。深色是 opt-in。
+照抄 [`assets/example-process-dark.html`](../assets/example-process-dark.html)：对称换基、α 不动——`ink@X` 各档换 ink 深基同 α；`accent` 换深色档；节点默认填充白换 ink 深基 @0.05；焦点节点填充 `accent` 深基 @0.10（自 0.08 提档）；芯片码字系列色换深档实色、反白字换纸色；自定义配色 `C` 提亮 ~15%。深色是 opt-in。
 
 ---
 
@@ -289,3 +289,5 @@ viewBox_h        = ceil40(末行基线 + 10)              # 3 行 → 680
 ## 12. 示例
 
 - [`assets/example-process.html`](../assets/example-process.html) — 季度入户调查端到端：5 角色 × 7 步接力（设计→分配→采集·焦点→审核→清洗→制表→发布），入 / 出芯片全程追踪载荷，现场异常上报为虚线触发。
+- [`assets/example-process-dark.html`](../assets/example-process-dark.html) — 同图深色档（对称换基、α 不动）。
+- [`assets/example-process-full.html`](../assets/example-process-full.html) — 同图完整讲解页（焦点 / 读法 / 口径三卡）。
