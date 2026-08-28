@@ -392,6 +392,20 @@ def check_colors(source: str, errors: list[str]) -> None:
             f"终端灰阶 {terminal} 用在非终端文件——终端色系只属于终端外壳"
             "（references/primitive-terminal.md）"
         )
+    # α 梯子闭集：一切 rgba 透明度只取梯子标准档（treemap 六档整组特例）——
+    # 档位值本身表外即制度性漂移（radar-dark 系列面积 0.22 一案）
+    LADDER = {"0.02", "0.03", "0.05", "0.06", "0.08", "0.10", "0.12", "0.15", "0.18",
+              "0.20", "0.30", "0.40", "0.45", "0.50", "0.60", "0.72",
+              "0.04", "0.07", "0.09", "0.11", "0.13", "0.16"}
+    off = sorted({a for a in re.findall(r"rgba\(\d+,\s*\d+,\s*\d+,\s*(0\.\d+)\)", source) if a not in LADDER})
+    if off:
+        errors.append(f"透明度不在梯子标准档：{off}——深色档 α 不动（style-guide α 梯子闭集）")
+    # line 元素 α 白名单：线类只走线档；芯片 / 柱体 / 面积档上线即档位错用
+    # （org-chart 分隔线 0.12、看板图例线 0.12 两案）
+    LINE_TIERS = {"0.08", "0.10", "0.20", "0.30", "0.40", "0.50", "0.60"}
+    bad_lines = sorted({a for a in re.findall(r'<line\s[^>]*stroke="rgba\(\d+,\s*\d+,\s*\d+,\s*(0\.\d+)\)', source) if a not in LINE_TIERS})
+    if bad_lines:
+        errors.append(f"line 描边用了非线档透明度：{bad_lines}——线走 0.08/0.10/0.20/0.30/0.40/0.50/0.60，芯片与面积档别混")
 
 
 def verify(path: Path) -> tuple[list[str], list[str]]:
