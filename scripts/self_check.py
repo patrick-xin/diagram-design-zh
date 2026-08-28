@@ -406,6 +406,9 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         if tag == "a" and parser.gallery_index:
             # 画廊目录页：<a> 外链（GitHub 仓库等）是正当导航，非交付物远程依赖
             finding = None
+        if tag == "a" and value.startswith("https://github.com/patrick-xin/diagram-design-zh"):
+            # 页头导航条的仓库链接（与「← 类型画廊」同层），非内容引用
+            finding = None
         if finding:
             errors.append(finding)
         if tag == "iframe" and parser.gallery_index:
