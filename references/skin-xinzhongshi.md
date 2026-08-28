@@ -99,3 +99,19 @@
 ## 示例
 
 - 用 `scripts/reskin.py --skin xinzhongshi <默认成品.html> -o <输出>.html` 从默认成品生成色板版；钤印 / 题签 / 朱批等结构元素按本文件在生成时落实
+
+## 7. 漆器暗变体（`xinzhongshi-dark`，reskin 定制表）
+
+黑地漆器风的暗色变体：墨黑底、宣纸色字、朱砂焦点、描金走线。仅以 `scripts/skins/xinzhongshi-dark.json` 存在——值级换肤用，不含钤印 / 题签结构（要完整结构效果按本文件生成时规则画，再取本表值）。
+
+| 槽位 | 值 |
+|---|---|
+| paper / paper-2 | `#16130e` / `#201b12` |
+| ink / muted | `#efe7d6` / `#c8bda3` |
+| soft | `rgba(239,231,214,0.50)` |
+| accent | `#e85f4e`（亮朱砂） |
+| link | `#d8b66a`（描金——借 link 槽位承载） |
+
+- 焦点取**亮朱砂**而非深朱砂：语义五色里的安全红（`#b85450` / 深档 `#bf6561`）换皮不换义、跨皮肤恒定，深朱砂与其色距不足会混淆焦点与「安全」语义——亮一档明度既保朱砂身份又拉开距离（色距 46 / 49，gate 阈值 40）。
+- 深色档换基规则照旧适用（ink 基 rgba(239,231,214,X)、焦点 tint 提档 0.10、白盒换 paper 色）。
+- 用法：`python3 scripts/reskin.py --skin xinzhongshi-dark <成品.html> -o <输出>.html`
