@@ -252,6 +252,8 @@ def canonical_controller() -> str:
 def check_scripts(parser: DiagramParser, errors: list[str]) -> None:
     if not parser.scripts:
         return
+    if parser.gallery_index:
+        return  # 画廊目录页：允许内联主题切换脚本（非交付物，与 iframe 豁免同理）
     if len(parser.scripts) > 1:
         errors.append(f"至多允许一个脚本（动效控制器）；发现 {len(parser.scripts)} 个")
     for number, script in enumerate(parser.scripts, 1):
@@ -272,6 +274,8 @@ def check_scripts(parser: DiagramParser, errors: list[str]) -> None:
 
 
 def check_motion(parser: DiagramParser, source: str, errors: list[str]) -> None:
+    if "data-gallery-index" in source:
+        return  # 画廊目录页：内联脚本不是动效控制器，勿按动效契约校验
     has_motion_markup = bool(parser.roots or parser.items or parser.scripts)
     if not has_motion_markup:
         return
@@ -399,6 +403,9 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
     errors.extend(parser.unsafe)
     for tag, rel, value in parser.references:
         finding = reference_error(tag, rel, value)
+        if tag == "a" and parser.gallery_index:
+            # 画廊目录页：<a> 外链（GitHub 仓库等）是正当导航，非交付物远程依赖
+            finding = None
         if finding:
             errors.append(finding)
         if tag == "iframe" and parser.gallery_index:
@@ -556,6 +563,10 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         if w >= 60 and h >= 40:
             structural_rects.append((x, y, w, h))
     bands: dict[tuple[float, float], list[tuple[float, float]]] = {}
+    # 画廊目录页：多张缩略共一文件，跨图坐标比较全是误报——几何完整性由各源
+    # example 的 self_check 保证，画廊层只管引用与结构。
+    if "data-gallery-index" in source:
+        structural_rects = []
     for rx, ry, rw, rh in structural_rects:
         bands.setdefault((rx, rw), []).append((ry, rh))
     stacks = [
@@ -599,6 +610,8 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         x1, y1, x2, y2 = (float(c.group(1)) for c in coords.values())
         if abs(y1 - y2) <= 0.5 and x1 <= 20 and x2 >= 900:
             through_lines.append(y1)
+    if "data-gallery-index" in source:  # 画廊页：跨图图例线互不相干，见堆叠检查处注释
+        through_lines = []
     if through_lines:
         legend_line_y = max(through_lines)  # 最底部的贯通横线是图例线（道框/分区线更靠上）
         baselines: dict[float, str] = {}
@@ -738,6 +751,8 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
                     cur = [args[-2] + tx, args[-1] + ty]
             endpoint_specs.append((cur[0], cur[1], "path终", tag, current_vb))
 
+    if "data-gallery-index" in source:  # 画廊页：跨图端点/容器互不相干，见堆叠检查处注释
+        endpoint_specs = []
     for (px, py, kind, tag_src, _vb) in endpoint_specs:
         holders = [
             (x, y, w, h) for (x, y, w, h, _b) in surfaces
