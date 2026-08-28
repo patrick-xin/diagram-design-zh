@@ -1,6 +1,6 @@
 ---
 name: diagram-design-zh
-description: 生成标准中文图表：架构图、流程图、示意图、拓扑图等，输出 standalone HTML/SVG，内置中文字体栈与 CJK 排版规则（字号下限、字距、中英混排），零指令产出可直接放进文档、周报、公众号的图。支持把 Mermaid 源（.mmd/.mermaid/Markdown 代码块）重绘为中文标准图表；支持排队瓶颈、策略评估、安全铺路等语义模式与可选无障碍分步动效；内置 IT/云/K8s 单色图标库，支持终端外壳与深色档变体。当用户要求画架构图/流程图/示意图/拓扑图/图表/diagram 且期望好看，要求转换/重绘 Mermaid 图，或要求加动效/分步动画、配图标、终端风格、深色/暗色模式时使用。Chinese diagram skill with built-in CJK typography for agent-authored standalone HTML/SVG.
+description: 生成标准中文图表：架构图、流程图、示意图、拓扑图等，输出 standalone HTML/SVG，内置中文字体栈与 CJK 排版规则（字号下限、字距、中英混排），零指令产出可直接放进文档、周报、公众号的图。支持把 Mermaid 源（.mmd/.mermaid/Markdown 代码块）重绘为中文标准图表；支持排队瓶颈、策略评估、安全铺路等语义模式与可选无障碍分步动效；内置 IT/云/K8s 单色图标库，支持终端外壳与深色档变体。当用户要求画架构图/流程图/看板/示意图/拓扑图/图表/diagram 且期望好看，要求转换/重绘 Mermaid 图，或要求加动效/分步动画、配图标、终端风格、深色/暗色模式时使用。Chinese diagram skill with built-in CJK typography for agent-authored standalone HTML/SVG.
 license: MIT
 metadata:
   version: "0.1.0"
@@ -70,7 +70,7 @@ metadata:
 | 控制项按执行位置分组 | **治理 / 控制清单** → 分层堆叠 |
 | 防御弥补先前缺口、残余风险向下传播 | **补偿分层** → 分层堆叠 |
 
-### 类型路由（28 内置）
+### 类型路由（29 内置）
 
 | 要画的是…… | 类型 | 参考 |
 |---|---|---|
@@ -99,6 +99,7 @@ metadata:
 | 包含关系划边界（作用域 / 信任域 / 波及范围） | **嵌套图** | [type-nested.md](references/type-nested.md) |
 | 容器集群上的端到端数据栈总览 | **数据栈全景图** | [type-high-level.md](references/type-high-level.md) |
 | 同一数据集的多质量层级（湖仓分层 / 裸→净→聚合） | **奖章架构** | [type-medallion.md](references/type-medallion.md) |
+| 在制工作的状态盘点（看板 / WIP 限 / 超限预警） | **看板** | [type-kanban.md](references/type-kanban.md) |
 | 现代化之前的存量 IT 版图（现状 / 痛点 / 手工交接） | **IT 现状图** | [type-it-state.md](references/type-it-state.md) |
 | 平台接入面与协议拓扑（源 → 平台 → 消费） | **数据平台集成图** | [type-dp-integration.md](references/type-dp-integration.md) |
 | 角色 × 组件的权限矩阵（谁能读写什么） | **数据平台安全矩阵** | [type-dp-security-matrix.md](references/type-dp-security-matrix.md) |
