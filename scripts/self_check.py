@@ -84,6 +84,7 @@ class DiagramParser(HTMLParser):
         self._motion_root_depth: int | None = None
         self._controls_depth: int | None = None
         self._current_text_size: str | None = None
+        self.gallery_index = False
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.casefold()
@@ -91,8 +92,13 @@ class DiagramParser(HTMLParser):
         data = {key: value for key, value in normalized_attrs}
         if tag == "html" and not self.html_lang:
             self.html_lang = data.get("lang", "")
+        if tag in {"html", "body"} and "data-gallery-index" in data:
+            # 画廊目录页自报——iframe 只作本目录示例的索引缩略（画廊非交付物，
+            # 本身不是单文件图表）；src 仍走远程引用检查 + 文件级存在性检查。
+            self.gallery_index = True
         if tag in {"base", "embed", "object", "iframe"}:
-            self.unsafe.append(f"<{tag}> 不允许出现在图表文件里")
+            if not (tag == "iframe" and self.gallery_index):
+                self.unsafe.append(f"<{tag}> 不允许出现在图表文件里")
         for key, value in normalized_attrs:
             if key.startswith("on"):
                 self.unsafe.append(f"可执行属性 {key} 出现在 <{tag}> 上")
@@ -395,6 +401,11 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         finding = reference_error(tag, rel, value)
         if finding:
             errors.append(finding)
+        if tag == "iframe" and parser.gallery_index:
+            # 画廊缩略的本地索引——目标必须真实存在，防链接腐烂
+            target = value.split("#")[0].split("?")[0]
+            if target and not (path.parent / target).is_file():
+                errors.append(f"画廊 iframe 指向不存在的本地文件：{value}")
 
     # CSS 内的远程引用（@import / 远程 url() / Google Fonts 域名）——属性扫描抓不到的路径
     css = "\n".join(parser.styles)
@@ -435,9 +446,11 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         if isinstance(svg["attrs"], dict)
         and str(svg["attrs"].get("aria-hidden", "")).casefold() != "true"
     ]
-    if not checkable and "data-decorative-gallery" not in source:
-        # 装饰性样本页（如 icons.html）自报 data-decorative-gallery 时豁免——
-        # 无障碍契约本就要求装饰图用 aria-hidden 而非命名；图表产出页不许带此标记。
+    if not checkable and "data-decorative-gallery" not in source and "data-gallery-index" not in source:
+        # 装饰性样本页（如 icons.html）自报 data-decorative-gallery、画廊目录页
+        # （index.html）自报 data-gallery-index 时豁免——无障碍契约本就要求装饰图
+        # 用 aria-hidden 而非命名，画廊缩略的命名由各示例自身负责；图表产出页
+        # 不许带任何一种标记。
         errors.append("至少需要一个可访问（非 aria-hidden）的 SVG")
     stem = path.stem
     for number, svg in enumerate(checkable, 1):

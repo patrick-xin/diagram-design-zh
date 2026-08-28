@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类型画廊</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #ffffff;
+      --color-paper-2: #f3f2ff;
+      --color-ink:     #29314f;
+      --color-muted:   #565e7e;
+      --color-soft:    #8f94ab;
+      --color-rule:    rgba(41,49,79,0.12);
+      --color-accent:  #1a4dd9;
+      --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+      --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      padding: 3rem 2rem 4rem;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .header { margin-bottom: 2.5rem; }
+    .eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: var(--color-muted);
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-size: 1rem;
+      line-height: 1.55;
+      color: var(--color-muted);
+      max-width: 64ch;
+    }
+    .cat { margin-top: 2.5rem; }
+    .cat h2 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--color-rule);
+      display: flex;
+      align-items: baseline;
+      gap: 0.625rem;
+    }
+    .count {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.1em;
+      color: var(--color-soft);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 1.5rem;
+    }
+    .card { min-width: 0; }
+    .thumb {
+      display: block;
+      position: relative;
+      height: 0;
+      overflow: hidden;
+      border: 1px solid var(--color-rule);
+      border-radius: 6px;
+      background: var(--color-paper);
+      container-type: inline-size;
+    }
+    .thumb iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      border: 0;
+      transform: scale(calc(100cqw / 1080px));
+      transform-origin: 0 0;
+      pointer-events: none;
+    }
+    .meta { padding: 0.625rem 0.125rem 0; }
+    .name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+    .name > a { color: var(--color-ink); text-decoration: none; }
+    .name > a:hover { color: var(--color-accent); }
+    .lnk { font-size: 0.75rem; font-weight: 400; white-space: nowrap; }
+    .lnk a { color: var(--color-muted); text-decoration: none; }
+    .lnk a:hover { color: var(--color-accent); }
+    .desc {
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+      color: var(--color-muted);
+    }
+    .footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-rule);
+      font-size: 0.75rem;
+      color: var(--color-soft);
+    }
+    .footer code {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--color-muted);
+    }
+  </style>
+</head>
+<body data-gallery-index>
+  <div class="container">
+    <header class="header">
+      <p class="eyebrow">diagram-design-zh</p>
+      <h1>类型画廊</h1>
+      <p class="subtitle">28 个内置类型与导入、动效示例，每个都是开箱即锚点的中文成品页。点缩略图开标准档，卡片右上角进深色档与讲解版。</p>
+    </header>
+    <section class="cat">
+      <h2>系统与流程<span class="count">12</span></h2>
+      <div class="grid">
+      <div class="card">
+        <a class="thumb" style="padding-top:54.6296%" href="example-architecture.html" title="架构图——标准档" aria-label="架构图 标准档示例">
+          <iframe src="example-architecture.html" title="架构图示例" loading="lazy" tabindex="-1" style="height:590px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-architecture.html">架构图</a><span class="lnk"><a href="example-architecture-dark.html">深色</a> · <a href="example-architecture-full.html">讲解版</a></span></p>
+          <p class="desc">系统的组件与连接</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:73.1481%" href="example-flowchart.html" title="流程图——标准档" aria-label="流程图 标准档示例">
+          <iframe src="example-flowchart.html" title="流程图示例" loading="lazy" tabindex="-1" style="height:790px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-flowchart.html">流程图</a><span class="lnk"><a href="example-flowchart-dark.html">深色</a> · <a href="example-flowchart-full.html">讲解版</a></span></p>
+          <p class="desc">带分支的决策逻辑</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:69.4444%" href="example-sequence.html" title="时序图——标准档" aria-label="时序图 标准档示例">
+          <iframe src="example-sequence.html" title="时序图示例" loading="lazy" tabindex="-1" style="height:750px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-sequence.html">时序图</a><span class="lnk"><a href="example-sequence-dark.html">深色</a> · <a href="example-sequence-full.html">讲解版</a></span></p>
+          <p class="desc">参与者之间按时间的消息</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:54.6296%" href="example-state.html" title="状态机——标准档" aria-label="状态机 标准档示例">
+          <iframe src="example-state.html" title="状态机示例" loading="lazy" tabindex="-1" style="height:590px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-state.html">状态机</a><span class="lnk"><a href="example-state-dark.html">深色</a> · <a href="example-state-full.html">讲解版</a></span></p>
+          <p class="desc">状态、转移与守卫</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:54.6296%" href="example-er.html" title="ER / 数据模型——标准档" aria-label="ER / 数据模型 标准档示例">
+          <iframe src="example-er.html" title="ER / 数据模型示例" loading="lazy" tabindex="-1" style="height:590px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-er.html">ER / 数据模型</a><span class="lnk"><a href="example-er-dark.html">深色</a> · <a href="example-er-full.html">讲解版</a></span></p>
+          <p class="desc">实体、字段与关系</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:80.5556%" href="example-data-flow.html" title="数据流——标准档" aria-label="数据流 标准档示例">
+          <iframe src="example-data-flow.html" title="数据流示例" loading="lazy" tabindex="-1" style="height:870px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-data-flow.html">数据流</a><span class="lnk"><a href="example-data-flow-dark.html">深色</a> · <a href="example-data-flow-full.html">讲解版</a></span></p>
+          <p class="desc">谁在哪一步干什么</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:84.2593%" href="example-process.html" title="流程——标准档" aria-label="流程 标准档示例">
+          <iframe src="example-process.html" title="流程示例" loading="lazy" tabindex="-1" style="height:910px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-process.html">流程</a><span class="lnk"><a href="example-process-dark.html">深色</a> · <a href="example-process-full.html">讲解版</a></span></p>
+          <p class="desc">多角色串行工作流</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:58.3333%" href="example-swimlane.html" title="泳道图——标准档" aria-label="泳道图 标准档示例">
+          <iframe src="example-swimlane.html" title="泳道图示例" loading="lazy" tabindex="-1" style="height:630px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-swimlane.html">泳道图</a><span class="lnk"><a href="example-swimlane-dark.html">深色</a> · <a href="example-swimlane-full.html">讲解版</a></span></p>
+          <p class="desc">跨职能流程与交接</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:76.8519%" href="example-org-chart.html" title="组织架构图——标准档" aria-label="组织架构图 标准档示例">
+          <iframe src="example-org-chart.html" title="组织架构图示例" loading="lazy" tabindex="-1" style="height:830px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-org-chart.html">组织架构图</a><span class="lnk"><a href="example-org-chart-dark.html">深色</a> · <a href="example-org-chart-full.html">讲解版</a></span></p>
+          <p class="desc">归属、上报与升级</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:58.3333%" href="example-tree.html" title="树形图——标准档" aria-label="树形图 标准档示例">
+          <iframe src="example-tree.html" title="树形图示例" loading="lazy" tabindex="-1" style="height:630px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-tree.html">树形图</a><span class="lnk"><a href="example-tree-dark.html">深色</a> · <a href="example-tree-full.html">讲解版</a></span></p>
+          <p class="desc">通用父子层级</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:65.7407%" href="example-nested.html" title="嵌套图——标准档" aria-label="嵌套图 标准档示例">
+          <iframe src="example-nested.html" title="嵌套图示例" loading="lazy" tabindex="-1" style="height:710px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-nested.html">嵌套图</a><span class="lnk"><a href="example-nested-dark.html">深色</a> · <a href="example-nested-full.html">讲解版</a></span></p>
+          <p class="desc">包含关系划边界</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:62.037%" href="example-layers.html" title="分层堆叠——标准档" aria-label="分层堆叠 标准档示例">
+          <iframe src="example-layers.html" title="分层堆叠示例" loading="lazy" tabindex="-1" style="height:670px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-layers.html">分层堆叠</a><span class="lnk"><a href="example-layers-dark.html">深色</a> · <a href="example-layers-full.html">讲解版</a></span></p>
+          <p class="desc">抽象层级堆叠</p>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section class="cat">
+      <h2>计划与叙事<span class="count">6</span></h2>
+      <div class="grid">
+      <div class="card">
+        <a class="thumb" style="padding-top:50.9259%" href="example-timeline.html" title="时间线——标准档" aria-label="时间线 标准档示例">
+          <iframe src="example-timeline.html" title="时间线示例" loading="lazy" tabindex="-1" style="height:550px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-timeline.html">时间线</a><span class="lnk"><a href="example-timeline-dark.html">深色</a> · <a href="example-timeline-full.html">讲解版</a></span></p>
+          <p class="desc">时间轴上的事件</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:62.037%" href="example-gantt.html" title="甘特图——标准档" aria-label="甘特图 标准档示例">
+          <iframe src="example-gantt.html" title="甘特图示例" loading="lazy" tabindex="-1" style="height:670px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-gantt.html">甘特图</a><span class="lnk"><a href="example-gantt-dark.html">深色</a> · <a href="example-gantt-full.html">讲解版</a></span></p>
+          <p class="desc">任务与阶段排在时间上</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:69.4444%" href="example-quadrant.html" title="象限图——标准档" aria-label="象限图 标准档示例">
+          <iframe src="example-quadrant.html" title="象限图示例" loading="lazy" tabindex="-1" style="height:750px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-quadrant.html">象限图</a></p>
+          <p class="desc">双轴定位与优先级</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:80.5556%" href="example-loop.html" title="飞轮——标准档" aria-label="飞轮 标准档示例">
+          <iframe src="example-loop.html" title="飞轮示例" loading="lazy" tabindex="-1" style="height:870px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-loop.html">飞轮</a><span class="lnk"><a href="example-loop-dark.html">深色</a> · <a href="example-loop-full.html">讲解版</a></span></p>
+          <p class="desc">增强回路与运营循环</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:65.7407%" href="example-pyramid.html" title="金字塔 / 漏斗——标准档" aria-label="金字塔 / 漏斗 标准档示例">
+          <iframe src="example-pyramid.html" title="金字塔 / 漏斗示例" loading="lazy" tabindex="-1" style="height:710px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-pyramid.html">金字塔 / 漏斗</a></p>
+          <p class="desc">等级层级或逐层转化</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:62.037%" href="example-venn.html" title="维恩图——标准档" aria-label="维恩图 标准档示例">
+          <iframe src="example-venn.html" title="维恩图示例" loading="lazy" tabindex="-1" style="height:670px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-venn.html">维恩图</a></p>
+          <p class="desc">集合交集与共性</p>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section class="cat">
+      <h2>数据图表<span class="count">5</span></h2>
+      <div class="grid">
+      <div class="card">
+        <a class="thumb" style="padding-top:69.4444%" href="example-bar.html" title="柱状图——标准档" aria-label="柱状图 标准档示例">
+          <iframe src="example-bar.html" title="柱状图示例" loading="lazy" tabindex="-1" style="height:750px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-bar.html">柱状图</a><span class="lnk"><a href="example-bar-dark.html">深色</a> · <a href="example-bar-full.html">讲解版</a></span></p>
+          <p class="desc">离散数量跨类目比较</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:69.4444%" href="example-line.html" title="折线图——标准档" aria-label="折线图 标准档示例">
+          <iframe src="example-line.html" title="折线图示例" loading="lazy" tabindex="-1" style="height:750px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-line.html">折线图</a><span class="lnk"><a href="example-line-dark.html">深色</a> · <a href="example-line-full.html">讲解版</a></span></p>
+          <p class="desc">连续趋势随时间</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:69.4444%" href="example-scatter.html" title="散点图——标准档" aria-label="散点图 标准档示例">
+          <iframe src="example-scatter.html" title="散点图示例" loading="lazy" tabindex="-1" style="height:750px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-scatter.html">散点图</a><span class="lnk"><a href="example-scatter-dark.html">深色</a> · <a href="example-scatter-full.html">讲解版</a></span></p>
+          <p class="desc">两变量的分布与相关性</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:62.037%" href="example-radar.html" title="雷达图——标准档" aria-label="雷达图 标准档示例">
+          <iframe src="example-radar.html" title="雷达图示例" loading="lazy" tabindex="-1" style="height:670px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-radar.html">雷达图</a><span class="lnk"><a href="example-radar-dark.html">深色</a> · <a href="example-radar-full.html">讲解版</a></span></p>
+          <p class="desc">多实体量化评分对比</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:65.7407%" href="example-treemap.html" title="矩形树图——标准档" aria-label="矩形树图 标准档示例">
+          <iframe src="example-treemap.html" title="矩形树图示例" loading="lazy" tabindex="-1" style="height:710px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-treemap.html">矩形树图</a><span class="lnk"><a href="example-treemap-dark.html">深色</a> · <a href="example-treemap-full.html">讲解版</a></span></p>
+          <p class="desc">部分与整体，面积即故事</p>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section class="cat">
+      <h2>数据平台特化<span class="count">5</span></h2>
+      <div class="grid">
+      <div class="card">
+        <a class="thumb" style="padding-top:69.4444%" href="example-high-level.html" title="数据栈全景图——标准档" aria-label="数据栈全景图 标准档示例">
+          <iframe src="example-high-level.html" title="数据栈全景图示例" loading="lazy" tabindex="-1" style="height:750px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-high-level.html">数据栈全景图</a><span class="lnk"><a href="example-high-level-dark.html">深色</a> · <a href="example-high-level-full.html">讲解版</a></span></p>
+          <p class="desc">集群上的端到端数据栈</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:73.1481%" href="example-medallion.html" title="奖章架构——标准档" aria-label="奖章架构 标准档示例">
+          <iframe src="example-medallion.html" title="奖章架构示例" loading="lazy" tabindex="-1" style="height:790px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-medallion.html">奖章架构</a><span class="lnk"><a href="example-medallion-dark.html">深色</a> · <a href="example-medallion-full.html">讲解版</a></span></p>
+          <p class="desc">同一数据集的多质量层级</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:65.7407%" href="example-it-state.html" title="IT 现状图——标准档" aria-label="IT 现状图 标准档示例">
+          <iframe src="example-it-state.html" title="IT 现状图示例" loading="lazy" tabindex="-1" style="height:710px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-it-state.html">IT 现状图</a><span class="lnk"><a href="example-it-state-dark.html">深色</a> · <a href="example-it-state-full.html">讲解版</a></span></p>
+          <p class="desc">现代化之前的存量版图</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:76.8519%" href="example-dp-integration.html" title="数据平台集成图——标准档" aria-label="数据平台集成图 标准档示例">
+          <iframe src="example-dp-integration.html" title="数据平台集成图示例" loading="lazy" tabindex="-1" style="height:830px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-dp-integration.html">数据平台集成图</a><span class="lnk"><a href="example-dp-integration-dark.html">深色</a> · <a href="example-dp-integration-full.html">讲解版</a></span></p>
+          <p class="desc">平台接入面与协议拓扑</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:65.7407%" href="example-dp-security-matrix.html" title="数据平台安全矩阵——标准档" aria-label="数据平台安全矩阵 标准档示例">
+          <iframe src="example-dp-security-matrix.html" title="数据平台安全矩阵示例" loading="lazy" tabindex="-1" style="height:710px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-dp-security-matrix.html">数据平台安全矩阵</a><span class="lnk"><a href="example-dp-security-matrix-dark.html">深色</a> · <a href="example-dp-security-matrix-full.html">讲解版</a></span></p>
+          <p class="desc">角色 × 组件的权限矩阵</p>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section class="cat">
+      <h2>导入与动效示例<span class="count">5</span></h2>
+      <div class="grid">
+      <div class="card">
+        <a class="thumb" style="padding-top:65.7407%" href="example-import-drawio.html" title="draw.io 导入重绘——标准档" aria-label="draw.io 导入重绘 标准档示例">
+          <iframe src="example-import-drawio.html" title="draw.io 导入重绘示例" loading="lazy" tabindex="-1" style="height:710px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-import-drawio.html">draw.io 导入重绘</a></p>
+          <p class="desc">源结构按设计系统重排</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:69.4444%" href="example-import-mermaid.html" title="Mermaid 导入重绘——标准档" aria-label="Mermaid 导入重绘 标准档示例">
+          <iframe src="example-import-mermaid.html" title="Mermaid 导入重绘示例" loading="lazy" tabindex="-1" style="height:750px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-import-mermaid.html">Mermaid 导入重绘</a></p>
+          <p class="desc">源码重绘，附保真台账</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:80.5556%" href="example-policy-trace-animated.html" title="策略评估追踪 · 动效——标准档" aria-label="策略评估追踪 · 动效 标准档示例">
+          <iframe src="example-policy-trace-animated.html" title="策略评估追踪 · 动效示例" loading="lazy" tabindex="-1" style="height:870px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-policy-trace-animated.html">策略评估追踪 · 动效</a></p>
+          <p class="desc">分步播放，静态帧完整</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:76.8519%" href="example-queue-animated.html" title="排队瓶颈 · 动效——标准档" aria-label="排队瓶颈 · 动效 标准档示例">
+          <iframe src="example-queue-animated.html" title="排队瓶颈 · 动效示例" loading="lazy" tabindex="-1" style="height:830px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-queue-animated.html">排队瓶颈 · 动效</a></p>
+          <p class="desc">分步播放，静态帧完整</p>
+        </div>
+      </div>
+      <div class="card">
+        <a class="thumb" style="padding-top:76.8519%" href="example-paved-road-animated.html" title="安全铺路 · 动效——标准档" aria-label="安全铺路 · 动效 标准档示例">
+          <iframe src="example-paved-road-animated.html" title="安全铺路 · 动效示例" loading="lazy" tabindex="-1" style="height:830px"></iframe>
+        </a>
+        <div class="meta">
+          <p class="name"><a href="example-paved-road-animated.html">安全铺路 · 动效</a></p>
+          <p class="desc">分步播放，静态帧完整</p>
+        </div>
+      </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <p>图标库见 <code>icons.html</code> · 模板见 <code>template.html</code> / <code>template-dark.html</code> / <code>template-terminal.html</code> / <code>template-motion.html</code> · 全部单文件，断网可开。</p>
+    </footer>
+  </div>
+</body>
+</html>
