@@ -1,6 +1,6 @@
 # diagram-design-zh
 
-> 本项目 fork 自 Cathryn Lavery 的 [diagram-design](https://github.com/cathrynlarry/diagram-design)（MIT），并在此致谢。设计系统的骨架——类型体系、布局与几何计算、按需载入——来自原项目；中文排版层的重写，以及下文「本项目独创」的全部能力，由本仓库完成。
+> 本项目 fork 自 Cathryn Lavery 的 [diagram-design](https://github.com/cathrynlavery/diagram-design)（MIT），并在此致谢。设计系统的骨架——类型体系、布局与几何计算、按需载入——来自原项目；中文排版层的重写，以及下文「本项目独创」的全部能力，由本仓库完成。
 
 **对 agent 说一句话，拿到能直接放进文档的中文图表。**
 
@@ -136,7 +136,7 @@ npx skills add https://github.com/patrick-xin/diagram-design-zh --skill diagram-
 - PNG——默认 2 倍图，紧凑素材 1 倍、打印主图 3 倍；依赖 Playwright（首次 `pip install playwright && playwright install chromium`）
 - SVG——只取 `<svg>` 节点，进 Figma / Illustrator 可继续编辑
 
-导出只交图本身，full 版的讲解卡片按设计丢弃。
+导出只交图本身，完整版（full）的附加卡片按设计丢弃。
 
 ### 换肤与品牌
 
