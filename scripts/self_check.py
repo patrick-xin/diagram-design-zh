@@ -406,6 +406,21 @@ def check_colors(source: str, errors: list[str]) -> None:
     bad_lines = sorted({a for a in re.findall(r'<line\s[^>]*stroke="rgba\(\d+,\s*\d+,\s*\d+,\s*(0\.\d+)\)', source) if a not in LINE_TIERS})
     if bad_lines:
         errors.append(f"line 描边用了非线档透明度：{bad_lines}——线走 0.08/0.10/0.20/0.30/0.40/0.50/0.60，芯片与面积档别混")
+    # 颜色值合法性：fill/stroke 属性值必须落在合法形态闭集——非法串（漏 rgba
+    # 前缀、拼错的函数式）会渲染成黑块却绕过 α 梯子检查（鱼骨图首例一案）
+    GOOD_COLOR = re.compile(
+        r"^(?:#[0-9a-fA-F]{3,8}"
+        r"|rgba\(\d+,\s*\d+,\s*\d+,\s*(?:0(?:\.\d+)?|1(?:\.0+)?)\)"
+        r"|rgb\(\d+,\s*\d+,\s*\d+\)"
+        r"|none|transparent|inherit|currentColor"
+        r"|url\(#[^)]+\))$"
+    )
+    bad_colors = sorted(
+        {v.strip() for v in re.findall(r'\b(?:fill|stroke)="([^"]*)"', source)
+         if v.strip() and not GOOD_COLOR.match(v.strip())}
+    )
+    if bad_colors:
+        errors.append(f"非法颜色值（形态不在闭集）：{bad_colors}——十六进制 token / 合法 rgba / none 之外一律拦")
 
 
 def verify(path: Path) -> tuple[list[str], list[str]]:
@@ -715,7 +730,12 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         tag = m.group(0)
         if tag.startswith("<svg"):
             vbm = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', tag)
-            current_vb = (float(vbm.group(1)), float(vbm.group(2))) if vbm else None
+            if vbm:
+                current_vb = (float(vbm.group(1)), float(vbm.group(2)))
+            else:
+                # fail-closed：viewBox 缺失或非闭集格式时报错，而不是静默跳过越界检查
+                errors.append(f'svg 缺少合法 viewBox（应为 "0 0 W H"，宽高为正数）| {tag[:80]}')
+                current_vb = None
             continue
         if tag.startswith("<g"):
             t = re.search(r"translate\(([-\d.]+)[ ,]+([-\d.]+)\)", tag)
