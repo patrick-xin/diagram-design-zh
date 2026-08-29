@@ -51,6 +51,13 @@ MARKDOWN_SUFFIXES = {".md", ".markdown", ".mdown", ".mkd"}
 MERMAID_SUFFIXES = {".mmd", ".mermaid"}
 
 
+def _configure_stdout_utf8() -> None:
+    """Emit digests as UTF-8 even when Windows selects a legacy codepage."""
+    reconfigure = getattr(sys.stdout, "reconfigure", None)
+    if reconfigure is not None:
+        reconfigure(encoding="utf-8", errors="strict")
+
+
 def _fail(message: str) -> NoReturn:
     print(f"mermaid_extract: {message}", file=sys.stderr)
     raise SystemExit(2)
@@ -598,21 +605,39 @@ def _edge_operators(text: str) -> list[_Operator]:
     # Labeled links carry the label between the opening and closing operator:
     # `A-- text -->B`, `A-. retry .-> B`, `A== critical ==> B`, and the
     # undirected forms of each. The compact form drops the spaces —
-    # `B--yes-->C` — so its label may not contain whitespace, and the operator
-    # characters themselves may not open one (keeping `A----->B` unlabeled and
-    # `A --o B --> C` two separate links).
+    # `B--yes-->C` — and may retain a left arrow/circle/cross marker, as in
+    # `A<--yes-->B` or `A o--yes--o B`. Its label may not contain whitespace,
+    # and the operator characters themselves may not open one (keeping
+    # `A----->B` unlabeled and `A --o B --> C` two separate links).
     text_edge = re.compile(
-        r"(?:--|-\.|==)"
-        r"(?:\s+(.+?)\s+|(?![-=.\s])([^\s|<>]+?))"
-        r"(\.-+[>xo]|\.-+|-{2,}>|--[xo]|=+>|={2,}|-{3,})"
+        r"(?P<opening>"
+        r"<(?:--|-\.|==)"
+        r"|(?<![\w.:-])[xo](?:--|-\.|==)"
+        r"|(?:--|-\.|==)"
+        r")"
+        r"(?:\s+(?P<spaced>.+?)\s+|(?![-=.\s])(?P<compact>[^\s|<>]+?))"
+        r"(?P<closing>\.-+[>xo]|\.-+|-{2,}>|--[xo]|=+>|={2,}|-{3,})"
+    )
+    trailing_operator = re.compile(
+        r"(?:\.-+[>xo]|\.-+|-{2,}>|--[xo]|=+>|={2,}|-{3,})"
+        r"(?:\|[^|\n]*\|)?\s*$"
     )
     for match in text_edge.finditer(mask):
-        token = match.group(3)
-        label_group = 1 if match.group(1) is not None else 2
+        opening = match.group("opening")
+        operator_start = match.start()
+        if opening.startswith(("x", "o")):
+            prefix = mask[:operator_start]
+            if not prefix.strip() or trailing_operator.search(prefix):
+                # Here x/o is the endpoint before a regular opening operator,
+                # not a left marker: `x--yes-->B` or `A-->x--go-->B`.
+                operator_start += 1
+                opening = opening[1:]
+        token = opening + match.group("closing")
+        label_group = "spaced" if match.group("spaced") is not None else "compact"
         style, arrowhead, bidirectional, undirected = _operator_style(token)
         operators.append(
             _Operator(
-                match.start(),
+                operator_start,
                 match.end(),
                 clean_label(text[match.start(label_group) : match.end(label_group)]),
                 style,
@@ -621,7 +646,7 @@ def _edge_operators(text: str) -> list[_Operator]:
                 undirected,
             )
         )
-        occupied.append((match.start(), match.end()))
+        occupied.append((operator_start, match.end()))
 
     pattern = re.compile(
         r"[xo][-=.]+[xo]|<[-=.]+>|-+\.-+>|=+>|-+(?:>|x|o)|-+\.-+|={3,}|-{3,}"
@@ -1322,4 +1347,5 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
+    _configure_stdout_utf8()
     raise SystemExit(main())
