@@ -1,6 +1,6 @@
 ---
 name: diagram-design-zh
-description: 生成标准中文图表：架构图、流程图、示意图、拓扑图等，输出 standalone HTML/SVG，内置中文字体栈与 CJK 排版规则（字号下限、字距、中英混排），零指令产出可直接放进文档、周报、公众号的图。支持把 Mermaid 源（.mmd/.mermaid/Markdown 代码块）重绘为中文标准图表；支持排队瓶颈、策略评估、安全铺路等语义模式与可选无障碍分步动效；内置 IT/云/K8s 单色图标库，支持终端外壳与深色档变体。当用户要求画架构图/流程图/看板/鱼骨图/根因分析/数据库/schema/依赖图/示意图/拓扑图/图表/diagram 且期望好看，要求转换/重绘 Mermaid 图，或要求加动效/分步动画、配图标、终端风格、深色/暗色模式时使用。Chinese diagram skill with built-in CJK typography for agent-authored standalone HTML/SVG.
+description: 生成标准中文图表：架构图、流程图、示意图、拓扑图等，输出 standalone HTML/SVG，内置中文字体栈与 CJK 排版规则（字号下限、字距、中英混排），零指令产出可直接放进文档、周报、公众号的图。支持把 Mermaid 源（.mmd/.mermaid/Markdown 代码块）重绘为中文标准图表；支持排队瓶颈、策略评估、安全铺路等语义模式与可选无障碍分步动效；内置 IT/云/K8s 单色图标库，支持终端外壳与深色档变体。当用户要求画架构图/流程图/看板/鱼骨图/根因分析/数据库/schema/依赖图/部署图/示意图/拓扑图/图表/diagram 且期望好看，要求转换/重绘 Mermaid 图，或要求加动效/分步动画、配图标、终端风格、深色/暗色模式时使用。Chinese diagram skill with built-in CJK typography for agent-authored standalone HTML/SVG.
 license: MIT
 metadata:
   version: "0.1.0"
@@ -70,11 +70,12 @@ metadata:
 | 控制项按执行位置分组 | **治理 / 控制清单** → 分层堆叠 |
 | 防御弥补先前缺口、残余风险向下传播 | **补偿分层** → 分层堆叠 |
 
-### 类型路由（32 内置）
+### 类型路由（33 内置）
 
 | 要画的是…… | 类型 | 参考 |
 |---|---|---|
 | 系统的组件与连接（架构 / 拓扑） | **架构图** | [type-architecture.md](references/type-architecture.md) |
+| 软件实际落位（环境 / 主机 / 副本 / 网络边界） | **部署图** | [type-deployment.md](references/type-deployment.md) |
 | 带分支的决策逻辑（流程图 / 决策 / 审批） | **流程图** | [type-flowchart.md](references/type-flowchart.md) |
 | 参与者之间按时间的消息（时序图 / 调用链 / 请求响应） | **时序图** | [type-sequence.md](references/type-sequence.md) |
 | 状态 + 转移 + 守卫（状态机 / 订单状态 / 生命周期） | **状态机** | [type-state.md](references/type-state.md) |
