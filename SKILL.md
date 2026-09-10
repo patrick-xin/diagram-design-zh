@@ -1,6 +1,6 @@
 ---
 name: diagram-design-zh
-description: 生成标准中文图表：架构图、流程图、示意图、拓扑图等，输出 standalone HTML/SVG，内置中文字体栈与 CJK 排版规则（字号下限、字距、中英混排），零指令产出可直接放进文档、周报、公众号的图。支持把 Mermaid 源（.mmd/.mermaid/Markdown 代码块）重绘为中文标准图表；支持排队瓶颈、策略评估、安全铺路等语义模式与可选无障碍分步动效；内置 IT/云/K8s 单色图标库，支持终端外壳与深色档变体。当用户要求画架构图/流程图/看板/鱼骨图/根因分析/数据库/schema/依赖图/部署图/示意图/拓扑图/图表/diagram 且期望好看，要求转换/重绘 Mermaid 图，或要求加动效/分步动画、配图标、终端风格、深色/暗色模式时使用。Chinese diagram skill with built-in CJK typography for agent-authored standalone HTML/SVG.
+description: 生成标准中文图表：架构图、流程图、示意图、拓扑图等，输出 standalone HTML/SVG，内置中文字体栈与 CJK 排版规则（字号下限、字距、中英混排），零指令产出可直接放进文档、周报、公众号的图。支持把 Mermaid 源（.mmd/.mermaid/Markdown 代码块）重绘为中文标准图表；支持排队瓶颈、策略评估、安全铺路等语义模式与可选无障碍分步动效；内置 IT/云/K8s 单色图标库，支持终端外壳与深色档变体。当用户要求画架构图/流程图/看板/鱼骨图/根因分析/数据库/schema/依赖图/部署图/用户旅程/故事地图/桑基图/极坐标图/UML 类图/Wardley 地图/示意图/拓扑图/图表/diagram 且期望好看，要求转换/重绘 Mermaid 图，或要求加动效/分步动画、配图标、终端风格、深色/暗色模式时使用。Chinese diagram skill with built-in CJK typography for agent-authored standalone HTML/SVG.
 license: MIT
 metadata:
   version: "0.1.0"
@@ -70,7 +70,7 @@ metadata:
 | 控制项按执行位置分组 | **治理 / 控制清单** → 分层堆叠 |
 | 防御弥补先前缺口、残余风险向下传播 | **补偿分层** → 分层堆叠 |
 
-### 类型路由（33 内置）
+### 类型路由（39 内置）
 
 | 要画的是…… | 类型 | 参考 |
 |---|---|---|
@@ -81,7 +81,9 @@ metadata:
 | 状态 + 转移 + 守卫（状态机 / 订单状态 / 生命周期） | **状态机** | [type-state.md](references/type-state.md) |
 | 实体 + 字段 + 关系（实体关系 / 数据模型 / schema） | **ER / 数据模型** | [type-er.md](references/type-er.md) |
 | 物理库结构（表 / 列类型 / 外键列到列 / ON DELETE 行为） | **数据库 schema** | [type-db-schema.md](references/type-db-schema.md) |
+| 类 / 接口 / 继承与组合词汇（UML / 静态结构 / 操作分格） | **UML 类图** | [type-uml-class.md](references/type-uml-class.md) |
 | 时间轴上的事件（时间线 / 里程碑 / 路线图节点） | **时间线** | [type-timeline.md](references/type-timeline.md) |
+| 一个人在各阶段的体验与感受（用户旅程 / 体验地图 / 情绪曲线） | **用户旅程** | [type-journey.md](references/type-journey.md) |
 | 跨职能流程与交接（泳道 / 跨部门流程 / 职责分工） | **泳道图** | [type-swimlane.md](references/type-swimlane.md) |
 | 双轴定位 / 优先级（象限 / 2×2） | **象限图** | [type-quadrant.md](references/type-quadrant.md) |
 | 增强回路 / 飞轮（运营循环，末步喂首步、hub 累积状态） | **飞轮** | [type-loop.md](references/type-loop.md) |
@@ -93,16 +95,20 @@ metadata:
 | 连续趋势随时间或次序（折线 / 走势 / 逐版本曲线） | **折线图** | [type-line.md](references/type-line.md) |
 | 两变量的分布与相关性（散点 / 聚类 / 离群点） | **散点图** | [type-scatter.md](references/type-scatter.md) |
 | 多实体 × 3–5 项量化评分（雷达 / 能力矩阵 / 选型卡） | **雷达图** | [type-radar.md](references/type-radar.md) |
+| 单序列环形有序类目（时辰 / 星期 / 月份分布） | **极坐标图** | [type-polar.md](references/type-polar.md) |
 | 集合交集与共性（维恩 / 交汇 / 复合角色） | **维恩图** | [type-venn.md](references/type-venn.md) |
 | 等级金字塔或转化漏斗（需求层级 / 逐层流失） | **金字塔 / 漏斗** | [type-pyramid.md](references/type-pyramid.md) |
+| 数量的分流与汇合（成本 / 算力 / 预算分配 / 量流） | **桑基图** | [type-sankey.md](references/type-sankey.md) |
 | 部分与整体、面积即故事（占比 / 存储占用 / 预算拆分） | **矩形树图** | [type-treemap.md](references/type-treemap.md) |
 | 通用父子层级（分类树 / 依赖树 / 文件树） | **树形图** | [type-tree.md](references/type-tree.md) |
+| 价值链 × 演进四档（自建还是外购 / 战略情景定位） | **Wardley 地图** | [type-wardley.md](references/type-wardley.md) |
 | 多亲汇聚与环（依赖结构 / 包依赖 / 扇入） | **依赖图** | [type-dependency.md](references/type-dependency.md) |
 | 谁拥有什么、上报与升级（组织 / 团队归属 / 路由） | **组织架构图** | [type-org-chart.md](references/type-org-chart.md) |
 | 包含关系划边界（作用域 / 信任域 / 波及范围） | **嵌套图** | [type-nested.md](references/type-nested.md) |
 | 容器集群上的端到端数据栈总览 | **数据栈全景图** | [type-high-level.md](references/type-high-level.md) |
 | 同一数据集的多质量层级（湖仓分层 / 裸→净→聚合） | **奖章架构** | [type-medallion.md](references/type-medallion.md) |
 | 在制工作的状态盘点（看板 / WIP 限 / 超限预警） | **看板** | [type-kanban.md](references/type-kanban.md) |
+| 叙事序 × 发布切片（Patton 故事地图 / 切首版范围） | **用户故事地图** | [type-story-map.md](references/type-story-map.md) |
 | 一果多因的结构化归因（鱼骨 / 石川图 / 事故复盘） | **鱼骨图** | [type-fishbone.md](references/type-fishbone.md) |
 | 现代化之前的存量 IT 版图（现状 / 痛点 / 手工交接） | **IT 现状图** | [type-it-state.md](references/type-it-state.md) |
 | 平台接入面与协议拓扑（源 → 平台 → 消费） | **数据平台集成图** | [type-dp-integration.md](references/type-dp-integration.md) |
