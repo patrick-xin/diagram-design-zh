@@ -439,3 +439,9 @@ entry_y(k) = target.cy - ((N - 1) / 2 - k) * 16     # 16px 等距、以中线对
 - [`assets/example-high-level.html`](../assets/example-high-level.html) — 纯横向、五阶段、调度条 + 统一身份底栏、浅色档
 - [`assets/example-high-level-dark.html`](../assets/example-high-level-dark.html) — 深色档（§6：换基 α 不动 + chevron 实色反转）
 - [`assets/example-high-level-full.html`](../assets/example-high-level-full.html) — full 页面级（subtitle / 三卡 / footer）
+- [`assets/example-high-level-vertical.html`](../assets/example-high-level-vertical.html) — 竖排变体：调度 / 安全挂右条竖排 chevron、可观测横贯底部——§2.9 右条语法的整图参考渲染
+- [`assets/example-high-level-vertical-dark.html`](../assets/example-high-level-vertical-dark.html) — 竖排变体深色档
+- [`assets/example-high-level-vertical-full.html`](../assets/example-high-level-vertical-full.html) — 竖排变体 full 页面级
+- [`assets/example-datalake.html`](../assets/example-datalake.html) — 直连变体：无容器编排边界，源 → 采集 → 湖 → 查询 → 消费五段直连，单一数据湖为焦点
+- [`assets/example-datalake-dark.html`](../assets/example-datalake-dark.html) — 直连变体深色档
+- [`assets/example-datalake-full.html`](../assets/example-datalake-full.html) — 直连变体 full 页面级

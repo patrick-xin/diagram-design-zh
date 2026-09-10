@@ -140,3 +140,6 @@
 - [`assets/example-sequence.html`](../assets/example-sequence.html) — 扫码点单链路：同步调用 / 自消息 / 异步回调 / 返回 / 焦点主线
 - [`assets/example-sequence-dark.html`](../assets/example-sequence-dark.html) — 深色档（对称换基 α 不动）
 - [`assets/example-sequence-full.html`](../assets/example-sequence-full.html) — full 页面级（副题 + 三卡 + 页脚）
+- [`assets/example-sequence-oauth.html`](../assets/example-sequence-oauth.html) — OAuth 变体：Bearer 调用 + alt 刷新片段（token 有效直达 200，过期刷新重试）
+- [`assets/example-sequence-oauth-dark.html`](../assets/example-sequence-oauth-dark.html) — OAuth 变体深色档
+- [`assets/example-sequence-oauth-full.html`](../assets/example-sequence-oauth-full.html) — OAuth 变体 full 页面级

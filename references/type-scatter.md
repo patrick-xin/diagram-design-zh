@@ -38,3 +38,11 @@
 - [`assets/example-scatter.html`](../assets/example-scatter.html) — 广告计划：展示量 × 转化率（焦点 = 超绩效离群计划）
 - [`assets/example-scatter-dark.html`](../assets/example-scatter-dark.html) — 深色档（对称换基 α 不动，焦点光晕提档 0.10）
 - [`assets/example-scatter-full.html`](../assets/example-scatter-full.html) — full 页面级（副题 + 三卡 + 页脚）
+
+### 气泡变体（Bubble）
+
+第三变量用**面积**编码（半径编码会把 6 倍服务画成 36 倍墨量）；轴自零起、大泡先画、纸底垫圈挡网格透色；焦点泡与母类型同档（accent 淡染 + accent 描边），普通泡 muted 淡染。面积感知不可靠——关键数字写进标签或正文，别让气泡大小单独承重。
+
+- [`assets/example-bubble.html`](../assets/example-bubble.html) — 九个服务 P95 时延 × 错误率，面积 ∝ 每秒请求数，payments 是风险焦点
+- [`assets/example-bubble-dark.html`](../assets/example-bubble-dark.html) — 深色档（对称换基 α 不动）
+- [`assets/example-bubble-full.html`](../assets/example-bubble-full.html) — full 页面级（副题 + 三卡 + 页脚）

@@ -72,3 +72,9 @@
 - [`assets/example-line.html`](../assets/example-line.html) — 近 12 周活跃用户趋势（三系列，焦点 = 付费版；首末点贴轴与网格右端）
 - [`assets/example-line-dark.html`](../assets/example-line-dark.html) — 深色档（§深色档换基）
 - [`assets/example-line-full.html`](../assets/example-line-full.html) — full 页面级（副题 + 三卡 + 页脚）
+- [`assets/example-slopegraph.html`](../assets/example-slopegraph.html) — 斜率图变体：缓存层前后五服务 P95 对比，Recommender 唯一劣化（两轴同刻度 100–550ms）
+- [`assets/example-slopegraph-dark.html`](../assets/example-slopegraph-dark.html) — 斜率图深色档
+- [`assets/example-slopegraph-full.html`](../assets/example-slopegraph-full.html) — 斜率图 full 页面级
+- [`assets/example-ridgeline.html`](../assets/example-ridgeline.html) — 嵓线图变体：五服务请求时延分布，checkout-api 在 300ms 外拖第二峰（各脊同幅 1% = 2.4px）
+- [`assets/example-ridgeline-dark.html`](../assets/example-ridgeline-dark.html) — 嵓线图深色档
+- [`assets/example-ridgeline-full.html`](../assets/example-ridgeline-full.html) — 嵓线图 full 页面级

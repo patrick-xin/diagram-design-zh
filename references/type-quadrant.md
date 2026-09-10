@@ -23,6 +23,9 @@
 ## 示例
 
 - [`assets/example-quadrant.html`](../assets/example-quadrant.html) — AI 自动化机会（影响力×工作量）
+- [`assets/example-quadrant-consultant.html`](../assets/example-quadrant-consultant.html) — 顾问式变体：2027 组织形态四情景，Agent 团队为主打赌注
+- [`assets/example-quadrant-consultant-dark.html`](../assets/example-quadrant-consultant-dark.html) — 顾问式深色档
+- [`assets/example-quadrant-consultant-full.html`](../assets/example-quadrant-consultant-full.html) — 顾问式 full 页面级
 
 ---
 
@@ -51,7 +54,7 @@
 ### 造型 token
 
 - **轴线**：`ink`，`stroke-width: 1.2`，`marker-start` + `marker-end` 双向朝外。
-- **焦点象限底衬**：`rgba(125,152,255,0.05)` 整格 rect 垫在最底层。
+- **焦点象限底衬**：`accent @ 0.05` 整格 rect 垫在最底层（深色档换基）。
 - **焦点格**：`accent-tint` 底 + `accent` 描边 1.2px；角标 `accent` · 600。
 - **非焦点格**：`store` 处理（`ink @ 0.05` 底 + `muted` 描边）。
 - **格标题**：sans 16px · 600 · `ink`。

@@ -221,3 +221,4 @@ SKILL.md §8 全部适用，除两个 Loop 专属连接原语：圆环弧（§2.
 - [`assets/example-loop.html`](../assets/example-loop.html) — 六站点增长飞轮 + 社区知识库 hub：免费产品 → 内容触达 → 注册激活 → 付费转化 → 收入再投入 → 产品变好。
 - [`assets/example-loop-dark.html`](../assets/example-loop-dark.html) — 深色档（§5 换基 + hub 实色反转）
 - [`assets/example-loop-full.html`](../assets/example-loop-full.html) — full 页面级（副题 + 三卡 + 页脚）
+- [`assets/example-loop-terminal.html`](../assets/example-loop-terminal.html) — 终端皮肤变体（单档）：同一飞轮换终端九 token 外壳，hub 实色 accent 反转

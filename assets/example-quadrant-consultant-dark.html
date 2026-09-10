@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2027 组织形态 · 远程 × AI · 象限图（顾问式）· 图表设计</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #0a0d1b;
+      --color-ink:     #e0e4ff;
+      --color-muted:   #a2a9ce;
+      --color-accent:  #7d98ff;
+      --font-sans:     'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+      --font-serif:    'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+      --font-mono:     'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+
+    .frame { max-width: 1200px; width: 100%; padding-left: 4%; }
+
+    .eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 3rem;
+    }
+
+    svg { width: 100%; min-width: 900px; display: block; overflow: visible; }
+
+.page-nav{display:flex;justify-content:space-between;align-items:center;margin:0 0 1.25rem}
+.back-link{font-family:var(--font-sans);font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--color-muted);text-decoration:none}
+.back-link:hover{color:var(--color-accent)}
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="page-nav"><a class="back-link" href="index.html">← 类型画廊</a><a class="back-link" href="https://github.com/patrick-xin/diagram-design-zh" target="_blank" rel="noopener">GitHub ↗</a></div>
+    <p class="eyebrow">象限图（顾问式）· 图表设计</p>
+    <h1>2027 组织形态 · 远程 × AI</h1>
+
+    <svg viewBox="0 0 1000 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="example-quadrant-consultant-dark-title example-quadrant-consultant-dark-desc">
+<title id="example-quadrant-consultant-dark-title">2027 组织形态 · 远程 × AI · 象限图（顾问式）· 图表设计</title>
+<desc id="example-quadrant-consultant-dark-desc">顾问式 2×2 情景矩阵：以远程到坐班、人力到 AI 两根双端轴框定四种组织未来——分布式团队、Agent 团队、经典办公室、智能园区，Agent 团队是主打赌注</desc>
+  <defs>
+    <marker id="example-quadrant-consultant-axis-end" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#e0e4ff"/></marker>
+    <marker id="example-quadrant-consultant-axis-start" markerWidth="9" markerHeight="7" refX="1" refY="3.5" orient="auto"><polygon points="9 0, 0 3.5, 9 7" fill="#e0e4ff"/></marker>
+  </defs>
+  <!-- 焦点象限底衬（TR） -->
+  <rect x="560" y="72" width="280" height="180" fill="rgba(125,152,255,0.05)"/>
+  <!-- 命名情景格：焦点格 accent，其余 store 处理 -->
+  <rect x="160" y="72" width="280" height="180" rx="6" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+  <text x="176" y="96" fill="#a2a9ce" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">01 · 远程 / 人力</text>
+  <text x="176" y="136" fill="#e0e4ff" font-size="16" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">分布式团队</text>
+  <text x="176" y="168" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">异步协作、全球招聘，</text>
+  <text x="176" y="184" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">流程靠人扛，</text>
+  <text x="176" y="200" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">AI 渗透率低。</text>
+  <rect x="560" y="72" width="280" height="180" rx="6" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1.2"/>
+  <text x="576" y="96" fill="#7d98ff" font-size="12" font-weight="600" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">02 · 远程 / AI</text>
+  <text x="576" y="136" fill="#e0e4ff" font-size="16" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">Agent 团队 <tspan fill="#7d98ff" font-size="13">●</tspan></text>
+  <text x="576" y="168" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">人做编排，AI 扛例行层，</text>
+  <text x="576" y="184" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">小而高效的核心团队，</text>
+  <text x="576" y="200" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">招聘竞争转向编排力。</text>
+  <rect x="160" y="348" width="280" height="180" rx="6" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+  <text x="176" y="372" fill="#a2a9ce" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">03 · 坐班 / 人力</text>
+  <text x="176" y="412" fill="#e0e4ff" font-size="16" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">经典办公室</text>
+  <text x="176" y="444" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">强制返岗、手工流程，</text>
+  <text x="176" y="460" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">惯性延续现状，</text>
+  <text x="176" y="476" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">组织变革成本最高。</text>
+  <rect x="560" y="348" width="280" height="180" rx="6" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+  <text x="576" y="372" fill="#a2a9ce" font-size="12" font-weight="500" letter-spacing="0.3em" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">04 · 坐班 / AI</text>
+  <text x="576" y="412" fill="#e0e4ff" font-size="16" font-weight="600" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">智能园区</text>
+  <text x="576" y="444" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">智能办公空间，</text>
+  <text x="576" y="460" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">现场协作由 AI 辅助，</text>
+  <text x="576" y="476" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">重资产路线。</text>
+  <!-- 轴：双端箭头、1.2px，十字从格间穿过 -->
+  <line x1="500" y1="40" x2="500" y2="560" stroke="#e0e4ff" stroke-width="1.2" marker-start="url(#example-quadrant-consultant-axis-start)" marker-end="url(#example-quadrant-consultant-axis-end)"/>
+  <line x1="120" y1="300" x2="880" y2="300" stroke="#e0e4ff" stroke-width="1.2" marker-start="url(#example-quadrant-consultant-axis-start)" marker-end="url(#example-quadrant-consultant-axis-end)"/>
+  <text x="500" y="28" fill="#e0e4ff" font-size="12" font-weight="500" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">远程</text>
+  <text x="500" y="580" fill="#e0e4ff" font-size="12" font-weight="500" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">坐班</text>
+  <text x="108" y="300" fill="#e0e4ff" font-size="12" font-weight="500" text-anchor="end" dominant-baseline="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">人力</text>
+  <text x="892" y="300" fill="#e0e4ff" font-size="12" font-weight="500" text-anchor="start" dominant-baseline="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">AI</text>
+  <!-- 图例 -->
+  <line x1="0" y1="636" x2="1000" y2="636" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+  <text x="0" y="654" font-size="10" fill="#a2a9ce" letter-spacing="0.1em" font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace">图例</text>
+  <rect x="72" y="644" width="16" height="12" rx="2" fill="rgba(125,152,255,0.10)" stroke="#7d98ff" stroke-width="1.2"/>
+  <text x="96" y="654" font-size="10" fill="#a2a9ce" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">主打赌注</text>
+  <rect x="184" y="644" width="16" height="12" rx="2" fill="rgba(224,228,255,0.05)" stroke="rgba(162,169,206,0.60)" stroke-width="1"/>
+  <text x="208" y="654" font-size="10" fill="#a2a9ce" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">候选情景</text>
+  <text x="1000" y="654" font-size="10" fill="#a2a9ce" text-anchor="end" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">四格全命名 · 轴承区间 · accent 格即承诺</text>
+</svg>
+  </div>
+</body>
+</html>
