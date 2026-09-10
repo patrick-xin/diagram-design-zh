@@ -386,7 +386,10 @@ def check_colors(source: str, errors: list[str]) -> None:
             "或语义色族，不许自造颜色"
         )
     terminal = sorted(k.split(":", 1)[1] for k in kept if k.startswith("terminal:"))
-    is_terminal = 'class="terminal"' in source or "terminal-page" in source
+    is_terminal = (
+        'class="terminal"' in source or "terminal-page" in source
+        or "data-gallery-index" in source  # 画廊页内联终端皮肤缩略属跨图展示
+    )
     if terminal and not is_terminal:
         errors.append(
             f"终端灰阶 {terminal} 用在非终端文件——终端色系只属于终端外壳"
@@ -720,6 +723,7 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
     # <g transform="translate()"> 内的坐标按累计偏移换算。
     surfaces: list[tuple[float, float, float, float]] = []
     endpoint_specs: list[tuple[float, float, str, str]] = []
+    lifelines: list[float] = []  # 竖直虚线 = 时序生命线（消息端点的合法附着面）
 
     def _apply(tx: float, ty: float, nums: list[float]) -> list[float]:
         return [nums[0] + tx, nums[1] + ty]
@@ -767,6 +771,8 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
             x1, y1, x2, y2 = (float(c.group(1)) for c in coords.values())
             if abs(y1 - y2) < 0.5 and abs(x2 - x1) > 500 and "0.10" in tag:
                 continue  # 图例贯通线
+            if abs(x1 - x2) < 0.5 and "stroke-dasharray" in tag:
+                lifelines.append(x1 + tx)  # 时序生命线：竖直虚线
             endpoint_specs.append((x1 + tx, y1 + ty, "起", tag, current_vb))
             endpoint_specs.append((x2 + tx, y2 + ty, "终", tag, current_vb))
         elif tag.startswith("<path"):
@@ -791,6 +797,8 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
     if "data-gallery-index" in source:  # 画廊页：跨图端点/容器互不相干，见堆叠检查处注释
         endpoint_specs = []
     for (px, py, kind, tag_src, _vb) in endpoint_specs:
+        if any(abs(px - lx) <= 8 for lx in lifelines):
+            continue  # 时序消息端点贴生命线/激活条（组合片段框内的消息线首例所立）
         holders = [
             (x, y, w, h) for (x, y, w, h, _b) in surfaces
             if x - 1 <= px <= x + w + 1 and y - 1 <= py <= y + h + 1
