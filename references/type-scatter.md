@@ -46,3 +46,11 @@
 - [`assets/example-bubble.html`](../assets/example-bubble.html) — 九个服务 P95 时延 × 错误率，面积 ∝ 每秒请求数，payments 是风险焦点
 - [`assets/example-bubble-dark.html`](../assets/example-bubble-dark.html) — 深色档（对称换基 α 不动）
 - [`assets/example-bubble-full.html`](../assets/example-bubble-full.html) — full 页面级（副题 + 三卡 + 页脚）
+
+### 蜂群变体（Beeswarm）
+
+单变量的逐样本分布——**一点 = 一条记录**，值落在共享横值轴上：自 0 起、**铺满 0→1000**（单横值轴、无左轴列，左缘即标题线；style-guide「容器对齐与画布基线」），首尾刻度 start/end 锚防溢出。纵向散开只是避让排布（10px 行格，同行间距 ≥ 9），**不承载数值——不画横向网格线**：横线会诱导把行距读成第二个变量。半径统一 r=4——点大小编码第三变量是气泡变体的活，两套编码不混用；常规点随散点档（muted@0.20 + 纸底垫圈挡网格透色）；尾部 / 离群一组 = 焦点（r=5、accent@0.15 + 1.4 描边、遮罩标签点名，≤ 1 组）。单序列走底部口径线（polar 先例），无图例条。「中位数藏住了尾部」是它的招牌故事——保住每条记录的粒度是蜂群对直方图的全部优势；样本 300+ 挤成一堵墙时改直方图。
+
+- [`assets/example-beeswarm.html`](../assets/example-beeswarm.html) — 下单接口 138 个请求的单请求延迟分布，3 个 > 440 ms 的 p99 尾部是焦点
+- [`assets/example-beeswarm-dark.html`](../assets/example-beeswarm-dark.html) — 深色档（对称换基 α 不动，垫圈随纸面换档）
+- [`assets/example-beeswarm-full.html`](../assets/example-beeswarm-full.html) — full 页面级（三卡 + 页脚）
