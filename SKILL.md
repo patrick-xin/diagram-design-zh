@@ -1,6 +1,6 @@
 ---
 name: diagram-design-zh
-description: 生成标准中文图表：架构图、流程图、示意图、拓扑图等，输出 standalone HTML/SVG，内置中文字体栈与 CJK 排版规则（字号下限、字距、中英混排），零指令产出可直接放进文档、周报、公众号的图。支持把 Mermaid 源（.mmd/.mermaid/Markdown 代码块）重绘为中文标准图表；支持排队瓶颈、策略评估、安全铺路等语义模式与可选无障碍分步动效；内置 IT/云/K8s 单色图标库，支持终端外壳与深色档变体。当用户要求画架构图/流程图/看板/鱼骨图/根因分析/数据库/schema/依赖图/部署图/用户旅程/故事地图/桑基图/极坐标图/UML 类图/Wardley 地图/示意图/拓扑图/图表/diagram 且期望好看，要求转换/重绘 Mermaid 图，或要求加动效/分步动画、配图标、终端风格、深色/暗色模式时使用。Chinese diagram skill with built-in CJK typography for agent-authored standalone HTML/SVG.
+description: 生成标准中文图表：架构图、流程图、示意图、拓扑图等，输出 standalone HTML/SVG，内置中文字体栈与 CJK 排版规则（字号下限、字距、中英混排），零指令产出可直接放进文档、周报、公众号的图。支持把 Mermaid 源（.mmd/.mermaid/Markdown 代码块）重绘为中文标准图表；支持排队瓶颈、策略评估、安全铺路等语义模式与可选无障碍分步动效；内置 IT/云/K8s 单色图标库，支持终端外壳与深色档变体。当用户要求画架构图/流程图/看板/鱼骨图/根因分析/数据库/schema/依赖图/部署图/用户旅程/故事地图/桑基图/极坐标图/UML 类图/Wardley 地图/瀑布图/示意图/拓扑图/图表/diagram 且期望好看，要求转换/重绘 Mermaid 图，或要求加动效/分步动画、配图标、终端风格、深色/暗色模式时使用。Chinese diagram skill with built-in CJK typography for agent-authored standalone HTML/SVG.
 license: MIT
 metadata:
   version: "0.1.0"
@@ -70,7 +70,7 @@ metadata:
 | 控制项按执行位置分组 | **治理 / 控制清单** → 分层堆叠 |
 | 防御弥补先前缺口、残余风险向下传播 | **补偿分层** → 分层堆叠 |
 
-### 类型路由（39 内置）
+### 类型路由（40 内置）
 
 | 要画的是…… | 类型 | 参考 |
 |---|---|---|
@@ -92,6 +92,7 @@ metadata:
 | 多角色串行流程，载荷与工具并重（端到端工作流） | **流程** | [type-process.md](references/type-process.md) |
 | 任务与阶段排在时间上（甘特 / 排期 / 并行计划） | **甘特图** | [type-gantt.md](references/type-gantt.md) |
 | 离散数量跨类目比较（柱状 / 对比 / 吞吐） | **柱状图** | [type-bar.md](references/type-bar.md) |
+| 期初总量经带符号分步走到期末（预算桥 / 成本桥 / 增减走账） | **瀑布图** | [type-waterfall.md](references/type-waterfall.md) |
 | 连续趋势随时间或次序（折线 / 走势 / 逐版本曲线） | **折线图** | [type-line.md](references/type-line.md) |
 | 两变量的分布与相关性（散点 / 聚类 / 离群点） | **散点图** | [type-scatter.md](references/type-scatter.md) |
 | 多实体 × 3–5 项量化评分（雷达 / 能力矩阵 / 选型卡） | **雷达图** | [type-radar.md](references/type-radar.md) |

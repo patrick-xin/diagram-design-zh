@@ -213,7 +213,7 @@
     </div>
     <header class="header">
       <h1>类型画廊</h1>
-      <p class="subtitle">39 个内置类型与变体、导入与动效示例，每个都是开箱即锚点的中文成品页。点缩略图开标准档，卡片右上角进深色档与完整版。</p>
+      <p class="subtitle">40 个内置类型与变体、导入与动效示例，每个都是开箱即锚点的中文成品页。点缩略图开标准档，卡片右上角进深色档与完整版。</p>
       <p class="install"><code>npx skills add https://github.com/patrick-xin/diagram-design-zh --skill diagram-design-zh</code></p>
     </header>
     <section class="cat">
@@ -5860,7 +5860,7 @@
       </div>
     </section>
     <section class="cat">
-      <h2>数据图表<span class="count">10</span></h2>
+      <h2>数据图表<span class="count">11</span></h2>
       <div class="grid">
       <div class="card">
         <div class="meta">
@@ -6299,6 +6299,181 @@
   <circle cx="314" cy="514" r="3" fill="rgba(224,228,255,0.60)"/>
   <text x="336" y="518" font-size="10" fill="#a2a9ce" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">其余服务 · 深浅按改造前基线</text>
   <text x="1000" y="518" font-size="10" fill="#a2a9ce" text-anchor="end" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif">两轴同刻度 100–550ms · 示意数据</text>
+</svg></a>
+      </div>
+      <div class="card">
+        <div class="meta">
+          <p class="name"><a href="example-waterfall.html" data-std="example-waterfall.html" data-dark="example-waterfall-dark.html">瀑布图</a><span class="lnk"><a href="example-waterfall-dark.html">深色</a> · <a href="example-waterfall-full.html">完整版</a></span></p>
+          <p class="desc">期初总量经带符号分步走到期末</p>
+        </div>
+        <a class="thumb" href="example-waterfall.html" data-std="example-waterfall.html" data-dark="example-waterfall-dark.html" title="瀑布图——标准档" aria-label="瀑布图 示例">
+<svg class="std-copy" aria-hidden="true" style="width:100%;height:100%" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="gwaterfall-title gwaterfall-desc">
+<title id="gwaterfall-example-waterfall-title">云成本预算桥 · 2025 → 2026</title>
+<desc id="gwaterfall-example-waterfall-desc">瀑布图：2025 年月度云成本基线 240 千元，经扩容增配 +64、预留实例 -40、AI 训练负载 +24、存储分层 -52 四步桥接，汇至 2026 计划 236 千元；存储分层为最大降幅焦点。</desc>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- y 轴题（竖排，基线补偿 x=12） -->
+  <text transform="rotate(-90 12 190)" x="12" y="190" fill="#565e7e" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" letter-spacing="0.3em" text-anchor="middle">月度云成本（千元/月）</text>
+
+  <!-- 网格线（极淡，画在柱下） -->
+  <line x1="80" y1="20"  x2="960" y2="20"  stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+  <line x1="80" y1="80"  x2="960" y2="80"  stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+  <line x1="80" y1="140" x2="960" y2="140" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+  <line x1="80" y1="200" x2="960" y2="200" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+  <line x1="80" y1="260" x2="960" y2="260" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+  <line x1="80" y1="320" x2="960" y2="320" stroke="rgba(41,49,79,0.08)" stroke-width="0.8"/>
+
+  <!-- 轴线：y 轴顶贴 0，x 轴基线 380（总量锚底） -->
+  <line x1="80" y1="0"   x2="80"  y2="380" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+  <line x1="80" y1="380" x2="960" y2="380" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
+
+  <!-- y 轴刻度（纯数字 mono 9px，右对齐 x=48） -->
+  <text x="48" y="384" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">0</text>
+  <text x="48" y="324" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">60</text>
+  <text x="48" y="264" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">120</text>
+  <text x="48" y="204" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">180</text>
+  <text x="48" y="144" fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">240</text>
+  <text x="48" y="84"  fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">300</text>
+  <text x="48" y="24"  fill="#565e7e" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">360</text>
+
+  <!-- carry 线：传运累计值，柱边到柱边，画在柱下 -->
+  <line x1="160" y1="140" x2="232" y2="140" stroke="rgba(41,49,79,0.50)" stroke-width="1"/>
+  <line x1="304" y1="76"  x2="376" y2="76"  stroke="rgba(41,49,79,0.50)" stroke-width="1"/>
+  <line x1="448" y1="116" x2="520" y2="116" stroke="rgba(41,49,79,0.50)" stroke-width="1"/>
+  <line x1="592" y1="92"  x2="664" y2="92"  stroke="rgba(41,49,79,0.50)" stroke-width="1"/>
+  <line x1="736" y1="144" x2="808" y2="144" stroke="rgba(41,49,79,0.50)" stroke-width="1"/>
+
+  <!-- 柱（宽 72 / 步距 144 / 首柱 x=88）。累计：240 → 304 → 264 → 288 → 236 → 236 -->
+  <!-- 2025 基线：总量 240，锚底 -->
+  <rect x="88" y="140" width="72" height="240" fill="rgba(41,49,79,0.18)" stroke="#565e7e" stroke-width="1"/>
+  <!-- 扩容增配：+64，自 240 升至 304 -->
+  <rect x="232" y="76" width="72" height="64" fill="rgba(86,94,126,0.15)" stroke="#565e7e" stroke-width="1"/>
+  <!-- 预留实例：-40，自 304 降至 264（hollow = 降） -->
+  <rect x="376" y="76" width="72" height="40" fill="#ffffff" stroke="#565e7e" stroke-width="1"/>
+  <!-- AI 训练负载：+24，自 264 升至 288 -->
+  <rect x="520" y="92" width="72" height="24" fill="rgba(86,94,126,0.15)" stroke="#565e7e" stroke-width="1"/>
+  <!-- 存储分层（焦点）：-52，自 288 降至 236，最大降幅 -->
+  <rect x="664" y="92" width="72" height="52" fill="rgba(26,77,217,0.12)" stroke="#1a4dd9" stroke-width="1"/>
+  <!-- 2026 计划：总量 236 = 240 + 64 - 40 + 24 - 52，锚底 -->
+  <rect x="808" y="144" width="72" height="236" fill="rgba(41,49,79,0.18)" stroke="#565e7e" stroke-width="1"/>
+
+  <!-- 数值标签：总量与增印柱顶上方，降印柱底下方（上方是 carry 到达位） -->
+  <text x="124" y="132" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">240</text>
+  <text x="268" y="68"  fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">+64</text>
+  <text x="412" y="128" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">-40</text>
+  <text x="556" y="84"  fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">+24</text>
+  <text x="700" y="140" fill="#1a4dd9" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">-52</text>
+  <text x="844" y="136" fill="#565e7e" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">236</text>
+
+  <!-- x 轴类目标签（基线 = 轴 + 24） -->
+  <text x="124" y="404" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">2025 基线</text>
+  <text x="268" y="404" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">扩容增配</text>
+  <text x="412" y="404" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">预留实例</text>
+  <text x="556" y="404" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">AI 训练负载</text>
+  <text x="700" y="404" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储分层</text>
+  <text x="844" y="404" fill="#29314f" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">2026 计划</text>
+
+  <!-- 图例条：分隔线距类目底 56 -->
+  <line x1="0" y1="460" x2="1000" y2="460" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
+  <text x="0" y="478" fill="#565e7e" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+
+  <rect x="72" y="468" width="16" height="12" rx="2" fill="rgba(41,49,79,0.18)" stroke="#565e7e" stroke-width="1"/>
+  <text x="96" y="478" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">期初 / 期末总量</text>
+
+  <rect x="240" y="468" width="16" height="12" rx="2" fill="rgba(86,94,126,0.15)" stroke="#565e7e" stroke-width="1"/>
+  <text x="264" y="478" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">成本增加</text>
+
+  <rect x="392" y="468" width="16" height="12" rx="2" fill="#ffffff" stroke="#565e7e" stroke-width="1"/>
+  <text x="416" y="478" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">成本减少</text>
+
+  <rect x="528" y="468" width="16" height="12" rx="2" fill="rgba(26,77,217,0.12)" stroke="#1a4dd9" stroke-width="1"/>
+  <text x="552" y="478" fill="#565e7e" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储分层 · 最大降幅</text>
+
+  <text x="1000" y="478" fill="#565e7e" font-size="10" text-anchor="end" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">单位：千元 / 月 · 示意数据</text>
+</svg>
+<svg class="dark-copy" aria-hidden="true" style="width:100%;height:100%" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="gwaterfalld-title gwaterfalld-desc">
+<title id="gwaterfalld-example-waterfall-dark-title">云成本预算桥 · 2025 → 2026</title>
+<desc id="gwaterfalld-example-waterfall-dark-desc">瀑布图：2025 年月度云成本基线 240 千元，经扩容增配 +64、预留实例 -40、AI 训练负载 +24、存储分层 -52 四步桥接，汇至 2026 计划 236 千元；存储分层为最大降幅焦点。</desc>
+  <rect width="100%" height="100%" fill="#0a0d1b"/>
+
+  <!-- y 轴题（竖排，基线补偿 x=12） -->
+  <text transform="rotate(-90 12 190)" x="12" y="190" fill="#a2a9ce" font-size="12" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" letter-spacing="0.3em" text-anchor="middle">月度云成本（千元/月）</text>
+
+  <!-- 网格线（极淡，画在柱下） -->
+  <line x1="80" y1="20"  x2="960" y2="20"  stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+  <line x1="80" y1="80"  x2="960" y2="80"  stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+  <line x1="80" y1="140" x2="960" y2="140" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+  <line x1="80" y1="200" x2="960" y2="200" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+  <line x1="80" y1="260" x2="960" y2="260" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+  <line x1="80" y1="320" x2="960" y2="320" stroke="rgba(224,228,255,0.08)" stroke-width="0.8"/>
+
+  <!-- 轴线：y 轴顶贴 0，x 轴基线 380（总量锚底） -->
+  <line x1="80" y1="0"   x2="80"  y2="380" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+  <line x1="80" y1="380" x2="960" y2="380" stroke="rgba(224,228,255,0.30)" stroke-width="1"/>
+
+  <!-- y 轴刻度（纯数字 mono 9px，右对齐 x=48） -->
+  <text x="48" y="384" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">0</text>
+  <text x="48" y="324" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">60</text>
+  <text x="48" y="264" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">120</text>
+  <text x="48" y="204" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">180</text>
+  <text x="48" y="144" fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">240</text>
+  <text x="48" y="84"  fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">300</text>
+  <text x="48" y="24"  fill="#a2a9ce" font-size="9" text-anchor="end" font-family="'Sarasa Mono SC', ui-monospace, monospace">360</text>
+
+  <!-- carry 线：传运累计值，柱边到柱边，画在柱下 -->
+  <line x1="160" y1="140" x2="232" y2="140" stroke="rgba(224,228,255,0.50)" stroke-width="1"/>
+  <line x1="304" y1="76"  x2="376" y2="76"  stroke="rgba(224,228,255,0.50)" stroke-width="1"/>
+  <line x1="448" y1="116" x2="520" y2="116" stroke="rgba(224,228,255,0.50)" stroke-width="1"/>
+  <line x1="592" y1="92"  x2="664" y2="92"  stroke="rgba(224,228,255,0.50)" stroke-width="1"/>
+  <line x1="736" y1="144" x2="808" y2="144" stroke="rgba(224,228,255,0.50)" stroke-width="1"/>
+
+  <!-- 柱（宽 72 / 步距 144 / 首柱 x=88）。累计：240 → 304 → 264 → 288 → 236 → 236 -->
+  <!-- 2025 基线：总量 240，锚底（总量=ink 基@0.18 重档，描边随家族 muted 实色） -->
+  <rect x="88" y="140" width="72" height="240" fill="rgba(224,228,255,0.18)" stroke="#a2a9ce" stroke-width="1"/>
+  <!-- 扩容增配：+64，自 240 升至 304 -->
+  <rect x="232" y="76" width="72" height="64" fill="rgba(162,169,206,0.15)" stroke="#a2a9ce" stroke-width="1"/>
+  <!-- 预留实例：-40，自 304 降至 264（hollow = 降，纸底随纸面换档） -->
+  <rect x="376" y="76" width="72" height="40" fill="#0a0d1b" stroke="#a2a9ce" stroke-width="1"/>
+  <!-- AI 训练负载：+24，自 264 升至 288 -->
+  <rect x="520" y="92" width="72" height="24" fill="rgba(162,169,206,0.15)" stroke="#a2a9ce" stroke-width="1"/>
+  <!-- 存储分层（焦点）：-52，自 288 降至 236，最大降幅 -->
+  <rect x="664" y="92" width="72" height="52" fill="rgba(125,152,255,0.12)" stroke="#7d98ff" stroke-width="1"/>
+  <!-- 2026 计划：总量 236 = 240 + 64 - 40 + 24 - 52，锚底 -->
+  <rect x="808" y="144" width="72" height="236" fill="rgba(224,228,255,0.18)" stroke="#a2a9ce" stroke-width="1"/>
+
+  <!-- 数值标签：总量与增印柱顶上方，降印柱底下方（上方是 carry 到达位） -->
+  <text x="124" y="132" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">240</text>
+  <text x="268" y="68"  fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">+64</text>
+  <text x="412" y="128" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">-40</text>
+  <text x="556" y="84"  fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">+24</text>
+  <text x="700" y="140" fill="#7d98ff" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">-52</text>
+  <text x="844" y="136" fill="#a2a9ce" font-size="9" text-anchor="middle" font-family="'Sarasa Mono SC', ui-monospace, monospace">236</text>
+
+  <!-- x 轴类目标签（基线 = 轴 + 24） -->
+  <text x="124" y="404" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">2025 基线</text>
+  <text x="268" y="404" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">扩容增配</text>
+  <text x="412" y="404" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">预留实例</text>
+  <text x="556" y="404" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">AI 训练负载</text>
+  <text x="700" y="404" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储分层</text>
+  <text x="844" y="404" fill="#e0e4ff" font-size="12" font-weight="600" text-anchor="middle" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">2026 计划</text>
+
+  <!-- 图例条：分隔线距类目底 56 -->
+  <line x1="0" y1="460" x2="1000" y2="460" stroke="rgba(224,228,255,0.10)" stroke-width="0.8"/>
+  <text x="0" y="478" fill="#a2a9ce" font-size="10" letter-spacing="0.1em" font-family="'Sarasa Mono SC', ui-monospace, monospace">图例</text>
+
+  <rect x="72" y="468" width="16" height="12" rx="2" fill="rgba(224,228,255,0.18)" stroke="#a2a9ce" stroke-width="1"/>
+  <text x="96" y="478" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">期初 / 期末总量</text>
+
+  <rect x="240" y="468" width="16" height="12" rx="2" fill="rgba(162,169,206,0.15)" stroke="#a2a9ce" stroke-width="1"/>
+  <text x="264" y="478" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">成本增加</text>
+
+  <rect x="392" y="468" width="16" height="12" rx="2" fill="#0a0d1b" stroke="#a2a9ce" stroke-width="1"/>
+  <text x="416" y="478" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">成本减少</text>
+
+  <rect x="528" y="468" width="16" height="12" rx="2" fill="rgba(125,152,255,0.12)" stroke="#7d98ff" stroke-width="1"/>
+  <text x="552" y="478" fill="#a2a9ce" font-size="10" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">存储分层 · 最大降幅</text>
+
+  <text x="1000" y="478" fill="#a2a9ce" font-size="10" text-anchor="end" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif">单位：千元 / 月 · 示意数据</text>
 </svg></a>
       </div>
       <div class="card">
