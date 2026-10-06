@@ -1,0 +1,14 @@
+{
+  "label": "新中式 · 漆器暗（定制）",
+  "source": "references/skin-xinzhongshi.md §7",
+  "note": "定制暗黑国风：墨黑底 + 淡宣纸字 + 亮朱砂 + 描金（黑地漆器风）。焦点取亮朱砂——与语义安全红拉开色距（46/49，阈值 40），朱砂身份不换只提明度；描金借用 link 槽位承载。",
+  "colors": {
+    "paper": "#16130e",
+    "paper-2": "#201b12",
+    "ink": "#efe7d6",
+    "muted": "#c8bda3",
+    "soft": "rgba(239,231,214,0.50)",
+    "accent": "#e85f4e",
+    "link": "#d8b66a"
+  }
+}

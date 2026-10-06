@@ -1,0 +1,13 @@
+{
+  "label": "新中式 · 墨印签",
+  "source": "references/skin-xinzhongshi.md",
+  "note": "值替换近似：钤印/题签/朱批/黛蓝 link 是生成时语义，reskin 不实现，只换得动色板。soft 本身就是带 α 的淡墨（0.55）。暂无深色档——深色成品保持默认并告警。",
+  "colors": {
+    "paper": "#f6f2e9",
+    "paper-2": "#ede7d9",
+    "ink": "#322f2a",
+    "muted": "#5a564d",
+    "soft": "rgba(50,47,42,0.55)",
+    "accent": "#c3272b"
+  }
+}

@@ -1,0 +1,56 @@
+# 散点图（Scatter）
+
+**最适合**：相关性与分布——两个连续变量互投。变量间的关系（或无关）是信息本体，或要识别聚类、离群点、高低绩效时用。
+
+## 布局惯例
+
+- **绘图区贴满画布**：y 轴在 x=40、x 轴右缘到 1000；左侧从外到内三列——竖排轴题（rotate −90°，x=6 列贴 x=0，左缘即页面/图例对齐线）、刻度数字右对齐贴轴（x=32）、轴线。轴题与数字留 ~14px、数字与轴 8px。
+- **轴名放轴外，不放表内**：竖排轴外最左、垂直居中于轴（y=画布绘图区中点）；横轴名在刻度下方 16px、右缘对齐。不居中压轴顶——那需要顶部标签带 + 轴右移半标签宽的整体重排，仅用户点名时按此配方执行。
+- **点数**：5–30 个。更少 → 用一段话说清关系；更多 → 分箱成密度轮廓。
+- **轴**：y 轴 x=40 起于 y=0（顶贴）、x 轴基线贴最下网格。刻度标签 mono 9px（横轴首尾刻度用 start/end 锚防溢出）；每轴 4–6 条等距网格线（`ink @ 0.08`）。
+- **点形**：`<circle>` 常规 r=5，焦点 r=6。焦点点 `accent-tint` 填充 + `accent` 描边；其余 `muted @ 0.20` 填充 + `muted` 描边。
+- **轴名**：一个词， mono 9px（拉丁）或 sans 12px（中文），放轴端外侧——同象限图的极简轴标签纪律。
+- **点标签（可选）**：点旁 mono 9px 或中文 sans 12px，标签下垫 paper 色遮罩。至多标 2–3 个点，不许全标。
+- **趋势线（可选）**：左下到右上的 `<line>`，`ink @ 0.30` 虚线 4,3。趋势不显然就不画——硬拟合是撒谎。
+- **象限分割线（可选）**：中位数 x / y 上的淡虚线，把绘图区切四块；每块可配一个中文 sans 12px `muted` 象限名。
+
+### 点元素范式
+
+```svg
+<!-- 常规点 -->
+<circle cx="X" cy="Y" r="5" fill="rgba(86,94,126,0.20)" stroke="#565e7e" stroke-width="1"/>
+
+<!-- 焦点点（含光晕） -->
+<circle cx="X" cy="Y" r="10" fill="rgba(26,77,217,0.08)"/>
+<circle cx="X" cy="Y" r="6" fill="rgba(26,77,217,0.15)" stroke="#1a4dd9" stroke-width="1.4"/>
+```
+
+## 反模式
+
+- 超过 30 个点不做聚类处理（抖成一团）。
+- 数据真的散还硬画趋势线——不诚实。
+- 每个点都贴标签（只标焦点 + 1–2 个值得注意的离群点）。
+- 气泡大小编码第三变量（面积感知不可靠；改用标签或颜色说明）。
+- 绝对位置重要时轴不含零；量程很小且远离零时轴却硬含零。
+
+## 示例
+
+- [`assets/example-scatter.html`](../assets/example-scatter.html) — 广告计划：展示量 × 转化率（焦点 = 超绩效离群计划）
+- [`assets/example-scatter-dark.html`](../assets/example-scatter-dark.html) — 深色档（对称换基 α 不动，焦点光晕提档 0.10）
+- [`assets/example-scatter-full.html`](../assets/example-scatter-full.html) — full 页面级（副题 + 三卡 + 页脚）
+
+### 气泡变体（Bubble）
+
+第三变量用**面积**编码（半径编码会把 6 倍服务画成 36 倍墨量）；轴自零起、大泡先画、纸底垫圈挡网格透色；焦点泡与母类型同档（accent 淡染 + accent 描边），普通泡 muted 淡染。面积感知不可靠——关键数字写进标签或正文，别让气泡大小单独承重。
+
+- [`assets/example-bubble.html`](../assets/example-bubble.html) — 九个服务 P95 时延 × 错误率，面积 ∝ 每秒请求数，payments 是风险焦点
+- [`assets/example-bubble-dark.html`](../assets/example-bubble-dark.html) — 深色档（对称换基 α 不动）
+- [`assets/example-bubble-full.html`](../assets/example-bubble-full.html) — full 页面级（副题 + 三卡 + 页脚）
+
+### 蜂群变体（Beeswarm）
+
+单变量的逐样本分布——**一点 = 一条记录**，值落在共享横值轴上：自 0 起、**铺满 0→1000**（单横值轴、无左轴列，左缘即标题线；style-guide「容器对齐与画布基线」），首尾刻度 start/end 锚防溢出。纵向散开只是避让排布（10px 行格，同行间距 ≥ 9），**不承载数值——不画横向网格线**：横线会诱导把行距读成第二个变量。半径统一 r=4——点大小编码第三变量是气泡变体的活，两套编码不混用；常规点随散点档（muted@0.20 + 纸底垫圈挡网格透色）；尾部 / 离群一组 = 焦点（r=5、accent@0.15 + 1.4 描边、遮罩标签点名，≤ 1 组）。单序列走底部口径线（polar 先例），无图例条。「中位数藏住了尾部」是它的招牌故事——保住每条记录的粒度是蜂群对直方图的全部优势；样本 300+ 挤成一堵墙时改直方图。
+
+- [`assets/example-beeswarm.html`](../assets/example-beeswarm.html) — 下单接口 138 个请求的单请求延迟分布，3 个 > 440 ms 的 p99 尾部是焦点
+- [`assets/example-beeswarm-dark.html`](../assets/example-beeswarm-dark.html) — 深色档（对称换基 α 不动，垫圈随纸面换档）
+- [`assets/example-beeswarm-full.html`](../assets/example-beeswarm-full.html) — full 页面级（三卡 + 页脚）

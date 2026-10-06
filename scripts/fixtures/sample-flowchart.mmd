@@ -1,0 +1,22 @@
+flowchart LR
+  subgraph edge["接入层"]
+    web["Web 控制台"]
+    mobile(["移动 App"])
+  end
+
+  subgraph core["核心服务"]
+    gateway("API 网关")
+    decision{"令牌有效？"}
+    orders["订单服务"]
+    store[("Postgres")]
+  end
+
+  web -->|HTTPS| gateway
+  mobile -- HTTPS --> gateway
+  gateway --> decision
+  decision -->|是| orders
+  decision -->|否| gateway
+  gateway -.-> gateway
+  orders ==> store
+
+  note["遗留备注 — 未连接"]
