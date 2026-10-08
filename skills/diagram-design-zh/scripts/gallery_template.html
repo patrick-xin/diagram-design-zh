@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="zh-CN" data-gallery-index>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>类型画廊 · diagram-design-zh</title>
+<style>
+  :root {
+    --font-sans:  'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+    --font-serif: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+    --font-mono:  'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
+    --paper: #ffffff; --paper-2: #f3f2ff;
+    --ink: #29314f; --muted: #565e7e; --soft: #8f94ab;
+    --rule: rgba(41,49,79,0.10);
+    --accent: #1a4dd9; --accent-tint: rgba(26,77,217,0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 14px/1.6 var(--font-sans);
+    display: flex; flex-direction: column; overflow: hidden; }
+  a { color: inherit; }
+
+  .top { flex: none; display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 0.75rem 1.5rem; flex-wrap: wrap; padding: 0.5rem 1.5rem 0.625rem; }
+  .brand h1 { font: 400 1.5rem/1.2 var(--font-serif); margin: 0 0 0.25rem; letter-spacing: 0.01em; }
+  .tagline { margin: 0 0 0.5rem; font-size: 12px; line-height: 1.6; color: var(--soft); }
+  .tagline b { font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .repo { font-size: 12px; color: var(--muted); text-decoration: none;
+    margin-top: 0.375rem; white-space: nowrap; }
+  .repo:hover { color: var(--accent); }
+  .cmd { display: inline-flex; align-items: stretch; border: 1px solid var(--rule);
+    border-radius: 6px; overflow: hidden; }
+  .cmd code { font: 400 11px/1.6 var(--font-mono); color: var(--muted);
+    padding: 0.25rem 0.625rem; }
+  .cmd .copy { appearance: none; background: none; border: 0; border-left: 1px solid var(--rule);
+    padding: 0.25rem 0.625rem; cursor: pointer; font: 500 11px/1.6 var(--font-sans);
+    color: var(--muted); }
+  .cmd .copy:hover, .cmd .copy.ok { color: var(--accent); }
+
+  .tabsrow { flex: none; display: flex; align-items: stretch; gap: 1.25rem;
+    border-bottom: 1px solid var(--rule); padding: 0 1.5rem; }
+  .tabs { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+  .tabs button { appearance: none; background: none; border: 0; border-bottom: 2px solid transparent;
+    padding: 0.5rem 0.75rem; margin-bottom: -1px; cursor: pointer;
+    font: 500 12px/1.6 var(--font-sans); letter-spacing: 0.12em; color: var(--muted); }
+  .tabs button span { margin-left: 0.375rem; font-size: 12px; color: var(--soft);
+    font-variant-numeric: tabular-nums; }
+  .tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+  .search { align-self: center; appearance: none; background: none;
+    border: 1px solid var(--rule); border-radius: 6px; padding: 0.3rem 0.75rem;
+    width: 11rem; margin-left: auto; outline: none;
+    font: 400 12px/1.5 var(--font-sans); color: var(--ink); }
+  .search:focus { border-color: var(--accent); }
+  .search::placeholder { color: var(--soft); }
+
+  .layout { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 264px 1fr; }
+  .list { min-height: 0; overflow-y: auto; border-right: 1px solid var(--rule); padding: 0.5rem 0 1rem; }
+  .list h2 { font: 500 12px/1.6 var(--font-sans); letter-spacing: 0.3em; color: var(--soft);
+    margin: 1.25rem 1.25rem 0.5rem; }
+  .list h2 span { margin-left: 0.5rem; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+  .list ul { list-style: none; margin: 0; padding: 0; }
+  .list a { display: block; padding: 0.5rem 1rem 0.5rem 1.125rem; border-left: 2px solid transparent;
+    text-decoration: none; }
+  .list a b { display: block; font-weight: 600; font-size: 14px; line-height: 1.5; }
+  .list a small { display: block; font-size: 12px; line-height: 1.5; color: var(--muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .list a:hover { background: var(--paper-2); }
+  .list a.active { border-left-color: var(--accent); background: var(--accent-tint); }
+
+  .viewer { min-width: 0; min-height: 0; display: flex; flex-direction: column;
+    padding: 1rem 1.5rem 1.25rem; }
+  .bar { flex: none; display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; margin-bottom: 0.75rem; }
+  .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .seg button { appearance: none; background: none; border: 0; padding: 0.375rem 0.875rem;
+    cursor: pointer; font: 500 12px/1.5 var(--font-sans); color: var(--muted); }
+  .seg button + button { border-left: 1px solid var(--rule); }
+  .seg button[aria-pressed="true"] { background: var(--accent-tint); color: var(--accent); }
+  .seg button:disabled { color: var(--rule); cursor: default; }
+  .src { font-size: 12px; color: var(--muted); text-decoration: none; }
+  .src:hover { color: var(--accent); }
+
+  .stage { flex: 1 1 auto; min-height: 0; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; }
+  .stage.scroll { display: block; overflow-y: auto; }
+  .ph { display: none; width: 100%; }
+  .stage iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .js .stage iframe { position: absolute; left: 50%; top: 50%; width: 1440px;
+    transform-origin: center center; }
+  .js .stage.scroll iframe { left: 0; top: 0; transform-origin: top left; }
+
+  @media (max-width: 920px) {
+    body { height: auto; min-height: 100%; overflow: visible; }
+    .top { padding: 0.625rem 1rem 0.5rem; }
+    .cmd { display: none; }
+    .tabsrow { padding: 0 1rem; }
+    .search { width: 8rem; }
+    .layout { display: block; }
+    .list { max-height: 15rem; border-right: 0; border-bottom: 1px solid var(--rule); }
+    .viewer { padding: 1rem 1rem 1.5rem; }
+    .stage { height: 70vh; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>diagram-design-zh</h1>
+    <p class="tagline">为 coding agent 提供的中文图表规则与资源 · <b>%%TOTAL%%</b> 张示例 · <b>45</b> 种图表类型与变体 · MIT</p>
+    <span class="cmd"><code>npx skills add https://github.com/patrick-xin/diagram-design-zh --skill diagram-design-zh</code><button type="button" class="copy">复制</button></span>
+  </div>
+  <a class="repo" href="https://github.com/patrick-xin/diagram-design-zh" target="_blank" rel="noopener">GitHub 仓库 ↗</a>
+</header>
+<div class="tabsrow">
+  <nav class="tabs" role="tablist" aria-label="分组">
+%%TABS%%
+  </nav>
+  <input class="search" type="search" placeholder="搜索图表" aria-label="搜索图表" autocomplete="off">
+</div>
+<div class="layout">
+  <aside class="list">
+%%SECTIONS%%
+  </aside>
+  <main class="viewer">
+    <div class="bar">
+      <div class="seg" role="group" aria-label="样式档">
+        <button type="button" data-v="std" aria-pressed="true">浅色</button>
+        <button type="button" data-v="dark" aria-pressed="false">深色</button>
+        <button type="button" data-v="full" aria-pressed="false">全档</button>
+      </div>
+      <a class="src" href="%%FIRST%%" target="_blank" rel="noopener">在新标签打开源文件 ↗</a>
+    </div>
+    <div class="stage" id="stage">
+      <div class="ph" id="ph" aria-hidden="true"></div>
+      <iframe title="图表预览" src="%%FIRST%%"></iframe>
+    </div>
+  </main>
+</div>
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  var tabs = [].slice.call(document.querySelectorAll('[role=tab]'));
+  var links = [].slice.call(document.querySelectorAll('.list a'));
+  var segBtns = [].slice.call(document.querySelectorAll('.seg button'));
+  var iframe = document.querySelector('.stage iframe');
+  var stage = document.getElementById('stage');
+  var ph = document.getElementById('ph');
+  var srcLink = document.querySelector('.src');
+  var search = document.querySelector('.search');
+  var copyBtn = document.querySelector('.copy');
+  var current = null, variant = 'std';
+
+  function cardOf(base) {
+    for (var i = 0; i < links.length; i++) if (links[i].dataset.base === base) return links[i];
+    return null;
+  }
+  function fromHash() {
+    var h = location.hash.slice(1);
+    if (!h) return null;
+    var m = h.match(/^(.+?)(?:-(dark|full))$/);
+    var c = cardOf(m ? m[1] : h);
+    return c ? [c, m ? m[2] : 'std'] : null;
+  }
+  function showGroup(gi) {
+    tabs.forEach(function (t) {
+      t.setAttribute('aria-selected', t.dataset.g === gi ? 'true' : 'false');
+    });
+    document.querySelectorAll('.list section').forEach(function (s) {
+      s.hidden = s.dataset.g !== gi;
+    });
+  }
+  function fit() {
+    if (!current) return;
+    var h = variant === 'full' && current.dataset.fullH
+      ? +current.dataset.fullH : +current.dataset.h;
+    iframe.style.height = h + 'px';
+    if (variant === 'full') {
+      // 全档是带讲解卡片的长页：按宽度缩放保字号可读，预览区内滚动
+      var sw = stage.clientWidth / 1440;
+      stage.classList.add('scroll');
+      ph.style.display = 'block';
+      ph.style.height = Math.round(h * sw) + 'px';
+      iframe.style.transform = 'scale(' + sw + ')';
+    } else {
+      stage.classList.remove('scroll');
+      ph.style.display = 'none';
+      var s = Math.min(stage.clientWidth / 1440, stage.clientHeight / h);
+      iframe.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+    }
+  }
+  function select(a, v) {
+    variant = v || 'std';
+    current = a;
+    links.forEach(function (l) { l.classList.toggle('active', l === a); });
+    if (!search.value.trim()) showGroup(a.closest('section').dataset.g);
+    var file = variant === 'std' ? a.getAttribute('href') : a.dataset[variant];
+    iframe.src = file;
+    iframe.title = a.querySelector('b').textContent + ' 预览';
+    srcLink.href = file;
+    segBtns.forEach(function (b) {
+      var key = b.dataset.v;
+      b.disabled = key !== 'std' && !a.dataset[key];
+      b.setAttribute('aria-pressed', key === variant ? 'true' : 'false');
+    });
+    history.replaceState(null, '', '#' + a.dataset.base + (variant === 'std' ? '' : '-' + variant));
+    stage.scrollTop = 0;
+    fit();
+  }
+  function step(dir) {
+    var vis = links.filter(function (l) {
+      return !l.closest('section').hidden && l.parentElement.style.display !== 'none';
+    });
+    var i = vis.indexOf(current);
+    if (i < 0) return;
+    var n = vis[i + dir];
+    if (n) { select(n); n.scrollIntoView({ block: 'nearest' }); }
+  }
+  function applyFilter(q) {
+    q = q.trim().toLowerCase();
+    var sections = [].slice.call(document.querySelectorAll('.list section'));
+    if (!q) {
+      links.forEach(function (l) { l.parentElement.style.display = ''; });
+      sections.forEach(function (s) {
+        var c = s.querySelector('h2 span');
+        c.textContent = c.dataset.n;
+      });
+      showGroup(current ? current.closest('section').dataset.g : '0');
+      return;
+    }
+    var counts = {};
+    links.forEach(function (l) {
+      var hay = (l.querySelector('b').textContent + ' ' +
+        l.querySelector('small').textContent + ' ' + l.title).toLowerCase();
+      var hit = hay.indexOf(q) > -1;
+      l.parentElement.style.display = hit ? '' : 'none';
+      if (hit) {
+        var g = l.closest('section').dataset.g;
+        counts[g] = (counts[g] || 0) + 1;
+      }
+    });
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', 'false'); });
+    sections.forEach(function (s) {
+      s.querySelector('h2 span').textContent = counts[s.dataset.g] || 0;
+      s.hidden = !counts[s.dataset.g];
+    });
+  }
+
+  links.forEach(function (l) {
+    l.addEventListener('click', function (e) { e.preventDefault(); select(l); });
+  });
+  segBtns.forEach(function (b) {
+    b.addEventListener('click', function () { if (!b.disabled) select(current, b.dataset.v); });
+  });
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showGroup(t.dataset.g); tabs[i].focus(); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = tabs[(i + d + tabs.length) % tabs.length];
+      showGroup(n.dataset.g); n.focus();
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest('[role=tab]') || e.target.closest('input')) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+  });
+  search.addEventListener('input', function () { applyFilter(search.value); });
+  search.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      search.value = '';
+      applyFilter('');
+      search.blur();
+    }
+  });
+  copyBtn.addEventListener('click', function () {
+    var text = copyBtn.parentElement.querySelector('code').textContent;
+    function done() {
+      copyBtn.textContent = '已复制';
+      copyBtn.classList.add('ok');
+      setTimeout(function () {
+        copyBtn.textContent = '复制';
+        copyBtn.classList.remove('ok');
+      }, 1500);
+    }
+    function legacy() {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (err) { /* 放弃 */ }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, legacy);
+    } else legacy();
+  });
+  window.addEventListener('hashchange', function () {
+    var r = fromHash();
+    if (r) select(r[0], r[1]);
+  });
+  window.addEventListener('resize', fit);
+  if ('ResizeObserver' in window) new ResizeObserver(fit).observe(stage);
+
+  var initial = fromHash() || [links[0], 'std'];
+  select(initial[0], initial[1]);
+})();
+</script>
+</body>
+</html>
