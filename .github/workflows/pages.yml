@@ -27,7 +27,7 @@ jobs:
       - name: Upload gallery artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: assets
+          path: skills/diagram-design-zh/assets
 
   deploy:
     needs: build

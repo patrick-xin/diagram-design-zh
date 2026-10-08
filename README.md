@@ -1,178 +1,85 @@
 # diagram-design-zh
 
-**对 agent 说一句话，生成白底、通用、开箱即用的中文图表。**
+为 coding agent 提供一套生成中文图表的规则与资源。你描述图表要表达的内容，技能会选择合适的类型，按中文排版规范生成可直接使用的成品。
 
-## 先说它解决什么
+默认使用白底和通用样式，输出独立 HTML；需要时也可导出 SVG 或 PNG。图表不依赖远程字体，适合保存、转发和离线打开。
 
-让 agent 画中文图表时，字体乱码、字号太小、中英混排不一致，会让成品难以直接使用。这个技能内置中文排版规则、字体与质量检查：你说明要表达的内容，它选择图表类型、载入对应规则，并生成可直接打开的单文件 HTML / SVG。
+## 能做什么
 
-适合谁：
+- **45 种图表类型**：覆盖系统结构、流程、计划、数据比较和数据平台等任务。
+- **中文排版**：内置中文字体栈、字号下限、中英混排和标点规则；交付前将实际用到的字体子集内嵌到文件中。
+- **统一样式**：按共享的颜色、几何、图例和可访问性规范生成图表；支持可选皮肤和品牌档案。
+- **从已有图重绘**：读取 Mermaid 或 draw.io 的结构，再按本项目规则重排；不会把源图直接换皮当作成品。
+- **按需增强**：可选图标、深色样式、终端外壳、分步动效、旁注和手绘效果，默认不启用。
 
-- 用 agent 干活的开发者，图画完直接进文档
-- 要把图贴进周报、汇报、公众号文章的人
-- 服务多个品牌客户的乙方：品牌档案相互隔离，不串色
+## 图表类型
 
-## 它能画什么
+每种类型都有对应的规则文档和中文示例。
 
-45 个内置类型，每个都有中文示例。[在线画廊](https://patrick-xin.github.io/diagram-design-zh/)浏览已接入的示例；已安装或已克隆的，可打开 `assets/index.html` 或对应的 `assets/example-*.html`。
+| 分组       | 类型                                                                                                                                                                                     |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 系统与流程 | 架构图、部署图、流程图、时序图、状态机、ER / 数据模型、数据库 schema、UML 类图、数据流、流程、泳道图、组织架构图、树形图、思维导图、依赖图、Wardley 地图、嵌套图、分层堆叠、鱼骨图、看板 |
+| 计划与叙事 | 时间线、用户旅程、用户故事地图、甘特图、象限图、飞轮、金字塔 / 漏斗、维恩图                                                                                                              |
+| 数据图表   | 柱状图、瀑布图、折线图、散点图、哑铃图、雷达图、极坐标图、桑基图、矩形树图、热力图、轴测平面图、爆炸轴测图                                                                               |
+| 数据平台   | 数据栈全景图、奖章架构、IT 现状图、数据平台集成图、安全矩阵                                                                                                                              |
 
-| 分组         | 类型                                                                                                                |
-| ------------ | ------------------------------------------------------------------------------------------------------------------- |
-| 系统与流程   | 架构图 · 部署图 · 流程图 · 时序图 · 状态机 · ER / 数据模型 · 数据库 schema · UML 类图 · 数据流 · 流程 · 泳道 · 组织架构 · 树形 · 思维导图 · 依赖图 · Wardley 地图 · 嵌套 · 分层 · 鱼骨图 |
-| 计划与叙事   | 时间线 · 用户旅程 · 用户故事地图 · 甘特 · 象限 · 飞轮 · 金字塔 / 漏斗 · 维恩                                          |
-| 数据图表     | 柱状 · 瀑布图 · 折线 · 散点 · 哑铃 · 雷达 · 极坐标图 · 桑基图 · 矩形树图 · 热力图 · 轴测平面图 · 爆炸轴测图                                                             |
-| 数据平台特化 | 数据栈全景 · 奖章架构 · IT 现状 · 数据平台集成 · 安全矩阵                                                           |
-
-载荷重的题先选语义模式再选类型（排队瓶颈、阶段框架、策略评估、安全铺路、治理清单、补偿分层），行为语义不靠类型硬凑。
-
-可选增强层默认全不启用，点名才上：无障碍分步动效、单色图标库、终端外壳、深色档、旁注、手绘滤镜。
-
-## 适合 / 不适合
-
-**适合**：需要表达结构、流程、关系或数据变化的中文图表；有品牌色或平台尺寸要求的图；需要离线打开和转发的单文件。
-
-**不适合**：
-
-- **实时数据仪表盘**。图表是一次生成的数据快照，不会自动连接和刷新数据源。
-- **需要多人协作持续编辑的图集**。产出是静态 HTML，改图靠 agent 重画。团队要长期共同维护的架构图，源文件型工具（draw.io）更合适——但可以从 draw.io 重绘一版对外交付。
-- 一段文字或一个表格能说清的事——那就别画图。
-
-## 默认约定
-
-图表默认使用白底和通用样式，静态输出，不依赖远程字体或数据服务。按需载入类型规则；用户有品牌或平台要求时，再按对应规则调整。
-
-## 内置能力
-
-### 中文排版层
-
-三个字体栈管全部文本：宋体标题、黑体节点、等宽技术标签。裸 `font-family` 和纯西文字体名直接禁止——Inter、Geist 一个汉字都没有，中文会掉回系统默认，整个版面就散了。
-
-- **等宽只给技术串**：协议、端口、URL、命令、字段名；人名、服务名一律黑体
-- **字号两条线**：默认坡道按中文正文惯例（节点名 14px、中文小字 12px 起）；**10px 是违法下限**——汉字笔画密，9px 糊成一团，自检脚本逐字扫
-- **中英混排全部机检**：`API 网关` 要空格、并列用间隔号 `·`、中文语境全角标点、标点不落行首
-- **交付前固定内嵌字体**：跑 `embed_fonts.py` 按实际用字切 GB2312 级子集，以 data: URI 内嵌进单文件——断网、无中文字库的机器上打开，像素级一致
-
-### 质量门：跑不过就不交付
-
-self_check 五层，跑不过就不交付：
-
-1. **单文件契约**——零远程引用、默认零脚本，外链字体直接拦截
-2. **无障碍契约**——`role="img"`、title/desc 非空、`aria-labelledby` 可解析
-3. **中文排版硬规则**——字号下限逐字扫、三栈齐全、混排空格
-4. **几何与信号**——4px 网格、端点贴边、图例基线、焦点簇计数（accent 滥用报警）
-5. **动效逐字节校验**——控制器与审查过的模板逐字节相等，改一个字符都不放行
-
-颜色按统一的语义角色和色值规范使用；换肤时保持图表含义不变。
-
-### 换肤机器
-
-皮肤就是一张表：语义槽位到色值的映射，十几行 JSON。对任何已交付的成品做值级替换，不重画：
-
-```bash
-python3 scripts/reskin.py --skin zhongguohong 成品.html -o 成品-红.html
-```
-
-- **换皮不换义**：语义色族、透明度档位、深色对比度契约原样保留，同一张图换皮后读法不变
-- **皮肤表自带质量门**：AA 对比度、焦点色唯一、防彩虹，`--list` 逐张过 gate
-- **出厂三张**：新中式、中国红（政务）、新中式·深；终端外壳是独立增强层
-
-品牌定制是另一条路，走 onboarding 写进样式指南，此后本项目所有图生效。定制管项目，reskin 管单张成品，两条路不混。
-
-### 本土投放与国内图标
-
-- **平台预设**：公众号封面 900×380（@2 出 1800×760）、小红书 3:4 1080×1440（@2 出 2160×2880）。预设是**重画不是缩放**——字号跟投放坡道走，agent 不许心算平台尺寸。投屏、A4 打印同理
-- **国内品牌图标**：华为、知乎、支付宝、微信、哔哩哔哩、字节跳动、TiDB、RocketMQ 等，走 currentColor 单色管线随主题继承；许可逐枚核实，见 [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md)
+按任务需要，技能还会先选择语义模式，再确定图表类型；例如瓶颈分析、阶段框架、策略评估和治理清单。
 
 ## 安装
-
-方式一（推荐，一行命令）：
 
 ```bash
 npx skills add https://github.com/patrick-xin/diagram-design-zh --skill diagram-design-zh
 ```
 
-方式二：直接让 agent 装——对任何有 shell 权限的 agent 说「帮我把 https://github.com/patrick-xin/diagram-design-zh 装成技能」，它会克隆到技能目录并验证 `SKILL.md`、`assets/`、`references/` 都在。装好后不用配置，说「画一张微服务架构图」就会触发。
+本仓采用 [Agent Skills 格式](https://agentskills.io/specification)。自动安装和自动发现取决于 agent 是否支持该格式；[`skills` 安装器](https://github.com/vercel-labs/skills#supported-agents)也只面向其支持的 agent。使用其他 agent 时，可按该产品支持的方式提供技能目录及其引用文件。
 
 ## 使用
 
-### 基础用法
+安装后，用自然语言说明内容、受众和用途即可，例如：
 
-装完直接和 agent 说：
+- 「画一张电商系统的架构图，给不熟悉技术的管理者看。」
+- 「比较这五条产品线今年和去年的收入变化。」
+- 「把这段 Mermaid 时序图重绘成中文图表。」
+- 「把这张架构图改成公众号封面尺寸。」
 
-- 「我手上有 A、B、C、D 四条产品线的收入和增速，想让大家讨论明年钱往哪投，画个图」
-- 「画一张电商系统的架构图」
-- 「把这段时序画出来：用户 → 网关 → 订单服务 → 库存」
-- 「这张架构图给不懂技术的高管看」——同一内容按受众坡道改写措辞
+如果图表类型不明确，说明想表达什么、希望读者看出什么，agent 会给出合适的选项及读法差异。
 
-不知道该用什么图也行。说清你有什么、给谁看、想让人讨论什么，agent 会给两三个候选、各说一句读法差别，你挑一个就行——「按时间排的还是按部门分的」这种话就够了，不需要知道图的名字。
+### 导入与导出
 
-### 导入重绘
+Mermaid 和 draw.io 文件会先提取节点、关系、分组等结构，再依照本项目的规则重绘。每次导入都会说明合并、折叠或省略的内容，便于核对信息是否保留。
 
-已有 draw.io 或 Mermaid 图？指给 agent，它重绘而非渲染：源坐标、源色板、自动布局全部丢弃，组件、关系、分组、方向按本设计系统重排。
+默认输出独立 HTML。需要图片或矢量文件时，可请求 PNG 或 SVG；导出流程和尺寸预设见 [`skills/diagram-design-zh/references/export.md`](skills/diagram-design-zh/references/export.md) 与 [`skills/diagram-design-zh/references/output-spec.md`](skills/diagram-design-zh/references/output-spec.md)。
 
-- 「把这个 Mermaid 文件重画成标准图」
-- 「这张 .drawio 出一版幻灯片用的，简化到 7 个节点」
+### 皮肤与品牌
 
-四个拨盘控制产出：格式（html / svg / png）× 尺寸（文档 / 幻灯 / 社交 / 打印）× 细节（faithful / balanced / simplified）× 受众（engineer / mixed / executive）。每次导入附保真台账——合并、折叠、丢弃了什么，逐条说明。你认识源文件，会察觉；藏着的才算问题。
+可使用内置皮肤，也可按项目配置品牌样式。皮肤适用于单张成品；品牌档案适用于一个项目中的后续图表。命令与配置流程见 [`skills/diagram-design-zh/references/onboarding.md`](skills/diagram-design-zh/references/onboarding.md) 和 [`skills/diagram-design-zh/references/profiles.md`](skills/diagram-design-zh/references/profiles.md)。
 
-### 导出
+## 规则与示例
 
-默认交付 standalone HTML。要图片时：
+- [`skills/diagram-design-zh/SKILL.md`](skills/diagram-design-zh/SKILL.md)：入口、选型路由和通用工作规则。
+- [`skills/diagram-design-zh/references/`](skills/diagram-design-zh/references/)：图表类型、排版、样式、导入和输出规则。
+- [`skills/diagram-design-zh/assets/`](skills/diagram-design-zh/assets/)：各类型的 HTML 示例、模板和图标资源；示例可直接用浏览器打开。
+- [`skills/diagram-design-zh/scripts/self_check.py`](skills/diagram-design-zh/scripts/self_check.py)：检查单个 HTML 成品是否符合文件、无障碍、颜色、中文排版、几何和动效规则。
+- [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md)：字体、图标和商标相关说明。
 
-- PNG——默认 2 倍图，紧凑素材 1 倍、打印主图 3 倍；依赖 Playwright（首次 `pip install playwright && playwright install chromium`）
-- SVG——只取 `<svg>` 节点，进 Figma / Illustrator 可继续编辑
-
-导出只交图本身，完整版（full）的附加卡片按设计丢弃。
-
-### 换肤与品牌
+提交或更新示例前，运行：
 
 ```bash
-python3 scripts/reskin.py --list                    # 看可用皮肤（逐张过质量门）
-python3 scripts/reskin.py --skin xinzhongshi 成品.html -o 成品-新中式.html
-```
-
-品牌定制走 onboarding：「按我们官网的颜色配置这个技能」——agent 抓取站点、提取色板与字体映射成语义槽位、给出 diff 确认后写入。多客户团队用品牌档案隔离，并行项目互不串色。
-
-### 按需载入，不浪费上下文
-
-| 你说                         | agent 载入                   |
-| ---------------------------- | ---------------------------- |
-| 「画张流程图」               | SKILL.md + type-flowchart.md |
-| 「这两条审批链的差异画出来」 | + semantic-patterns.md       |
-| 「给它加分步动效」           | + animation.md               |
-| 「转成公众号封面」           | + output-spec.md             |
-| 「把这个 .mmd 重画」         | + import-mermaid.md          |
-
-不管内置多少类型，agent 每次只读你用得着的那一两份文档。
-
-## 正常工作的样子
-
-- 一句常规请求，agent 只载入 SKILL.md 加一份类型文档，不多读一个字。
-- 产出是单个 `.html`：双击打开、断网打开、在没有中文字库的机器上打开，渲染一致。
-- `python3 scripts/self_check.py <文件>` 打印全绿。
-- 屏幕阅读器读得出图题与内容描述（「订单从待支付到完成的五态生命周期」，不是「上面一个框下面五个框」）。
-- 全图找不到低于 10px 的汉字，也没有裸露的西文字体名。
-
-任何一条不成立，都值得提 issue。
-
-## 仓库结构
-
-```
-diagram-design-zh/
-├── SKILL.md            # 技能入口：选型路由、理念、通用纪律
-├── references/         # 全部规则文档（style-guide.md 是颜色唯一权威）
-├── assets/             # 中文图表示例 + 画廊 + 模板 + 图标页
-├── scripts/            # self_check / embed_fonts / reskin / 导入提取器
-├── fonts/              # 思源 GB2312 子集母本（OFL）
-└── .github/workflows/  # 画廊发布到 GitHub Pages
+python3 skills/diagram-design-zh/scripts/self_check.py skills/diagram-design-zh/assets/example-你的类型.html
 ```
 
 ## 贡献
 
-欢迎 issue / PR。中文字体子集、CJK 排版边界、国内平台预设这类本土化问题优先。提交新示例前请跑 `python3 scripts/self_check.py <你的示例.html>`，必须全绿。
+欢迎通过 issue 或 pull request 报告问题、提出改进。新增或修改示例时，请同时更新对应的类型规则，并先通过质量检查。
 
-如果这个技能帮你省下过一次调字体的时间，点个 Star，谢谢。
+## 致谢
+
+感谢 Cathryn Lavery 创建并以 MIT 许可发布 [`diagram-design`](https://github.com/cathrynlavery/diagram-design)。本项目沿用了其类型组织、布局与几何计算、按需载入等基础工作，并围绕中文排版、字体支持和质量检查进行了扩展。
 
 ## 许可
 
-MIT。图标与字体的第三方许可汇总见 [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md)。
+本项目采用 MIT 许可，详见 [`LICENSE`](LICENSE)。字体、图标等第三方内容遵循各自许可，具体说明见 [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md)。
+
+## 友情链接
+
+[LINUX DO](https://linux.do/) — 新的理想型社区 / A new ideal community
