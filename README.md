@@ -12,6 +12,88 @@
 - **从已有图重绘**：读取 Mermaid 或 draw.io 的结构，再按本项目规则重排；不会把源图直接换皮当作成品。
 - **按需增强**：可选图标、深色样式、终端外壳、分步动效、旁注和手绘效果，默认不启用。
 
+## 画廊
+
+45 种类型各一张成品示例，点图进入[在线画廊](https://patrick-xin.github.io/diagram-design-zh/)的对应位置——那里可以切换浅色 / 深色 / 讲解三档、按名称搜索，另有变体与动效示例。此处为浅色标准档静态导出。
+
+<table>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#architecture"><img src="screenshots/architecture.png" alt="AI 客服平台 · 生产架构" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#data-flow"><img src="screenshots/data-flow.png" alt="数据平台 · 谁在哪个阶段碰数据" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#db-schema"><img src="screenshots/db-schema.png" alt="电商数据库 · 订单子系统" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#dependency"><img src="screenshots/dependency.png" alt="TypeScript 单仓 · 依赖结构" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#deployment"><img src="screenshots/deployment.png" alt="结算服务 · 生产部署" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#er"><img src="screenshots/er.png" alt="内容平台 · 数据模型" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#fishbone"><img src="screenshots/fishbone.png" alt="查询 p99 延迟事故 · 根因分析" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#flowchart"><img src="screenshots/flowchart.png" alt="线上告警怎么处置？" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#kanban"><img src="screenshots/kanban.png" alt="数据平台迭代看板 · 2026 W36" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#layers"><img src="screenshots/layers.png" alt="AI 应用技术栈 · 差异化到底发生在哪一层" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#mindmap"><img src="screenshots/mindmap.png" alt="短视频账号运营" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#nested"><img src="screenshots/nested.png" alt="数据访问边界" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#org-chart"><img src="screenshots/org-chart.png" alt="研发部责任图 · 谁拥有什么" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#process"><img src="screenshots/process.png" alt="季度入户调查 · 从问卷设计到公开发布" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#sequence"><img src="screenshots/sequence.png" alt="扫码点单链路 · 从提单到取餐码" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#state"><img src="screenshots/state.png" alt="文章生命周期 · 从草稿到归档" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#swimlane"><img src="screenshots/swimlane.png" alt="采购审批流 · 谁在什么时候接手" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#tree"><img src="screenshots/tree.png" alt="订单系统模块分解" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#uml-class"><img src="screenshots/uml-class.png" alt="支付域 · 类图" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#wardley"><img src="screenshots/wardley.png" alt="AI 助手产品 · Wardley 地图" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#gantt"><img src="screenshots/gantt.png" alt="App 2.0 重构 · 十二周排期" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#journey"><img src="screenshots/journey.png" alt="协作工具试用转付费 · 第一周" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#loop"><img src="screenshots/loop.png" alt="开发者工具的增长飞轮" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#pyramid"><img src="screenshots/pyramid.png" alt="用户参与金字塔 · 少数人创造多数价值" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#quadrant"><img src="screenshots/quadrant.png" alt="团队 AI 自动化机会 · 2026 H2" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#story-map"><img src="screenshots/story-map.png" alt="报表工具 · 首个发布" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#timeline"><img src="screenshots/timeline.png" alt="App 2.0 · 2025–2026 五个关键节点" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#venn"><img src="screenshots/venn.png" alt="数据团队成员画像" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#axonometric-plan"><img src="screenshots/axonometric-plan.png" alt="三层办公区：团队真正落座的地方" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#bar"><img src="screenshots/bar.png" alt="2026 H1 各渠道新增用户" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#dumbbell"><img src="screenshots/dumbbell.png" alt="改版后，哪些自助流程更容易一次完成？" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#exploded"><img src="screenshots/exploded.png" alt="应用三层结构：一个产品的拆解" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#heatmap"><img src="screenshots/heatmap.png" alt="支付在迭代 4 出的事故" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#line"><img src="screenshots/line.png" alt="近 12 周活跃用户趋势" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#polar"><img src="screenshots/polar.png" alt="在线课堂并发负载 · 分时段" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#radar"><img src="screenshots/radar.png" alt="存储方案选型评估" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#sankey"><img src="screenshots/sankey.png" alt="流水线算力 · 一个月的构建分钟" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#scatter"><img src="screenshots/scatter.png" alt="广告计划：展示量 × 转化率" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#treemap"><img src="screenshots/treemap.png" alt="对象存储占用分布" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#waterfall"><img src="screenshots/waterfall.png" alt="云成本预算桥 · 2025 → 2026" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#dp-integration"><img src="screenshots/dp-integration.png" alt="数据平台集成拓扑" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#dp-security-matrix"><img src="screenshots/dp-security-matrix.png" alt="平台访问矩阵" width="420"></a></td>
+  </tr>
+  <tr>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#high-level"><img src="screenshots/high-level.png" alt="K8s 数据栈全景" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#it-state"><img src="screenshots/it-state.png" alt="现行 IT 版图 · 数据平台建成之前" width="420"></a></td>
+    <td><a href="https://patrick-xin.github.io/diagram-design-zh/#medallion"><img src="screenshots/medallion.png" alt="五层奖章架构 · 季度调研数据" width="420"></a></td>
+  </tr>
+</table>
+
 ## 图表类型
 
 每种类型都有对应的规则文档和中文示例。
