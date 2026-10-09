@@ -24,6 +24,12 @@ python3 <技能目录>/scripts/drawio_extract.py <文件> [--page N|NAME|all]
 
 提取器支持原始 XML、压缩 `<diagram>` 载荷、内嵌 `mxfile` 块的 PNG、带 draw.io `content` 属性的 SVG。它输出 Markdown 摘要：节点 / 边表（含绝对几何）、形状类、hub 度数、容器结构、环检测、预算标记，以及*可折叠分组*（压缩时先合并的对象）。
 
+关系方向跟随序列化的箭头：只有 start 箭头的连线会翻转 source / target，双箭头是双向，两头都无箭头是无向。度数统计与入口 / 终端信号按这套语义计；双向连线在环检测中两个方向都参与。未指定 end 箭头时沿用 classic 箭头默认。
+
+绝对几何按父相对子顶点的 `relative="1"` 标记换算：坐标乘父宽高、加 `mxPoint` 偏移；普通像素定位的子节点保持原坐标语义。父尺寸的解析与 cell 顺序无关；非有限偏移与溢出仍按具名错误拒收。
+
+每次导入的上限：直接 `<diagram>` 子页 100 页、每页 `<root>` 直接子元素 10000 个。超限时提取器分别以 `page limit exceeded (max 100)`、`page N: cell limit exceeded (max 10000)` 退出；遇到上限就把源拆成更小的 draw.io 文件再导。
+
 值得知道的选项：
 
 - `--page all`——多页文件。默认只读第 0 页；头部行列出每页的节点 / 边数。
