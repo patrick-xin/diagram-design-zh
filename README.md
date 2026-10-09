@@ -1,13 +1,21 @@
 # diagram-design-zh
 
-为 coding agent 提供一套生成中文图表的规则与资源。你描述图表要表达的内容，技能会选择合适的类型，按中文排版规范生成可直接使用的成品。
+[![License: MIT](https://img.shields.io/badge/License-MIT-1a4dd9.svg)](LICENSE)
+[![Format: Agent Skills](https://img.shields.io/badge/Format-Agent_Skills-565e7e.svg)](https://agentskills.io/specification)
+[![types](https://img.shields.io/badge/types-45-217e7b.svg)](#图表类型)
+[![output: single-file HTML](https://img.shields.io/badge/output-single--file_HTML_·_offline-29314f.svg)](#导入与导出)
+[![GitHub stars](https://img.shields.io/github/stars/patrick-xin/diagram-design-zh.svg)](https://github.com/patrick-xin/diagram-design-zh/stargazers)
+
+> 本项目是从 [diagram-design](https://github.com/cathrynlavery/diagram-design) fork 来的（感谢原作者 Cathryn Lavery ），按中文排版重做了整套规则。想画英文图表，直接用原项目就行。
+
+**为 coding agent 提供一套生成中文图表的规则与资源。你描述图表要表达的内容，技能会选择合适的类型，按中文排版规范生成可直接使用的成品。**
 
 默认使用白底和通用样式，输出独立 HTML；需要时也可导出 SVG 或 PNG。图表不依赖远程字体，适合保存、转发和离线打开。
 
 ## 能做什么
 
 - **45 种图表类型**：覆盖系统结构、流程、计划、数据比较和数据平台等任务。
-- **中文排版**：内置中文字体栈、字号下限、中英混排和标点规则；交付前将实际用到的字体子集内嵌到文件中。
+- **中文排版**：内置中文字体栈、字号下限、中英混排和标点规则；生成时会把实际用到的字体子集内嵌进文件。
 - **统一样式**：按共享的颜色、几何、图例和可访问性规范生成图表；支持可选皮肤和品牌档案。
 - **从已有图重绘**：读取 Mermaid 或 draw.io 的结构，再按本项目规则重排；不会把源图直接换皮当作成品。
 - **按需增强**：可选图标、深色样式、终端外壳、分步动效、旁注和手绘效果，默认不启用。
@@ -136,27 +144,21 @@ Mermaid 和 draw.io 文件会先提取节点、关系、分组等结构，再依
 
 可使用内置皮肤，也可按项目配置品牌样式。皮肤适用于单张成品；品牌档案适用于一个项目中的后续图表。命令与配置流程见 [`skills/diagram-design-zh/references/onboarding.md`](skills/diagram-design-zh/references/onboarding.md) 和 [`skills/diagram-design-zh/references/profiles.md`](skills/diagram-design-zh/references/profiles.md)。
 
-## 规则与示例
+## 仓库结构
 
 - [`skills/diagram-design-zh/SKILL.md`](skills/diagram-design-zh/SKILL.md)：入口、选型路由和通用工作规则。
 - [`skills/diagram-design-zh/references/`](skills/diagram-design-zh/references/)：图表类型、排版、样式、导入和输出规则。
 - [`skills/diagram-design-zh/assets/`](skills/diagram-design-zh/assets/)：各类型的 HTML 示例、模板和图标资源；示例可直接用浏览器打开。
-- [`skills/diagram-design-zh/scripts/self_check.py`](skills/diagram-design-zh/scripts/self_check.py)：检查单个 HTML 成品是否符合文件、无障碍、颜色、中文排版、几何和动效规则。
+- [`skills/diagram-design-zh/scripts/`](skills/diagram-design-zh/scripts/)：自检（`self_check.py` 检查单个 HTML 成品的文件、无障碍、颜色、中文排版、几何与动效六层）、字体子集内嵌与换肤脚本。
 - [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md)：字体、图标和商标相关说明。
 
-提交或更新示例前，运行：
+## 贡献
+
+欢迎通过 issue 或 pull request 报告问题、提出改进。新增或修改示例时，请同步更新对应的类型规则，并运行质量门确认通过：
 
 ```bash
 python3 skills/diagram-design-zh/scripts/self_check.py skills/diagram-design-zh/assets/example-你的类型.html
 ```
-
-## 贡献
-
-欢迎通过 issue 或 pull request 报告问题、提出改进。新增或修改示例时，请同时更新对应的类型规则，并先通过质量检查。
-
-## 致谢
-
-感谢 Cathryn Lavery 创建并以 MIT 许可发布 [`diagram-design`](https://github.com/cathrynlavery/diagram-design)。本项目沿用了其类型组织、布局与几何计算、按需载入等基础工作，并围绕中文排版、字体支持和质量检查进行了扩展。
 
 ## 许可
 
