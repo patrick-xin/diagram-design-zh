@@ -99,7 +99,9 @@
       transform: none;
     }
 
-    /* 队列深度徽章切换：到达第 2 步后隐藏第 1 步的 2/5 徽章 */
+    /* 队列深度徽章切换：到达第 2 步后隐藏第 1 步的 2/5 徽章；
+       g 带 display="none" 属性兜底裸 SVG 抽取（= 静态终态），第 1 步由本条规则显示 */
+    [data-step-current="1"] .queue-depth-step1 { display: inline; }
     [data-step-current="2"] .queue-depth-step1,
     [data-step-current="3"] .queue-depth-step1,
     [data-step-current="4"] .queue-depth-step1,
@@ -296,7 +298,7 @@
           <rect x="280" y="260" width="252" height="36" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
           <text x="292" y="283" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">槽 2 · req_mob_4412 [POST /auth]</text>
 
-          <g class="queue-depth-step1">
+          <g class="queue-depth-step1" display="none">
             <rect x="548" y="216" width="60" height="212" rx="4" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1" />
             <text x="578" y="300" text-anchor="middle" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="10">深度</text>
             <text x="578" y="330" text-anchor="middle" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="600">2/5</text>
