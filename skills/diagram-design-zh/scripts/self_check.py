@@ -5,7 +5,7 @@
 
     python3 <技能目录>/scripts/self_check.py my-diagram.html
 
-检查分六层：
+检查分八层：
   安全层   单文件契约：无任何远程引用（字体走 embed_fonts.py 内嵌子集
            或系统三栈）、无可执行属性、无 iframe/embed/object；脚本只允许
            一个——与 assets/template-motion.html 逐字节一致的动效控制器。
@@ -24,6 +24,11 @@
            排版角色表 / 字号下限）。
   几何层   4px 网格（rect，警告级）；堆叠条带左侧竖向方向标尺与
            堆叠上下缘的对齐关系（警告级）——网格合规不等于几何关系正确。
+  自含层   SVG 脱离页级 CSS 后必须仍然成立（独立导出 / 无 CSS 渲染器）：
+           svg 内禁 var() 与 <style>；有面积形状须有 fill、text 须有
+           font-family（自带或继承自 SVG 内祖先）；class 若靠页级 CSS
+           给 fill/stroke/display，元素必须有属性兜底。
+  画廊层   仅画廊目录页：每个分组的 span.count 必须等于组内卡数。
 
 错误（-）导致退出码 1；警告（~）不拦截但须逐条人工确认。
 """
@@ -66,6 +71,16 @@ FONT_VALUE_RE = re.compile(r'font-family\s*[:=]\s*["\']?([^;"\'}]+)', re.IGNOREC
 CSS_FONT_SIZE_RE = re.compile(r"font-size\s*:\s*([\d.]+)(px|rem)\b")
 EYEBROW_BLOCK_RE = re.compile(r"(?:^|[^\w-])(?:header-)?eyebrow\s*\{([^}]*)\}")
 H1_BLOCK_RE = re.compile(r"(?:^|[^\w.#-])h1\s*\{([^}]*)\}")
+
+# 自含层：SVG 内结构走查用的标签集（含 svg 自身开标签，使根属性可作祖先继承源）
+SVG_WALK_RE = re.compile(
+    r"<(/?)(g|svg|defs|marker|pattern|clipPath|rect|circle|ellipse|polygon"
+    r"|polyline|path|line|text|tspan|use|title|desc)\b[^>]*>",
+    re.S,
+)
+AREA_SHAPES = {"rect", "circle", "ellipse", "polygon"}
+# 锁定模板件豁免自含层：模板自带演示样式是其教学内容；成品资产按字面值写
+SELF_CONTAIN_EXEMPT = {"template-motion"}
 
 
 class DiagramParser(HTMLParser):
@@ -472,6 +487,99 @@ def check_css_references(parser: DiagramParser, errors: list[str]) -> None:
     # Remove url() payloads first: base64 data URLs may contain // by chance.
     if CSS_REMOTE_RE.search(CSS_URL_RE.sub("", source)) and not found_loader:
         errors.append("CSS 内远程引用——字体用 scripts/embed_fonts.py 内嵌，图片转 data: URI")
+
+
+def check_svg_self_containment(source: str, stem: str, errors: list[str]) -> None:
+    """自含层：SVG 脱离页级 CSS 后必须仍然成立——独立 SVG 导出、无 CSS 的
+    渲染器、打印管线都只吃 SVG 自身。四条规矩：
+
+    1. svg 内禁 var() 与内嵌 <style>——页级变量与规则不会随导出携带；
+    2. 有面积形状（rect/circle/ellipse/polygon，clipPath 几何除外）必须有
+       fill，自带或继承自 SVG 内祖先均可——缺失时脱离 CSS 渲染按默认黑色
+       填充，黑块盖图；
+    3. text/tspan 必须有 font-family（自带或继承）——否则独立导出丢字体；
+    4. 元素 class 若由页级 CSS 提供 fill/stroke/display，元素必须有对应
+       属性兜底——display 兜底保证静态终态语义，fill/stroke 兜底保证颜料。
+    """
+    if stem in SELF_CONTAIN_EXEMPT:
+        return
+    css = "\n".join(re.findall(r"<style\b[^>]*>(.*?)</style>", source, re.S | re.IGNORECASE))
+    rules = re.findall(r"([^{}]+)\{([^{}]*)\}", css)
+    findings: Counter = Counter()
+    examples: dict[str, str] = {}
+    for number, svg in enumerate(re.finditer(r"<svg\b.*?</svg>", source, re.S), 1):
+        fragment = svg.group(0)
+        if "var(" in fragment:
+            findings[f"svg {number} 内出现 var()——页级变量不随独立导出携带，颜色/字体写元素字面值"] += 1
+        if re.search(r"<style\b", fragment, re.IGNORECASE):
+            findings[f"svg {number} 内嵌 <style>——独立导出不携带，样式写在元素属性上"] += 1
+        stack: list[tuple[str, dict[str, str]]] = []
+        in_clip = 0
+        for match in SVG_WALK_RE.finditer(fragment):
+            close, name, tag = match.group(1), match.group(2), match.group(0)
+            if close:
+                if name == "clipPath":
+                    in_clip = max(0, in_clip - 1)
+                for index in range(len(stack) - 1, -1, -1):
+                    if stack[index][0] == name:
+                        del stack[index:]
+                        break
+                continue
+            attrs = dict(re.findall(r'([\w:-]+)="([^"]*)"', tag))
+            if name == "clipPath":
+                in_clip += 1
+            if not in_clip:
+                ancestor_fill = any("fill" in a for _n, a in stack)
+                ancestor_stroke = any("stroke" in a for _n, a in stack)
+                ancestor_font = any("font-family" in a for _n, a in stack)
+                if name in AREA_SHAPES and "fill" not in attrs and not ancestor_fill:
+                    key = f"svg {number} 的 {name} 无 fill（自带或 SVG 内祖先继承）——脱离 CSS 渲染时按默认黑色填充"
+                    findings[key] += 1
+                    examples.setdefault(key, tag[:60])
+                if name in {"text", "tspan"} and "font-family" not in attrs and not ancestor_font:
+                    key = f"svg {number} 的 {name} 无 font-family——独立导出会丢字体"
+                    findings[key] += 1
+                    examples.setdefault(key, tag[:60])
+                seen: set[str] = set()  # 同一元素同一类问题只计一次（多条规则命中同类不再累加）
+                for cls in attrs.get("class", "").split():
+                    for selector, block in rules:
+                        if f".{cls}" not in selector:
+                            continue
+                        if re.search(r"(?:^|[^-])fill\s*:", block) and "fill" not in attrs and not ancestor_fill and f"fill:{cls}" not in seen:
+                            seen.add(f"fill:{cls}")
+                            findings[f"svg {number} 的 .{cls} 依赖页级 CSS fill——元素须带 fill 属性兜底"] += 1
+                        if re.search(r"(?:^|[^-])stroke\s*:", block) and "stroke" not in attrs and not ancestor_stroke and f"stroke:{cls}" not in seen:
+                            seen.add(f"stroke:{cls}")
+                            findings[f"svg {number} 的 .{cls} 依赖页级 CSS stroke——元素须带 stroke 属性兜底"] += 1
+                        if re.search(r"(?:^|[^-])display\s*:", block) and "display" not in attrs and f"display:{cls}" not in seen:
+                            seen.add(f"display:{cls}")
+                            findings[f"svg {number} 的 .{cls} 依赖页级 CSS display——元素须带 display 属性兜底（静态终态语义）"] += 1
+            if not tag.rstrip().endswith("/>"):
+                stack.append((name, attrs))
+    for message, count in findings.items():
+        detail = f"（{count} 处，如 {examples[message]}）" if message in examples and count > 1 else (
+            f"（如 {examples[message]}）" if message in examples else (f"（{count} 处）" if count > 1 else "")
+        )
+        errors.append(message + detail)
+
+
+def check_gallery_counts(source: str, errors: list[str]) -> None:
+    """画廊层（仅画廊目录页）：每个分组标题的 <span data-n="N">N</span> 必须
+    等于该组卡数——插卡漏同步计数是实发事故（连漏四张一案）。data-n 属性
+    与文本内容也须一致（两份计数漂移同样误导）。副题的「N 个内置类型与
+    变体」只随类型走、变体不计数，口径不同，不在此核。"""
+    for segment in re.split(r"<h2\b", source)[1:]:
+        cards = len(re.findall(r"<li\b", segment))
+        declared = re.search(r'<span data-n="(\d+)">(\d+)</span>', segment)
+        if not declared:
+            if cards:
+                errors.append(f"画廊分组有 {cards} 张卡但标题缺 <span data-n> 计数")
+            continue
+        attr, text = declared.group(1), declared.group(2)
+        if attr != text:
+            errors.append(f"画廊分组计数两份不一致：data-n={attr}，文本={text}")
+        if int(attr) != cards:
+            errors.append(f"画廊分组计数不符：声明 {attr}，实际 {cards} 张卡")
 
 
 def verify(path: Path) -> tuple[list[str], list[str]]:
@@ -888,6 +996,11 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
 
     # 颜色出处层（值级闭集，与 reskin 换肤机器同源）
     check_colors(source, errors)
+
+    # 自含层（SVG 脱离页级 CSS 仍成立）+ 画廊层（仅目录页）
+    check_svg_self_containment(source, path.stem, errors)
+    if parser.gallery_index:
+        check_gallery_counts(source, errors)
 
     return errors, warnings
 
