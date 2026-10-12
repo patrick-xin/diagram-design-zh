@@ -166,7 +166,8 @@
     }
     /* 当前步的行聚焦框：虚线勾边，颜色之外的第二通道 */
     .row-focus { fill: transparent; stroke: transparent; stroke-width: 1.2; }
-    .motion-ready [data-motion-item].is-current .row-focus {
+    /* 行聚焦只在步进帧出现；终态（static/end）没有「当前步」，虚线勾边随之隐藏 */
+    .motion-ready:not([data-frame="static"]):not([data-frame="end"]) [data-motion-item].is-current .row-focus {
       stroke: var(--muted);
       stroke-dasharray: 4 4;
     }
@@ -259,7 +260,7 @@
 
         <g transform="translate(-48 0)">
         <g data-motion-item="" data-step="1" aria-label="规则 1 身份绑定：两条追踪都通过">
-          <rect class="row-focus" x="48" y="124" width="952" height="68" rx="4"/>
+          <rect class="row-focus" fill="none" stroke="none" x="48" y="124" width="952" height="68" rx="4"/>
           <text x="88" y="152" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600">1 · 身份绑定</text>
           <text x="88" y="172" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">要求具名主体</text>
           <rect x="440" y="132" width="240" height="52" rx="4" fill="rgba(41,49,79,0.05)" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
@@ -269,7 +270,7 @@
         </g>
 
         <g data-motion-item="" data-step="2" aria-label="规则 2 内部受众：两条追踪都通过">
-          <rect class="row-focus" x="48" y="200" width="952" height="68" rx="4"/>
+          <rect class="row-focus" fill="none" stroke="none" x="48" y="200" width="952" height="68" rx="4"/>
           <text x="88" y="228" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600">2 · 内部受众</text>
           <text x="88" y="248" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">仅限员工</text>
           <rect x="440" y="208" width="240" height="52" rx="4" fill="rgba(41,49,79,0.05)" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
@@ -279,7 +280,7 @@
         </g>
 
         <g data-motion-item="" data-step="3" aria-label="规则 3 数据分级是首个分歧：追踪 A 通过，追踪 B 失败">
-          <rect class="row-focus" x="48" y="276" width="952" height="80" rx="4"/>
+          <rect class="row-focus" fill="none" stroke="none" x="48" y="276" width="952" height="80" rx="4"/>
           <text x="88" y="304" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600">3 · 数据分级</text>
           <text x="88" y="324" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">受限写入一律拒绝</text>
           <rect x="440" y="284" width="240" height="52" rx="4" fill="rgba(41,49,79,0.05)" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
@@ -292,7 +293,7 @@
         </g>
 
         <g data-motion-item="" data-step="4" aria-label="规则 4 人工审批：对追踪 A 是跳过，对追踪 B 是未到达">
-          <rect class="row-focus" x="48" y="364" width="952" height="68" rx="4"/>
+          <rect class="row-focus" fill="none" stroke="none" x="48" y="364" width="952" height="68" rx="4"/>
           <text x="88" y="392" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600">4 · 人工审批</text>
           <text x="88" y="412" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">仅写入类请求需要</text>
           <rect x="440" y="372" width="240" height="52" rx="4" fill="#ffffff" stroke="#8f94ab" stroke-width="1" stroke-dasharray="4 4"/>
@@ -302,7 +303,7 @@
         </g>
 
         <g data-motion-item="" data-step="5" aria-label="规则 5 部署门禁：追踪 A 通过而追踪 B 未到达；最终结果分别是允许与拒绝">
-          <rect class="row-focus" x="48" y="440" width="952" height="152" rx="4"/>
+          <rect class="row-focus" fill="none" stroke="none" x="48" y="440" width="952" height="152" rx="4"/>
           <text x="88" y="468" fill="#29314f" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600">5 · 部署门禁</text>
           <text x="88" y="488" fill="#565e7e" font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12">所有到达的规则须全部通过</text>
           <rect x="440" y="448" width="240" height="52" rx="4" fill="rgba(41,49,79,0.05)" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
