@@ -58,8 +58,6 @@
     }
     .diagram-container { width: 100%; overflow-x: auto; padding: 2px 0; }
     svg { width: 100%; min-width: 900px; display: block; overflow: visible; }
-    svg .sans { font-family: var(--font-sans); }
-    svg .mono { font-family: var(--font-mono); }
     .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 2rem; }
     @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
     .card { background: var(--color-paper); border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
@@ -111,74 +109,74 @@
         <line x1="160" y1="40" x2="160" y2="420" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
 
         <!-- 0–100% 共用尺度：每格 20 个百分点。 -->
-        <text class="mono" x="160" y="440" fill="#565e7e" font-size="9" text-anchor="middle">0</text>
-        <text class="mono" x="320" y="440" fill="#565e7e" font-size="9" text-anchor="middle">20</text>
-        <text class="mono" x="480" y="440" fill="#565e7e" font-size="9" text-anchor="middle">40</text>
-        <text class="mono" x="640" y="440" fill="#565e7e" font-size="9" text-anchor="middle">60</text>
-        <text class="mono" x="800" y="440" fill="#565e7e" font-size="9" text-anchor="middle">80</text>
-        <text class="mono" x="960" y="440" fill="#565e7e" font-size="9" text-anchor="middle">100</text>
-        <text class="sans" x="560" y="460" fill="#565e7e" font-size="10" text-anchor="middle">首次完成率（%）</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="160" y="440" fill="#565e7e" font-size="9" text-anchor="middle">0</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="320" y="440" fill="#565e7e" font-size="9" text-anchor="middle">20</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="480" y="440" fill="#565e7e" font-size="9" text-anchor="middle">40</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="640" y="440" fill="#565e7e" font-size="9" text-anchor="middle">60</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="800" y="440" fill="#565e7e" font-size="9" text-anchor="middle">80</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="960" y="440" fill="#565e7e" font-size="9" text-anchor="middle">100</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="560" y="460" fill="#565e7e" font-size="10" text-anchor="middle">首次完成率（%）</text>
 
         <!-- 权限调整：47% → 82%，变化绝对值 35 个百分点。 -->
-        <text class="sans" x="0" y="80" fill="#29314f" font-size="12" font-weight="600">权限调整</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="0" y="80" fill="#29314f" font-size="12" font-weight="600">权限调整</text>
         <line x1="542" y1="76" x2="810" y2="76" stroke="rgba(41,49,79,0.60)" stroke-width="1.2"/>
         <circle cx="536" cy="76" r="6" fill="#ffffff" stroke="rgba(41,49,79,0.60)" stroke-width="1.5"/>
         <circle cx="816" cy="76" r="6" fill="rgba(41,49,79,0.60)" stroke="rgba(41,49,79,0.60)" stroke-width="1"/>
-        <text class="mono" x="524" y="80" fill="#565e7e" font-size="9" text-anchor="end">47</text>
-        <text class="mono" x="828" y="80" fill="#565e7e" font-size="9">82</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="524" y="80" fill="#565e7e" font-size="9" text-anchor="end">47</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="828" y="80" fill="#565e7e" font-size="9">82</text>
 
         <!-- 账号找回：42% → 68%，变化绝对值 26 个百分点。 -->
-        <text class="sans" x="0" y="144" fill="#29314f" font-size="12" font-weight="600">账号找回</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="0" y="144" fill="#29314f" font-size="12" font-weight="600">账号找回</text>
         <line x1="502" y1="140" x2="698" y2="140" stroke="rgba(41,49,79,0.50)" stroke-width="1.2"/>
         <circle cx="496" cy="140" r="6" fill="#ffffff" stroke="rgba(41,49,79,0.50)" stroke-width="1.5"/>
         <circle cx="704" cy="140" r="6" fill="rgba(41,49,79,0.50)" stroke="rgba(41,49,79,0.50)" stroke-width="1"/>
-        <text class="mono" x="484" y="144" fill="#565e7e" font-size="9" text-anchor="end">42</text>
-        <text class="mono" x="716" y="144" fill="#565e7e" font-size="9">68</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="484" y="144" fill="#565e7e" font-size="9" text-anchor="end">42</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="716" y="144" fill="#565e7e" font-size="9">68</text>
 
         <!-- 退款申请：34% → 57%，变化绝对值 23 个百分点。 -->
-        <text class="sans" x="0" y="208" fill="#29314f" font-size="12" font-weight="600">退款申请</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="0" y="208" fill="#29314f" font-size="12" font-weight="600">退款申请</text>
         <line x1="438" y1="204" x2="610" y2="204" stroke="rgba(41,49,79,0.40)" stroke-width="1.2"/>
         <circle cx="432" cy="204" r="6" fill="#ffffff" stroke="rgba(41,49,79,0.40)" stroke-width="1.5"/>
         <circle cx="616" cy="204" r="6" fill="rgba(41,49,79,0.40)" stroke="rgba(41,49,79,0.40)" stroke-width="1"/>
-        <text class="mono" x="420" y="208" fill="#565e7e" font-size="9" text-anchor="end">34</text>
-        <text class="mono" x="628" y="208" fill="#565e7e" font-size="9">57</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="420" y="208" fill="#565e7e" font-size="9" text-anchor="end">34</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="628" y="208" fill="#565e7e" font-size="9">57</text>
 
         <!-- 工单升级：55% → 73%，变化绝对值 18 个百分点。 -->
-        <text class="sans" x="0" y="272" fill="#29314f" font-size="12" font-weight="600">工单升级</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="0" y="272" fill="#29314f" font-size="12" font-weight="600">工单升级</text>
         <line x1="606" y1="268" x2="738" y2="268" stroke="rgba(41,49,79,0.30)" stroke-width="1.2"/>
         <circle cx="600" cy="268" r="6" fill="#ffffff" stroke="rgba(41,49,79,0.30)" stroke-width="1.5"/>
         <circle cx="744" cy="268" r="6" fill="rgba(41,49,79,0.30)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-        <text class="mono" x="588" y="272" fill="#565e7e" font-size="9" text-anchor="end">55</text>
-        <text class="mono" x="756" y="272" fill="#565e7e" font-size="9">73</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="588" y="272" fill="#565e7e" font-size="9" text-anchor="end">55</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="756" y="272" fill="#565e7e" font-size="9">73</text>
 
         <!-- 新成员接入：31% → 44%，变化绝对值 13 个百分点。 -->
-        <text class="sans" x="0" y="336" fill="#29314f" font-size="12" font-weight="600">新成员接入</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="0" y="336" fill="#29314f" font-size="12" font-weight="600">新成员接入</text>
         <line x1="414" y1="332" x2="506" y2="332" stroke="rgba(41,49,79,0.30)" stroke-width="1.2"/>
         <circle cx="408" cy="332" r="6" fill="#ffffff" stroke="rgba(41,49,79,0.30)" stroke-width="1.5"/>
         <circle cx="512" cy="332" r="6" fill="rgba(41,49,79,0.30)" stroke="rgba(41,49,79,0.30)" stroke-width="1"/>
-        <text class="mono" x="396" y="336" fill="#565e7e" font-size="9" text-anchor="end">31</text>
-        <text class="mono" x="524" y="336" fill="#565e7e" font-size="9">44</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="396" y="336" fill="#565e7e" font-size="9" text-anchor="end">31</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="524" y="336" fill="#565e7e" font-size="9">44</text>
 
         <!-- 账单查询：改版后 61% 低于改版前 64%，不得按系列顺序摆标签。 -->
-        <text class="sans" x="0" y="400" fill="#29314f" font-size="12" font-weight="600">账单查询</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="0" y="400" fill="#29314f" font-size="12" font-weight="600">账单查询</text>
         <line x1="654" y1="396" x2="666" y2="396" stroke="#1a4dd9" stroke-width="1.8"/>
         <circle cx="672" cy="396" r="6" fill="#ffffff" stroke="#1a4dd9" stroke-width="1.5"/>
         <circle cx="648" cy="396" r="6" fill="#1a4dd9" stroke="#1a4dd9" stroke-width="1"/>
-        <text class="mono" x="636" y="400" fill="#565e7e" font-size="9" text-anchor="end">61</text>
-        <text class="mono" x="684" y="400" fill="#565e7e" font-size="9">64</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="636" y="400" fill="#565e7e" font-size="9" text-anchor="end">61</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="684" y="400" fill="#565e7e" font-size="9">64</text>
 
         <!-- 图例：颜色与轮廓都标明两个时点，顺序按图中端点定义。 -->
         <line x1="0" y1="520" x2="1000" y2="520" stroke="rgba(41,49,79,0.10)" stroke-width="0.8"/>
-        <text class="mono" x="0" y="538" fill="#565e7e" font-size="10" letter-spacing="0.1em">图例</text>
+        <text font-family="'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace" x="0" y="538" fill="#565e7e" font-size="10" letter-spacing="0.1em">图例</text>
         <circle cx="78" cy="534" r="6" fill="#ffffff" stroke="rgba(41,49,79,0.60)" stroke-width="1.5"/>
-        <text class="sans" x="96" y="538" fill="#565e7e" font-size="10">改版前</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="96" y="538" fill="#565e7e" font-size="10">改版前</text>
         <circle cx="174" cy="534" r="6" fill="rgba(41,49,79,0.60)" stroke="rgba(41,49,79,0.60)" stroke-width="1"/>
-        <text class="sans" x="192" y="538" fill="#565e7e" font-size="10">改版后</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="192" y="538" fill="#565e7e" font-size="10">改版后</text>
         <line x1="280" y1="534" x2="308" y2="534" stroke="rgba(41,49,79,0.40)" stroke-width="1.2"/>
-        <text class="sans" x="318" y="538" fill="#565e7e" font-size="10">墨色深浅表示变化幅度</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="318" y="538" fill="#565e7e" font-size="10">墨色深浅表示变化幅度</text>
         <line x1="530" y1="534" x2="558" y2="534" stroke="#1a4dd9" stroke-width="1.8"/>
-        <text class="sans" x="568" y="538" fill="#565e7e" font-size="10">唯一回落</text>
-        <text class="sans" x="1000" y="538" fill="#8f94ab" font-size="10" text-anchor="end">示意数据 · 按变化绝对值降序</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="568" y="538" fill="#565e7e" font-size="10">唯一回落</text>
+        <text font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif" x="1000" y="538" fill="#8f94ab" font-size="10" text-anchor="end">示意数据 · 按变化绝对值降序</text>
       </svg>
     </div>
     <div class="cards">
