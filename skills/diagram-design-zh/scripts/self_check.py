@@ -18,7 +18,7 @@
            hex 与 rgba 基色必须来自语义槽位表或语义色族，不许自造颜色；
            终端灰阶只在终端外壳文件里合法。
   排版层   中文硬规则：lang=zh-CN、三字体栈齐全且含系统兜底、
-           禁用纯西文字体（Geist/Inter/Roboto 等）、含汉字文本 ≥10px、
+           保留中文/系统字体回退、含汉字文本 ≥10px、
            中英混排空格（警告级）；角色值——页面 eyebrow 字号 12px
            （拉丁 eyebrow 走 mono 7–8px）、h1 下限 1.5rem（style-guide
            排版角色表 / 字号下限）。
@@ -28,7 +28,7 @@
            svg 内禁 var() 与 <style>；有面积形状须有 fill、text 须有
            font-family（自带或继承自 SVG 内祖先）；class 若靠页级 CSS
            给 fill/stroke/display，元素必须有属性兜底。
-  画廊层   仅画廊目录页：每个分组的 span.count 必须等于组内卡数。
+  画廊层   仅画廊目录页：每个分组的 span[data-n] 与文本等于组内卡数。
 
 错误（-）导致退出码 1；警告（~）不拦截但须逐条人工确认。
 """
@@ -47,6 +47,8 @@ from xml.etree import ElementTree as ET
 # 显式补一次是为了 self_check 被当作模块导入时也能找到 reskin。
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import reskin  # noqa: E402——同目录模块，槽位闭集与值级识别的唯一实现
+from style_config import load_style_colors
+from html_tools import svg_fragments, color_occurrences
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
 MOTION_TEMPLATE = SKILL_DIR / "assets" / "template-motion.html"
@@ -59,14 +61,32 @@ CSS_URL_RE = re.compile(r"url\(\s*([^)]+?)\s*\)", re.IGNORECASE)
 CSS_IMAGE_SET_RE = re.compile(r"(?:-webkit-)?image-set\s*\(", re.IGNORECASE)
 CSS_REMOTE_RE = re.compile(r"(?:https?:)?//", re.IGNORECASE)
 CSS_REFERENCE_ATTRS = {
-    "style", "fill", "stroke", "filter", "clip-path", "mask", "marker",
-    "marker-start", "marker-mid", "marker-end", "cursor",
+    "style",
+    "fill",
+    "stroke",
+    "filter",
+    "clip-path",
+    "mask",
+    "marker",
+    "marker-start",
+    "marker-mid",
+    "marker-end",
+    "cursor",
 }
-REFERENCE_ATTRS = {"src", "href", "xlink:href", "poster", "srcset", "action", "formaction"}
+REFERENCE_ATTRS = {
+    "src",
+    "href",
+    "xlink:href",
+    "poster",
+    "srcset",
+    "action",
+    "formaction",
+}
 
 CJK_RE = re.compile(r"[\u4e00-\u9fff]")
-SPACING_RE = re.compile(r"([\u4e00-\u9fff])([A-Za-z0-9])|([A-Za-z0-9])([\u4e00-\u9fff])")
-BANNED_FONTS = ["geist", "instrument serif", "jetbrains mono", "inter", "roboto"]
+SPACING_RE = re.compile(
+    r"([\u4e00-\u9fff])([A-Za-z0-9])|([A-Za-z0-9])([\u4e00-\u9fff])"
+)
 FONT_VALUE_RE = re.compile(r'font-family\s*[:=]\s*["\']?([^;"\'}]+)', re.IGNORECASE)
 CSS_FONT_SIZE_RE = re.compile(r"font-size\s*:\s*([\d.]+)(px|rem)\b")
 EYEBROW_BLOCK_RE = re.compile(r"(?:^|[^\w-])(?:header-)?eyebrow\s*\{([^}]*)\}")
@@ -84,7 +104,7 @@ SELF_CONTAIN_EXEMPT = {"template-motion"}
 
 
 class DiagramParser(HTMLParser):
-    def __init__(self) -> None:
+    def __init__(self, mode="diagram") -> None:
         super().__init__(convert_charrefs=True)
         self.roots: list[dict[str, str]] = []
         self.items: list[dict[str, str]] = []
@@ -110,7 +130,9 @@ class DiagramParser(HTMLParser):
         self._motion_root_depth: int | None = None
         self._controls_depth: int | None = None
         self._current_text_size: str | None = None
-        self.gallery_index = False
+        self.gallery_index = mode == "gallery"
+        self.decorative = mode == "decorative"
+        self.mode = mode
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.casefold()
@@ -118,10 +140,13 @@ class DiagramParser(HTMLParser):
         data = {key: value for key, value in normalized_attrs}
         if tag == "html" and not self.html_lang:
             self.html_lang = data.get("lang", "")
-        if tag in {"html", "body"} and "data-gallery-index" in data:
-            # 画廊目录页自报——iframe 只作本目录示例的索引缩略（画廊非交付物，
-            # 本身不是单文件图表）；src 仍走远程引用检查 + 文件级存在性检查。
-            self.gallery_index = True
+        if tag in {"html", "body"}:
+            if "data-gallery-index" in data and not self.gallery_index:
+                self.unsafe.append(
+                    "交付图表不能自报画廊；画廊须由调用方指定 --mode gallery"
+                )
+            if "data-decorative-gallery" in data and not self.decorative:
+                self.unsafe.append("装饰资源须由调用方指定 --mode decorative")
         if tag in {"base", "embed", "object", "iframe"}:
             if not (tag == "iframe" and self.gallery_index):
                 self.unsafe.append(f"<{tag}> 不允许出现在图表文件里")
@@ -151,6 +176,10 @@ class DiagramParser(HTMLParser):
                 self.statuses.append(data)
                 if self._controls_depth is not None:
                     self.statuses_in_controls += 1
+        if self.gallery_index:
+            for key in ("data-dark", "data-full"):
+                if key in data:
+                    self.references.append((tag, "gallery-preview", data[key]))
         if tag == "script":
             self._current_script = {
                 "attrs": data,
@@ -239,8 +268,8 @@ def css_px(value: str) -> float | None:
     return float(m.group(1)) * (16 if m.group(2) == "rem" else 1)
 
 
-def parsed_document(source: str) -> DiagramParser:
-    parser = DiagramParser()
+def parsed_document(source: str, mode="diagram") -> DiagramParser:
+    parser = DiagramParser(mode)
     parser.feed(source)
     parser.close()
     return parser
@@ -277,32 +306,58 @@ def canonical_controller() -> str:
     return normalized_controller("".join(body))
 
 
-def check_scripts(parser: DiagramParser, errors: list[str]) -> None:
+def check_scripts(
+    parser: DiagramParser, errors: list[str], gallery_template: Path | None = None
+) -> None:
     if not parser.scripts:
         return
+    if parser.decorative:
+        errors.append("装饰资源不允许脚本")
+        return
     if parser.gallery_index:
-        return  # 画廊目录页：允许内联主题切换脚本（非交付物，与 iframe 豁免同理）
+        if gallery_template is None:
+            errors.append("画廊检查需由调用方显式提供规范模板")
+            return
+        canonical = parsed_document(gallery_template.read_text())
+        actual = [normalized_controller("".join(s["body"])) for s in parser.scripts]
+        expected = [
+            normalized_controller("".join(s["body"])) for s in canonical.scripts
+        ]
+        if actual != expected or any(
+            s["attrs"] or not s["closed"] for s in parser.scripts
+        ):
+            errors.append("画廊脚本须与 gallery_template.html 一致且无附加属性")
+        return
     if len(parser.scripts) > 1:
         errors.append(f"至多允许一个脚本（动效控制器）；发现 {len(parser.scripts)} 个")
     for number, script in enumerate(parser.scripts, 1):
         attrs = script["attrs"]
         attr_names = script["attr_names"]
         body = script["body"]
-        assert isinstance(attrs, dict) and isinstance(attr_names, list) and isinstance(body, list)
+        assert (
+            isinstance(attrs, dict)
+            and isinstance(attr_names, list)
+            and isinstance(body, list)
+        )
         if not script["closed"]:
             errors.append(f"脚本 {number} 必须有闭合标签")
-        if attr_names != ["data-diagram-controls"] or attrs.get("data-diagram-controls") != "":
+        if (
+            attr_names != ["data-diagram-controls"]
+            or attrs.get("data-diagram-controls") != ""
+        ):
             errors.append(f"脚本 {number} 只能携带唯一的规范属性 data-diagram-controls")
             continue
         try:
             if normalized_controller("".join(body)) != canonical_controller():
-                errors.append(f"脚本 {number} 必须与 template-motion.html 中的控制器逐字节一致")
+                errors.append(
+                    f"脚本 {number} 必须与 template-motion.html 中的控制器逐字节一致"
+                )
         except RuntimeError as exc:
             errors.append(str(exc))
 
 
 def check_motion(parser: DiagramParser, source: str, errors: list[str]) -> None:
-    if "data-gallery-index" in source:
+    if parser.gallery_index:
         return  # 画廊目录页：内联脚本不是动效控制器，勿按动效契约校验
     has_motion_markup = bool(parser.roots or parser.items or parser.scripts)
     if not has_motion_markup:
@@ -339,21 +394,30 @@ def check_motion(parser: DiagramParser, source: str, errors: list[str]) -> None:
             if not item.get("aria-label", "").strip():
                 errors.append(f"语义动效条目 {index} 需要非颜色的 aria-label")
         elif item.get("aria-hidden") != "true" or item.get("focusable") != "false":
-            errors.append(f"装饰动效条目 {index} 需要 aria-hidden=true 与 focusable=false")
+            errors.append(
+                f"装饰动效条目 {index} 需要 aria-hidden=true 与 focusable=false"
+            )
         inline = item.get("style", "").replace(" ", "").lower()
-        if any(token in inline for token in ("display:none", "visibility:hidden", "opacity:0")):
+        if any(
+            token in inline
+            for token in ("display:none", "visibility:hidden", "opacity:0")
+        ):
             errors.append(f"动效条目 {index} 在源里被隐藏；静态回退画面必须可见")
 
     expected = set(range(1, count + 1)) if count > 0 else set()
     if set(semantic_steps) != expected:
-        errors.append(f"语义步必须连续覆盖 1..{count}；发现 {sorted(set(semantic_steps))}")
+        errors.append(
+            f"语义步必须连续覆盖 1..{count}；发现 {sorted(set(semantic_steps))}"
+        )
     crowded = {step: n for step, n in Counter(semantic_steps).items() if n > 2}
     if crowded:
         errors.append(f"每步至多 2 个语义条目；超出的有 {crowded}")
 
     if mode in {"none", "loop"} and parser.scripts:
         errors.append(f"{mode} 模式必须无脚本")
-    if mode in {"none", "loop"} and (parser.controls or parser.actions or parser.statuses):
+    if mode in {"none", "loop"} and (
+        parser.controls or parser.actions or parser.statuses
+    ):
         errors.append(f"{mode} 模式不得提供播放控件或播报区")
     controlled = mode == "step" or (mode == "reveal" and bool(parser.scripts))
     if controlled:
@@ -371,7 +435,9 @@ def check_motion(parser: DiagramParser, source: str, errors: list[str]) -> None:
                 or status.get("aria-live") != "polite"
                 or status.get("aria-atomic") != "true"
             ):
-                errors.append("动效播报区需要 role=status、aria-live=polite、aria-atomic=true")
+                errors.append(
+                    "动效播报区需要 role=status、aria-live=polite、aria-atomic=true"
+                )
             if parser.statuses_in_controls:
                 errors.append("动效播报区必须在 data-motion-controls 之外")
         if not parser.scripts:
@@ -379,7 +445,12 @@ def check_motion(parser: DiagramParser, source: str, errors: list[str]) -> None:
 
     style_source = "".join(parser.styles)
     if parser.scripts:
-        if re.search(r"prefers-reduced-motion\s*:\s*reduce", style_source, re.IGNORECASE) is None:
+        if (
+            re.search(
+                r"prefers-reduced-motion\s*:\s*reduce", style_source, re.IGNORECASE
+            )
+            is None
+        ):
             errors.append("缺少减弱动效 CSS 回退（prefers-reduced-motion）")
         if re.search(r"@media\s+print\b", style_source, re.IGNORECASE) is None:
             errors.append("缺少打印 CSS 回退（@media print）")
@@ -387,36 +458,69 @@ def check_motion(parser: DiagramParser, source: str, errors: list[str]) -> None:
             errors.append("动效文件需要 <noscript> 说明完整静态画面")
 
 
-def check_colors(source: str, errors: list[str]) -> None:
+def check_colors(
+    source: str,
+    errors: list[str],
+    style_guide: Path | None = None,
+    stem: str = "",
+    gallery=False,
+) -> None:
     """颜色出处闭集：值级识别复用 reskin.translate——质量门与换肤机器
     同一套槽位表，不存在两套标准。换肤产物按 doctype 后的 reskin 来源
     注释把目标皮肤表的值并进闭集（出处=那张表）；标记指向的表不在
     skins/ 里则直接拦——自带表请拷进 scripts/skins/（gate 顺带把关）。
     终端灰阶只在终端外壳文件里合法（外壳特征：class="terminal" 或
     CSS 变量注释 terminal-page）。"""
-    extra = None
+    try:
+        extra = load_style_colors(style_guide or reskin.DEFAULT_CONFIG)
+    except (OSError, ValueError) as exc:
+        errors.append(f"生效样式指南无效：{exc}")
+        return
     marker = re.search(r"<!--\s*reskin:([\w.-]+)", source)
     if marker:
         skin_path = reskin.SKINS_DIR / f"{marker.group(1)}.json"
-        if not skin_path.is_file():
+        if not skin_path.is_file() and style_guide is None:
             errors.append(
                 f"reskin 标记自报皮肤 {marker.group(1)!r} 不在 scripts/skins/ 里——"
                 "自带表先拷进去（--list 会顺带过 gate）再交付"
             )
-        else:
-            extra = reskin.load_skin(skin_path)["colors"]
+        elif skin_path.is_file():
+            try:
+                skin = reskin.load_skin(skin_path)
+                problems, _notices = reskin.gate(skin)
+                if problems:
+                    errors.extend(f"皮肤表无效：{p}" for p in problems)
+                extra.update(skin["colors"])
+            except reskin.SkinError as exc:
+                errors.append(str(exc))
     _text, _replaced, kept = reskin.translate(source, {}, extra=extra)
+    if style_guide:
+        effective_bases = {v[1] for v in extra.values()} | {
+            v[1] for v in reskin.PINNED.values()
+        }
+        retired = {
+            v[1] for k, v in reskin.SLOTS.items() if k in extra and extra[k][1] != v[1]
+        } - effective_bases
+        stale = sorted(
+            {
+                raw
+                for a, b, raw in color_occurrences(source)
+                if reskin.parse_color(raw)[1] in retired
+            }
+        )
+        if stale:
+            errors.append(f"成品仍使用已替换的出厂角色色：{stale}")
     unknown = sorted(k for k in kept if k.startswith("未知:"))
     if unknown:
         errors.append(
             f"颜色出处不明 {sum(kept[k] for k in unknown)} 处 {unknown}——"
-            "色值必须来自语义槽位表（scripts/skins/default.json，与 style-guide 对账）"
-            "或语义色族，不许自造颜色"
+            "色值必须来自生效样式指南、已登记皮肤或语义色族；档案用 --style-guide 显式指定"
         )
     terminal = sorted(k.split(":", 1)[1] for k in kept if k.startswith("terminal:"))
     is_terminal = (
-        'class="terminal"' in source or "terminal-page" in source
-        or "data-gallery-index" in source  # 画廊页内联终端皮肤缩略属跨图展示
+        'class="terminal"' in source
+        or "terminal-page" in source
+        or gallery  # 画廊页内联终端皮肤缩略属跨图展示
     )
     if terminal and not is_terminal:
         errors.append(
@@ -425,18 +529,107 @@ def check_colors(source: str, errors: list[str]) -> None:
         )
     # α 梯子闭集：一切 rgba 透明度只取梯子标准档（treemap 六档整组特例）——
     # 档位值本身表外即制度性漂移（radar-dark 系列面积 0.22 一案）
-    LADDER = {"0.02", "0.03", "0.05", "0.06", "0.08", "0.10", "0.12", "0.15", "0.18",
-              "0.20", "0.30", "0.40", "0.45", "0.50", "0.60", "0.72",
-              "0.04", "0.07", "0.09", "0.11", "0.13", "0.16"}
-    off = sorted({a for a in re.findall(r"rgba\(\d+,\s*\d+,\s*\d+,\s*(0\.\d+)\)", source) if a not in LADDER})
+    LADDER = {
+        0.02,
+        0.03,
+        0.05,
+        0.06,
+        0.08,
+        0.10,
+        0.12,
+        0.15,
+        0.18,
+        0.20,
+        0.30,
+        0.40,
+        0.45,
+        0.50,
+        0.60,
+    }
+    declared = re.search(r'<svg\b[^>]*\bdata-diagram-type="([\w-]+)"', source)
+    diagram_type = declared.group(1) if declared else stem.removeprefix("example-")
+    exceptional = set()
+    if gallery:
+        exceptional = {0.04, 0.07, 0.09, 0.11, 0.13, 0.16, 0.72}
+    elif diagram_type.startswith("treemap"):
+        exceptional = {0.04, 0.07, 0.09, 0.11, 0.13, 0.16}
+    elif diagram_type.startswith("marimekko"):
+        exceptional = {0.16}
+    elif diagram_type.startswith(("exploded", "axonometric-plan")):
+        exceptional = {0.07}
+    elif diagram_type.startswith("state-lifecycle"):
+        exceptional = {0.04}
+    ink_bases = {
+        reskin.SLOTS["ink"][1],
+        reskin.SLOTS["paper-dark"][1],
+        extra["ink"][1],
+        extra["paper-dark"][1],
+    }
+    text_bases = ink_bases | {
+        reskin.SLOTS["paper"][1],
+        reskin.SLOTS["dark-bg"][1],
+        extra["paper"][1],
+        extra["dark-bg"][1],
+    }
+    if is_terminal:
+        text_bases |= set(reskin.TERMINAL_NEUTRALS)
+    accent_bases = {
+        reskin.SLOTS["accent"][1],
+        reskin.SLOTS["accent-dark"][1],
+        extra["accent"][1],
+        extra["accent-dark"][1],
+    }
+    off = set()
+    registered_rgba = set()
+    for literal, base in extra.values():
+        match = reskin.RGBA_RE.fullmatch(literal)
+        if match and match.group(4) is not None:
+            registered_rgba.add((base, float(match.group(4))))
+    color_positions = {a for a, b, raw in color_occurrences(source)}
+    for match in re.finditer(r"rgba\(\s*(\d+),\s*(\d+),\s*(\d+),\s*(0\.\d+)\)", source):
+        if match.start() not in color_positions:
+            continue
+        r, g, b, alpha = match.groups()
+        value, base = float(alpha), (int(r), int(g), int(b))
+        prefix = source[source.rfind("<", 0, match.start()) : match.start()]
+        text_use = bool(
+            re.match(r"<t(?:ext|span)\b", prefix)
+            or re.search(r"(?:color|--color-(?:ink|muted|soft))\s*:\s*$", prefix)
+        )
+        text_special = value == 0.72 and text_use and base in text_bases
+        detail_special = (
+            value == 0.72
+            and diagram_type.startswith(("exploded", "axonometric-plan"))
+            and base in accent_bases
+            and re.search(r"\bstroke=[\"']$", prefix)
+        )
+        type_special = value in exceptional and base in ink_bases
+        literal_token = (base, value) in registered_rgba
+        if value not in LADDER and not (
+            literal_token or text_special or detail_special or type_special
+        ):
+            off.add(alpha)
+    off = sorted(off)
     if off:
-        errors.append(f"透明度不在梯子标准档：{off}——深色档 α 不动（style-guide α 梯子闭集）")
+        errors.append(
+            f"透明度不在梯子标准档：{off}——深色档 α 不动（style-guide α 梯子闭集）"
+        )
     # line 元素 α 白名单：线类只走线档；芯片 / 柱体 / 面积档上线即档位错用
     # （org-chart 分隔线 0.12、看板图例线 0.12 两案）
     LINE_TIERS = {"0.08", "0.10", "0.20", "0.30", "0.40", "0.50", "0.60"}
-    bad_lines = sorted({a for a in re.findall(r'<line\s[^>]*stroke="rgba\(\d+,\s*\d+,\s*\d+,\s*(0\.\d+)\)', source) if a not in LINE_TIERS})
+    bad_lines = sorted(
+        {
+            a
+            for a in re.findall(
+                r'<line\s[^>]*stroke="rgba\(\d+,\s*\d+,\s*\d+,\s*(0\.\d+)\)', source
+            )
+            if a not in LINE_TIERS
+        }
+    )
     if bad_lines:
-        errors.append(f"line 描边用了非线档透明度：{bad_lines}——线走 0.08/0.10/0.20/0.30/0.40/0.50/0.60，芯片与面积档别混")
+        errors.append(
+            f"line 描边用了非线档透明度：{bad_lines}——线走 0.08/0.10/0.20/0.30/0.40/0.50/0.60，芯片与面积档别混"
+        )
     # 颜色值合法性：fill/stroke 属性值必须落在合法形态闭集——非法串（漏 rgba
     # 前缀、拼错的函数式）会渲染成黑块却绕过 α 梯子检查（鱼骨图首例一案）
     GOOD_COLOR = re.compile(
@@ -447,11 +640,16 @@ def check_colors(source: str, errors: list[str]) -> None:
         r"|url\(#[^)]+\))$"
     )
     bad_colors = sorted(
-        {v.strip() for v in re.findall(r'\b(?:fill|stroke)="([^"]*)"', source)
-         if v.strip() and not GOOD_COLOR.match(v.strip())}
+        {
+            v.strip()
+            for v in re.findall(r'\b(?:fill|stroke)="([^"]*)"', source)
+            if v.strip() and not GOOD_COLOR.match(v.strip())
+        }
     )
     if bad_colors:
-        errors.append(f"非法颜色值（形态不在闭集）：{bad_colors}——十六进制 token / 合法 rgba / none 之外一律拦")
+        errors.append(
+            f"非法颜色值（形态不在闭集）：{bad_colors}——十六进制 token / 合法 rgba / none 之外一律拦"
+        )
 
 
 def normalize_css_escapes(source: str) -> str:
@@ -486,7 +684,9 @@ def check_css_references(parser: DiagramParser, errors: list[str]) -> None:
         found_loader = True
     # Remove url() payloads first: base64 data URLs may contain // by chance.
     if CSS_REMOTE_RE.search(CSS_URL_RE.sub("", source)) and not found_loader:
-        errors.append("CSS 内远程引用——字体用 scripts/embed_fonts.py 内嵌，图片转 data: URI")
+        errors.append(
+            "CSS 内远程引用——字体用 scripts/embed_fonts.py 内嵌，图片转 data: URI"
+        )
 
 
 def check_svg_self_containment(source: str, stem: str, errors: list[str]) -> None:
@@ -503,16 +703,22 @@ def check_svg_self_containment(source: str, stem: str, errors: list[str]) -> Non
     """
     if stem in SELF_CONTAIN_EXEMPT:
         return
-    css = "\n".join(re.findall(r"<style\b[^>]*>(.*?)</style>", source, re.S | re.IGNORECASE))
+    css = "\n".join(
+        re.findall(r"<style\b[^>]*>(.*?)</style>", source, re.S | re.IGNORECASE)
+    )
     rules = re.findall(r"([^{}]+)\{([^{}]*)\}", css)
     findings: Counter = Counter()
     examples: dict[str, str] = {}
-    for number, svg in enumerate(re.finditer(r"<svg\b.*?</svg>", source, re.S), 1):
-        fragment = svg.group(0)
+    for number, svg in enumerate(svg_fragments(source), 1):
+        fragment = svg.source
         if "var(" in fragment:
-            findings[f"svg {number} 内出现 var()——页级变量不随独立导出携带，颜色/字体写元素字面值"] += 1
+            findings[
+                f"svg {number} 内出现 var()——页级变量不随独立导出携带，颜色/字体写元素字面值"
+            ] += 1
         if re.search(r"<style\b", fragment, re.IGNORECASE):
-            findings[f"svg {number} 内嵌 <style>——独立导出不携带，样式写在元素属性上"] += 1
+            findings[
+                f"svg {number} 内嵌 <style>——独立导出不携带，样式写在元素属性上"
+            ] += 1
         stack: list[tuple[str, dict[str, str]]] = []
         in_clip = 0
         for match in SVG_WALK_RE.finditer(fragment):
@@ -536,29 +742,61 @@ def check_svg_self_containment(source: str, stem: str, errors: list[str]) -> Non
                     key = f"svg {number} 的 {name} 无 fill（自带或 SVG 内祖先继承）——脱离 CSS 渲染时按默认黑色填充"
                     findings[key] += 1
                     examples.setdefault(key, tag[:60])
-                if name in {"text", "tspan"} and "font-family" not in attrs and not ancestor_font:
+                if (
+                    name in {"text", "tspan"}
+                    and "font-family" not in attrs
+                    and not ancestor_font
+                ):
                     key = f"svg {number} 的 {name} 无 font-family——独立导出会丢字体"
                     findings[key] += 1
                     examples.setdefault(key, tag[:60])
-                seen: set[str] = set()  # 同一元素同一类问题只计一次（多条规则命中同类不再累加）
+                seen: set[str] = (
+                    set()
+                )  # 同一元素同一类问题只计一次（多条规则命中同类不再累加）
                 for cls in attrs.get("class", "").split():
                     for selector, block in rules:
                         if f".{cls}" not in selector:
                             continue
-                        if re.search(r"(?:^|[^-])fill\s*:", block) and "fill" not in attrs and not ancestor_fill and f"fill:{cls}" not in seen:
+                        if (
+                            re.search(r"(?:^|[^-])fill\s*:", block)
+                            and "fill" not in attrs
+                            and not ancestor_fill
+                            and f"fill:{cls}" not in seen
+                        ):
                             seen.add(f"fill:{cls}")
-                            findings[f"svg {number} 的 .{cls} 依赖页级 CSS fill——元素须带 fill 属性兜底"] += 1
-                        if re.search(r"(?:^|[^-])stroke\s*:", block) and "stroke" not in attrs and not ancestor_stroke and f"stroke:{cls}" not in seen:
+                            findings[
+                                f"svg {number} 的 .{cls} 依赖页级 CSS fill——元素须带 fill 属性兜底"
+                            ] += 1
+                        if (
+                            re.search(r"(?:^|[^-])stroke\s*:", block)
+                            and "stroke" not in attrs
+                            and not ancestor_stroke
+                            and f"stroke:{cls}" not in seen
+                        ):
                             seen.add(f"stroke:{cls}")
-                            findings[f"svg {number} 的 .{cls} 依赖页级 CSS stroke——元素须带 stroke 属性兜底"] += 1
-                        if re.search(r"(?:^|[^-])display\s*:", block) and "display" not in attrs and f"display:{cls}" not in seen:
+                            findings[
+                                f"svg {number} 的 .{cls} 依赖页级 CSS stroke——元素须带 stroke 属性兜底"
+                            ] += 1
+                        if (
+                            re.search(r"(?:^|[^-])display\s*:", block)
+                            and "display" not in attrs
+                            and f"display:{cls}" not in seen
+                        ):
                             seen.add(f"display:{cls}")
-                            findings[f"svg {number} 的 .{cls} 依赖页级 CSS display——元素须带 display 属性兜底（静态终态语义）"] += 1
+                            findings[
+                                f"svg {number} 的 .{cls} 依赖页级 CSS display——元素须带 display 属性兜底（静态终态语义）"
+                            ] += 1
             if not tag.rstrip().endswith("/>"):
                 stack.append((name, attrs))
     for message, count in findings.items():
-        detail = f"（{count} 处，如 {examples[message]}）" if message in examples and count > 1 else (
-            f"（如 {examples[message]}）" if message in examples else (f"（{count} 处）" if count > 1 else "")
+        detail = (
+            f"（{count} 处，如 {examples[message]}）"
+            if message in examples and count > 1
+            else (
+                f"（如 {examples[message]}）"
+                if message in examples
+                else (f"（{count} 处）" if count > 1 else "")
+            )
         )
         errors.append(message + detail)
 
@@ -582,39 +820,62 @@ def check_gallery_counts(source: str, errors: list[str]) -> None:
             errors.append(f"画廊分组计数不符：声明 {attr}，实际 {cards} 张卡")
 
 
-def verify(path: Path) -> tuple[list[str], list[str]]:
+def verify(
+    path: Path,
+    style_guide: Path | None = None,
+    mode="diagram",
+    *,
+    gallery_template: Path | None = None,
+) -> tuple[list[str], list[str]]:
     source = path.read_text(encoding="utf-8")
-    parser = parsed_document(source)
+    if mode not in {"diagram", "gallery", "decorative"}:
+        raise ValueError("未知检查模式")
+    parser = parsed_document(source, mode)
     errors: list[str] = []
     warnings: list[str] = []
 
     errors.extend(parser.unsafe)
-    for number, match in enumerate(re.finditer(r"<svg\b.*?</svg>", source, re.IGNORECASE | re.DOTALL), 1):
-        try:
-            ET.fromstring(match.group(0))
-        except ET.ParseError as exc:
-            errors.append(f"svg {number} 不是良构 XML，无法导出独立 SVG：{exc}")
+    try:
+        for number, fragment in enumerate(svg_fragments(source), 1):
+            try:
+                ET.fromstring(fragment.source)
+            except ET.ParseError as exc:
+                errors.append(f"svg {number} 不是良构 XML，无法导出独立 SVG：{exc}")
+    except ValueError as exc:
+        return errors + [str(exc)], warnings
     for tag, rel, value in parser.references:
         finding = reference_error(tag, rel, value)
-        if tag == "a" and parser.gallery_index:
+        if (
+            tag == "a"
+            and parser.gallery_index
+            and value.strip().lower().startswith(("https://", "http://", "//"))
+        ):
             # 画廊目录页：<a> 外链（GitHub 仓库等）是正当导航，非交付物远程依赖
             finding = None
-        if tag == "a" and value.startswith("https://github.com/patrick-xin/diagram-design-zh"):
+        if tag == "a" and value.startswith(
+            "https://github.com/patrick-xin/diagram-design-zh"
+        ):
             # 页头导航条的仓库链接（与「← 类型画廊」同层），非内容引用
             finding = None
         if finding:
             errors.append(finding)
-        if tag == "iframe" and parser.gallery_index:
-            # 画廊缩略的本地索引——目标必须真实存在，防链接腐烂
+        if parser.gallery_index and (tag == "iframe" or rel == "gallery-preview"):
             target = value.split("#")[0].split("?")[0]
-            if target and not (path.parent / target).is_file():
-                errors.append(f"画廊 iframe 指向不存在的本地文件：{value}")
+            candidate = (path.parent / target).resolve()
+            if (
+                not re.fullmatch(r"example-[a-z0-9-]+\.html", target)
+                or candidate.parent != path.parent.resolve()
+                or not candidate.is_file()
+            ):
+                errors.append(f"画廊预览只允许同目录的现存示例：{value}")
 
     # CSS 加载器可以藏在样式块、style 属性与 SVG 呈现属性中。
     check_css_references(parser, errors)
     css = "\n".join(parser.styles)
     if "fonts.googleapis.com" in source.casefold():
-        errors.append("Google Fonts 外链残留——字体已自托管，跑 scripts/embed_fonts.py 或走系统三栈")
+        errors.append(
+            "Google Fonts 外链残留——字体已自托管，跑 scripts/embed_fonts.py 或走系统三栈"
+        )
 
     # lang
     if parser.html_lang.casefold() != "zh-cn":
@@ -630,29 +891,34 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
             errors.append(f":root 缺少 --font-{role} 定义（三栈缺一）")
     if stack_defs["sans"]:
         sans = stack_defs["sans"][0]
-        if "pingfang sc" not in sans.casefold() and "microsoft yahei" not in sans.casefold():
+        if (
+            "pingfang sc" not in sans.casefold()
+            and "microsoft yahei" not in sans.casefold()
+        ):
             errors.append("--font-sans 缺系统兜底（PingFang SC / Microsoft YaHei）")
-    if stack_defs["mono"] and "sarasa mono sc" not in stack_defs["mono"][0].casefold() \
-            and "ui-monospace" not in stack_defs["mono"][0].casefold():
+    if (
+        stack_defs["mono"]
+        and "sarasa mono sc" not in stack_defs["mono"][0].casefold()
+        and "ui-monospace" not in stack_defs["mono"][0].casefold()
+    ):
         errors.append("--font-mono 缺等宽首选或兜底（Sarasa Mono SC / ui-monospace）")
-    font_values = " ; ".join(m.group(1) for m in FONT_VALUE_RE.finditer(source))
-    for name in BANNED_FONTS:
-        if re.search(rf"\b{re.escape(name)}\b", font_values, re.IGNORECASE):
-            errors.append(f"禁用的纯西文字体出现在 font-family：{name}")
 
     # SVG 契约（slug 绑定）
     checkable = [
-        svg for svg in parser.svgs
+        svg
+        for svg in parser.svgs
         if isinstance(svg["attrs"], dict)
         and str(svg["attrs"].get("aria-hidden", "")).casefold() != "true"
     ]
-    if not checkable and "data-decorative-gallery" not in source and "data-gallery-index" not in source:
-        # 装饰性样本页（如 icons.html）自报 data-decorative-gallery、画廊目录页
-        # （index.html）自报 data-gallery-index 时豁免——无障碍契约本就要求装饰图
-        # 用 aria-hidden 而非命名，画廊缩略的命名由各示例自身负责；图表产出页
-        # 不许带任何一种标记。
+    if not checkable and not (parser.decorative or parser.gallery_index):
+        # 调用方显式选择资源模式；交付图表不能由自身标记取得豁免。
         errors.append("至少需要一个可访问（非 aria-hidden）的 SVG")
     stem = path.stem
+    root_ids = [svg["attrs"].get("id", "") for svg in checkable]
+    if len(checkable) > 1 and (
+        not all(root_ids) or len(root_ids) != len(set(root_ids))
+    ):
+        errors.append("多主图必须有唯一的顶层 SVG id")
     for number, svg in enumerate(checkable, 1):
         attrs = svg["attrs"]
         assert isinstance(attrs, dict)
@@ -663,13 +929,19 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
             errors.append(f"svg {number} 需要 role=img")
         if svg["first"] != "title":
             errors.append(f"svg {number} 的首子元素必须是 <title>")
-        if not str(title.get("text", "")).strip() or not str(desc.get("text", "")).strip():
+        if (
+            not str(title.get("text", "")).strip()
+            or not str(desc.get("text", "")).strip()
+        ):
             errors.append(f"svg {number} 的 title/desc 不能为空")
         title_id = title.get("attrs", {}).get("id", "")
         desc_id = desc.get("attrs", {}).get("id", "")
-        expected = (f"{stem}-title", f"{stem}-desc")
+        prefix = stem + "-" + attrs.get("id", "") if len(checkable) > 1 else stem
+        expected = (f"{prefix}-title", f"{prefix}-desc")
         if (title_id, desc_id) != expected:
-            errors.append(f"svg {number} 的 title/desc id 必须是 {expected}；当前是 ({title_id!r}, {desc_id!r})")
+            errors.append(
+                f"svg {number} 的 title/desc id 必须是 {expected}；当前是 ({title_id!r}, {desc_id!r})"
+            )
         if attrs.get("aria-labelledby", "").split() != [title_id, desc_id]:
             errors.append(f"svg {number} 的 aria-labelledby 必须依次指向 title、desc")
 
@@ -689,7 +961,9 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         value, unit = float(m.group(1)), m.group(2)
         px = value * 16 if unit == "rem" else value
         if px < 10:
-            warnings.append(f"CSS font-size {m.group(0)} < 10px——若该选择器作用于含汉字文本即违规")
+            warnings.append(
+                f"CSS font-size {m.group(0)} < 10px——若该选择器作用于含汉字文本即违规"
+            )
 
     # 排版角色值（style-guide 排版角色表 / 字号下限）：页面 eyebrow 一律 12px，
     # 唯一例外 eyebrow-tech（mono 栈）7–8px；h1 下限 1.5rem，clamp() 取其最小档。
@@ -706,9 +980,13 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
             continue
         if ff and "mono" in ff.group(1).lower():
             if not 7 <= size <= 8:
-                errors.append(f"eyebrow-tech 字号应为 mono 7–8px；当前 {fs.group(1).strip()}")
+                errors.append(
+                    f"eyebrow-tech 字号应为 mono 7–8px；当前 {fs.group(1).strip()}"
+                )
         elif abs(size - 12) > 0.01:
-            errors.append(f"页面 eyebrow 字号应为 12px（0.75rem）；当前 {fs.group(1).strip()}")
+            errors.append(
+                f"页面 eyebrow 字号应为 12px（0.75rem）；当前 {fs.group(1).strip()}"
+            )
     for m in H1_BLOCK_RE.finditer(css):
         fs = re.search(r"font-size\s*:\s*([^;]+)", m.group(1))
         if not fs:
@@ -723,7 +1001,7 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
     seen: set[str] = set()
     for node in parser.text_nodes:
         for m in SPACING_RE.finditer(node):
-            snippet = node[max(0, m.start() - 4):m.end() + 4].strip()
+            snippet = node[max(0, m.start() - 4) : m.end() + 4].strip()
             if snippet not in seen:
                 seen.add(snippet)
                 warnings.append(f"中英混排疑似缺空格：「…{snippet}…」")
@@ -748,7 +1026,10 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
     structural_rects = []
     for m in re.finditer(r"<rect\s+[^>]*>", source):
         tag_src = m.group(0)
-        coords = {a: re.search(rf'{a}="([-\d.]+)"', tag_src) for a in ("x", "y", "width", "height")}
+        coords = {
+            a: re.search(rf'{a}="([-\d.]+)"', tag_src)
+            for a in ("x", "y", "width", "height")
+        }
         if not all(coords.values()):
             continue
         x, y = float(coords["x"].group(1)), float(coords["y"].group(1))
@@ -758,7 +1039,7 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
     bands: dict[tuple[float, float], list[tuple[float, float]]] = {}
     # 画廊目录页：多张缩略共一文件，跨图坐标比较全是误报——几何完整性由各源
     # example 的 self_check 保证，画廊层只管引用与结构。
-    if "data-gallery-index" in source:
+    if parser.gallery_index:
         structural_rects = []
     for rx, ry, rw, rh in structural_rects:
         bands.setdefault((rx, rw), []).append((ry, rh))
@@ -770,7 +1051,10 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
     if stacks:
         for m in re.finditer(r"<line\s+[^>]*>", source):
             tag_src = m.group(0)
-            coords = {a: re.search(rf'{a}="([-\d.]+)"', tag_src) for a in ("x1", "y1", "x2", "y2")}
+            coords = {
+                a: re.search(rf'{a}="([-\d.]+)"', tag_src)
+                for a in ("x1", "y1", "x2", "y2")
+            }
             if not all(coords.values()):
                 continue
             x1, y1, x2, y2 = (float(c.group(1)) for c in coords.values())
@@ -797,16 +1081,20 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
     through_lines: list[float] = []
     for m in re.finditer(r"<line\s+[^>]*>", source):
         tag = m.group(0)
-        coords = {a: re.search(rf'{a}="([-\d.]+)"', tag) for a in ("x1", "y1", "x2", "y2")}
+        coords = {
+            a: re.search(rf'{a}="([-\d.]+)"', tag) for a in ("x1", "y1", "x2", "y2")
+        }
         if not all(coords.values()):
             continue
         x1, y1, x2, y2 = (float(c.group(1)) for c in coords.values())
         if abs(y1 - y2) <= 0.5 and x1 <= 20 and x2 >= 900:
             through_lines.append(y1)
-    if "data-gallery-index" in source:  # 画廊页：跨图图例线互不相干，见堆叠检查处注释
+    if parser.gallery_index:  # 画廊页：跨图图例线互不相干，见堆叠检查处注释
         through_lines = []
     if through_lines:
-        legend_line_y = max(through_lines)  # 最底部的贯通横线是图例线（道框/分区线更靠上）
+        legend_line_y = max(
+            through_lines
+        )  # 最底部的贯通横线是图例线（道框/分区线更靠上）
         baselines: dict[float, str] = {}
         for t in re.finditer(r"<text\s+[^>]*>", source):
             ty = re.search(r'\by="([-\d.]+)"', t.group(0))
@@ -817,11 +1105,17 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
                 continue  # 图例样本芯片内的码字（7px）与项文字本就异层，不参与同线判定
             y = float(ty.group(1))
             if legend_line_y < y <= legend_line_y + 30:
-                snippet = re.search(r">\s*([^<\s][^<]{0,11})", source[t.end():t.end() + 80])
+                snippet = re.search(
+                    r">\s*([^<\s][^<]{0,11})", source[t.end() : t.end() + 80]
+                )
                 baselines.setdefault(y, (snippet.group(1).strip() if snippet else "?"))
         if len(baselines) > 1:
-            detail = "、".join(f"y={y:g}（{txt}…）" for y, txt in sorted(baselines.items()))
-            warnings.append(f"图例行文字基线不一致：{detail}——同行图例文字应共用一条基线")
+            detail = "、".join(
+                f"y={y:g}（{txt}…）" for y, txt in sorted(baselines.items())
+            )
+            warnings.append(
+                f"图例行文字基线不一致：{detail}——同行图例文字应共用一条基线"
+            )
 
     # 焦点信号簇计数（警告级）：accent 系的「面与线」语义簇 ≤2——焦点盒
     # （rect ≥40×20、fill 为 accent 且 α≥0.08）+ 焦点线（line stroke accent、
@@ -888,7 +1182,10 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
 
     translate_stack: list[tuple[float, float]] = []
     current_vb: tuple[float, float] | None = None
-    for m in re.finditer(r"<g\b[^>]*>|</g>|<svg\b[^>]*>|<rect\s[^>]*>|<polygon\s[^>]*>|<line\s[^>]*>|<path\s[^>]*>", source):
+    for m in re.finditer(
+        r"<g\b[^>]*>|</g>|<svg\b[^>]*>|<rect\s[^>]*>|<polygon\s[^>]*>|<line\s[^>]*>|<path\s[^>]*>",
+        source,
+    ):
         tag = m.group(0)
         if tag.startswith("<svg"):
             vbm = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', tag)
@@ -896,12 +1193,16 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
                 current_vb = (float(vbm.group(1)), float(vbm.group(2)))
             else:
                 # fail-closed：viewBox 缺失或非闭集格式时报错，而不是静默跳过越界检查
-                errors.append(f'svg 缺少合法 viewBox（应为 "0 0 W H"，宽高为正数）| {tag[:80]}')
+                errors.append(
+                    f'svg 缺少合法 viewBox（应为 "0 0 W H"，宽高为正数）| {tag[:80]}'
+                )
                 current_vb = None
             continue
         if tag.startswith("<g"):
             t = re.search(r"translate\(([-\d.]+)[ ,]+([-\d.]+)\)", tag)
-            translate_stack.append((float(t.group(1)), float(t.group(2))) if t else (0.0, 0.0))
+            translate_stack.append(
+                (float(t.group(1)), float(t.group(2))) if t else (0.0, 0.0)
+            )
             continue
         if tag == "</g>":
             if translate_stack:
@@ -910,20 +1211,38 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
         tx = sum(o[0] for o in translate_stack)
         ty = sum(o[1] for o in translate_stack)
         if tag.startswith("<rect") or tag.startswith("<polygon"):
-            coords = {a: re.search(rf'{a}="([-\d.]+)"', tag) for a in ("x", "y", "width", "height")}
+            coords = {
+                a: re.search(rf'{a}="([-\d.]+)"', tag)
+                for a in ("x", "y", "width", "height")
+            }
             if tag.startswith("<rect") and all(coords.values()):
-                x, y = float(coords["x"].group(1)) + tx, float(coords["y"].group(1)) + ty
+                x, y = (
+                    float(coords["x"].group(1)) + tx,
+                    float(coords["y"].group(1)) + ty,
+                )
                 w, h = float(coords["width"].group(1)), float(coords["height"].group(1))
             elif tag.startswith("<polygon"):
-                pts = [float(v) for v in re.findall(r"-?\d+\.?\d*", re.search(r'points="([^"]+)"', tag).group(1))]
+                pts = [
+                    float(v)
+                    for v in re.findall(
+                        r"-?\d+\.?\d*", re.search(r'points="([^"]+)"', tag).group(1)
+                    )
+                ]
                 xs, ys = pts[0::2], pts[1::2]
-                x, y, w, h = min(xs) + tx, min(ys) + ty, max(xs) - min(xs), max(ys) - min(ys)
+                x, y, w, h = (
+                    min(xs) + tx,
+                    min(ys) + ty,
+                    max(xs) - min(xs),
+                    max(ys) - min(ys),
+                )
             else:
                 continue
             if w >= 40 and h >= 20:
                 surfaces.append((x, y, w, h, current_vb))
         elif tag.startswith("<line"):
-            coords = {a: re.search(rf'{a}="([-\d.]+)"', tag) for a in ("x1", "y1", "x2", "y2")}
+            coords = {
+                a: re.search(rf'{a}="([-\d.]+)"', tag) for a in ("x1", "y1", "x2", "y2")
+            }
             if not all(coords.values()):
                 continue
             x1, y1, x2, y2 = (float(c.group(1)) for c in coords.values())
@@ -952,55 +1271,76 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
                     cur = [args[-2] + tx, args[-1] + ty]
             endpoint_specs.append((cur[0], cur[1], "path终", tag, current_vb))
 
-    if "data-gallery-index" in source:  # 画廊页：跨图端点/容器互不相干，见堆叠检查处注释
+    if parser.gallery_index:  # 画廊页：跨图端点/容器互不相干，见堆叠检查处注释
         endpoint_specs = []
-    for (px, py, kind, tag_src, _vb) in endpoint_specs:
+    for px, py, kind, tag_src, _vb in endpoint_specs:
         if any(abs(px - lx) <= 8 for lx in lifelines):
             continue  # 时序消息端点贴生命线/激活条（组合片段框内的消息线首例所立）
         holders = [
-            (x, y, w, h) for (x, y, w, h, _b) in surfaces
+            (x, y, w, h)
+            for (x, y, w, h, _b) in surfaces
             if x - 1 <= px <= x + w + 1 and y - 1 <= py <= y + h + 1
         ]
         if not holders:
             continue
         if any(
-            abs(px - x) <= 2 or abs(px - x - w) <= 2 or abs(py - y) <= 2 or abs(py - y - h) <= 2
+            abs(px - x) <= 2
+            or abs(px - x - w) <= 2
+            or abs(py - y) <= 2
+            or abs(py - y - h) <= 2
             for (x, y, w, h) in holders
         ):
             continue
         # hub-and-spoke 豁免：≥3 根辐条从同一盒内部同一点辐射（radar 轴辐 / 全景 hub）
         # ——辐条压在 hub 底下是设计，不是埋箭头。
         cluster = sum(
-            1 for (qx, qy, _k, _t, _vb) in endpoint_specs
+            1
+            for (qx, qy, _k, _t, _vb) in endpoint_specs
             if abs(qx - px) <= 8 and abs(qy - py) <= 8
         )
         if cluster >= 3:
             continue
         if any(not (w >= 400 or h >= 150) for (x, y, w, h) in holders):
-            warnings.append(f"连线{kind}端点埋进节点盒/菱形内 ({px:g},{py:g})——端点应贴边线 | {tag_src[:70]}")
+            warnings.append(
+                f"连线{kind}端点埋进节点盒/菱形内 ({px:g},{py:g})——端点应贴边线 | {tag_src[:70]}"
+            )
         else:
-            warnings.append(f"连线{kind}端点悬在容器内空白处 ({px:g},{py:g})——应贴容器边或目标盒边 | {tag_src[:70]}")
+            warnings.append(
+                f"连线{kind}端点悬在容器内空白处 ({px:g},{py:g})——应贴容器边或目标盒边 | {tag_src[:70]}"
+            )
 
     # 内容越界（警告级）：有效坐标（含组平移）超出 viewBox——动效图曾因此溢出
     # 画布 80 单位而 EXEMPT 漏检（paved 右列 1080>1000 一案），此为回归闸。
-    for (x, y, w, h, vb) in surfaces:
+    for x, y, w, h, vb in surfaces:
         if vb and (x + w > vb[0] + 2 or y + h > vb[1] + 2):
-            warnings.append(f"元素 ({x:g},{y:g},{w:g},{h:g}) 越出画布 {vb[0]:g}×{vb[1]:g}")
-    for (px, py, kind, tag_src, vb) in endpoint_specs:
+            warnings.append(
+                f"元素 ({x:g},{y:g},{w:g},{h:g}) 越出画布 {vb[0]:g}×{vb[1]:g}"
+            )
+    for px, py, kind, tag_src, vb in endpoint_specs:
         if vb and (px > vb[0] + 2 or py > vb[1] + 2):
-            warnings.append(f"连线{kind}端点 ({px:g},{py:g}) 越出画布 {vb[0]:g}×{vb[1]:g} | {tag_src[:60]}")
+            warnings.append(
+                f"连线{kind}端点 ({px:g},{py:g}) 越出画布 {vb[0]:g}×{vb[1]:g} | {tag_src[:60]}"
+            )
 
     # 动效层（存在动效标记或脚本时才检查）
-    check_scripts(parser, errors)
+    check_scripts(parser, errors, gallery_template)
     check_motion(parser, source, errors)
 
     # 颜色出处层（值级闭集，与 reskin 换肤机器同源）
-    check_colors(source, errors)
+    check_colors(source, errors, style_guide, path.stem, parser.gallery_index)
 
     # 自含层（SVG 脱离页级 CSS 仍成立）+ 画廊层（仅目录页）
     check_svg_self_containment(source, path.stem, errors)
     if parser.gallery_index:
+        if not re.search(r"<(?:html|body)\b[^>]*\bdata-gallery-index(?:\s|>)", source):
+            errors.append("画廊模式需要目录根标记")
+        if not re.search(r'role=["\']tabpanel["\']', source) or not re.search(
+            r"<iframe\b", source
+        ):
+            errors.append("画廊需要分组面板与本地预览 iframe")
         check_gallery_counts(source, errors)
+    if parser.decorative and (checkable or not parser.svgs):
+        errors.append("装饰资源须含 SVG 且全部 aria-hidden=true")
 
     return errors, warnings
 
@@ -1008,12 +1348,31 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
 def main() -> int:
     argument_parser = argparse.ArgumentParser(description=__doc__)
     argument_parser.add_argument("files", nargs="+", type=Path)
+    argument_parser.add_argument(
+        "--style-guide",
+        type=Path,
+        help="生效样式指南或品牌档案；默认读取技能内的 style-guide.md",
+    )
+    argument_parser.add_argument(
+        "--mode",
+        choices=["diagram", "gallery", "decorative"],
+        default="diagram",
+        help="调用方选择检查契约；文件内标记不能切换模式",
+    )
+    argument_parser.add_argument(
+        "--gallery-template", type=Path, help="画廊模式的规范模板，由调用方提供"
+    )
     args = argument_parser.parse_args()
     failed = False
     for path in args.files:
         try:
-            errors, warnings = verify(path)
-        except (OSError, UnicodeError) as exc:
+            errors, warnings = verify(
+                path,
+                args.style_guide,
+                args.mode,
+                gallery_template=args.gallery_template,
+            )
+        except (OSError, UnicodeError, ValueError) as exc:
             errors, warnings = [str(exc)], []
         if errors:
             failed = True

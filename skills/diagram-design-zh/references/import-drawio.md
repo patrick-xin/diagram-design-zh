@@ -58,8 +58,8 @@ python3 <技能目录>/scripts/drawio_extract.py <文件> [--page N|NAME|all]
 | 有 `rhombus`、单一入口、是 / 否标签边 | 流程图 | [type-flowchart.md](type-flowchart.md) |
 | 主要是 `ellipse`、自环、`has_cycle: True` | 状态机 | [type-state.md](type-state.md) |
 | `icon:aws` / `icon:azure` / `icon:gcp` / `icon:kubernetes` 族 | 架构图 | [type-architecture.md](type-architecture.md) |
-| 嵌套容器、深度 ≥2、边少 | 架构图（嵌套分区；nested 未内置，按 §9 兜底说明） | [type-architecture.md](type-architecture.md) |
-| 单一入口、无环、纯扇出 | 树 / 组织架构图（**未内置**） | 按 SKILL.md §3 兜底：说明后用架构图层级布局精神 |
+| 嵌套容器、深度 ≥2、边少 | 嵌套图（包含关系主导）或架构图嵌套分区 | [type-architecture.md](type-architecture.md) |
+| 单一入口、无环、纯扇出 | 通用父子层级用树；团队归属/责任用组织架构图 | [type-tree.md](type-tree.md)，[type-org-chart.md](type-org-chart.md) |
 | 盒子纵向堆叠、只在相邻层间有边 | 层级堆叠 | [type-layers.md](type-layers.md) |
 | 单轴上的日期标签 | 时间线或甘特 | [type-timeline.md](type-timeline.md)，[type-gantt.md](type-gantt.md) |
 | 其余一切有边的 | 架构图 | [type-architecture.md](type-architecture.md) |
@@ -76,8 +76,8 @@ python3 <技能目录>/scripts/drawio_extract.py <文件> [--page N|NAME|all]
 2. **套细节级别。** 走 [`output-spec.md` §3](output-spec.md) 的降级梯子到节点上限内。摘要的*可折叠分组*就是梯子第 3 步的预计算结果。
 3. **选 1–2 个焦点。** 摘要的 `hubs` 排序（最高度数）是常用答案，但焦点是*读者*该先看的那个——有时是入口或新组件，不是最忙的那个。焦点拿 `accent`，其余不拿。
 4. **按受众改写全部标签**（[`output-spec.md` §4](output-spec.md)）。draw.io 标签是作者写给自己的：`svc-auth-prod-v2` 改成 `认证服务`。专有名词保留，缩写展开一次。
-5. **连线标签一律中文**——协议 / 格式名也译（HTTPS→请求、SQL→写入）；sans 10px · 500 · 0.12em，白底遮罩骑线。
-6. **剪边。** 源图里常有布局已经隐含的边。A 在 B 上方、整体向下流，那根箭头就是噪音。保留带标签的、跨分区的、逆主方向的边。
+5. **说明性连线标签按受众中文化**；协议、操作、字段和标识符保留精确含义。engineer 可保留 HTTPS/SQL，mixed 可用「请求 · HTTPS」；只有源语义确为写操作时才写「写入」。字体按内容语言选角色，遮罩保持净空。
+6. **核对关系。** 只有语义冗余、或用户授权的简化才删边，并进台账。上下位置与主流向不能证明关系冗余；faithful 保留真实关系。
 
 ## 第 5 步——重绘
 
@@ -112,7 +112,7 @@ python3 <技能目录>/scripts/drawio_extract.py <文件> [--page N|NAME|all]
 | `text`（游离标签） | 丢弃，或并入分区标签 |
 
 - **全部连线重新路由。** 源航路点是废重——摘要报航路点数是让你知道原图有多乱，不是让你复刻。正交圆角肘线、扇出附着点、无重叠：SKILL.md §8 规则 1–5，导入内容也不例外。
-- **从画布基线起排**——宽 1000 定死、内容 x=0 起排贴容器线、y 顶贴、高按内容底取整到 40 的倍数。尺寸拨盘不再改画布几何。不要先画后裁。
+- **按目标尺寸起排**——默认 doc-inline 遵循 style-guide 的 1000 宽与内容高度；固定投放尺寸按 output-spec 的 viewBox、安全区与字号重排。不要先画后裁。
 
 ## 第 6 步——交付
 
@@ -125,7 +125,7 @@ python3 <技能目录>/scripts/drawio_extract.py <文件> [--page N|NAME|all]
 
 ## 成品示例
 
-[`assets/example-import-drawio.html`](../assets/example-import-drawio.html) 是本流程跑 [`scripts/fixtures/sample-architecture.drawio`](../scripts/fixtures/sample-architecture.drawio)（12 节点、8 边、2 容器分组）的产出，拨盘为 `格式=html`、`尺寸=doc-inline`、`细节=balanced`、`受众=mixed`。
+[`assets/example-import-drawio.html`](../assets/example-import-drawio.html) 是本流程跑 [`assets/import-sources/sample-architecture.drawio`](../assets/import-sources/sample-architecture.drawio)（12 节点、8 边、2 容器分组）的产出，拨盘为 `格式=html`、`尺寸=doc-inline`、`细节=balanced`、`受众=mixed`。
 
 这次运行的决定与理由：
 
@@ -136,7 +136,7 @@ python3 <技能目录>/scripts/drawio_extract.py <文件> [--page N|NAME|all]
 | `Token valid?` 判断菱形 | 网关 → 认证上的 `校验` 标签 | 架构图里的单个判断就是一根边标签 |
 | 便签"遗留路径，即将下线" | 丢弃 | 源里未连接；降级梯子第一步 |
 | 拨盘参数（doc-inline · balanced） | 不上 eyebrow | 渲染面只放图自身信息；拨盘组合记录在本文档 |
-| 源边标签 HTTPS / SQL | 译为「请求」「写入」 | 连线标签一律中文 |
+| 源边标签 HTTPS / SQL | 保留协议；说明性文字按受众处理 | 不由协议名推断未声明的读/写操作 |
 | `#dae8fc` / `#d5e8d4` / `#e1d5e7` 填充 | 白底服务、墨色 tint 存储、一个 accent | 源颜色报角色；角色映射进设计系统 |
 | API Gateway（度数 4，摘要头号 hub） | 唯一 accent 节点 | 最高度节点也是故事枢纽 |
 
@@ -158,8 +158,8 @@ python3 <技能目录>/scripts/drawio_extract.py <文件> [--page N|NAME|all]
 |---|---|
 | 摘要 `0 nodes` | 源是纯图片导出或加密（`<mxfile ... type="embed">` 且无可读模型）。告知用户；要原始 `.drawio` 或口述内容。不要看截图瞎猜。 |
 | 提取器退出码 2 | 报错原样转述——它点名了真实问题（不是 drawio 文件 / XML 畸形 / 无页面）。不要退回去读原始文件。 |
-| `edges_dangling > 0` | 端点已在源里删掉的边。静默丢弃——那是源文件腐烂，不是内容。 |
-| 列出未连接节点 | 通常是图例、标题、废弃盒。除非标签另有说法，丢弃；看起来有意义就写进台账。 |
+| `edges_dangling > 0` | 摘要指出端点缺失；告知并记台账，不猜补端点，不把静默删除当保真。 |
+| 列出未连接节点 | 判断是装饰还是语义组件；不以未连接自动判废弃。有意义则保留，合并/省略须有授权并记台账。 |
 | 标签整片为空 | 源靠形状和位置承载含义。问用户盒子里是什么——不要编名字。 |
 | 源超 40 节点 | 不给 `faithful` 选项。动手前就提"总览 + 分区细节"成对。 |
 | 源是别家的品牌图 | 按*本项目的*皮肤重绘（[style-guide.md](style-guide.md)），不是按源的。说明这一点——这是特性不是缺陷。 |
@@ -178,3 +178,7 @@ python3 <技能目录>/scripts/drawio_extract.py <文件> [--page N|NAME|all]
 | 静默丢弃组件 | 用户认识源文件。永远附保真台账。 |
 | 为填满版面发明组件 | 导入以源为界。缺口要问，不要补。 |
 | 保留 draw.io 的斜连线 | 正交肘线是强制的（SKILL.md §8 规则 1），不问出处 |
+
+## 内容映射验证
+
+完整重绘使用提取器 `--json` 的单图/单页 IR，保留源 ID 与成品 ID 的映射、合并/省略理由，按 [quality-workflow.md](quality-workflow.md) 运行内容检查并审核语义。摘要截表不代表源内容已经全部核对。

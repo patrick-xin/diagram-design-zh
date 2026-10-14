@@ -1,0 +1,3 @@
+-r ../skills/diagram-design-zh/scripts/requirements-fonts.txt
+-r ../skills/diagram-design-zh/scripts/requirements-browser.txt
+Pillow==12.3.0

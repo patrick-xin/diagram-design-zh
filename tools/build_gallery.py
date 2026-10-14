@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """生成 assets/index.html 类型画廊（渐进增强：静态清单链接 + 少量 JS 切换预览）。
 
-用法：python3 scripts/build_gallery.py
+用法：python3 tools/build_gallery.py （在仓库根目录）
 新增 / 删除示例后重跑本脚本即可，画廊清单与分组计数自动跟随（防手维护漏卡）。
 重跑会覆盖 index.html——随后再跑一次 embed_fonts.py 补回内嵌字体（幂等）。
 
@@ -14,28 +14,17 @@
 from __future__ import annotations
 
 import re
+import json
 import sys
 from pathlib import Path
 
-ASSETS = Path(__file__).resolve().parent.parent / "assets"
+ASSETS = Path(__file__).resolve().parent.parent / "skills/diagram-design-zh/assets"
 
-GROUPS = ["系统与流程", "计划与叙事", "数据图表", "数据平台", "变体", "动效"]
-
-# 45 内置类型 → 分组序（README「图表类型」表同序；组内顺序即此表顺序）
-TYPES45: dict[str, int] = {b: g for b, g in [
-    ("architecture", 0), ("deployment", 0), ("flowchart", 0), ("sequence", 0),
-    ("state", 0), ("er", 0), ("db-schema", 0), ("uml-class", 0),
-    ("data-flow", 0), ("process", 0), ("swimlane", 0), ("org-chart", 0),
-    ("tree", 0), ("mindmap", 0), ("dependency", 0), ("wardley", 0),
-    ("nested", 0), ("layers", 0), ("fishbone", 0), ("kanban", 0),
-    ("timeline", 1), ("journey", 1), ("story-map", 1), ("gantt", 1),
-    ("quadrant", 1), ("loop", 1), ("pyramid", 1), ("venn", 1),
-    ("bar", 2), ("waterfall", 2), ("line", 2), ("scatter", 2),
-    ("dumbbell", 2), ("radar", 2), ("polar", 2), ("sankey", 2),
-    ("treemap", 2), ("heatmap", 2), ("axonometric-plan", 2), ("exploded", 2),
-    ("high-level", 3), ("medallion", 3), ("it-state", 3),
-    ("dp-integration", 3), ("dp-security-matrix", 3),
-]}
+CATALOG = json.loads(
+    (ASSETS.parent / "references/catalog.json").read_text(encoding="utf-8")
+)
+GROUPS = CATALOG["groups"] + ["变体", "动效"]
+TYPES45 = {item["id"]: GROUPS.index(item["group"]) for item in CATALOG["types"]}
 
 SUFFIXES = {"dark": "-dark", "full": "-full"}  # 终端变体独立成卡，不作档位
 
@@ -81,11 +70,15 @@ def build() -> str:
     cards: dict[str, dict] = {}
     seen_files: list[str] = []
     for f in sorted(ASSETS.glob("example-*.html")):
+        if not re.fullmatch(r"example-[a-z0-9-]+\.html", f.name):
+            raise ValueError("示例文件名须为小写 slug：" + f.name)
         base, suffix = parse_name(f.name)
         seen_files.append(f.name)
         if suffix == "terminal":
             suffix = ""  # 终端外壳是独立示例卡，parse_name 已带全名
-        card = cards.setdefault(base, {"std": "", "dark": "", "full": "", "terminal": ""})
+        card = cards.setdefault(
+            base, {"std": "", "dark": "", "full": "", "terminal": ""}
+        )
         card[suffix or "std"] = f.name
 
     missing = [b for b in TYPES45 if not cards.get(b, {}).get("std")]
@@ -121,8 +114,12 @@ def build() -> str:
             for k in ("dark", "full"):
                 if c[k]:
                     attrs.append(f'data-{k}="{c[k]}"')
-            esc = (c["desc"].replace("&", "&amp;").replace("<", "&lt;")
-                   .replace('"', "&quot;"))
+            esc = (
+                c["desc"]
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace('"', "&quot;")
+            )
             lis.append(
                 f'<li><a href="{c["std"]}" target="_blank" rel="noopener" title="{esc}" '
                 + " ".join(attrs)
@@ -130,8 +127,9 @@ def build() -> str:
             )
         sections.append(
             f'<section id="panel-{gi}" role="tabpanel" aria-labelledby="tab-{gi}" data-g="{gi}">\n'
-            f"<h2>{GROUPS[gi]}<span data-n=\"{len(group)}\">{len(group)}</span></h2>\n<ul>\n"
-            + "\n".join(lis) + "\n</ul>\n</section>"
+            f'<h2>{GROUPS[gi]}<span data-n="{len(group)}">{len(group)}</span></h2>\n<ul>\n'
+            + "\n".join(lis)
+            + "\n</ul>\n</section>"
         )
         lis = []
 
@@ -142,10 +140,13 @@ def build() -> str:
     )
     total = sum(len(g) for g in grouped)
     template = Path(__file__).with_name("gallery_template.html")
-    return template.read_text(encoding="utf-8").replace("%%TABS%%", tabs).replace(
-        "%%SECTIONS%%", "\n".join(sections)
-    ).replace("%%TOTAL%%", str(total)).replace(
-        "%%FIRST%%", grouped[0][0][1]["std"]
+    return (
+        template.read_text(encoding="utf-8")
+        .replace("%%TABS%%", tabs)
+        .replace("%%SECTIONS%%", "\n".join(sections))
+        .replace("%%TOTAL%%", str(total))
+        .replace("%%TYPECOUNT%%", str(len(TYPES45)))
+        .replace("%%FIRST%%", grouped[0][0][1]["std"])
     )
 
 

@@ -1,0 +1,583 @@
+{
+  "schema": 1,
+  "groups": [
+    "系统与流程",
+    "计划与叙事",
+    "数据图表",
+    "数据平台"
+  ],
+  "types": [
+    {
+      "id": "architecture",
+      "name": "架构图",
+      "group": "系统与流程",
+      "reference": "references/type-architecture.md",
+      "example": "assets/example-architecture.html",
+      "aliases": [
+        "架构图",
+        "architecture",
+        "架构变更对比（Architecture Delta）"
+      ],
+      "variants": [
+        "architecture-delta"
+      ]
+    },
+    {
+      "id": "deployment",
+      "name": "部署图",
+      "group": "系统与流程",
+      "reference": "references/type-deployment.md",
+      "example": "assets/example-deployment.html",
+      "aliases": [
+        "部署图",
+        "deployment"
+      ],
+      "variants": []
+    },
+    {
+      "id": "flowchart",
+      "name": "流程图（Flowchart）",
+      "group": "系统与流程",
+      "reference": "references/type-flowchart.md",
+      "example": "assets/example-flowchart.html",
+      "aliases": [
+        "流程图（Flowchart）",
+        "flowchart"
+      ],
+      "variants": []
+    },
+    {
+      "id": "sequence",
+      "name": "时序图（Sequence）",
+      "group": "系统与流程",
+      "reference": "references/type-sequence.md",
+      "example": "assets/example-sequence.html",
+      "aliases": [
+        "时序图（Sequence）",
+        "sequence"
+      ],
+      "variants": [
+        "sequence-oauth"
+      ]
+    },
+    {
+      "id": "state",
+      "name": "状态机（State）",
+      "group": "系统与流程",
+      "reference": "references/type-state.md",
+      "example": "assets/example-state.html",
+      "aliases": [
+        "状态机（State）",
+        "state"
+      ],
+      "variants": []
+    },
+    {
+      "id": "er",
+      "name": "实体关系 / 数据模型（ER）",
+      "group": "系统与流程",
+      "reference": "references/type-er.md",
+      "example": "assets/example-er.html",
+      "aliases": [
+        "实体关系 / 数据模型（ER）",
+        "er"
+      ],
+      "variants": []
+    },
+    {
+      "id": "db-schema",
+      "name": "数据库 schema（物理模型）",
+      "group": "系统与流程",
+      "reference": "references/type-db-schema.md",
+      "example": "assets/example-db-schema.html",
+      "aliases": [
+        "数据库 schema（物理模型）",
+        "db-schema"
+      ],
+      "variants": []
+    },
+    {
+      "id": "uml-class",
+      "name": "UML 类图",
+      "group": "系统与流程",
+      "reference": "references/type-uml-class.md",
+      "example": "assets/example-uml-class.html",
+      "aliases": [
+        "UML 类图",
+        "uml-class"
+      ],
+      "variants": []
+    },
+    {
+      "id": "data-flow",
+      "name": "数据流（Data Flow）",
+      "group": "系统与流程",
+      "reference": "references/type-data-flow.md",
+      "example": "assets/example-data-flow.html",
+      "aliases": [
+        "数据流（Data Flow）",
+        "data-flow"
+      ],
+      "variants": []
+    },
+    {
+      "id": "process",
+      "name": "流程（Process）",
+      "group": "系统与流程",
+      "reference": "references/type-process.md",
+      "example": "assets/example-process.html",
+      "aliases": [
+        "流程（Process）",
+        "process"
+      ],
+      "variants": []
+    },
+    {
+      "id": "swimlane",
+      "name": "泳道图（Swimlane）",
+      "group": "系统与流程",
+      "reference": "references/type-swimlane.md",
+      "example": "assets/example-swimlane.html",
+      "aliases": [
+        "泳道图（Swimlane）",
+        "swimlane"
+      ],
+      "variants": []
+    },
+    {
+      "id": "org-chart",
+      "name": "组织架构图（Org Chart / Responsibility Map）",
+      "group": "系统与流程",
+      "reference": "references/type-org-chart.md",
+      "example": "assets/example-org-chart.html",
+      "aliases": [
+        "组织架构图（Org Chart / Responsibility Map）",
+        "org-chart"
+      ],
+      "variants": []
+    },
+    {
+      "id": "tree",
+      "name": "树形图（Tree / Hierarchy）",
+      "group": "系统与流程",
+      "reference": "references/type-tree.md",
+      "example": "assets/example-tree.html",
+      "aliases": [
+        "树形图（Tree / Hierarchy）",
+        "tree"
+      ],
+      "variants": []
+    },
+    {
+      "id": "mindmap",
+      "name": "思维导图（Mindmap）",
+      "group": "系统与流程",
+      "reference": "references/type-mindmap.md",
+      "example": "assets/example-mindmap.html",
+      "aliases": [
+        "思维导图（Mindmap）",
+        "mindmap"
+      ],
+      "variants": []
+    },
+    {
+      "id": "dependency",
+      "name": "依赖图",
+      "group": "系统与流程",
+      "reference": "references/type-dependency.md",
+      "example": "assets/example-dependency.html",
+      "aliases": [
+        "依赖图",
+        "dependency"
+      ],
+      "variants": []
+    },
+    {
+      "id": "wardley",
+      "name": "Wardley 地图",
+      "group": "系统与流程",
+      "reference": "references/type-wardley.md",
+      "example": "assets/example-wardley.html",
+      "aliases": [
+        "Wardley 地图",
+        "wardley"
+      ],
+      "variants": []
+    },
+    {
+      "id": "nested",
+      "name": "嵌套图（Nested Containment）",
+      "group": "系统与流程",
+      "reference": "references/type-nested.md",
+      "example": "assets/example-nested.html",
+      "aliases": [
+        "嵌套图（Nested Containment）",
+        "nested"
+      ],
+      "variants": []
+    },
+    {
+      "id": "layers",
+      "name": "层级堆叠（Layers）",
+      "group": "系统与流程",
+      "reference": "references/type-layers.md",
+      "example": "assets/example-layers.html",
+      "aliases": [
+        "层级堆叠（Layers）",
+        "layers"
+      ],
+      "variants": []
+    },
+    {
+      "id": "fishbone",
+      "name": "鱼骨图 / 石川图（根因分析）",
+      "group": "系统与流程",
+      "reference": "references/type-fishbone.md",
+      "example": "assets/example-fishbone.html",
+      "aliases": [
+        "鱼骨图 / 石川图（根因分析）",
+        "fishbone"
+      ],
+      "variants": []
+    },
+    {
+      "id": "kanban",
+      "name": "看板（Kanban Board）",
+      "group": "系统与流程",
+      "reference": "references/type-kanban.md",
+      "example": "assets/example-kanban.html",
+      "aliases": [
+        "看板（Kanban Board）",
+        "kanban"
+      ],
+      "variants": []
+    },
+    {
+      "id": "timeline",
+      "name": "时间线（Timeline）",
+      "group": "计划与叙事",
+      "reference": "references/type-timeline.md",
+      "example": "assets/example-timeline.html",
+      "aliases": [
+        "时间线（Timeline）",
+        "timeline"
+      ],
+      "variants": []
+    },
+    {
+      "id": "journey",
+      "name": "用户旅程 / 体验地图",
+      "group": "计划与叙事",
+      "reference": "references/type-journey.md",
+      "example": "assets/example-journey.html",
+      "aliases": [
+        "用户旅程 / 体验地图",
+        "journey"
+      ],
+      "variants": []
+    },
+    {
+      "id": "story-map",
+      "name": "用户故事地图",
+      "group": "计划与叙事",
+      "reference": "references/type-story-map.md",
+      "example": "assets/example-story-map.html",
+      "aliases": [
+        "用户故事地图",
+        "story-map"
+      ],
+      "variants": []
+    },
+    {
+      "id": "gantt",
+      "name": "甘特图（Gantt）",
+      "group": "计划与叙事",
+      "reference": "references/type-gantt.md",
+      "example": "assets/example-gantt.html",
+      "aliases": [
+        "甘特图（Gantt）",
+        "gantt"
+      ],
+      "variants": []
+    },
+    {
+      "id": "quadrant",
+      "name": "象限图（Quadrant）",
+      "group": "计划与叙事",
+      "reference": "references/type-quadrant.md",
+      "example": "assets/example-quadrant.html",
+      "aliases": [
+        "象限图（Quadrant）",
+        "quadrant"
+      ],
+      "variants": [
+        "quadrant-consultant"
+      ]
+    },
+    {
+      "id": "loop",
+      "name": "飞轮 / 循环（Loop）",
+      "group": "计划与叙事",
+      "reference": "references/type-loop.md",
+      "example": "assets/example-loop.html",
+      "aliases": [
+        "飞轮 / 循环（Loop）",
+        "loop"
+      ],
+      "variants": []
+    },
+    {
+      "id": "pyramid",
+      "name": "金字塔 / 漏斗（Pyramid / Funnel）",
+      "group": "计划与叙事",
+      "reference": "references/type-pyramid.md",
+      "example": "assets/example-pyramid.html",
+      "aliases": [
+        "金字塔 / 漏斗（Pyramid / Funnel）",
+        "pyramid"
+      ],
+      "variants": []
+    },
+    {
+      "id": "venn",
+      "name": "维恩图（Venn / Set Overlap）",
+      "group": "计划与叙事",
+      "reference": "references/type-venn.md",
+      "example": "assets/example-venn.html",
+      "aliases": [
+        "维恩图（Venn / Set Overlap）",
+        "venn"
+      ],
+      "variants": []
+    },
+    {
+      "id": "bar",
+      "name": "柱状图（Bar / Column）",
+      "group": "数据图表",
+      "reference": "references/type-bar.md",
+      "example": "assets/example-bar.html",
+      "aliases": [
+        "柱状图（Bar / Column）",
+        "bar"
+      ],
+      "variants": []
+    },
+    {
+      "id": "waterfall",
+      "name": "瀑布图（Waterfall）",
+      "group": "数据图表",
+      "reference": "references/type-waterfall.md",
+      "example": "assets/example-waterfall.html",
+      "aliases": [
+        "瀑布图（Waterfall）",
+        "waterfall"
+      ],
+      "variants": []
+    },
+    {
+      "id": "line",
+      "name": "折线图（Line）",
+      "group": "数据图表",
+      "reference": "references/type-line.md",
+      "example": "assets/example-line.html",
+      "aliases": [
+        "折线图（Line）",
+        "line",
+        "斜率图（Slopegraph）",
+        "山脊图（Ridgeline）",
+        "凹凸图（Bump）",
+        "流图（Streamgraph）"
+      ],
+      "variants": [
+        "bump",
+        "ridgeline",
+        "slopegraph",
+        "streamgraph"
+      ]
+    },
+    {
+      "id": "scatter",
+      "name": "散点图（Scatter）",
+      "group": "数据图表",
+      "reference": "references/type-scatter.md",
+      "example": "assets/example-scatter.html",
+      "aliases": [
+        "散点图（Scatter）",
+        "scatter",
+        "气泡变体（Bubble）",
+        "蜂群变体（Beeswarm）"
+      ],
+      "variants": [
+        "beeswarm",
+        "bubble"
+      ]
+    },
+    {
+      "id": "dumbbell",
+      "name": "哑铃图（Dumbbell）",
+      "group": "数据图表",
+      "reference": "references/type-dumbbell.md",
+      "example": "assets/example-dumbbell.html",
+      "aliases": [
+        "哑铃图（Dumbbell）",
+        "dumbbell"
+      ],
+      "variants": []
+    },
+    {
+      "id": "radar",
+      "name": "雷达图（Radar / Spider）",
+      "group": "数据图表",
+      "reference": "references/type-radar.md",
+      "example": "assets/example-radar.html",
+      "aliases": [
+        "雷达图（Radar / Spider）",
+        "radar"
+      ],
+      "variants": []
+    },
+    {
+      "id": "polar",
+      "name": "极坐标图",
+      "group": "数据图表",
+      "reference": "references/type-polar.md",
+      "example": "assets/example-polar.html",
+      "aliases": [
+        "极坐标图",
+        "polar"
+      ],
+      "variants": []
+    },
+    {
+      "id": "sankey",
+      "name": "桑基图 / 流量分配图",
+      "group": "数据图表",
+      "reference": "references/type-sankey.md",
+      "example": "assets/example-sankey.html",
+      "aliases": [
+        "桑基图 / 流量分配图",
+        "sankey"
+      ],
+      "variants": []
+    },
+    {
+      "id": "treemap",
+      "name": "矩形树图（Treemap）",
+      "group": "数据图表",
+      "reference": "references/type-treemap.md",
+      "example": "assets/example-treemap.html",
+      "aliases": [
+        "矩形树图（Treemap）",
+        "treemap",
+        "马赛克图（Marimekko）"
+      ],
+      "variants": [
+        "marimekko"
+      ]
+    },
+    {
+      "id": "heatmap",
+      "name": "热力图（Heatmap）",
+      "group": "数据图表",
+      "reference": "references/type-heatmap.md",
+      "example": "assets/example-heatmap.html",
+      "aliases": [
+        "热力图（Heatmap）",
+        "heatmap"
+      ],
+      "variants": []
+    },
+    {
+      "id": "axonometric-plan",
+      "name": "轴测平面图（Axonometric plan）",
+      "group": "数据图表",
+      "reference": "references/type-axonometric-plan.md",
+      "example": "assets/example-axonometric-plan.html",
+      "aliases": [
+        "轴测平面图（Axonometric plan）",
+        "axonometric-plan"
+      ],
+      "variants": [
+        "axonometric-plan-campus"
+      ]
+    },
+    {
+      "id": "exploded",
+      "name": "爆炸轴测图（Exploded axonometric）",
+      "group": "数据图表",
+      "reference": "references/type-exploded.md",
+      "example": "assets/example-exploded.html",
+      "aliases": [
+        "爆炸轴测图（Exploded axonometric）",
+        "exploded"
+      ],
+      "variants": [
+        "exploded-phone",
+        "exploded-unboxing"
+      ]
+    },
+    {
+      "id": "high-level",
+      "name": "数据栈全景图（High-Level）",
+      "group": "数据平台",
+      "reference": "references/type-high-level.md",
+      "example": "assets/example-high-level.html",
+      "aliases": [
+        "数据栈全景图（High-Level）",
+        "high-level"
+      ],
+      "variants": [
+        "datalake",
+        "high-level-vertical"
+      ]
+    },
+    {
+      "id": "medallion",
+      "name": "奖章架构（Medallion）",
+      "group": "数据平台",
+      "reference": "references/type-medallion.md",
+      "example": "assets/example-medallion.html",
+      "aliases": [
+        "奖章架构（Medallion）",
+        "medallion"
+      ],
+      "variants": []
+    },
+    {
+      "id": "it-state",
+      "name": "IT 现状图（IT current-state）",
+      "group": "数据平台",
+      "reference": "references/type-it-state.md",
+      "example": "assets/example-it-state.html",
+      "aliases": [
+        "IT 现状图（IT current-state）",
+        "it-state"
+      ],
+      "variants": []
+    },
+    {
+      "id": "dp-integration",
+      "name": "数据平台集成图（DP integration）",
+      "group": "数据平台",
+      "reference": "references/type-dp-integration.md",
+      "example": "assets/example-dp-integration.html",
+      "aliases": [
+        "数据平台集成图（DP integration）",
+        "dp-integration"
+      ],
+      "variants": []
+    },
+    {
+      "id": "dp-security-matrix",
+      "name": "数据平台安全矩阵（DP security matrix）",
+      "group": "数据平台",
+      "reference": "references/type-dp-security-matrix.md",
+      "example": "assets/example-dp-security-matrix.html",
+      "aliases": [
+        "数据平台安全矩阵（DP security matrix）",
+        "dp-security-matrix"
+      ],
+      "variants": []
+    }
+  ]
+}

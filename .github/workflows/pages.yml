@@ -3,6 +3,7 @@ name: Deploy gallery to GitHub Pages
 on:
   push:
     branches: [ main ]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -21,15 +22,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Install verification dependencies
+        run: |
+          python3 -m venv .venv-test
+          .venv-test/bin/python -m pip install -r tools/requirements-test.txt
+
+      - name: Install test browser
+        run: .venv-test/bin/python -m playwright install --with-deps chromium
+
+      - name: Verify project and tool workflows
+        run: .venv-test/bin/python tools/check_project.py --tests
+
       - name: Configure Pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v6
 
       - name: Upload gallery artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
         with:
           path: skills/diagram-design-zh/assets
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
