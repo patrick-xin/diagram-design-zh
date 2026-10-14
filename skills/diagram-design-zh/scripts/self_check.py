@@ -66,7 +66,6 @@ REFERENCE_ATTRS = {"src", "href", "xlink:href", "poster", "srcset", "action", "f
 
 CJK_RE = re.compile(r"[\u4e00-\u9fff]")
 SPACING_RE = re.compile(r"([\u4e00-\u9fff])([A-Za-z0-9])|([A-Za-z0-9])([\u4e00-\u9fff])")
-BANNED_FONTS = ["geist", "instrument serif", "jetbrains mono", "inter", "roboto"]
 FONT_VALUE_RE = re.compile(r'font-family\s*[:=]\s*["\']?([^;"\'}]+)', re.IGNORECASE)
 CSS_FONT_SIZE_RE = re.compile(r"font-size\s*:\s*([\d.]+)(px|rem)\b")
 EYEBROW_BLOCK_RE = re.compile(r"(?:^|[^\w-])(?:header-)?eyebrow\s*\{([^}]*)\}")
@@ -635,10 +634,6 @@ def verify(path: Path) -> tuple[list[str], list[str]]:
     if stack_defs["mono"] and "sarasa mono sc" not in stack_defs["mono"][0].casefold() \
             and "ui-monospace" not in stack_defs["mono"][0].casefold():
         errors.append("--font-mono 缺等宽首选或兜底（Sarasa Mono SC / ui-monospace）")
-    font_values = " ; ".join(m.group(1) for m in FONT_VALUE_RE.finditer(source))
-    for name in BANNED_FONTS:
-        if re.search(rf"\b{re.escape(name)}\b", font_values, re.IGNORECASE):
-            errors.append(f"禁用的纯西文字体出现在 font-family：{name}")
 
     # SVG 契约（slug 绑定）
     checkable = [

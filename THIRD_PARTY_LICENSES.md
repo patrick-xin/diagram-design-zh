@@ -29,7 +29,7 @@
 
 ## 字体
 
-- **Noto Sans SC / Noto Serif SC** — [SIL Open Font License 1.1](https://openfontlicense.org/)，全文见 [`fonts/OFL.txt`](fonts/OFL.txt)。仓库分发 woff2 全量与各图内嵌的子集化 base64 均为该许可允许的用途；子集由开发侧工具从官方发布版生成。
+- **Noto Sans SC / Noto Serif SC** — [SIL Open Font License 1.1](https://openfontlicense.org/)，全文见 [`fonts/OFL.txt`](skills/diagram-design-zh/fonts/OFL.txt)。仓库分发 woff2 全量与各图内嵌的子集化 base64 均为该许可允许的用途；子集从官方发布版生成。
 - MiSans、Sarasa Mono SC、PingFang SC、Microsoft YaHei 等仅作为字体栈回退名引用，本仓库不分发其字体文件。
 
 ## 商标

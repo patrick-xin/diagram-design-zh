@@ -150,7 +150,7 @@ metadata:
 | 两线重叠 / 共用同一附着点 | 每条连接必须独立可追踪（§8 规则 4、6） |
 | 汉字字号 <10px | 笔画密度高，9px 糊成一团（§7.2） |
 | 中英混排无空格 | `API 网关`，不是 `API网关`（§7.4） |
-| 裸 `font-family` / 纯西文字体 | 三栈纪律（§7.1） |
+| 字体栈缺中文/系统回退 | HTML 用变量、SVG 用完整字面栈（§7.1） |
 
 类型专属反模式在各 `references/type-*.md`。
 
@@ -194,25 +194,16 @@ metadata:
 
 ## 7. 中文排版纪律（全部硬规则）
 
-### 7.1 三字体栈
+### 7.1 三栈与内嵌
 
-```css
-:root {
-  --font-sans:  'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
-  --font-serif: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
-  --font-mono:  'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace;
-}
-```
+排版角色、三栈、字号与混排以 [style-guide.md](references/style-guide.md) 为准，不在此维护副本。
 
-字体已自托管（`fonts/` 内思源两族 GB2312 级 woff2 子集），**不外链 Google Fonts**——外链破坏单文件契约（self_check 拦截）。
-
-- 产出 HTML 的字体由系统三栈渲染（macOS 苹方 / Windows 雅黑开箱即用）；**成稿后、交付前固定跑一步内嵌**：
-  `python3 <技能目录>/scripts/embed_fonts.py 产出.html`
-  它按文件实际用字生成 woff2 子集、以 data: URI 内嵌进 `<style>`。**每张产出都要跑**——图是拿来分发的，内嵌保证任何机器（无中文字库、断网）都像素级一致。用户换了字体（栈首位非出厂）时脚本自动解析该字体（文件在手加 `--font` 直嵌，不装系统；见 onboarding「字体接入」节），解析不到打 ⚠ 回落思源。改了文案重跑一次即重建（幂等）；环境装不上 fonttools 就明说"已降级系统字体栈"交付，不为装依赖反复折腾。
-- 示例锚点（`assets/example-*.html`）出厂即内嵌；三个模板出厂不带（内容会被替换），复制后成稿统一跑内嵌。
-- **栈内系统兜底项一个都不许删**——内嵌子集只覆盖 GB2312，集外字按字符回退系统；兜底是底线。
-- **任何文本必须引用这三个变量之一**。禁止裸 `font-family`，禁止出现 Inter / Roboto / Geist / Instrument Serif / JetBrains Mono 等纯西文字体——它们一个汉字都没有，中文会掉回系统默认，整个设计感就散了。
-- mono 栈只用于**技术内容**：协议名、端口、URL、命令、字段名。人名、服务名、步骤名一律 sans。
+- 含汉字 ≥10px 是最低线，正文与节点名采用角色表的默认字号；纯拉丁技术串可使用 mono 小字。中英/数字之间留空格，标点按语境处理。
+- HTML 用三栈变量；SVG 用对应角色的字面完整字体栈，使独立导出仍可读。保留 CJK 和系统回退，允许用户字体或拉丁品牌字体放在首位。
+- 成稿后内嵌：`python3 <技能目录>/scripts/embed_fonts.py 图.html [--font 字体文件]`。它同步 SVG 字面栈、按文本子集化自定义字体并保留包内思源回退；字体文件按内部 family 匹配，可重复给多个字重/字体。
+- 换字体流程读 [onboarding.md](references/onboarding.md)「字体接入」。文案或字体变化后重跑；颜色-only 不重建字体。不能装依赖时明确降级；遇到 ⚠ 说明缺字体/缺字及实际回退。
+- 内嵌保证已覆盖字形的字体随文件分发；系统首选字体、集外字、渲染器差异不保证跨机逐像素一致。固定图片观感用 PNG。
+- 标题/旁注用 serif，节点与普通文字用 sans；mono 主要给协议、端口、字段、命令，终端皮肤允许通篇 mono。文字两端留足空间，换字体后检查字宽与溢出。
 
 ### 7.2 字号下限
 
