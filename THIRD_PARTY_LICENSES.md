@@ -1,6 +1,6 @@
 # 第三方许可
 
-本仓库 MIT 许可（见 [`LICENSE`](LICENSE)）。技能包内再分发的第三方内容及其许可如下；每个图标的逐枚来源记录在 [`references/primitive-icons.md`](references/primitive-icons.md) 各图标的 `Source:` 行，以该文件为准。
+本仓库 MIT 许可（见 [`LICENSE`](LICENSE)）。技能包内再分发的第三方内容及其许可如下；每个图标的逐枚来源记录在 [`references/primitive-icons.md`](skills/diagram-design-zh/references/primitive-icons.md) 各图标的 `Source:` 行，以该文件为准。
 
 ## Tabler Icons
 

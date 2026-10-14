@@ -54,13 +54,13 @@ python3 <技能目录>/scripts/mermaid_extract.py <文件> [--diagram N|all] [--
 2. 按请求的细节级别套用 `output-spec.md` 的降级梯子。从未连接节点和 digest 列出的可折叠分组开始砍。
 3. 用 hub 作证据选 1–2 个焦点，不把 hub 当自动答案。
 4. 按受众改写标签。专有名词与含义保留；源码标记剥掉。
-5. **连线标签一律中文**——协议 / 格式名也译（HTTPS→请求）；sans 10px · 500 · 0.12em，白底遮罩骑线。
+5. **说明性连线标签按受众中文化**；协议、操作、标识符与守卫保留精确含义。engineer 保留 HTTPS/SQL 等原词；mixed 可用「请求 · HTTPS」。不能把 SQL 一律改成写入。字体按标签内容走 style-guide，遮罩保持净空。
 6. 有意义的边标签、状态守卫、时序顺序 / 片段、ER 基数 / 字段、容器归属，全部保留。
 7. 方向（`TD` / `LR` / `RL` / `BT`）只是提示。所选类型的布局惯例可以覆盖它——流程图默认上→下就是一例。
 
 ## 第 5 步——重绘
 
-- 从画布基线起步——宽 1000 定死、内容 x=0 起排贴容器线、y 顶贴、高按内容底取整到 40 的倍数；尺寸拨盘不再改画布几何。Mermaid 源里不存在坐标，渲染器的坐标也不许复刻。
+- 默认文档图用 style-guide 的 1000 宽与内容高度；固定投放尺寸按 output-spec 的目标 viewBox、安全区与字号重排。Mermaid 源的布局提示不作为必须复刻的坐标。
 - 用所选类型的语义处理。Mermaid 圆柱体变 store；菱形只在流程图里保留判断语义；subgraph 变分区或可折叠分组。
 - 忽略 init 主题、`style`、`classDef`、`class`、行内 `:::class`、`linkStyle`。一个 accent 加墨色坡道取代源主题。开头的 `---` frontmatter 是标题 / 配置，同样跳过。
 - 所有连线按 SKILL.md §8 连接线规则重新路由。Mermaid 的边长标记（`-->` 与 `==>`）是重要度提示，不是内容。
@@ -77,7 +77,7 @@ python3 <技能目录>/scripts/mermaid_extract.py <文件> [--diagram N|all] [--
 
 ## 成品示例
 
-[`assets/example-import-mermaid.html`](../assets/example-import-mermaid.html) 以 `格式=html`、`尺寸=doc-inline`、`细节=balanced`、`受众=mixed` 重绘了 [`scripts/fixtures/sample-flowchart.mmd`](../scripts/fixtures/sample-flowchart.mmd)。
+[`assets/example-import-mermaid.html`](../assets/example-import-mermaid.html) 以 `格式=html`、`尺寸=doc-inline`、`细节=balanced`、`受众=mixed` 重绘了 [`assets/import-sources/sample-flowchart.mmd`](../assets/import-sources/sample-flowchart.mmd)。
 
 | 源 | 产出 | 理由 |
 |---|---|---|
@@ -86,7 +86,7 @@ python3 <技能目录>/scripts/mermaid_extract.py <文件> [--diagram N|all] [--
 | `令牌有效？` 菱形 | 一个判断菱形 | 是 / 否分支是内容 |
 | `Postgres` 圆柱体 | 扁平 store 盒 | 语义存储处理，不是 3D 圆桶 |
 | 网关自环 | 带标签的重试环 | 环在这个流程里有意义 |
-| 源边标签 HTTPS | 译为「请求」 | 连线标签一律中文 |
+| 源边标签 HTTPS | 可写「请求 · HTTPS」 | 保留协议身份，说明按受众改写 |
 | 拨盘参数（doc-inline · balanced） | 不上 eyebrow | 渲染面只放图自身信息 |
 | `遗留备注 — 未连接` | 丢弃 | 降级梯子第一步 |
 
@@ -127,3 +127,7 @@ Markdown 之于 Mermaid 相当于多页 draw.io。digest 头部列出每个代�
 | 不看预算一对一映射节点 | 忠实的接线图不是合格的图表 |
 | 丢弃时序片段或 ER 基数 | 那些结构承载含义，不是样式 |
 | 静默丢弃内容 | 每次导入都附保真台账 |
+
+## 内容映射验证
+
+完整重绘使用提取器 `--json` 的单图/单页 IR，保留源 ID 与成品 ID 的映射、合并/省略理由，按 [quality-workflow.md](quality-workflow.md) 运行内容检查并审核语义。摘要截表不代表源内容已经全部核对。

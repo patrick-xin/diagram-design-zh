@@ -1,0 +1,214 @@
+{
+  "schema": 1,
+  "colors": {
+    "paper": "#ffffff",
+    "paper-2": "#f3f2ff",
+    "ink": "#29314f",
+    "muted": "#565e7e",
+    "soft": "#8f94ab",
+    "accent": "#1a4dd9",
+    "link": "#217e7b",
+    "paper-dark": "#e0e4ff",
+    "dark-bg": "#0a0d1b",
+    "muted-dark": "#a2a9ce",
+    "soft-dark": "#787fa2",
+    "accent-dark": "#7d98ff",
+    "link-dark": "#55b8b4",
+    "series-1": "#3ba272",
+    "series-2": "#ed7d31",
+    "series-3": "#d9605b",
+    "series-4": "#5470c6",
+    "series-5": "#9a6fb8",
+    "series-1-dark": "#5fbf93",
+    "series-2-dark": "#f2a267",
+    "series-3-dark": "#e78c88",
+    "series-4-dark": "#8498dc",
+    "series-5-dark": "#b795cf",
+    "paper-2-dark": "#0a0d1b",
+    "rule": "rgba(41,49,79,0.10)",
+    "rule-dark": "rgba(224,228,255,0.12)",
+    "accent-tint": "rgba(26,77,217,0.08)",
+    "accent-tint-dark": "rgba(125,152,255,0.10)"
+  },
+  "fonts": {
+    "sans": "'MiSans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif",
+    "serif": "'Noto Serif SC', 'Songti SC', 'SimSun', serif",
+    "mono": "'Sarasa Mono SC', 'Noto Sans SC', ui-monospace, 'SF Mono', Menlo, monospace"
+  },
+  "pinned": {
+    "sem-security": "#b85450",
+    "sem-observability": "#5a7d9a",
+    "sem-governance": "#7a8c47",
+    "sem-backup": "#8c6d3f",
+    "sem-workspace": "#c9a23a",
+    "sem-security-dark": "#bf6561",
+    "sem-observability-dark": "#5e83a1",
+    "sem-governance-dark": "#7a8c47",
+    "sem-backup-dark": "#9b7946",
+    "sem-workspace-dark": "#c9a23a"
+  },
+  "skin_slots": [
+    "paper",
+    "paper-2",
+    "ink",
+    "muted",
+    "soft",
+    "accent",
+    "link",
+    "paper-dark",
+    "dark-bg",
+    "muted-dark",
+    "soft-dark",
+    "accent-dark",
+    "link-dark",
+    "series-1",
+    "series-2",
+    "series-3",
+    "series-4",
+    "series-5",
+    "series-1-dark",
+    "series-2-dark",
+    "series-3-dark",
+    "series-4-dark",
+    "series-5-dark"
+  ],
+  "terminal_neutrals": [
+    [
+      10,
+      10,
+      10
+    ],
+    [
+      20,
+      20,
+      20
+    ],
+    [
+      27,
+      27,
+      27
+    ],
+    [
+      43,
+      43,
+      43
+    ],
+    [
+      92,
+      92,
+      92
+    ],
+    [
+      154,
+      154,
+      154
+    ],
+    [
+      245,
+      245,
+      245
+    ]
+  ],
+  "typography": {
+    "title": {
+      "stack": "serif",
+      "sizes": [
+        "1.75rem"
+      ],
+      "weight": 400,
+      "tracking": "0",
+      "uppercase": false
+    },
+    "node-name": {
+      "stack": "sans",
+      "sizes": [
+        "14px"
+      ],
+      "weight": 600,
+      "tracking": "0",
+      "uppercase": false
+    },
+    "sublabel-tech": {
+      "stack": "mono",
+      "sizes": [
+        "9px"
+      ],
+      "weight": 400,
+      "tracking": "0.04em",
+      "uppercase": false
+    },
+    "sublabel-text": {
+      "stack": "sans",
+      "sizes": [
+        "12px"
+      ],
+      "weight": 400,
+      "tracking": "0",
+      "uppercase": false
+    },
+    "eyebrow-tech": {
+      "stack": "mono",
+      "sizes": [
+        "7–8px"
+      ],
+      "weight": 500,
+      "tracking": "0.18em",
+      "uppercase": true
+    },
+    "eyebrow-text": {
+      "stack": "sans",
+      "sizes": [
+        "12px"
+      ],
+      "weight": 500,
+      "tracking": "0.3em",
+      "uppercase": false
+    },
+    "arrow-label-tech": {
+      "stack": "mono",
+      "sizes": [
+        "8px"
+      ],
+      "weight": 400,
+      "tracking": "0.06em",
+      "uppercase": false
+    },
+    "arrow-label-text": {
+      "stack": "sans",
+      "sizes": [
+        "12px",
+        "10px"
+      ],
+      "weight": 500,
+      "tracking": "0.12em",
+      "uppercase": false
+    },
+    "callout": {
+      "stack": "serif",
+      "sizes": [
+        "16px"
+      ],
+      "weight": 400,
+      "tracking": "0",
+      "uppercase": false
+    },
+    "legend": {
+      "stack": "sans",
+      "sizes": [
+        "10px"
+      ],
+      "weight": 400,
+      "tracking": "0",
+      "uppercase": false
+    },
+    "legend-label": {
+      "stack": "mono",
+      "sizes": [
+        "10px"
+      ],
+      "weight": 400,
+      "tracking": "0.1em",
+      "uppercase": false
+    }
+  }
+}

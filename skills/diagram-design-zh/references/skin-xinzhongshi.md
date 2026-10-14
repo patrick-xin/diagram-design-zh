@@ -61,7 +61,7 @@
 ```svg
 <rect x="{边界x-10}" y="{y}" width="20" height="{字数*14+10}" rx="2"
       fill="#f6f2e9" stroke="rgba(50,47,42,0.18)" stroke-width="0.8"/>
-<text x="{边界x}" y="{首字基线}" fill="#5a564d" font-size="10" font-weight="500"
+<text x="{边界x}" y="{首字基线}" fill="#5a564d" font-size="12" font-weight="500"
       font-family="'MiSans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
       text-anchor="middle">生<tspan x="{边界x}" dy="14">产</tspan><tspan x="{边界x}" dy="14">环</tspan><tspan x="{边界x}" dy="14">境</tspan></text>
 ```
@@ -74,7 +74,7 @@
 - 引线：从注释下方垂直引到目标边缘，朱砂、0.8 宽、60% 不透明度
 
 ```svg
-<text x="{x}" y="{y}" fill="#c3272b" font-size="10.5"
+<text x="{x}" y="{y}" fill="#c3272b" font-size="12"
       font-family="'Noto Serif SC', 'Songti SC', serif">外部依赖 · 限时 2s</text>
 <line x1="{x+4}" y1="{y+6}" x2="{x+4}" y2="{目标顶-4}" stroke="#c3272b" stroke-width="0.8" opacity="0.6"/>
 ```
@@ -90,7 +90,7 @@
 
 - **红金搭配**——一步掉进伪中式
 - 龙凤 / 祥云 / 回纹 / 水墨飞白等纹样装饰
-- 隶书 / 行楷 / 魏碑 / 华文行楷做标题——三栈之外的字体一律不准引入
+- 未经要求用强风格字体替换默认标题。用户明确要求时按 onboarding 接入目标栈首，保留 CJK/系统回退并验证字宽。
 - 钤印超过 2 枚；或钤印之外又给焦点节点染色
 - 中性色出现第二色相
 - 整页朱砂化——朱砂贵在小而密

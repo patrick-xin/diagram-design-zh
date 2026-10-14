@@ -6,7 +6,7 @@
 [![output: single-file HTML](https://img.shields.io/badge/output-single--file_HTML_·_offline-29314f.svg)](#导入与导出)
 [![GitHub stars](https://img.shields.io/github/stars/patrick-xin/diagram-design-zh.svg)](https://github.com/patrick-xin/diagram-design-zh/stargazers)
 
-> 本项目是从 [diagram-design](https://github.com/cathrynlavery/diagram-design) fork 来的（感谢原作者 Cathryn Lavery ），按中文排版重做了整套规则。想画英文图表，直接用原项目就行。
+> 本项目基于 [diagram-design](https://github.com/cathrynlavery/diagram-design)（感谢原作者 Cathryn Lavery），提供中文排版规则与成品资源。原项目提供英文图表的设计规则。
 
 **为 coding agent 提供一套生成中文图表的规则与资源。你描述图表要表达的内容，技能会选择合适的类型，按中文排版规范生成可直接使用的成品。**
 
@@ -132,7 +132,7 @@ npx skills add https://github.com/patrick-xin/diagram-design-zh --skill diagram-
 - 「把这段 Mermaid 时序图重绘成中文图表。」
 - 「把这张架构图改成公众号封面尺寸。」
 
-如果图表类型不明确，说明想表达什么、希望读者看出什么，agent 会给出合适的选项及读法差异。
+如果图表类型不明确，说明想表达什么、希望读者看出什么；授权 agent 选型时会直接选合适类型并说明理由，只有影响含义的缺口才澄清。
 
 ### 导入与导出
 
@@ -142,15 +142,20 @@ Mermaid 和 draw.io 文件会先提取节点、关系、分组等结构，再依
 
 ### 皮肤与品牌
 
-可使用内置皮肤，也可按项目配置品牌样式。皮肤适用于单张成品；品牌档案适用于一个项目中的后续图表。也可只给当前成品换字体，字体文件无需安装到系统；内嵌时同步 SVG 字面栈并保留中文回退。命令与配置流程见 [`skills/diagram-design-zh/references/onboarding.md`](skills/diagram-design-zh/references/onboarding.md) 和 [`skills/diagram-design-zh/references/profiles.md`](skills/diagram-design-zh/references/profiles.md)。
+可使用内置皮肤，也可按项目配置品牌样式。皮肤适用于单张成品；品牌档案只保存数据覆盖项，适用于一个项目中的后续图表，不改技能安装目录。也可只给当前成品换字体，字体文件无需安装到系统；内嵌时同步 SVG 字面栈并保留中文回退。命令与配置流程见 [`skills/diagram-design-zh/references/onboarding.md`](skills/diagram-design-zh/references/onboarding.md) 和 [`skills/diagram-design-zh/references/profiles.md`](skills/diagram-design-zh/references/profiles.md)。
 
 ## 仓库结构
 
 - [`skills/diagram-design-zh/SKILL.md`](skills/diagram-design-zh/SKILL.md)：入口、选型路由和通用工作规则。
 - [`skills/diagram-design-zh/references/`](skills/diagram-design-zh/references/)：图表类型、排版、样式、导入和输出规则。
 - [`skills/diagram-design-zh/assets/`](skills/diagram-design-zh/assets/)：各类型的 HTML 示例、模板和图标资源；示例可直接用浏览器打开。
-- [`skills/diagram-design-zh/scripts/`](skills/diagram-design-zh/scripts/)：自检（`self_check.py` 检查单个 HTML 成品的文件、无障碍、颜色、中文排版、几何与动效六层）、字体子集内嵌与换肤脚本。
+- [`skills/diagram-design-zh/scripts/`](skills/diagram-design-zh/scripts/)：自检（`self_check.py` 检查单个 HTML 成品的文件、无障碍、动效、颜色、中文排版、几何、SVG 自含和画廊八层）、字体子集内嵌与换肤脚本。
+- [`skills/diagram-design-zh/styles/`](skills/diagram-design-zh/styles/) 与 [`skills/diagram-design-zh/fonts/`](skills/diagram-design-zh/fonts/)：默认样式数据与内置字体。
+- [`tools/`](tools/)：仓库整体检查、家族与对比度检查、画廊构建和截图更新；开发维护时使用。
+- [`tests/`](tests/)：工具与示例的回归测试；[`GitHub Actions`](.github/workflows/pages.yml) 自动运行。
 - [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md)：字体、图标和商标相关说明。
+
+技能安装内容是 `skills/diagram-design-zh/`。该目录独立包含画图、成品验证和导出所需的规则、数据与工具；仓库级 `tools/`、`tests/` 和 CI 配置用于维护项目，不属于技能安装内容。
 
 ## 贡献
 
@@ -159,6 +164,34 @@ Mermaid 和 draw.io 文件会先提取节点、关系、分组等结构，再依
 ```bash
 python3 skills/diagram-design-zh/scripts/self_check.py skills/diagram-design-zh/assets/example-你的类型.html
 ```
+
+修改技能规则、工具或示例的贡献者（包括执行仓库修改的 agent）应在提交 PR 前运行完整项目检查。以下命令从仓库根目录执行，依赖装在独立虚拟环境中：
+
+```bash
+python3 -m venv .venv-test
+.venv-test/bin/python -m pip install -r tools/requirements-test.txt
+.venv-test/bin/python -m playwright install chromium
+.venv-test/bin/python tools/check_project.py --tests
+```
+
+完整入口检查资源路由、文档链接、默认样式与指南一致性、画廊生成一致性、全部 HTML、家族基线、对比度合同与工具回归。浏览器回归遍历全部 `assets/example-*.html`，在 360/1280/1920px 窗口检查阅读包装的元素边界、实际汉字大小、页面横向溢出及原 SVG 保持性；新增示例自动纳入。测试用隔离的内存版本验证静态完整布局，不修改公开资产。
+
+测试目录由完整入口调用，无需逐个手动运行。缺少字体或浏览器依赖时部分测试会 skip，带 skip 的结果不能报告为完整验证。上述依赖入口包含字体和浏览器依赖；Linux 若缺浏览器系统库，使用 `playwright install --with-deps chromium`。
+
+GitHub Actions 在 PR、推送到 main 和手动触发时安装测试依赖与 Chromium，再运行相同的完整入口。检查失败会阻止当前流程部署画廊；PR 只验证，不部署。其他分支仅有本地 commit 或 push 时不会自动触发此工作流，需要提交 PR 或手动触发。
+
+通过自动检查仍需复核内容事实、实际背景对比度、滤镜/标记绘制效果、动效与交付观感；已知家族余量与 soft 信息文字对比度事项不会因测试通过自动获准。存量示例的阅读迁移先小批过眼，再推广。
+
+### 展示资源维护
+
+类型与变体清单在技能的 [`catalog.json`](skills/diagram-design-zh/references/catalog.json)，同时供技能选型和仓库检查读取，不维护两份副本。新增或删除示例后，重建画廊并内嵌字体：
+
+```bash
+python3 tools/build_gallery.py
+.venv-test/bin/python skills/diagram-design-zh/scripts/embed_fonts.py skills/diagram-design-zh/assets/index.html
+```
+
+README 截图用 `tools/screenshots.py --only <类型>` 更新，按源内容哈希检测过期；`--force` 可明确重建。画廊检查由 `tools/check_project.py` 显式选择模式并提供规范构建模板，成品文件不能自行声明豁免。字体或文本变化后才重建字体；颜色变化不重建字体。用户成品的内容对账、阅读与导出流程见 [交付验证](skills/diagram-design-zh/references/quality-workflow.md)。
 
 ## 许可
 

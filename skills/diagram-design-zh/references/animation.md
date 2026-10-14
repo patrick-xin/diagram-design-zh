@@ -54,14 +54,14 @@
   --motion-ease: cubic-bezier(.2,.8,.2,1);
 }
 .motion-ready [data-motion-item] {
-  opacity: 0;
+  opacity: .12;
   transform: translateY(8px);
+  transition: opacity var(--motion-step) var(--motion-ease),
+              transform var(--motion-step) var(--motion-ease);
 }
 .motion-ready [data-motion-item].is-visible {
   opacity: 1;
   transform: none;
-  transition: opacity var(--motion-step) var(--motion-ease),
-              transform var(--motion-step) var(--motion-ease);
 }
 .motion-ready[data-frame="end"] [data-motion-item] {
   opacity: 1;

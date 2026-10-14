@@ -1,0 +1,29 @@
+{
+  "updated": "2026-10-05",
+  "findings": [
+    {
+      "cohort": "标准+dark",
+      "file": "example-architecture-delta.html",
+      "dim": "viewBox.width",
+      "value": "1200",
+      "mode": "1000",
+      "reason": "架构变更对比的专用宽画布；references/type-architecture.md 明确规定 1200×680。"
+    },
+    {
+      "cohort": "标准+dark",
+      "file": "example-architecture-delta-dark.html",
+      "dim": "viewBox.width",
+      "value": "1200",
+      "mode": "1000",
+      "reason": "架构变更对比的专用宽画布；references/type-architecture.md 明确规定 1200×680。"
+    },
+    {
+      "cohort": "full",
+      "file": "example-architecture-delta-full.html",
+      "dim": "viewBox.width",
+      "value": "1200",
+      "mode": "1000",
+      "reason": "架构变更对比的专用宽画布；references/type-architecture.md 明确规定 1200×680。"
+    }
+  ]
+}
