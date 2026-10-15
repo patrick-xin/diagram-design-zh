@@ -16,6 +16,40 @@ from embed_fonts import EMBED_RE
 import build_gallery
 
 
+def check_document_links(public):
+    # Git is the source of the checkout boundary: tracked files plus unignored
+    # new files. Installed packages and Git metadata are outside that boundary.
+    listing = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(public),
+            "ls-files",
+            "--cached",
+            "--others",
+            "--exclude-standard",
+            "-z",
+            "--",
+            "*.md",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    errors = []
+    for name in sorted(set(listing.stdout.split("\0")) - {""}):
+        path = public / name
+        if not path.is_file():
+            continue
+        for target in re.findall(r"(?<!!)\[[^\]]*\]\(([^)]+)\)", path.read_text()):
+            local = target.split("#")[0]
+            if not local or re.match(r"[a-z][a-z0-9+.-]*:", local):
+                continue
+            if not (path.parent / local).exists():
+                errors.append(f"{name} 链接失效：{target}")
+    return errors
+
+
 def structural_checks():
     errors = []
     warnings = []
@@ -52,13 +86,7 @@ def structural_checks():
         for name in item["variants"]:
             if not (ROOT / "assets" / ("example-" + name + ".html")).is_file():
                 errors.append("变体缺失：" + name)
-    for path in PUBLIC.rglob("*.md"):
-        for target in re.findall(r"(?<!!)\[[^\]]*\]\(([^)]+)\)", path.read_text()):
-            local = target.split("#")[0]
-            if not local or re.match(r"[a-z][a-z0-9+.-]*:", local):
-                continue
-            if not (path.parent / local).exists():
-                errors.append(f"{path.relative_to(PUBLIC)} 链接失效：{target}")
+    errors.extend(check_document_links(PUBLIC))
     data = load_config(ROOT / "styles/default.json")
     guide = load_config(ROOT / "references/style-guide.md")
     for key in ("colors", "fonts", "typography"):
@@ -80,7 +108,7 @@ def main():
     a = p.parse_args()
     try:
         errors, warnings = structural_checks()
-    except (OSError, ValueError, KeyError) as exc:
+    except (OSError, ValueError, KeyError, subprocess.CalledProcessError) as exc:
         errors = [str(exc)]
         warnings = []
     for message in errors:
